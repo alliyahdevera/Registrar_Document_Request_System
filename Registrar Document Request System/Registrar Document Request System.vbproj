@@ -121,6 +121,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CurrentUser.vb" />
     <Compile Include="dbConnect.vb" />
     <Compile Include="frmLogin.vb">
       <SubType>Form</SubType>
