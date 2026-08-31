@@ -41,7 +41,8 @@ Public Class frmStudentManagement
         LoadStudents()
     End Sub
     Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
-        Dim query As String = "UPDATE tblstudents SET " & "LRN = @lrn, " & "LastName = @ln, " & "FirstName = @fn, " & "MiddleName = @mn, " & "Course = @course, " & "YearLevel = @year, " & "Section = @section, " & "ContactNo = @contact " & "WHERE StudentID = @id"
+        Dim query As String = "UPDATE tblstudents SET " & "LRN = @lrn, " & "LastName = @ln, " & "FirstName = @fn, " & "MiddleName = @mn, " & "Course = @course, " & "YearLevel = @year, " & "Section = @section, " &
+            "ContactNo = @contact " & "WHERE StudentID = @id"
 
         Using conn As MySqlConnection = GetConnection()
             conn.Open()

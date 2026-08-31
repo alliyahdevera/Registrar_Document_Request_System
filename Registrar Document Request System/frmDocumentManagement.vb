@@ -44,7 +44,6 @@ Public Class frmDocumentManagement
         End Using
         LoadDocuments()
     End Sub
-
     Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
         If Not IsNumeric(txtFee.Text.Trim()) Then
             MsgBox("Fee must be a valid number.", vbExclamation, "Validation Error")
