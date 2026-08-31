@@ -1,6 +1,18 @@
 ﻿Public Class frmMainMenu
+
+    Private Sub frmMainMenu_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If CurrentUser.Role <> "Administrator" Then
+            btnUserManagement.Visible = False
+        End If
+    End Sub
     Private Sub btnLogout_Click(sender As Object, e As EventArgs) Handles btnLogout.Click
-        End
+        If MsgBox("Are you sure you want to logout?", vbYesNo + vbQuestion, "Confirm Logout") = MsgBoxResult.Yes Then
+            CurrentUser.UserID = 0
+            CurrentUser.FullName = ""
+            CurrentUser.Role = ""
+            frmLogin.Show()
+            Me.Close()
+        End If
     End Sub
 
     Private Sub btnStudentManagement_Click(sender As Object, e As EventArgs) Handles btnStudentManagement.Click

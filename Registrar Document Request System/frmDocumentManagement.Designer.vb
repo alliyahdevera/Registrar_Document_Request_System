@@ -37,22 +37,22 @@ Partial Class frmDocumentManagement
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Logo = New System.Windows.Forms.PictureBox()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnDelete = New System.Windows.Forms.Button()
+        Me.btnEdit = New System.Windows.Forms.Button()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.TextBox6 = New System.Windows.Forms.TextBox()
+        Me.txtStatus = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
-        Me.TextBox7 = New System.Windows.Forms.TextBox()
+        Me.txtFee = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
-        Me.TextBox4 = New System.Windows.Forms.TextBox()
+        Me.txtDescription = New System.Windows.Forms.TextBox()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
+        Me.txtName = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.txtDocumentID = New System.Windows.Forms.TextBox()
         Me.btnAddStudent = New System.Windows.Forms.Button()
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.dvgDocument = New System.Windows.Forms.DataGridView()
         Me.DocumentID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DocumentName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Description = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -60,14 +60,14 @@ Partial Class frmDocumentManagement
         Me.Status = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel6 = New System.Windows.Forms.Panel()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.txtsearch = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         CType(Me.Logo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel5.SuspendLayout()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dvgDocument, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel6.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -260,33 +260,33 @@ Partial Class frmDocumentManagement
         Me.Label5.TabIndex = 24
         Me.Label5.Text = "Document Request System"
         '
-        'Button2
+        'btnDelete
         '
-        Me.Button2.BackColor = System.Drawing.Color.IndianRed
-        Me.Button2.FlatAppearance.BorderSize = 0
-        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button2.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button2.ForeColor = System.Drawing.Color.White
-        Me.Button2.Location = New System.Drawing.Point(1166, 218)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(167, 31)
-        Me.Button2.TabIndex = 59
-        Me.Button2.Text = "Delete"
-        Me.Button2.UseVisualStyleBackColor = False
+        Me.btnDelete.BackColor = System.Drawing.Color.IndianRed
+        Me.btnDelete.FlatAppearance.BorderSize = 0
+        Me.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnDelete.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnDelete.ForeColor = System.Drawing.Color.White
+        Me.btnDelete.Location = New System.Drawing.Point(1166, 218)
+        Me.btnDelete.Name = "btnDelete"
+        Me.btnDelete.Size = New System.Drawing.Size(167, 31)
+        Me.btnDelete.TabIndex = 59
+        Me.btnDelete.Text = "Delete"
+        Me.btnDelete.UseVisualStyleBackColor = False
         '
-        'Button1
+        'btnEdit
         '
-        Me.Button1.BackColor = System.Drawing.Color.CornflowerBlue
-        Me.Button1.FlatAppearance.BorderSize = 0
-        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button1.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.ForeColor = System.Drawing.Color.White
-        Me.Button1.Location = New System.Drawing.Point(1166, 167)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(167, 31)
-        Me.Button1.TabIndex = 58
-        Me.Button1.Text = "Edit"
-        Me.Button1.UseVisualStyleBackColor = False
+        Me.btnEdit.BackColor = System.Drawing.Color.CornflowerBlue
+        Me.btnEdit.FlatAppearance.BorderSize = 0
+        Me.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnEdit.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnEdit.ForeColor = System.Drawing.Color.White
+        Me.btnEdit.Location = New System.Drawing.Point(1166, 167)
+        Me.btnEdit.Name = "btnEdit"
+        Me.btnEdit.Size = New System.Drawing.Size(167, 31)
+        Me.btnEdit.TabIndex = 58
+        Me.btnEdit.Text = "Edit"
+        Me.btnEdit.UseVisualStyleBackColor = False
         '
         'Panel5
         '
@@ -294,15 +294,15 @@ Partial Class frmDocumentManagement
         Me.Panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel5.Controls.Add(Me.Label14)
         Me.Panel5.Controls.Add(Me.Label9)
-        Me.Panel5.Controls.Add(Me.TextBox6)
+        Me.Panel5.Controls.Add(Me.txtStatus)
         Me.Panel5.Controls.Add(Me.Label10)
-        Me.Panel5.Controls.Add(Me.TextBox7)
+        Me.Panel5.Controls.Add(Me.txtFee)
         Me.Panel5.Controls.Add(Me.Label7)
-        Me.Panel5.Controls.Add(Me.TextBox4)
+        Me.Panel5.Controls.Add(Me.txtDescription)
         Me.Panel5.Controls.Add(Me.Label6)
-        Me.Panel5.Controls.Add(Me.TextBox3)
+        Me.Panel5.Controls.Add(Me.txtName)
         Me.Panel5.Controls.Add(Me.Label3)
-        Me.Panel5.Controls.Add(Me.TextBox2)
+        Me.Panel5.Controls.Add(Me.txtDocumentID)
         Me.Panel5.Location = New System.Drawing.Point(279, 86)
         Me.Panel5.Name = "Panel5"
         Me.Panel5.Size = New System.Drawing.Size(802, 188)
@@ -329,13 +329,13 @@ Partial Class frmDocumentManagement
         Me.Label9.TabIndex = 41
         Me.Label9.Text = "Status"
         '
-        'TextBox6
+        'txtStatus
         '
-        Me.TextBox6.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox6.Location = New System.Drawing.Point(541, 96)
-        Me.TextBox6.Name = "TextBox6"
-        Me.TextBox6.Size = New System.Drawing.Size(229, 27)
-        Me.TextBox6.TabIndex = 40
+        Me.txtStatus.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtStatus.Location = New System.Drawing.Point(541, 96)
+        Me.txtStatus.Name = "txtStatus"
+        Me.txtStatus.Size = New System.Drawing.Size(229, 27)
+        Me.txtStatus.TabIndex = 40
         '
         'Label10
         '
@@ -347,13 +347,13 @@ Partial Class frmDocumentManagement
         Me.Label10.TabIndex = 39
         Me.Label10.Text = "Fee"
         '
-        'TextBox7
+        'txtFee
         '
-        Me.TextBox7.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox7.Location = New System.Drawing.Point(541, 55)
-        Me.TextBox7.Name = "TextBox7"
-        Me.TextBox7.Size = New System.Drawing.Size(229, 27)
-        Me.TextBox7.TabIndex = 38
+        Me.txtFee.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtFee.Location = New System.Drawing.Point(541, 55)
+        Me.txtFee.Name = "txtFee"
+        Me.txtFee.Size = New System.Drawing.Size(229, 27)
+        Me.txtFee.TabIndex = 38
         '
         'Label7
         '
@@ -365,13 +365,13 @@ Partial Class frmDocumentManagement
         Me.Label7.TabIndex = 37
         Me.Label7.Text = "Description"
         '
-        'TextBox4
+        'txtDescription
         '
-        Me.TextBox4.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox4.Location = New System.Drawing.Point(140, 138)
-        Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.Size = New System.Drawing.Size(284, 27)
-        Me.TextBox4.TabIndex = 36
+        Me.txtDescription.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtDescription.Location = New System.Drawing.Point(140, 138)
+        Me.txtDescription.Name = "txtDescription"
+        Me.txtDescription.Size = New System.Drawing.Size(284, 27)
+        Me.txtDescription.TabIndex = 36
         '
         'Label6
         '
@@ -383,13 +383,13 @@ Partial Class frmDocumentManagement
         Me.Label6.TabIndex = 35
         Me.Label6.Text = "Name"
         '
-        'TextBox3
+        'txtName
         '
-        Me.TextBox3.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox3.Location = New System.Drawing.Point(140, 96)
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(284, 27)
-        Me.TextBox3.TabIndex = 34
+        Me.txtName.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtName.Location = New System.Drawing.Point(140, 96)
+        Me.txtName.Name = "txtName"
+        Me.txtName.Size = New System.Drawing.Size(284, 27)
+        Me.txtName.TabIndex = 34
         '
         'Label3
         '
@@ -401,13 +401,13 @@ Partial Class frmDocumentManagement
         Me.Label3.TabIndex = 33
         Me.Label3.Text = "Document ID"
         '
-        'TextBox2
+        'txtDocumentID
         '
-        Me.TextBox2.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox2.Location = New System.Drawing.Point(140, 54)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(284, 27)
-        Me.TextBox2.TabIndex = 32
+        Me.txtDocumentID.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtDocumentID.Location = New System.Drawing.Point(140, 54)
+        Me.txtDocumentID.Name = "txtDocumentID"
+        Me.txtDocumentID.Size = New System.Drawing.Size(284, 27)
+        Me.txtDocumentID.TabIndex = 32
         '
         'btnAddStudent
         '
@@ -422,14 +422,14 @@ Partial Class frmDocumentManagement
         Me.btnAddStudent.Text = "Add"
         Me.btnAddStudent.UseVisualStyleBackColor = False
         '
-        'DataGridView1
+        'dvgDocument
         '
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DocumentID, Me.DocumentName, Me.Description, Me.Fee, Me.Status})
-        Me.DataGridView1.Location = New System.Drawing.Point(281, 329)
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(1118, 412)
-        Me.DataGridView1.TabIndex = 60
+        Me.dvgDocument.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dvgDocument.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DocumentID, Me.DocumentName, Me.Description, Me.Fee, Me.Status})
+        Me.dvgDocument.Location = New System.Drawing.Point(281, 329)
+        Me.dvgDocument.Name = "dvgDocument"
+        Me.dvgDocument.Size = New System.Drawing.Size(1118, 412)
+        Me.dvgDocument.TabIndex = 60
         '
         'DocumentID
         '
@@ -466,7 +466,7 @@ Partial Class frmDocumentManagement
         Me.Panel6.BackColor = System.Drawing.Color.White
         Me.Panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel6.Controls.Add(Me.PictureBox1)
-        Me.Panel6.Controls.Add(Me.TextBox1)
+        Me.Panel6.Controls.Add(Me.txtsearch)
         Me.Panel6.Location = New System.Drawing.Point(456, 293)
         Me.Panel6.Name = "Panel6"
         Me.Panel6.Size = New System.Drawing.Size(263, 26)
@@ -482,14 +482,14 @@ Partial Class frmDocumentManagement
         Me.PictureBox1.TabIndex = 29
         Me.PictureBox1.TabStop = False
         '
-        'TextBox1
+        'txtsearch
         '
-        Me.TextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.TextBox1.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(3, 3)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(230, 20)
-        Me.TextBox1.TabIndex = 28
+        Me.txtsearch.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtsearch.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtsearch.Location = New System.Drawing.Point(3, 3)
+        Me.txtsearch.Name = "txtsearch"
+        Me.txtsearch.Size = New System.Drawing.Size(230, 20)
+        Me.txtsearch.TabIndex = 28
         '
         'Label2
         '
@@ -520,9 +520,9 @@ Partial Class frmDocumentManagement
         Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.Panel6)
         Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.DataGridView1)
-        Me.Controls.Add(Me.Button2)
-        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.dvgDocument)
+        Me.Controls.Add(Me.btnDelete)
+        Me.Controls.Add(Me.btnEdit)
         Me.Controls.Add(Me.Panel5)
         Me.Controls.Add(Me.btnAddStudent)
         Me.Controls.Add(Me.Label1)
@@ -535,7 +535,7 @@ Partial Class frmDocumentManagement
         CType(Me.Logo, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel5.ResumeLayout(False)
         Me.Panel5.PerformLayout()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dvgDocument, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel6.ResumeLayout(False)
         Me.Panel6.PerformLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -558,25 +558,25 @@ Partial Class frmDocumentManagement
     Friend WithEvents Label4 As Label
     Friend WithEvents Logo As PictureBox
     Friend WithEvents Label5 As Label
-    Friend WithEvents Button2 As Button
-    Friend WithEvents Button1 As Button
+    Friend WithEvents btnDelete As Button
+    Friend WithEvents btnEdit As Button
     Friend WithEvents Panel5 As Panel
     Friend WithEvents Label14 As Label
     Friend WithEvents Label9 As Label
-    Friend WithEvents TextBox6 As TextBox
+    Friend WithEvents txtStatus As TextBox
     Friend WithEvents Label10 As Label
-    Friend WithEvents TextBox7 As TextBox
+    Friend WithEvents txtFee As TextBox
     Friend WithEvents Label7 As Label
-    Friend WithEvents TextBox4 As TextBox
+    Friend WithEvents txtDescription As TextBox
     Friend WithEvents Label6 As Label
-    Friend WithEvents TextBox3 As TextBox
+    Friend WithEvents txtName As TextBox
     Friend WithEvents Label3 As Label
-    Friend WithEvents TextBox2 As TextBox
+    Friend WithEvents txtDocumentID As TextBox
     Friend WithEvents btnAddStudent As Button
-    Friend WithEvents DataGridView1 As DataGridView
+    Friend WithEvents dvgDocument As DataGridView
     Friend WithEvents Panel6 As Panel
     Friend WithEvents PictureBox1 As PictureBox
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents txtsearch As TextBox
     Friend WithEvents Label2 As Label
     Friend WithEvents DocumentID As DataGridViewTextBoxColumn
     Friend WithEvents DocumentName As DataGridViewTextBoxColumn

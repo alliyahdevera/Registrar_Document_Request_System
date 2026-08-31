@@ -10,6 +10,18 @@ Public Class frmStudentManagement
             dgvStudents.DataSource = dt
         End Using
     End Sub
+    Private Sub txtsearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearch.TextChanged
+        Using conn As MySqlConnection = GetConnection()
+            conn.Open()
+            Dim query As String = "SELECT * FROM tblstudents WHERE StudentID LIKE @kw OR LastName LIKE @kw OR FirstName LIKE @kw"
+            Dim cmd As New MySqlCommand(query, conn)
+            cmd.Parameters.AddWithValue("@kw", "%" & txtSearch.Text.Trim() & "%")
+            Dim da As New MySqlDataAdapter(cmd)
+            Dim dt As New DataTable()
+            da.Fill(dt)
+            dgvStudents.DataSource = dt
+        End Using
+    End Sub
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
         Using conn As MySqlConnection = GetConnection()
             conn.Open()
