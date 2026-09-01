@@ -23,34 +23,54 @@ Partial Class frmMainMenu
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMainMenu))
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.btnLogout = New System.Windows.Forms.Button()
         Me.btnUserManagement = New System.Windows.Forms.Button()
+        Me.btnLogout = New System.Windows.Forms.Button()
         Me.btnReports = New System.Windows.Forms.Button()
         Me.btnDocumentRequests = New System.Windows.Forms.Button()
         Me.btnDocumentManagement = New System.Windows.Forms.Button()
         Me.btnStudentManagement = New System.Windows.Forms.Button()
+        Me.btnMainMenu = New System.Windows.Forms.Button()
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Logo = New System.Windows.Forms.PictureBox()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Panel5 = New System.Windows.Forms.Panel()
+        Me.lbltotalstudents = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         CType(Me.Logo, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel5.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.BackColor = System.Drawing.Color.Transparent
+        Me.Label1.Font = New System.Drawing.Font("Segoe UI", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.ForeColor = System.Drawing.Color.Navy
+        Me.Label1.Location = New System.Drawing.Point(277, 21)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(145, 32)
+        Me.Label1.TabIndex = 25
+        Me.Label1.Text = "Main Menu"
         '
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
-        Me.Panel1.Controls.Add(Me.btnLogout)
         Me.Panel1.Controls.Add(Me.btnUserManagement)
+        Me.Panel1.Controls.Add(Me.btnLogout)
         Me.Panel1.Controls.Add(Me.btnReports)
         Me.Panel1.Controls.Add(Me.btnDocumentRequests)
         Me.Panel1.Controls.Add(Me.btnDocumentManagement)
         Me.Panel1.Controls.Add(Me.btnStudentManagement)
+        Me.Panel1.Controls.Add(Me.btnMainMenu)
         Me.Panel1.Controls.Add(Me.Panel4)
         Me.Panel1.Controls.Add(Me.Panel3)
         Me.Panel1.Controls.Add(Me.Panel2)
@@ -58,7 +78,23 @@ Partial Class frmMainMenu
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(250, 769)
-        Me.Panel1.TabIndex = 2
+        Me.Panel1.TabIndex = 27
+        '
+        'btnUserManagement
+        '
+        Me.btnUserManagement.BackColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
+        Me.btnUserManagement.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnUserManagement.FlatAppearance.BorderSize = 0
+        Me.btnUserManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnUserManagement.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnUserManagement.ForeColor = System.Drawing.Color.White
+        Me.btnUserManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnUserManagement.Location = New System.Drawing.Point(15, 345)
+        Me.btnUserManagement.Name = "btnUserManagement"
+        Me.btnUserManagement.Size = New System.Drawing.Size(220, 49)
+        Me.btnUserManagement.TabIndex = 11
+        Me.btnUserManagement.Text = " User Management"
+        Me.btnUserManagement.UseVisualStyleBackColor = False
         '
         'btnLogout
         '
@@ -76,22 +112,6 @@ Partial Class frmMainMenu
         Me.btnLogout.Text = "Logout"
         Me.btnLogout.UseVisualStyleBackColor = False
         '
-        'btnUserManagement
-        '
-        Me.btnUserManagement.BackColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
-        Me.btnUserManagement.Dock = System.Windows.Forms.DockStyle.Top
-        Me.btnUserManagement.FlatAppearance.BorderSize = 0
-        Me.btnUserManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnUserManagement.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnUserManagement.ForeColor = System.Drawing.Color.White
-        Me.btnUserManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnUserManagement.Location = New System.Drawing.Point(15, 296)
-        Me.btnUserManagement.Name = "btnUserManagement"
-        Me.btnUserManagement.Size = New System.Drawing.Size(220, 49)
-        Me.btnUserManagement.TabIndex = 8
-        Me.btnUserManagement.Text = " User Management"
-        Me.btnUserManagement.UseVisualStyleBackColor = False
-        '
         'btnReports
         '
         Me.btnReports.BackColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
@@ -101,10 +121,10 @@ Partial Class frmMainMenu
         Me.btnReports.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnReports.ForeColor = System.Drawing.Color.White
         Me.btnReports.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnReports.Location = New System.Drawing.Point(15, 247)
+        Me.btnReports.Location = New System.Drawing.Point(15, 296)
         Me.btnReports.Name = "btnReports"
         Me.btnReports.Size = New System.Drawing.Size(220, 49)
-        Me.btnReports.TabIndex = 7
+        Me.btnReports.TabIndex = 8
         Me.btnReports.Text = "Reports"
         Me.btnReports.UseVisualStyleBackColor = False
         '
@@ -117,10 +137,10 @@ Partial Class frmMainMenu
         Me.btnDocumentRequests.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDocumentRequests.ForeColor = System.Drawing.Color.White
         Me.btnDocumentRequests.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnDocumentRequests.Location = New System.Drawing.Point(15, 198)
+        Me.btnDocumentRequests.Location = New System.Drawing.Point(15, 247)
         Me.btnDocumentRequests.Name = "btnDocumentRequests"
         Me.btnDocumentRequests.Size = New System.Drawing.Size(220, 49)
-        Me.btnDocumentRequests.TabIndex = 6
+        Me.btnDocumentRequests.TabIndex = 7
         Me.btnDocumentRequests.Text = "Document Requests"
         Me.btnDocumentRequests.UseVisualStyleBackColor = False
         '
@@ -133,10 +153,10 @@ Partial Class frmMainMenu
         Me.btnDocumentManagement.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDocumentManagement.ForeColor = System.Drawing.Color.White
         Me.btnDocumentManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnDocumentManagement.Location = New System.Drawing.Point(15, 149)
+        Me.btnDocumentManagement.Location = New System.Drawing.Point(15, 198)
         Me.btnDocumentManagement.Name = "btnDocumentManagement"
         Me.btnDocumentManagement.Size = New System.Drawing.Size(220, 49)
-        Me.btnDocumentManagement.TabIndex = 5
+        Me.btnDocumentManagement.TabIndex = 6
         Me.btnDocumentManagement.Text = "Document Management"
         Me.btnDocumentManagement.UseVisualStyleBackColor = False
         '
@@ -149,12 +169,28 @@ Partial Class frmMainMenu
         Me.btnStudentManagement.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnStudentManagement.ForeColor = System.Drawing.Color.White
         Me.btnStudentManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnStudentManagement.Location = New System.Drawing.Point(15, 100)
+        Me.btnStudentManagement.Location = New System.Drawing.Point(15, 149)
         Me.btnStudentManagement.Name = "btnStudentManagement"
         Me.btnStudentManagement.Size = New System.Drawing.Size(220, 49)
-        Me.btnStudentManagement.TabIndex = 4
+        Me.btnStudentManagement.TabIndex = 5
         Me.btnStudentManagement.Text = "Student Management"
         Me.btnStudentManagement.UseVisualStyleBackColor = False
+        '
+        'btnMainMenu
+        '
+        Me.btnMainMenu.BackColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
+        Me.btnMainMenu.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnMainMenu.FlatAppearance.BorderSize = 0
+        Me.btnMainMenu.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnMainMenu.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMainMenu.ForeColor = System.Drawing.Color.White
+        Me.btnMainMenu.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnMainMenu.Location = New System.Drawing.Point(15, 100)
+        Me.btnMainMenu.Name = "btnMainMenu"
+        Me.btnMainMenu.Size = New System.Drawing.Size(220, 49)
+        Me.btnMainMenu.TabIndex = 4
+        Me.btnMainMenu.Text = "Main Menu"
+        Me.btnMainMenu.UseVisualStyleBackColor = False
         '
         'Panel4
         '
@@ -218,25 +254,57 @@ Partial Class frmMainMenu
         Me.Label5.TabIndex = 24
         Me.Label5.Text = "Document Request System"
         '
-        'Label1
+        'Panel5
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.BackColor = System.Drawing.Color.Transparent
-        Me.Label1.Font = New System.Drawing.Font("Segoe UI", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.ForeColor = System.Drawing.Color.Navy
-        Me.Label1.Location = New System.Drawing.Point(277, 21)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(145, 32)
-        Me.Label1.TabIndex = 25
-        Me.Label1.Text = "Main Menu"
+        Me.Panel5.BackColor = System.Drawing.Color.White
+        Me.Panel5.Controls.Add(Me.PictureBox1)
+        Me.Panel5.Controls.Add(Me.lbltotalstudents)
+        Me.Panel5.Controls.Add(Me.Label2)
+        Me.Panel5.Location = New System.Drawing.Point(283, 73)
+        Me.Panel5.Name = "Panel5"
+        Me.Panel5.Size = New System.Drawing.Size(246, 111)
+        Me.Panel5.TabIndex = 28
+        '
+        'lbltotalstudents
+        '
+        Me.lbltotalstudents.AutoSize = True
+        Me.lbltotalstudents.BackColor = System.Drawing.Color.Transparent
+        Me.lbltotalstudents.Font = New System.Drawing.Font("Segoe UI", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbltotalstudents.ForeColor = System.Drawing.Color.Navy
+        Me.lbltotalstudents.Location = New System.Drawing.Point(98, 50)
+        Me.lbltotalstudents.Name = "lbltotalstudents"
+        Me.lbltotalstudents.Size = New System.Drawing.Size(24, 32)
+        Me.lbltotalstudents.TabIndex = 30
+        Me.lbltotalstudents.Text = "-"
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.BackColor = System.Drawing.Color.Transparent
+        Me.Label2.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.ForeColor = System.Drawing.Color.Navy
+        Me.Label2.Location = New System.Drawing.Point(94, 27)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(114, 21)
+        Me.Label2.TabIndex = 29
+        Me.Label2.Text = "Total Students"
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.Location = New System.Drawing.Point(27, 28)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(55, 55)
+        Me.PictureBox1.TabIndex = 31
+        Me.PictureBox1.TabStop = False
         '
         'frmMainMenu
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1421, 769)
-        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.Panel5)
         Me.Controls.Add(Me.Panel1)
+        Me.Controls.Add(Me.Label1)
         Me.Name = "frmMainMenu"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "frmMainMenu"
@@ -244,22 +312,30 @@ Partial Class frmMainMenu
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
         CType(Me.Logo, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel5.ResumeLayout(False)
+        Me.Panel5.PerformLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
+    Friend WithEvents Label1 As Label
     Friend WithEvents Panel1 As Panel
-    Friend WithEvents btnLogout As Button
     Friend WithEvents btnUserManagement As Button
+    Friend WithEvents btnLogout As Button
     Friend WithEvents btnReports As Button
     Friend WithEvents btnDocumentRequests As Button
     Friend WithEvents btnDocumentManagement As Button
     Friend WithEvents btnStudentManagement As Button
+    Friend WithEvents btnMainMenu As Button
     Friend WithEvents Panel4 As Panel
     Friend WithEvents Panel3 As Panel
     Friend WithEvents Panel2 As Panel
-    Friend WithEvents Label5 As Label
     Friend WithEvents Label4 As Label
     Friend WithEvents Logo As PictureBox
-    Friend WithEvents Label1 As Label
+    Friend WithEvents Label5 As Label
+    Friend WithEvents Panel5 As Panel
+    Friend WithEvents lbltotalstudents As Label
+    Friend WithEvents Label2 As Label
+    Friend WithEvents PictureBox1 As PictureBox
 End Class

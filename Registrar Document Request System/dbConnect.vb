@@ -4,4 +4,5 @@ Module DBConnection
     Public Function GetConnection() As MySqlConnection
         Return New MySqlConnection(connStr)
     End Function
+    Public dr As MySqlDataReader
 End Module

@@ -51,16 +51,17 @@ Public Class frmDocumentManagement
         End If
         Dim fee As Decimal = CDec(txtFee.Text.Trim())
 
-        Dim query As String = "UPDATE tbldocuments SET " & "DocumentName = @name, " & "Description = @desc, " & "Fee = @fee, " & "Status = @status " & "WHERE DocumentID = @id"
+
 
         Using conn As MySqlConnection = GetConnection()
             conn.Open()
-            Using cmd As New MySqlCommand(query, conn)
-                cmd.Parameters.AddWithValue("@id", txtDocumentID.Text.Trim())
-                cmd.Parameters.AddWithValue("@name", txtName.Text.Trim())
-                cmd.Parameters.AddWithValue("@desc", txtDescription.Text.Trim())
-                cmd.Parameters.AddWithValue("@fee", fee)
-                cmd.Parameters.AddWithValue("@status", txtStatus.Text.Trim())
+            Dim query As String = "UPDATE tbldocuments SET " & "DocumentName = @name, " & "Description = @desc, " & "Fee = @fee, " & "Status = @status " & "WHERE DocumentID = @id"
+            Dim cmd As New MySqlCommand(query, conn)
+            cmd.Parameters.AddWithValue("@id", txtDocumentID.Text.Trim())
+            cmd.Parameters.AddWithValue("@name", txtName.Text.Trim())
+            cmd.Parameters.AddWithValue("@desc", txtDescription.Text.Trim())
+            cmd.Parameters.AddWithValue("@fee", fee)
+            cmd.Parameters.AddWithValue("@status", txtStatus.Text.Trim())
 
                 Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
 
@@ -70,7 +71,6 @@ Public Class frmDocumentManagement
                     MsgBox("Document details updated successfully!", vbInformation, "Success")
                 End If
             End Using
-        End Using
 
         LoadDocuments()
     End Sub
@@ -85,10 +85,11 @@ Public Class frmDocumentManagement
             Exit Sub
         End If
 
-        Dim query As String = "UPDATE tbldocuments SET Status = 'Inactive' WHERE DocumentID = @id"
+
 
         Using conn As MySqlConnection = GetConnection()
             conn.Open()
+            Dim query As String = "UPDATE tbldocuments SET Status = 'Inactive' WHERE DocumentID = @id"
             Using cmd As New MySqlCommand(query, conn)
                 cmd.Parameters.AddWithValue("@id", txtDocumentID.Text.Trim())
 
@@ -123,7 +124,7 @@ Public Class frmDocumentManagement
         End Using
     End Sub
 
-    Private Sub btnLogout_Click(sender As Object, e As EventArgs) Handles btnLogout.Click
+    Private Sub btnLogout_Click(sender As Object, e As EventArgs)
         If MsgBox("Are you sure you want to logout?", vbYesNo + vbQuestion, "Confirm Logout") = MsgBoxResult.Yes Then
             CurrentUser.UserID = 0
             CurrentUser.FullName = ""
@@ -133,11 +134,28 @@ Public Class frmDocumentManagement
         End If
     End Sub
 
-    Private Sub btnStudentManagement_Click(sender As Object, e As EventArgs) Handles btnStudentManagement.Click
+    Private Sub btnStudentManagement_Click(sender As Object, e As EventArgs)
         frmStudentManagement.Show()
         Me.Hide()
     End Sub
 
+    Private Sub btnMainMenu_Click(sender As Object, e As EventArgs) Handles btnMainMenu.Click
+        frmMainMenu.Show()
+        Me.Hide()
+    End Sub
 
+    Private Sub btnStudentManagement_Click_1(sender As Object, e As EventArgs) Handles btnStudentManagement.Click
+        frmStudentManagement.Show()
+        Me.Hide()
+    End Sub
 
+    Private Sub btnLogout_Click_1(sender As Object, e As EventArgs) Handles btnLogout.Click
+        If MsgBox("Are you sure you want to logout?", vbYesNo + vbQuestion, "Confirm Logout") = MsgBoxResult.Yes Then
+            CurrentUser.UserID = 0
+            CurrentUser.FullName = ""
+            CurrentUser.Role = ""
+            frmLogin.Show()
+            Me.Close()
+        End If
+    End Sub
 End Class
