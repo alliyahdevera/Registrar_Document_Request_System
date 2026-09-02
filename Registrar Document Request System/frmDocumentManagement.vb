@@ -11,7 +11,7 @@ Public Class frmDocumentManagement
 
     Private Sub LoadDocuments()
         Call connection()
-        sql = "SELECT * FROM tblstudents"
+        sql = "SELECT * FROM tbldocuments"
         cmd = New MySqlCommand(sql, cn)
         dr = cmd.ExecuteReader()
 
@@ -129,5 +129,25 @@ Public Class frmDocumentManagement
             cmd.ExecuteNonQuery()
         cn.Close()
         LoadDocuments()
+    End Sub
+
+    Private Sub txtsearch_TextChanged(sender As Object, e As EventArgs) Handles txtsearch.TextChanged
+        Call connection()
+        sql = "Select * from tbldocuments where documentID like '%" & txtsearch.Text & "%' or documentname like '%" & txtsearch.Text & "%'"
+        cmd = New MySqlCommand(sql, cn)
+        dr = cmd.ExecuteReader()
+
+        dvgDocument.Rows.Clear()
+        While dr.Read()
+            dvgDocument.Rows.Add(
+            dr("DocumentID").ToString(),
+            dr("DocumentName").ToString(),
+            dr("Description").ToString(),
+            dr("Fee").ToString(),
+            dr("Status").ToString())
+        End While
+
+        dr.Close()
+        cn.Close()
     End Sub
 End Class

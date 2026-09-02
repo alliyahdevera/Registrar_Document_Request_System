@@ -1,6 +1,4 @@
-﻿Imports System.Windows.Forms.VisualStyles.VisualStyleElement
-Imports MySql.Data.MySqlClient
-Imports Org.BouncyCastle.Crypto
+﻿Imports MySql.Data.MySqlClient
 
 Public Class frmStudentManagement
     Private Sub LoadStudents()
@@ -114,5 +112,29 @@ Public Class frmStudentManagement
             frmLogin.Show()
             Me.Close()
         End If
+    End Sub
+
+    Private Sub txtSearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearch.TextChanged
+        Call connection()
+        sql = "Select * from tblstudents where studentID like '%" & txtSearch.Text & "%' or lastname like '%" & txtSearch.Text & "%'"
+        cmd = New MySqlCommand(sql, cn)
+        dr = cmd.ExecuteReader()
+
+        dgvStudents.Rows.Clear()
+        While dr.Read()
+            dgvStudents.Rows.Add(
+                dr("StudentID").ToString(),
+                dr("LRN").ToString(),
+                dr("LastName").ToString(),
+                dr("FirstName").ToString(),
+                dr("MiddleName").ToString(),
+                dr("Course").ToString(),
+                dr("YearLevel").ToString(),
+                dr("Section").ToString(),
+                dr("ContactNo").ToString())
+        End While
+
+        dr.Close()
+        cn.Close()
     End Sub
 End Class
