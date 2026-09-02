@@ -50,15 +50,17 @@ Public Class frmMainMenu
     End Sub
 
     Private Sub TotalStudents()
-        Dim dr As MySqlDataReader
-        Using conn As MySqlConnection = GetConnection()
-            conn.Open()
-            Dim query As String = "Select count(StudentID) from tblstudents"
-            Dim cmd As New MySqlCommand(query, conn)
+        Call connection()
+        sql = "Select count(StudentID) from tblstudents"
+            cmd = New MySqlCommand(sql, cn)
             dr = cmd.ExecuteReader()
+
             If dr.Read() Then
                 lbltotalstudents.Text = dr(0).ToString()
             End If
-        End Using
+
+            dr.Close()
+            cn.Close()
+
     End Sub
 End Class

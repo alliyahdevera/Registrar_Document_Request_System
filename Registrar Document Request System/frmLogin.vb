@@ -2,30 +2,27 @@
  
 Public Class frmLogin
     Private Sub btnLogin_Click(sender As Object, e As EventArgs) Handles btnLogin.Click
-        Using conn As MySqlConnection = GetConnection()
-            Try
-                conn.Open()
-                Dim query As String = "SELECT * FROM tblusers WHERE Username=@u AND Password=@p AND Status='Active'"
-                Dim cmd As New MySqlCommand(query, conn)
-                cmd.Parameters.AddWithValue("@u", txtUsername.Text.Trim())
-                cmd.Parameters.AddWithValue("@p", txtPassword.Text.Trim())
+        Call connection()
+        sql = "SELECT * FROM tblusers WHERE Username=@u AND Password=@p AND Status='Active'"
+            cmd = New MySqlCommand(sql, cn)
+            cmd.Parameters.AddWithValue("@u", txtUsername.Text.Trim())
+            cmd.Parameters.AddWithValue("@p", txtPassword.Text.Trim())
+            dr = cmd.ExecuteReader()
 
-                Dim reader As MySqlDataReader = cmd.ExecuteReader()
-                If reader.Read() Then
-                    CurrentUser.UserID = Convert.ToInt32(reader("UserID"))
-                    CurrentUser.FullName = reader("FullName").ToString()
-                    CurrentUser.Role = reader("Role").ToString()
+            If dr.Read() Then
+                CurrentUser.UserID = Convert.ToInt32(dr("UserID"))
+                CurrentUser.FullName = dr("FullName").ToString()
+                CurrentUser.Role = dr("Role").ToString()
+                dr.Close()
+                cn.Close()
+                frmMainMenu.Show()
+                Me.Hide()
+            Else
+                dr.Close()
+                cn.Close()
+                MessageBox.Show("Invalid username or password.")
+            End If
 
-                    Dim frm As New frmMainMenu()
-                    frm.Show()
-                    Me.Hide()
-                Else
-                    MessageBox.Show("Invalid username or password.")
-                End If
-            Catch ex As Exception
-                MessageBox.Show("Connection error: " & ex.Message)
-            End Try
-        End Using
     End Sub
 
     Private Sub btnExit_Click(sender As Object, e As EventArgs) Handles btnExit.Click

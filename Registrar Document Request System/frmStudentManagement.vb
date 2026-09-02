@@ -4,42 +4,33 @@ Imports Org.BouncyCastle.Crypto
 
 Public Class frmStudentManagement
     Private Sub LoadStudents()
-        Using conn As MySqlConnection = GetConnection()
-            conn.Open()
-            Dim da As New MySqlDataAdapter("SELECT * FROM tblstudents", conn)
-            Dim dt As New DataTable()
-            da.Fill(dt)
-            dgvStudents.AutoGenerateColumns = False
-            StudentID.DataPropertyName = "StudentID"
-            LRN.DataPropertyName = "LRN"
-            LastName.DataPropertyName = "LastName"
-            FirstName.DataPropertyName = "FirstName"
-            MiddleName.DataPropertyName = "MiddleName"
-            Course.DataPropertyName = "Course"
-            YearLevel.DataPropertyName = "YearLevel"
-            Section.DataPropertyName = "Section"
-            ContactNumber.DataPropertyName = "ContactNo"
-            dgvStudents.DataSource = dt
-        End Using
-    End Sub
-    Private Sub txtsearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearch.TextChanged
-        Using conn As MySqlConnection = GetConnection()
-            conn.Open()
-            ' Dim query As String = "SELECT * FROM tblstudents WHERE StudentID LIKE '%" OR "&' LastName LIKE @kw OR FirstName LIKE @kw"
-            Dim query As String = "Select * from tblstudents studentID like '%" & txtSearch.Text & "%' or lastname like '%" & txtSearch.Text & "%'"
-            Dim cmd As New MySqlCommand(query, conn)
-            'cmd.Parameters.AddWithValue("@kw", "%" & txtSearch.Text.Trim() & "%")
-            Dim da As New MySqlDataAdapter(cmd)
-            Dim dt As New DataTable()
-            da.Fill(dt)
-            dgvStudents.DataSource = dt
-        End Using
+        Call connection()
+        sql = "SELECT * FROM tblstudents"
+        cmd = New MySqlCommand(sql, cn)
+        dr = cmd.ExecuteReader()
+
+        dgvStudents.Rows.Clear()
+        While dr.Read()
+            dgvStudents.Rows.Add(
+                dr("StudentID").ToString(),
+                dr("LRN").ToString(),
+                dr("LastName").ToString(),
+                dr("FirstName").ToString(),
+                dr("MiddleName").ToString(),
+                dr("Course").ToString(),
+                dr("YearLevel").ToString(),
+                dr("Section").ToString(),
+                dr("ContactNo").ToString())
+        End While
+
+        dr.Close()
+        cn.Close()
     End Sub
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
-        Using conn As MySqlConnection = GetConnection()
-            conn.Open()
-            Dim query As String = "INSERT INTO tblstudents (StudentID, LRN, LastName, FirstName, MiddleName, Course, YearLevel, Section, ContactNo) " & "VALUES (@id,@lrn,@ln,@fn,@mn,@course,@year,@section,@contact)"
-            Dim cmd As New MySqlCommand(query, conn)
+        Call connection()
+        sql = "INSERT INTO tblstudents (StudentID, LRN, LastName, FirstName, MiddleName, Course, YearLevel, Section, ContactNo) " &
+                  "VALUES (@id,@lrn,@ln,@fn,@mn,@course,@year,@section,@contact)"
+            cmd = New MySqlCommand(sql, cn)
             cmd.Parameters.AddWithValue("@id", txtStudentID.Text.Trim())
             cmd.Parameters.AddWithValue("@lrn", txtLRN.Text.Trim())
             cmd.Parameters.AddWithValue("@ln", txtLastName.Text.Trim())
@@ -50,15 +41,14 @@ Public Class frmStudentManagement
             cmd.Parameters.AddWithValue("@section", txtSection.Text.Trim())
             cmd.Parameters.AddWithValue("@contact", txtContactNo.Text.Trim())
             cmd.ExecuteNonQuery()
-        End Using
+        cn.Close()
         LoadStudents()
     End Sub
     Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
-        Using conn As MySqlConnection = GetConnection()
-            conn.Open()
-            Dim query As String = "UPDATE tblstudents SET " & "LRN = @lrn, " & "LastName = @ln, " & "FirstName = @fn, " & "MiddleName = @mn, " & "Course = @course, " & "YearLevel = @year, " & "Section = @section, " &
-            "ContactNo = @contact " & "WHERE StudentID = @id"
-            Dim cmd As New MySqlCommand(query, conn)
+        Call connection()
+        sql = "UPDATE tblstudents SET LRN=@lrn, LastName=@ln, FirstName=@fn, MiddleName=@mn, " &
+                  "Course=@course, YearLevel=@year, Section=@section, ContactNo=@contact WHERE StudentID=@id"
+            cmd = New MySqlCommand(sql, cn)
             cmd.Parameters.AddWithValue("@id", txtStudentID.Text.Trim())
             cmd.Parameters.AddWithValue("@lrn", txtLRN.Text.Trim())
             cmd.Parameters.AddWithValue("@ln", txtLastName.Text.Trim())
@@ -69,14 +59,12 @@ Public Class frmStudentManagement
             cmd.Parameters.AddWithValue("@section", txtSection.Text.Trim())
             cmd.Parameters.AddWithValue("@contact", txtContactNo.Text.Trim())
 
-            Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
-            If rowsAffected = 0 Then
-                MsgBox("No student record found with the specified Student ID.", vbInformation, "Update Failed")
-            Else
-                MsgBox("Student details updated successfully!", vbInformation, "Success")
-                End If
-
-        End Using
+        If cmd.ExecuteNonQuery() = 0 Then
+            MsgBox("No student record found with the specified Student ID.", vbInformation, "Update Failed")
+        Else
+            MsgBox("Student details updated successfully!", vbInformation, "Success")
+            End If
+        cn.Close()
 
         LoadStudents()
     End Sub
@@ -90,20 +78,17 @@ Public Class frmStudentManagement
             Exit Sub
         End If
 
-        Using conn As MySqlConnection = GetConnection()
-            conn.Open()
-            Dim query As String = "UPDATE tblstudents SET Status = 'Inactive' WHERE StudentID = @id"
-            Dim cmd As New MySqlCommand(query, conn)
+        Call connection()
+        sql = "UPDATE tblstudents SET Status = 'Inactive' WHERE StudentID = @id"
+            cmd = New MySqlCommand(sql, cn)
             cmd.Parameters.AddWithValue("@id", txtStudentID.Text.Trim())
 
-                Dim rowsAffected As Integer = cmd.ExecuteNonQuery()
-            If rowsAffected > 0 Then
+            If cmd.ExecuteNonQuery() > 0 Then
                 MsgBox("Student record successfully deleted.", vbInformation, "Success")
             Else
                 MsgBox("No matching Student ID found.", vbExclamation, "Record Not Found")
             End If
-        End Using
-
+            cn.Close()
         LoadStudents()
     End Sub
 

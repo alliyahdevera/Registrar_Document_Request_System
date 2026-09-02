@@ -38,7 +38,7 @@ Partial Class frmDocumentManagement
         Me.txtName = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.txtDocumentID = New System.Windows.Forms.TextBox()
-        Me.btnAddStudent = New System.Windows.Forms.Button()
+        Me.btnAddDocument = New System.Windows.Forms.Button()
         Me.dvgDocument = New System.Windows.Forms.DataGridView()
         Me.DocumentID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DocumentName = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -234,18 +234,18 @@ Partial Class frmDocumentManagement
         Me.txtDocumentID.Size = New System.Drawing.Size(284, 27)
         Me.txtDocumentID.TabIndex = 32
         '
-        'btnAddStudent
+        'btnAddDocument
         '
-        Me.btnAddStudent.BackColor = System.Drawing.Color.Navy
-        Me.btnAddStudent.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnAddStudent.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAddStudent.ForeColor = System.Drawing.Color.White
-        Me.btnAddStudent.Location = New System.Drawing.Point(1166, 115)
-        Me.btnAddStudent.Name = "btnAddStudent"
-        Me.btnAddStudent.Size = New System.Drawing.Size(167, 31)
-        Me.btnAddStudent.TabIndex = 55
-        Me.btnAddStudent.Text = "Add"
-        Me.btnAddStudent.UseVisualStyleBackColor = False
+        Me.btnAddDocument.BackColor = System.Drawing.Color.Navy
+        Me.btnAddDocument.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnAddDocument.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAddDocument.ForeColor = System.Drawing.Color.White
+        Me.btnAddDocument.Location = New System.Drawing.Point(1166, 115)
+        Me.btnAddDocument.Name = "btnAddDocument"
+        Me.btnAddDocument.Size = New System.Drawing.Size(167, 31)
+        Me.btnAddDocument.TabIndex = 55
+        Me.btnAddDocument.Text = "Add"
+        Me.btnAddDocument.UseVisualStyleBackColor = False
         '
         'dvgDocument
         '
@@ -543,7 +543,7 @@ Partial Class frmDocumentManagement
         Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.btnEdit)
         Me.Controls.Add(Me.Panel5)
-        Me.Controls.Add(Me.btnAddStudent)
+        Me.Controls.Add(Me.btnAddDocument)
         Me.Controls.Add(Me.Label1)
         Me.Name = "frmDocumentManagement"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -578,7 +578,7 @@ Partial Class frmDocumentManagement
     Friend WithEvents txtName As TextBox
     Friend WithEvents Label3 As Label
     Friend WithEvents txtDocumentID As TextBox
-    Friend WithEvents btnAddStudent As Button
+    Friend WithEvents btnAddDocument As Button
     Friend WithEvents dvgDocument As DataGridView
     Friend WithEvents Panel6 As Panel
     Friend WithEvents PictureBox1 As PictureBox
