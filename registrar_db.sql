@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 31, 2026 at 07:15 AM
+-- Generation Time: Sep 02, 2026 at 11:49 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -125,21 +125,21 @@ CREATE TABLE `tblstudents` (
 --
 
 INSERT INTO `tblstudents` (`StudentID`, `LRN`, `LastName`, `FirstName`, `MiddleName`, `Course`, `YearLevel`, `Section`, `ContactNo`, `Status`) VALUES
-('1123-24', '098760987612', 'Fernandez', 'Gio', 'Natividad', 'BSIT', '3rd Year', '31E1', '09609829478', 'Active'),
-('1127-24', '123456789016', 'Enclona', 'Paul Benedict', NULL, 'BSIT', '3rd Year', '31E1', '0912345678904', 'Active'),
-('1208-24', '123456789018', 'Para', 'Andrea', NULL, 'BSIT', '3rd Year', '31E1', '0912345678906', 'Active'),
-('1314-24', '253435623456', 'Batoy', 'Nicholo John', 'Lopez', 'BSIT', '3rd Year', '31E1', '09676781233', 'Active'),
-('1327-24', '123456789015', 'Reales', 'Jonnidel', 'Paradero', 'BSIT', '3rd Year', '31E1', '0912345678903', 'Active'),
-('1395-24', '407321150214', 'Solis', 'Sophia Cassandra', 'Villacorte', 'BSIT', '3rd Year', '31E1', '09690141523', 'Active'),
-('1396-24', '123456123412', 'Mendoza', 'Stephanie', 'Pobar', 'BSIT', '3rd Year', '31E1', '09612564233', 'Active'),
-('1522-24', '234567345678', 'Barcinas', 'Marc Denize', 'Babon', 'BSIT', '3rd Year', '31E1', '09612564765', 'Active'),
-('1808-23', '123456789013', 'Villacorte', 'Joshua', 'Joseph', 'BSIT', '3rd Year', '31E1', '0912345678901', 'Active'),
-('2055-24', '123456789012', 'Canua', 'Carl James', 'Prado', 'BSIT', '3rd Year', '31E3', '09764743381', 'Active'),
-('2096-24', '123456789019', 'Ramones', 'Leisbeth', 'Bering', 'BSIT', '3rd Year', '31E1', '0912345678907', 'Active'),
-('2194-24', '123456789014', 'Sabesaje', 'Sho Uno', NULL, 'BSIT', '3rd Year', '31E1', '0912345678902', 'Active'),
-('2208-24', '123456789017', 'Eullo', 'John Raven', 'Jandoc', 'BSIT', '3rd Year', '31E1', '0912345678905', 'Active'),
-('2786-24', '424515150094', 'Roque', 'Kevin Clerck', 'Alora', 'BSIT', '3rd Year', '31E1', '09626728466', 'Active'),
-('2789-24', '136899110095', 'De Vera', 'Alliyah', 'Garcia', 'BSIT', '3rd Year', '31E1', '09625632435', 'Active');
+('1123-24', '098760987612', 'Fernandez', 'Gio', 'Natividad', 'Bachelor of Science in Information Technology', '3rd Year', '31E1', '09609829478', 'Active'),
+('1127-24', '123456789016', 'Enclona', 'Paul Benedict', '', 'Bachelor of Science in Information Technology', '3rd Year', '31E1', '09123456789', 'Active'),
+('1208-24', '123456789018', 'Para', 'Andrea', '', 'Bachelor of Science in Information Technology', '3rd Year', '31E1', '09123456789', 'Active'),
+('1314-24', '253435623456', 'Batoy', 'Nicholo John', 'Lopez', 'Bachelor of Science in Information Technology', '3rd Year', '31E1', '09676781233', 'Active'),
+('1327-24', '123456789015', 'Reales', 'Jonnidel', 'Paradero', 'Bachelor of Science in Information Technology', '3rd Year', '31E1', '09123456789', 'Active'),
+('1395-24', '407321150214', 'Solis', 'Sophia Cassandra', 'Villacorte', 'Bachelor of Science in Information Technology', '3rd Year', '31E1', '09690141523', 'Active'),
+('1396-24', '123456123412', 'Mendoza', 'Stephanie', 'Pobar', 'Bachelor of Science in Information Technology', '3rd Year', '31E1', '09612564233', 'Active'),
+('1522-24', '234567345678', 'Barcinas', 'Marc Denize', 'Babon', 'Bachelor of Science in Information Technology', '3rd Year', '31E1', '09612564765', 'Active'),
+('1808-23', '123456789013', 'Villacorte', 'Joshua', 'Joseph', 'Bachelor of Science in Information Technology', '3rd Year', '31E1', '09123456789', 'Active'),
+('2055-24', '123456789012', 'Canua', 'Carl James', 'Prado', 'Bachelor of Science in Information Technology', '3rd Year', '31E3', '09764743381', 'Active'),
+('2096-24', '123456789019', 'Ramones', 'Leisbeth', 'Bering', 'Bachelor of Science in Information Technology', '3rd Year', '31E1', '09123456789', 'Active'),
+('2194-24', '123456789014', 'Sabesaje', 'Sho Uno', '', 'Bachelor of Science in Information Technology', '3rd Year', '31E1', '09123456789', 'Active'),
+('2208-24', '123456789017', 'Eullo', 'John Raven', 'Jandoc', 'Bachelor of Science in Information Technology', '3rd Year', '31E1', '09123456789', 'Active'),
+('2786-24', '424515150094', 'Roque', 'Kevin Clerck', 'Alora', 'Bachelor of Science in Information Technology', '3rd Year', '31E1', '09626728466', 'Active'),
+('2789-24', '136899110095', 'De Vera', 'Alliyah', 'Garcia', 'Bachelor of Science in Information Technology', '3rd Year', '31E1', '09625632435', 'Active');
 
 -- --------------------------------------------------------
 
