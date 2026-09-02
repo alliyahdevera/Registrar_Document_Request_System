@@ -380,7 +380,7 @@ Partial Class frmStudentManagement
         '
         Me.cboYearLevel.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboYearLevel.FormattingEnabled = True
-        Me.cboYearLevel.Items.AddRange(New Object() {"1", "2", "3", "4"})
+        Me.cboYearLevel.Items.AddRange(New Object() {"1st Year", "2nd Year", "3rd Year", "4th year"})
         Me.cboYearLevel.Location = New System.Drawing.Point(838, 93)
         Me.cboYearLevel.Name = "cboYearLevel"
         Me.cboYearLevel.Size = New System.Drawing.Size(260, 28)
