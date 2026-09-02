@@ -7,6 +7,9 @@ Public Class frmMainMenu
             btnUserManagement.Visible = False
         End If
         TotalStudents()
+        TotalRequest()
+        PendingRequest()
+        CompletedRequest()
     End Sub
     Private Sub btnLogout_Click(sender As Object, e As EventArgs)
         If MsgBox("Are you sure you want to logout?", vbYesNo + vbQuestion, "Confirm Logout") = MsgBoxResult.Yes Then
@@ -60,7 +63,49 @@ Public Class frmMainMenu
             End If
 
             dr.Close()
-            cn.Close()
+        cn.Close()
+    End Sub
 
+    Private Sub TotalRequest()
+        Call connection()
+        sql = "Select count(RequestID) from tblrequest"
+        cmd = New MySqlCommand(sql, cn)
+        dr = cmd.ExecuteReader()
+
+        If dr.Read() Then
+            lbltotrequests.Text = dr(0).ToString()
+        End If
+
+        dr.Close()
+        cn.Close()
+    End Sub
+
+    Private Sub PendingRequest()
+        Call connection()
+
+        sql = "SELECT COUNT(RequestID) FROM tblrequest WHERE Status = 'Pending'"
+        cmd = New MySqlCommand(sql, cn)
+        dr = cmd.ExecuteReader()
+
+        If dr.Read() Then
+            lblpendingrequests.Text = dr(0).ToString()
+        End If
+
+        dr.Close()
+        cn.Close()
+    End Sub
+    Private Sub CompletedRequest()
+        Call connection()
+
+        sql = "SELECT COUNT(RequestID) FROM tblrequest " & "WHERE PaymentStatus = 'Paid' " & "AND (Status IS NULL OR Status = '')"
+        cmd = New MySqlCommand(sql, cn)
+        dr = cmd.ExecuteReader()
+
+        If dr.Read() Then
+            lblcompleted.Text = dr(0).ToString()
+        End If
+
+        dr.Close()
+        cn.Close()
     End Sub
 End Class
