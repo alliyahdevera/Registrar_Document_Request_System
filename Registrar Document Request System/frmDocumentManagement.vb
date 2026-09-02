@@ -1,4 +1,5 @@
-﻿Imports System.Windows.Forms.VisualStyles.VisualStyleElement
+﻿Imports System.Data.SqlClient
+Imports System.Windows.Forms.VisualStyles.VisualStyleElement
 Imports MySql.Data.MySqlClient
 
 Public Class frmDocumentManagement
@@ -15,9 +16,9 @@ Public Class frmDocumentManagement
         cmd = New MySqlCommand(sql, cn)
         dr = cmd.ExecuteReader()
 
-        dvgDocument.Rows.Clear()
+        dgvDocument.Rows.Clear()
         While dr.Read()
-            dvgDocument.Rows.Add(
+            dgvDocument.Rows.Add(
                 dr("DocumentID").ToString(),
                 dr("DocumentName").ToString(),
                 dr("Description").ToString(),
@@ -28,29 +29,103 @@ Public Class frmDocumentManagement
         dr.Close()
         cn.Close()
     End Sub
-    Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
-        If Not IsNumeric(txtFee.Text.Trim()) Then
-            MsgBox("Fee must be a valid number.", vbExclamation, "Validation Error")
-            Exit Sub
+    Private Function IsDocumentIDExists() As Boolean
+        Call connection()
+        sql = "SELECT COUNT(*) FROM tbldocuments WHERE DocumentID = @id"
+        cmd = New MySqlCommand(sql, cn)
+        cmd.Parameters.AddWithValue("@id", txtDocumentID.Text.Trim())
+        IsDocumentIDExists = Convert.ToInt32(cmd.ExecuteScalar()) > 0
+        cn.Close()
+    End Function
+    Private Function IsValidInput() As Boolean
+        If String.IsNullOrWhiteSpace(txtDocumentID.Text) Then
+            MsgBox("Fill in Document ID", vbExclamation, "Document Management")
+            txtDocumentID.Focus()
+            Return False
+        ElseIf String.IsNullOrWhiteSpace(txtName.Text) Then
+            MsgBox("Fill in Document Name", vbExclamation, "Document Management")
+            txtName.Focus()
+            Return False
+        ElseIf IsDocumentNameExists() Then
+            MsgBox("Document Name already exists", vbExclamation, "Document Management")
+            txtName.Focus()
+            Return False
+        ElseIf String.IsNullOrWhiteSpace(txtDescription.Text) Then
+            MsgBox("Fill in Description", vbExclamation, "Document Management")
+            txtDescription.Focus()
+            Return False
+        ElseIf String.IsNullOrWhiteSpace(txtFee.Text) Then
+            MsgBox("Fill in Fee", vbExclamation, "Document Management")
+            txtFee.Focus()
+            Return False
+        ElseIf Not IsNumeric(txtFee.Text.Trim()) Then
+            MsgBox("Fee must be a valid numeric amount", vbExclamation, "Document Management")
+            txtFee.Focus()
+            Return False
+        ElseIf String.IsNullOrWhiteSpace(txtStatus.Text) Then
+            MsgBox("Fill in Status", vbExclamation, "Document Management")
+            txtStatus.Focus()
+            Return False
         End If
 
+        Return True
+    End Function
+    Private Function IsDocumentNameExists() As Boolean
+        Call connection()
+        sql = "SELECT COUNT(*) FROM tbldocuments WHERE DocumentName = @name"
+        cmd = New MySqlCommand(sql, cn)
+        cmd.Parameters.AddWithValue("@name", txtName.Text.Trim())
+        IsDocumentNameExists = Convert.ToInt32(cmd.ExecuteScalar()) > 0
+        cn.Close()
+    End Function
+    Private Sub dgvDocument_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvDocument.CellClick
+        If e.RowIndex >= 0 Then
+            txtDocumentID.Text = dgvDocument.Rows(e.RowIndex).Cells(0).Value.ToString()
+            txtName.Text = dgvDocument.Rows(e.RowIndex).Cells(1).Value.ToString()
+            txtDescription.Text = dgvDocument.Rows(e.RowIndex).Cells(2).Value.ToString()
+            txtFee.Text = dgvDocument.Rows(e.RowIndex).Cells(3).Value.ToString()
+            txtStatus.Text = dgvDocument.Rows(e.RowIndex).Cells(4).Value.ToString()
+        End If
+    End Sub
+    Private Sub btnAddDocument_Click(sender As Object, e As EventArgs) Handles btnAddDocument.Click
+        If Not IsValidInput() Then Exit Sub
+        If Not IsValidInput() Then Exit Sub
+        If IsDocumentIDExists() Then
+            MsgBox("A document with that Document ID already exists.", vbExclamation, "Document Management")
+            Exit Sub
+        End If
+        Call connection()
+        sql = "INSERT INTO tbldocuments (DocumentID, DocumentName, Description, Fee, Status) " & "VALUES (@id,@name,@desc,@fee,@status)"
+        cmd = New MySqlCommand(sql, cn)
+        cmd = New MySqlCommand(sql, cn)
+        cmd.Parameters.AddWithValue("@id", txtDocumentID.Text.Trim())
+        cmd.Parameters.AddWithValue("@name", txtName.Text.Trim())
+        cmd.Parameters.AddWithValue("@desc", txtDescription.Text.Trim())
+        cmd.Parameters.AddWithValue("@fee", CDec(txtFee.Text.Trim()))
+        cmd.Parameters.AddWithValue("@status", txtStatus.Text.Trim())
+        cmd.ExecuteNonQuery()
+        cn.Close()
+        LoadDocuments()
+    End Sub
+    Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
+        If Not IsValidInput() Then Exit Sub
         Call connection()
         sql = "UPDATE tbldocuments SET DocumentName=@name, Description=@desc, Fee=@fee, Status=@status WHERE DocumentID=@id"
-            cmd = New MySqlCommand(sql, cn)
-            cmd.Parameters.AddWithValue("@id", txtDocumentID.Text.Trim())
-            cmd.Parameters.AddWithValue("@name", txtName.Text.Trim())
-            cmd.Parameters.AddWithValue("@desc", txtDescription.Text.Trim())
-            cmd.Parameters.AddWithValue("@fee", CDec(txtFee.Text.Trim()))
-            cmd.Parameters.AddWithValue("@status", txtStatus.Text.Trim())
+        cmd = New MySqlCommand(sql, cn)
+        cmd.Parameters.AddWithValue("@id", txtDocumentID.Text.Trim())
+        cmd.Parameters.AddWithValue("@name", txtName.Text.Trim())
+        cmd.Parameters.AddWithValue("@desc", txtDescription.Text.Trim())
+        cmd.Parameters.AddWithValue("@fee", CDec(txtFee.Text.Trim()))
+        cmd.Parameters.AddWithValue("@status", txtStatus.Text.Trim())
 
-            If cmd.ExecuteNonQuery() = 0 Then
-                MsgBox("No document found with the specified Document ID.", vbInformation, "Update Failed")
-            Else
-                MsgBox("Document details updated successfully!", vbInformation, "Success")
-            End If
-            cn.Close()
+        If cmd.ExecuteNonQuery() = 0 Then
+            MsgBox("No document found with the specified Document ID.", vbInformation, "Success")
+        Else
+            MsgBox("Document details updated successfully!", vbInformation, "Record Not Found")
+        End If
+        cn.Close()
 
-            LoadDocuments()
+        LoadDocuments()
     End Sub
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
@@ -113,23 +188,6 @@ Public Class frmDocumentManagement
         End If
     End Sub
 
-    Private Sub btnAddDocument_Click(sender As Object, e As EventArgs) Handles btnAddDocument.Click
-        If Not IsNumeric(txtFee.Text.Trim()) Then
-            MsgBox("Fee must be a valid number.", vbExclamation, "Validation Error")
-            Exit Sub
-        End If
-
-        Call connection()
-        sql = "INSERT INTO tbldocuments (DocumentName, Description, Fee, Status) VALUES (@name,@desc,@fee,@status)"
-            cmd = New MySqlCommand(sql, cn)
-            cmd.Parameters.AddWithValue("@name", txtName.Text.Trim())
-            cmd.Parameters.AddWithValue("@desc", txtDescription.Text.Trim())
-            cmd.Parameters.AddWithValue("@fee", CDec(txtFee.Text.Trim()))
-            cmd.Parameters.AddWithValue("@status", txtStatus.Text.Trim())
-            cmd.ExecuteNonQuery()
-        cn.Close()
-        LoadDocuments()
-    End Sub
 
     Private Sub txtsearch_TextChanged(sender As Object, e As EventArgs) Handles txtsearch.TextChanged
         Call connection()
@@ -137,9 +195,9 @@ Public Class frmDocumentManagement
         cmd = New MySqlCommand(sql, cn)
         dr = cmd.ExecuteReader()
 
-        dvgDocument.Rows.Clear()
+        dgvDocument.Rows.Clear()
         While dr.Read()
-            dvgDocument.Rows.Add(
+            dgvDocument.Rows.Add(
             dr("DocumentID").ToString(),
             dr("DocumentName").ToString(),
             dr("Description").ToString(),

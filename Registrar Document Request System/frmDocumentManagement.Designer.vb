@@ -39,7 +39,7 @@ Partial Class frmDocumentManagement
         Me.Label3 = New System.Windows.Forms.Label()
         Me.txtDocumentID = New System.Windows.Forms.TextBox()
         Me.btnAddDocument = New System.Windows.Forms.Button()
-        Me.dvgDocument = New System.Windows.Forms.DataGridView()
+        Me.dgvDocument = New System.Windows.Forms.DataGridView()
         Me.DocumentID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DocumentName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Description = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -65,7 +65,7 @@ Partial Class frmDocumentManagement
         Me.Logo = New System.Windows.Forms.PictureBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Panel5.SuspendLayout()
-        CType(Me.dvgDocument, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dgvDocument, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel6.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
@@ -247,14 +247,14 @@ Partial Class frmDocumentManagement
         Me.btnAddDocument.Text = "Add"
         Me.btnAddDocument.UseVisualStyleBackColor = False
         '
-        'dvgDocument
+        'dgvDocument
         '
-        Me.dvgDocument.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dvgDocument.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DocumentID, Me.DocumentName, Me.Description, Me.Fee, Me.Status})
-        Me.dvgDocument.Location = New System.Drawing.Point(281, 329)
-        Me.dvgDocument.Name = "dvgDocument"
-        Me.dvgDocument.Size = New System.Drawing.Size(1118, 412)
-        Me.dvgDocument.TabIndex = 60
+        Me.dgvDocument.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvDocument.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DocumentID, Me.DocumentName, Me.Description, Me.Fee, Me.Status})
+        Me.dgvDocument.Location = New System.Drawing.Point(281, 329)
+        Me.dgvDocument.Name = "dgvDocument"
+        Me.dgvDocument.Size = New System.Drawing.Size(1118, 412)
+        Me.dgvDocument.TabIndex = 60
         '
         'DocumentID
         '
@@ -539,7 +539,7 @@ Partial Class frmDocumentManagement
         Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.Panel6)
         Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.dvgDocument)
+        Me.Controls.Add(Me.dgvDocument)
         Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.btnEdit)
         Me.Controls.Add(Me.Panel5)
@@ -550,7 +550,7 @@ Partial Class frmDocumentManagement
         Me.Text = "frmDocumentManagement"
         Me.Panel5.ResumeLayout(False)
         Me.Panel5.PerformLayout()
-        CType(Me.dvgDocument, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dgvDocument, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel6.ResumeLayout(False)
         Me.Panel6.PerformLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -579,7 +579,7 @@ Partial Class frmDocumentManagement
     Friend WithEvents Label3 As Label
     Friend WithEvents txtDocumentID As TextBox
     Friend WithEvents btnAddDocument As Button
-    Friend WithEvents dvgDocument As DataGridView
+    Friend WithEvents dgvDocument As DataGridView
     Friend WithEvents Panel6 As Panel
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents txtsearch As TextBox
