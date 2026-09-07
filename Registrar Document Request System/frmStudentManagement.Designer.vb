@@ -113,7 +113,7 @@ Partial Class frmStudentManagement
         Me.dgvStudents.Location = New System.Drawing.Point(275, 317)
         Me.dgvStudents.Name = "dgvStudents"
         Me.dgvStudents.RowHeadersWidth = 51
-        Me.dgvStudents.Size = New System.Drawing.Size(1123, 427)
+        Me.dgvStudents.Size = New System.Drawing.Size(1123, 476)
         Me.dgvStudents.TabIndex = 29
         '
         'StudentID
@@ -490,7 +490,7 @@ Partial Class frmStudentManagement
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Left
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(250, 768)
+        Me.Panel1.Size = New System.Drawing.Size(250, 821)
         Me.Panel1.TabIndex = 55
         '
         'btnUserManagement
@@ -518,7 +518,7 @@ Partial Class frmStudentManagement
         Me.btnLogout.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnLogout.ForeColor = System.Drawing.Color.White
         Me.btnLogout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnLogout.Location = New System.Drawing.Point(15, 719)
+        Me.btnLogout.Location = New System.Drawing.Point(15, 772)
         Me.btnLogout.Name = "btnLogout"
         Me.btnLogout.Size = New System.Drawing.Size(220, 49)
         Me.btnLogout.TabIndex = 10
@@ -611,7 +611,7 @@ Partial Class frmStudentManagement
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Right
         Me.Panel4.Location = New System.Drawing.Point(235, 100)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(15, 668)
+        Me.Panel4.Size = New System.Drawing.Size(15, 721)
         Me.Panel4.TabIndex = 2
         '
         'Panel3
@@ -620,7 +620,7 @@ Partial Class frmStudentManagement
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Left
         Me.Panel3.Location = New System.Drawing.Point(0, 100)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(15, 668)
+        Me.Panel3.Size = New System.Drawing.Size(15, 721)
         Me.Panel3.TabIndex = 1
         '
         'Panel2
@@ -672,7 +672,7 @@ Partial Class frmStudentManagement
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.ClientSize = New System.Drawing.Size(1425, 768)
+        Me.ClientSize = New System.Drawing.Size(1424, 821)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Label15)
         Me.Controls.Add(Me.Panel6)

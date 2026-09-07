@@ -109,7 +109,7 @@ Partial Class frmMainMenu
         Me.Label1.BackColor = System.Drawing.Color.Transparent
         Me.Label1.Font = New System.Drawing.Font("Segoe UI", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.Navy
-        Me.Label1.Location = New System.Drawing.Point(277, 21)
+        Me.Label1.Location = New System.Drawing.Point(278, 22)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(145, 32)
         Me.Label1.TabIndex = 25
@@ -131,7 +131,7 @@ Partial Class frmMainMenu
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Left
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(250, 817)
+        Me.Panel1.Size = New System.Drawing.Size(250, 821)
         Me.Panel1.TabIndex = 27
         '
         'btnUserManagement
@@ -159,7 +159,7 @@ Partial Class frmMainMenu
         Me.btnLogout.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnLogout.ForeColor = System.Drawing.Color.White
         Me.btnLogout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnLogout.Location = New System.Drawing.Point(15, 768)
+        Me.btnLogout.Location = New System.Drawing.Point(15, 772)
         Me.btnLogout.Name = "btnLogout"
         Me.btnLogout.Size = New System.Drawing.Size(220, 49)
         Me.btnLogout.TabIndex = 10
@@ -252,7 +252,7 @@ Partial Class frmMainMenu
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Right
         Me.Panel4.Location = New System.Drawing.Point(235, 100)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(15, 717)
+        Me.Panel4.Size = New System.Drawing.Size(15, 721)
         Me.Panel4.TabIndex = 2
         '
         'Panel3
@@ -261,7 +261,7 @@ Partial Class frmMainMenu
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Left
         Me.Panel3.Location = New System.Drawing.Point(0, 100)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(15, 717)
+        Me.Panel3.Size = New System.Drawing.Size(15, 721)
         Me.Panel3.TabIndex = 1
         '
         'Panel2
@@ -314,7 +314,7 @@ Partial Class frmMainMenu
         Me.Panel5.Controls.Add(Me.PictureBox1)
         Me.Panel5.Controls.Add(Me.lbltotalstudents)
         Me.Panel5.Controls.Add(Me.Label2)
-        Me.Panel5.Location = New System.Drawing.Point(283, 73)
+        Me.Panel5.Location = New System.Drawing.Point(284, 74)
         Me.Panel5.Name = "Panel5"
         Me.Panel5.Size = New System.Drawing.Size(246, 111)
         Me.Panel5.TabIndex = 28
@@ -359,7 +359,7 @@ Partial Class frmMainMenu
         Me.Panel6.Controls.Add(Me.PictureBox2)
         Me.Panel6.Controls.Add(Me.lbltotrequests)
         Me.Panel6.Controls.Add(Me.Label6)
-        Me.Panel6.Location = New System.Drawing.Point(567, 73)
+        Me.Panel6.Location = New System.Drawing.Point(574, 74)
         Me.Panel6.Name = "Panel6"
         Me.Panel6.Size = New System.Drawing.Size(246, 111)
         Me.Panel6.TabIndex = 32
@@ -404,7 +404,7 @@ Partial Class frmMainMenu
         Me.Panel7.Controls.Add(Me.PictureBox3)
         Me.Panel7.Controls.Add(Me.lblpendingrequests)
         Me.Panel7.Controls.Add(Me.Label7)
-        Me.Panel7.Location = New System.Drawing.Point(849, 73)
+        Me.Panel7.Location = New System.Drawing.Point(860, 74)
         Me.Panel7.Name = "Panel7"
         Me.Panel7.Size = New System.Drawing.Size(246, 111)
         Me.Panel7.TabIndex = 33
@@ -449,7 +449,7 @@ Partial Class frmMainMenu
         Me.Panel8.Controls.Add(Me.PictureBox4)
         Me.Panel8.Controls.Add(Me.lblcompleted)
         Me.Panel8.Controls.Add(Me.Label9)
-        Me.Panel8.Location = New System.Drawing.Point(1133, 73)
+        Me.Panel8.Location = New System.Drawing.Point(1145, 74)
         Me.Panel8.Name = "Panel8"
         Me.Panel8.Size = New System.Drawing.Size(246, 111)
         Me.Panel8.TabIndex = 34
@@ -511,7 +511,7 @@ Partial Class frmMainMenu
         Me.pnlDocreqpermonth.Controls.Add(Me.cboDocreqpermonth)
         Me.pnlDocreqpermonth.Controls.Add(Me.Label3)
         Me.pnlDocreqpermonth.Controls.Add(Me.chtdocreqpermonth)
-        Me.pnlDocreqpermonth.Location = New System.Drawing.Point(832, 511)
+        Me.pnlDocreqpermonth.Location = New System.Drawing.Point(847, 512)
         Me.pnlDocreqpermonth.Name = "pnlDocreqpermonth"
         Me.pnlDocreqpermonth.Size = New System.Drawing.Size(547, 282)
         Me.pnlDocreqpermonth.TabIndex = 37
@@ -540,7 +540,7 @@ Partial Class frmMainMenu
         Me.pnlreqstatus.BackColor = System.Drawing.Color.White
         Me.pnlreqstatus.Controls.Add(Me.Label8)
         Me.pnlreqstatus.Controls.Add(Me.chtreqstatus)
-        Me.pnlreqstatus.Location = New System.Drawing.Point(947, 208)
+        Me.pnlreqstatus.Location = New System.Drawing.Point(961, 209)
         Me.pnlreqstatus.Name = "pnlreqstatus"
         Me.pnlreqstatus.Size = New System.Drawing.Size(432, 282)
         Me.pnlreqstatus.TabIndex = 38
@@ -577,7 +577,7 @@ Partial Class frmMainMenu
         Me.pnlmostreqdoc.BackColor = System.Drawing.Color.White
         Me.pnlmostreqdoc.Controls.Add(Me.Label10)
         Me.pnlmostreqdoc.Controls.Add(Me.chtMostreqdoc)
-        Me.pnlmostreqdoc.Location = New System.Drawing.Point(283, 511)
+        Me.pnlmostreqdoc.Location = New System.Drawing.Point(284, 512)
         Me.pnlmostreqdoc.Name = "pnlmostreqdoc"
         Me.pnlmostreqdoc.Size = New System.Drawing.Size(530, 282)
         Me.pnlmostreqdoc.TabIndex = 38
@@ -615,7 +615,7 @@ Partial Class frmMainMenu
         Me.pnlrecentreqdoc.Controls.Add(Me.Button1)
         Me.pnlrecentreqdoc.Controls.Add(Me.dgvrecentreqdoc)
         Me.pnlrecentreqdoc.Controls.Add(Me.Label11)
-        Me.pnlrecentreqdoc.Location = New System.Drawing.Point(283, 209)
+        Me.pnlrecentreqdoc.Location = New System.Drawing.Point(284, 210)
         Me.pnlrecentreqdoc.Name = "pnlrecentreqdoc"
         Me.pnlrecentreqdoc.Size = New System.Drawing.Size(648, 282)
         Me.pnlrecentreqdoc.TabIndex = 39
@@ -683,7 +683,7 @@ Partial Class frmMainMenu
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1421, 817)
+        Me.ClientSize = New System.Drawing.Size(1424, 821)
         Me.Controls.Add(Me.pnlrecentreqdoc)
         Me.Controls.Add(Me.pnlmostreqdoc)
         Me.Controls.Add(Me.pnlreqstatus)

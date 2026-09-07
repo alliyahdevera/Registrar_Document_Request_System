@@ -253,7 +253,7 @@ Partial Class frmDocumentManagement
         Me.dgvDocument.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DocumentID, Me.DocumentName, Me.Description, Me.Fee, Me.Status})
         Me.dgvDocument.Location = New System.Drawing.Point(281, 329)
         Me.dgvDocument.Name = "dgvDocument"
-        Me.dgvDocument.Size = New System.Drawing.Size(1118, 412)
+        Me.dgvDocument.Size = New System.Drawing.Size(1118, 462)
         Me.dgvDocument.TabIndex = 60
         '
         'DocumentID
@@ -353,7 +353,7 @@ Partial Class frmDocumentManagement
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Left
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(250, 769)
+        Me.Panel1.Size = New System.Drawing.Size(250, 821)
         Me.Panel1.TabIndex = 63
         '
         'btnUserManagement
@@ -381,7 +381,7 @@ Partial Class frmDocumentManagement
         Me.btnLogout.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnLogout.ForeColor = System.Drawing.Color.White
         Me.btnLogout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnLogout.Location = New System.Drawing.Point(15, 720)
+        Me.btnLogout.Location = New System.Drawing.Point(15, 772)
         Me.btnLogout.Name = "btnLogout"
         Me.btnLogout.Size = New System.Drawing.Size(220, 49)
         Me.btnLogout.TabIndex = 10
@@ -474,7 +474,7 @@ Partial Class frmDocumentManagement
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Right
         Me.Panel4.Location = New System.Drawing.Point(235, 100)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(15, 669)
+        Me.Panel4.Size = New System.Drawing.Size(15, 721)
         Me.Panel4.TabIndex = 2
         '
         'Panel3
@@ -483,7 +483,7 @@ Partial Class frmDocumentManagement
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Left
         Me.Panel3.Location = New System.Drawing.Point(0, 100)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(15, 669)
+        Me.Panel3.Size = New System.Drawing.Size(15, 721)
         Me.Panel3.TabIndex = 1
         '
         'Panel2
@@ -534,7 +534,7 @@ Partial Class frmDocumentManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1421, 769)
+        Me.ClientSize = New System.Drawing.Size(1424, 821)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.Panel6)
