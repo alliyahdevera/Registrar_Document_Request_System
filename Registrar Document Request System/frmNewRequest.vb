@@ -2,8 +2,6 @@
 Imports Org.BouncyCastle.Asn1.Cmp
 
 Public Class frmNewRequest
-
-    ' Holds the fee of the document currently selected in cboDocument
     Private currentDocFee As Decimal = 0
 
     Private Sub frmNewRequest_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -22,16 +20,7 @@ Public Class frmNewRequest
 
         ClearDocumentEntryFields()
         RecalculateTotal()
-        ' NOTE: GenerateRequestNo() intentionally NOT called here.
-        ' Form_Load only fires once (first time the form is shown), so if we
-        ' generated the number here it would go stale on every re-show.
-        ' It's generated in frmNewRequest_Activated instead, which fires
-        ' every time the form regains focus/visibility.
     End Sub
-
-    ' Fires every time the form is shown/activated (unlike Load, which only
-    ' fires once). This guarantees a fresh Request No. every time the user
-    ' opens this form, including via the Show()/Hide() default-instance pattern.
     Private Sub frmNewRequest_Activated(sender As Object, e As EventArgs) Handles Me.Activated
         GenerateRequestNo()
     End Sub
@@ -61,10 +50,6 @@ Public Class frmNewRequest
         cboYearLevel.Items.Clear()
         cboYearLevel.Items.AddRange(New Object() {"1st Year", "2nd Year", "3rd Year", "4th Year"})
     End Sub
-
-    ' Generates the next request number in the format REQ-yyyy-000
-    ' Uses MAX() on the numeric suffix instead of "last inserted RequestID"
-    ' so it stays correct even if rows are deleted or inserted out of order.
     Private Sub GenerateRequestNo()
         Dim year As String = Now.Year.ToString()
         Dim nextNumber As Integer = 1
@@ -182,7 +167,6 @@ Public Class frmNewRequest
         Dim fee As Decimal = currentDocFee
         Dim subtotal As Decimal = fee * qty
 
-        ' If the document is already in the list, update the quantity instead of duplicating
         For Each row As DataGridViewRow In DataGridView1.Rows
             If row.IsNewRow Then Continue For
 
@@ -216,8 +200,6 @@ Public Class frmNewRequest
         txtFee.Clear()
         txtSubtotal.Clear()
     End Sub
-
-    ' Click the "Remove" link/text in the Action column to remove a row
     Private Sub DataGridView1_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellClick
         If e.RowIndex < 0 Then Exit Sub
         If DataGridView1.Rows(e.RowIndex).IsNewRow Then Exit Sub
@@ -277,7 +259,6 @@ Public Class frmNewRequest
         Call connection()
 
         Try
-            ' 1. Insert into tblrequest
             sql = "INSERT INTO tblrequest (RequestNo, StudentID, RequestDate, TotalAmount, PaymentStatus, Status, CreatedBy) " &
                   "VALUES (@reqno, @studid, @reqdate, @total, @paystat, @status, @createdby)"
             cmd = New MySqlCommand(sql, cn)
@@ -290,12 +271,8 @@ Public Class frmNewRequest
             cmd.Parameters.AddWithValue("@createdby", CurrentUser.UserID)
             cmd.ExecuteNonQuery()
 
-            ' 2. Get the newly generated RequestID
             Dim newRequestId As Long = cmd.LastInsertedId
 
-            ' 3. Insert each requested document into tblrequestdetails
-            '    (IsNewRow skips the DataGridView's built-in blank "add new row" placeholder,
-            '     which otherwise sends a NULL DocumentID and triggers a save error)
             For Each row As DataGridViewRow In DataGridView1.Rows
                 If row.IsNewRow Then Continue For
 

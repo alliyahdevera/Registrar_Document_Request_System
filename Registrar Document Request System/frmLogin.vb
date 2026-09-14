@@ -28,5 +28,15 @@ Public Class frmLogin
     Private Sub btnExit_Click(sender As Object, e As EventArgs) Handles btnExit.Click
         End
     End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        If txtPassword.PasswordChar = "*"c OrElse txtPassword.UseSystemPasswordChar Then
+            txtPassword.PasswordChar = ControlChars.NullChar
+            txtPassword.UseSystemPasswordChar = False
+        Else
+            txtPassword.PasswordChar = "*"c
+            txtPassword.UseSystemPasswordChar = True
+        End If
+    End Sub
 End Class
 

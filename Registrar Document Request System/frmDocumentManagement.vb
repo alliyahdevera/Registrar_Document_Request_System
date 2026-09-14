@@ -29,6 +29,7 @@ Public Class frmDocumentManagement
         dr.Close()
         cn.Close()
     End Sub
+
     Private Function IsDocumentIDExists() As Boolean
         Call connection()
         sql = "SELECT COUNT(*) FROM tbldocuments WHERE DocumentID = @id"
@@ -37,7 +38,24 @@ Public Class frmDocumentManagement
         IsDocumentIDExists = Convert.ToInt32(cmd.ExecuteScalar()) > 0
         cn.Close()
     End Function
-    Private Function IsValidInput() As Boolean
+
+    Private Function IsDocumentNameExists(Optional currentDocumentId As String = "") As Boolean
+        Call connection()
+        If String.IsNullOrEmpty(currentDocumentId) Then
+            sql = "SELECT COUNT(*) FROM tbldocuments WHERE DocumentName = @name"
+            cmd = New MySqlCommand(sql, cn)
+            cmd.Parameters.AddWithValue("@name", txtName.Text.Trim())
+        Else
+            sql = "SELECT COUNT(*) FROM tbldocuments WHERE DocumentName = @name AND DocumentID <> @id"
+            cmd = New MySqlCommand(sql, cn)
+            cmd.Parameters.AddWithValue("@name", txtName.Text.Trim())
+            cmd.Parameters.AddWithValue("@id", currentDocumentId)
+        End If
+
+        IsDocumentNameExists = Convert.ToInt32(cmd.ExecuteScalar()) > 0
+        cn.Close()
+    End Function
+    Private Function IsValidInput(Optional isEditMode As Boolean = False) As Boolean
         If String.IsNullOrWhiteSpace(txtDocumentID.Text) Then
             MsgBox("Fill in Document ID", vbExclamation, "Document Management")
             txtDocumentID.Focus()
@@ -46,7 +64,7 @@ Public Class frmDocumentManagement
             MsgBox("Fill in Document Name", vbExclamation, "Document Management")
             txtName.Focus()
             Return False
-        ElseIf IsDocumentNameExists() Then
+        ElseIf IsDocumentNameExists(If(isEditMode, txtDocumentID.Text.Trim(), "")) Then
             MsgBox("Document Name already exists", vbExclamation, "Document Management")
             txtName.Focus()
             Return False
@@ -70,14 +88,7 @@ Public Class frmDocumentManagement
 
         Return True
     End Function
-    Private Function IsDocumentNameExists() As Boolean
-        Call connection()
-        sql = "SELECT COUNT(*) FROM tbldocuments WHERE DocumentName = @name"
-        cmd = New MySqlCommand(sql, cn)
-        cmd.Parameters.AddWithValue("@name", txtName.Text.Trim())
-        IsDocumentNameExists = Convert.ToInt32(cmd.ExecuteScalar()) > 0
-        cn.Close()
-    End Function
+
     Private Sub dgvDocument_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvDocument.CellClick
         If e.RowIndex >= 0 Then
             txtDocumentID.Text = dgvDocument.Rows(e.RowIndex).Cells(0).Value.ToString()
@@ -87,16 +98,18 @@ Public Class frmDocumentManagement
             txtStatus.Text = dgvDocument.Rows(e.RowIndex).Cells(4).Value.ToString()
         End If
     End Sub
+
     Private Sub btnAddDocument_Click(sender As Object, e As EventArgs) Handles btnAddDocument.Click
-        If Not IsValidInput() Then Exit Sub
-        If Not IsValidInput() Then Exit Sub
+        ' Pass False for isEditMode (default)
+        If Not IsValidInput(isEditMode:=False) Then Exit Sub
+
         If IsDocumentIDExists() Then
             MsgBox("A document with that Document ID already exists.", vbExclamation, "Document Management")
             Exit Sub
         End If
+
         Call connection()
-        sql = "INSERT INTO tbldocuments (DocumentID, DocumentName, Description, Fee, Status) " & "VALUES (@id,@name,@desc,@fee,@status)"
-        cmd = New MySqlCommand(sql, cn)
+        sql = "INSERT INTO tbldocuments (DocumentID, DocumentName, Description, Fee, Status) VALUES (@id, @name, @desc, @fee, @status)"
         cmd = New MySqlCommand(sql, cn)
         cmd.Parameters.AddWithValue("@id", txtDocumentID.Text.Trim())
         cmd.Parameters.AddWithValue("@name", txtName.Text.Trim())
@@ -105,10 +118,13 @@ Public Class frmDocumentManagement
         cmd.Parameters.AddWithValue("@status", txtStatus.Text.Trim())
         cmd.ExecuteNonQuery()
         cn.Close()
+
         LoadDocuments()
     End Sub
+
     Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
-        If Not IsValidInput() Then Exit Sub
+        If Not IsValidInput(isEditMode:=True) Then Exit Sub
+
         Call connection()
         sql = "UPDATE tbldocuments SET DocumentName=@name, Description=@desc, Fee=@fee, Status=@status WHERE DocumentID=@id"
         cmd = New MySqlCommand(sql, cn)
@@ -119,9 +135,9 @@ Public Class frmDocumentManagement
         cmd.Parameters.AddWithValue("@status", txtStatus.Text.Trim())
 
         If cmd.ExecuteNonQuery() = 0 Then
-            MsgBox("No document found with the specified Document ID.", vbInformation, "Success")
+            MsgBox("No document found with the specified Document ID.", vbExclamation, "Record Not Found")
         Else
-            MsgBox("Document details updated successfully!", vbInformation, "Record Not Found")
+            MsgBox("Document details updated successfully!", vbInformation, "Success")
         End If
         cn.Close()
 
@@ -134,7 +150,7 @@ Public Class frmDocumentManagement
             Exit Sub
         End If
 
-        If MsgBox("Are you sure you want to delete this document record?", vbInformation, "Confirm Deactivation") <> DialogResult.Yes Then
+        If MsgBox("Are you sure you want to delete this document record?", vbYesNo + vbQuestion, "Confirm Deactivation") <> MsgBoxResult.Yes Then
             Exit Sub
         End If
 
@@ -151,21 +167,6 @@ Public Class frmDocumentManagement
         cn.Close()
 
         LoadDocuments()
-    End Sub
-
-    Private Sub btnLogout_Click(sender As Object, e As EventArgs)
-        If MsgBox("Are you sure you want to logout?", vbYesNo + vbQuestion, "Confirm Logout") = MsgBoxResult.Yes Then
-            CurrentUser.UserID = 0
-            CurrentUser.FullName = ""
-            CurrentUser.Role = ""
-            frmLogin.Show()
-            Me.Close()
-        End If
-    End Sub
-
-    Private Sub btnStudentManagement_Click(sender As Object, e As EventArgs)
-        frmStudentManagement.Show()
-        Me.Hide()
     End Sub
 
     Private Sub btnMainMenu_Click(sender As Object, e As EventArgs) Handles btnMainMenu.Click
@@ -188,21 +189,20 @@ Public Class frmDocumentManagement
         End If
     End Sub
 
-
     Private Sub txtsearch_TextChanged(sender As Object, e As EventArgs) Handles txtsearch.TextChanged
         Call connection()
-        sql = "Select * from tbldocuments where documentID like '%" & txtsearch.Text & "%' or documentname like '%" & txtsearch.Text & "%'"
+        sql = "SELECT * FROM tbldocuments WHERE DocumentID LIKE '%" & txtsearch.Text & "%' OR DocumentName LIKE '%" & txtsearch.Text & "%'"
         cmd = New MySqlCommand(sql, cn)
         dr = cmd.ExecuteReader()
 
         dgvDocument.Rows.Clear()
         While dr.Read()
             dgvDocument.Rows.Add(
-            dr("DocumentID").ToString(),
-            dr("DocumentName").ToString(),
-            dr("Description").ToString(),
-            dr("Fee").ToString(),
-            dr("Status").ToString())
+                dr("DocumentID").ToString(),
+                dr("DocumentName").ToString(),
+                dr("Description").ToString(),
+                dr("Fee").ToString(),
+                dr("Status").ToString())
         End While
 
         dr.Close()
