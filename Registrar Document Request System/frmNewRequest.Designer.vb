@@ -39,6 +39,8 @@ Partial Class frmNewRequest
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.Panel5 = New System.Windows.Forms.Panel()
+        Me.txtYearLevel = New System.Windows.Forms.TextBox()
+        Me.txtCourse = New System.Windows.Forms.TextBox()
         Me.Panel10 = New System.Windows.Forms.Panel()
         Me.txtStudentID = New System.Windows.Forms.TextBox()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
@@ -68,6 +70,8 @@ Partial Class frmNewRequest
         Me.txtQuantity = New System.Windows.Forms.TextBox()
         Me.Label18 = New System.Windows.Forms.Label()
         Me.Panel7 = New System.Windows.Forms.Panel()
+        Me.Panel16 = New System.Windows.Forms.Panel()
+        Me.Label11 = New System.Windows.Forms.Label()
         Me.dgvReqDoc = New System.Windows.Forms.DataGridView()
         Me.DocumentID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DocumentName = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -75,8 +79,6 @@ Partial Class frmNewRequest
         Me.Quantity = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Subtotal = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Action = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Panel16 = New System.Windows.Forms.Panel()
-        Me.Label11 = New System.Windows.Forms.Label()
         Me.Panel8 = New System.Windows.Forms.Panel()
         Me.Panel15 = New System.Windows.Forms.Panel()
         Me.Label19 = New System.Windows.Forms.Label()
@@ -104,8 +106,6 @@ Partial Class frmNewRequest
         Me.Label27 = New System.Windows.Forms.Label()
         Me.Panel17 = New System.Windows.Forms.Panel()
         Me.Label28 = New System.Windows.Forms.Label()
-        Me.txtCourse = New System.Windows.Forms.TextBox()
-        Me.txtYearLevel = New System.Windows.Forms.TextBox()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         CType(Me.Logo, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -116,8 +116,8 @@ Partial Class frmNewRequest
         Me.Panel6.SuspendLayout()
         Me.Panel12.SuspendLayout()
         Me.Panel7.SuspendLayout()
-        CType(Me.dgvReqDoc, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel16.SuspendLayout()
+        CType(Me.dgvReqDoc, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel8.SuspendLayout()
         Me.Panel15.SuspendLayout()
         Me.Panel9.SuspendLayout()
@@ -349,6 +349,26 @@ Partial Class frmNewRequest
         Me.Panel5.Name = "Panel5"
         Me.Panel5.Size = New System.Drawing.Size(1122, 137)
         Me.Panel5.TabIndex = 58
+        '
+        'txtYearLevel
+        '
+        Me.txtYearLevel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtYearLevel.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtYearLevel.Location = New System.Drawing.Point(839, 89)
+        Me.txtYearLevel.Name = "txtYearLevel"
+        Me.txtYearLevel.ReadOnly = True
+        Me.txtYearLevel.Size = New System.Drawing.Size(260, 25)
+        Me.txtYearLevel.TabIndex = 64
+        '
+        'txtCourse
+        '
+        Me.txtCourse.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtCourse.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtCourse.Location = New System.Drawing.Point(839, 54)
+        Me.txtCourse.Name = "txtCourse"
+        Me.txtCourse.ReadOnly = True
+        Me.txtCourse.Size = New System.Drawing.Size(260, 25)
+        Me.txtCourse.TabIndex = 63
         '
         'Panel10
         '
@@ -652,6 +672,26 @@ Partial Class frmNewRequest
         Me.Panel7.Size = New System.Drawing.Size(1122, 250)
         Me.Panel7.TabIndex = 62
         '
+        'Panel16
+        '
+        Me.Panel16.BackColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
+        Me.Panel16.Controls.Add(Me.Label11)
+        Me.Panel16.Location = New System.Drawing.Point(-3, -1)
+        Me.Panel16.Name = "Panel16"
+        Me.Panel16.Size = New System.Drawing.Size(1135, 35)
+        Me.Panel16.TabIndex = 68
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Font = New System.Drawing.Font("Segoe UI", 14.0!, System.Drawing.FontStyle.Bold)
+        Me.Label11.ForeColor = System.Drawing.Color.White
+        Me.Label11.Location = New System.Drawing.Point(7, 5)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(203, 25)
+        Me.Label11.TabIndex = 58
+        Me.Label11.Text = "Requested Document"
+        '
         'dgvReqDoc
         '
         Me.dgvReqDoc.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
@@ -696,26 +736,6 @@ Partial Class frmNewRequest
         Me.Action.HeaderText = "Action"
         Me.Action.Name = "Action"
         Me.Action.Width = 108
-        '
-        'Panel16
-        '
-        Me.Panel16.BackColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
-        Me.Panel16.Controls.Add(Me.Label11)
-        Me.Panel16.Location = New System.Drawing.Point(-3, -1)
-        Me.Panel16.Name = "Panel16"
-        Me.Panel16.Size = New System.Drawing.Size(1135, 35)
-        Me.Panel16.TabIndex = 68
-        '
-        'Label11
-        '
-        Me.Label11.AutoSize = True
-        Me.Label11.Font = New System.Drawing.Font("Segoe UI", 14.0!, System.Drawing.FontStyle.Bold)
-        Me.Label11.ForeColor = System.Drawing.Color.White
-        Me.Label11.Location = New System.Drawing.Point(7, 5)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(203, 25)
-        Me.Label11.TabIndex = 58
-        Me.Label11.Text = "Requested Document"
         '
         'Panel8
         '
@@ -1002,26 +1022,6 @@ Partial Class frmNewRequest
         Me.Label28.TabIndex = 51
         Me.Label28.Text = "Request Information"
         '
-        'txtCourse
-        '
-        Me.txtCourse.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtCourse.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCourse.Location = New System.Drawing.Point(839, 54)
-        Me.txtCourse.Name = "txtCourse"
-        Me.txtCourse.ReadOnly = True
-        Me.txtCourse.Size = New System.Drawing.Size(260, 25)
-        Me.txtCourse.TabIndex = 63
-        '
-        'txtYearLevel
-        '
-        Me.txtYearLevel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtYearLevel.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtYearLevel.Location = New System.Drawing.Point(839, 89)
-        Me.txtYearLevel.Name = "txtYearLevel"
-        Me.txtYearLevel.ReadOnly = True
-        Me.txtYearLevel.Size = New System.Drawing.Size(260, 25)
-        Me.txtYearLevel.TabIndex = 64
-        '
         'frmNewRequest
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1039,6 +1039,7 @@ Partial Class frmNewRequest
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.Panel1)
         Me.Name = "frmNewRequest"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "frmNewRequest"
         Me.Panel1.ResumeLayout(False)
         Me.Panel2.ResumeLayout(False)
@@ -1056,9 +1057,9 @@ Partial Class frmNewRequest
         Me.Panel12.ResumeLayout(False)
         Me.Panel12.PerformLayout()
         Me.Panel7.ResumeLayout(False)
-        CType(Me.dgvReqDoc, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel16.ResumeLayout(False)
         Me.Panel16.PerformLayout()
+        CType(Me.dgvReqDoc, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel8.ResumeLayout(False)
         Me.Panel8.PerformLayout()
         Me.Panel15.ResumeLayout(False)

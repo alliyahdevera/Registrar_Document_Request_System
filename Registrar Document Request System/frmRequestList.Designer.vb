@@ -432,6 +432,7 @@ Partial Class frmRequestList
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Label3)
         Me.Name = "frmRequestList"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "frmRequestList"
         Me.Panel7.ResumeLayout(False)
         Me.Panel16.ResumeLayout(False)
