@@ -1,5 +1,4 @@
 ﻿Imports MySql.Data.MySqlClient
-Imports Org.BouncyCastle.Asn1.Cmp
 
 Public Class frmNewRequest
     Private currentDocFee As Decimal = 0
@@ -10,8 +9,6 @@ Public Class frmNewRequest
         End If
 
         LoadDocumentsCombo()
-        LoadCourseCombo()
-        LoadYearLevelCombo()
 
         dtpRequestDate.Value = Today
 
@@ -37,18 +34,6 @@ Public Class frmNewRequest
         cboDocument.DisplayMember = "DocumentName"
         cboDocument.ValueMember = "DocumentID"
         cboDocument.SelectedIndex = -1
-    End Sub
-
-    Private Sub LoadCourseCombo()
-        cboCourse.Items.Clear()
-        cboCourse.Items.Add("Bachelor of Science in Information Technology")
-        cboCourse.Items.Add("Bachelor of Science in Computer Science")
-        cboCourse.Items.Add("Bachelor of Science in Business Administration")
-    End Sub
-
-    Private Sub LoadYearLevelCombo()
-        cboYearLevel.Items.Clear()
-        cboYearLevel.Items.AddRange(New Object() {"1st Year", "2nd Year", "3rd Year", "4th Year"})
     End Sub
     Private Sub GenerateRequestNo()
         Dim year As String = Now.Year.ToString()
@@ -97,8 +82,8 @@ Public Class frmNewRequest
             txtFirstName.Text = dr("FirstName").ToString()
             txtMiddleName.Text = dr("MiddleName").ToString()
             txtLastName.Text = dr("LastName").ToString()
-            cboCourse.Text = dr("Course").ToString()
-            cboYearLevel.Text = dr("YearLevel").ToString()
+            txtCourse.Text = dr("Course").ToString()
+            txtYearLevel.Text = dr("YearLevel").ToString()
         Else
             MsgBox("No student found with that Student ID.", vbExclamation, "New Document Request")
             ClearStudentFields()
@@ -112,8 +97,8 @@ Public Class frmNewRequest
         txtFirstName.Clear()
         txtMiddleName.Clear()
         txtLastName.Clear()
-        cboCourse.SelectedIndex = -1
-        cboYearLevel.SelectedIndex = -1
+        txtCourse.Clear()
+        txtYearLevel.Clear()
     End Sub
 
     Private Sub cboDocument_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboDocument.SelectedIndexChanged

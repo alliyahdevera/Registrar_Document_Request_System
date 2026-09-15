@@ -42,8 +42,6 @@ Partial Class frmNewRequest
         Me.Panel10 = New System.Windows.Forms.Panel()
         Me.txtStudentID = New System.Windows.Forms.TextBox()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.cboYearLevel = New System.Windows.Forms.ComboBox()
-        Me.cboCourse = New System.Windows.Forms.ComboBox()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
@@ -70,7 +68,6 @@ Partial Class frmNewRequest
         Me.txtQuantity = New System.Windows.Forms.TextBox()
         Me.Label18 = New System.Windows.Forms.Label()
         Me.Panel7 = New System.Windows.Forms.Panel()
-        Me.Panel16 = New System.Windows.Forms.Panel()
         Me.dgvReqDoc = New System.Windows.Forms.DataGridView()
         Me.DocumentID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DocumentName = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -78,6 +75,7 @@ Partial Class frmNewRequest
         Me.Quantity = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Subtotal = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Action = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Panel16 = New System.Windows.Forms.Panel()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Panel8 = New System.Windows.Forms.Panel()
         Me.Panel15 = New System.Windows.Forms.Panel()
@@ -93,6 +91,8 @@ Partial Class frmNewRequest
         Me.txtRequestNo = New System.Windows.Forms.TextBox()
         Me.Label22 = New System.Windows.Forms.Label()
         Me.Panel9 = New System.Windows.Forms.Panel()
+        Me.Panel18 = New System.Windows.Forms.Panel()
+        Me.Label29 = New System.Windows.Forms.Label()
         Me.txtTotalAmount = New System.Windows.Forms.TextBox()
         Me.Label24 = New System.Windows.Forms.Label()
         Me.Button2 = New System.Windows.Forms.Button()
@@ -104,8 +104,8 @@ Partial Class frmNewRequest
         Me.Label27 = New System.Windows.Forms.Label()
         Me.Panel17 = New System.Windows.Forms.Panel()
         Me.Label28 = New System.Windows.Forms.Label()
-        Me.Panel18 = New System.Windows.Forms.Panel()
-        Me.Label29 = New System.Windows.Forms.Label()
+        Me.txtCourse = New System.Windows.Forms.TextBox()
+        Me.txtYearLevel = New System.Windows.Forms.TextBox()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         CType(Me.Logo, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -116,8 +116,8 @@ Partial Class frmNewRequest
         Me.Panel6.SuspendLayout()
         Me.Panel12.SuspendLayout()
         Me.Panel7.SuspendLayout()
-        Me.Panel16.SuspendLayout()
         CType(Me.dgvReqDoc, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel16.SuspendLayout()
         Me.Panel8.SuspendLayout()
         Me.Panel15.SuspendLayout()
         Me.Panel9.SuspendLayout()
@@ -332,9 +332,9 @@ Partial Class frmNewRequest
         '
         Me.Panel5.BackColor = System.Drawing.Color.White
         Me.Panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel5.Controls.Add(Me.txtYearLevel)
+        Me.Panel5.Controls.Add(Me.txtCourse)
         Me.Panel5.Controls.Add(Me.Panel10)
-        Me.Panel5.Controls.Add(Me.cboYearLevel)
-        Me.Panel5.Controls.Add(Me.cboCourse)
         Me.Panel5.Controls.Add(Me.Label12)
         Me.Panel5.Controls.Add(Me.Label13)
         Me.Panel5.Controls.Add(Me.Label8)
@@ -379,33 +379,6 @@ Partial Class frmNewRequest
         Me.PictureBox1.TabIndex = 60
         Me.PictureBox1.TabStop = False
         '
-        'cboYearLevel
-        '
-        Me.cboYearLevel.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cboYearLevel.FormattingEnabled = True
-        Me.cboYearLevel.Items.AddRange(New Object() {"1st Year", "2nd Year", "3rd Year", "4th year"})
-        Me.cboYearLevel.Location = New System.Drawing.Point(839, 89)
-        Me.cboYearLevel.Name = "cboYearLevel"
-        Me.cboYearLevel.Size = New System.Drawing.Size(260, 25)
-        Me.cboYearLevel.TabIndex = 53
-        '
-        'cboCourse
-        '
-        Me.cboCourse.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cboCourse.FormattingEnabled = True
-        Me.cboCourse.Items.AddRange(New Object() {"Bachelor of Science in Psychology  ", "Bachelor of Science in Accountancy  ", "Bachelor of Science in Customs Administration  ", "Bachelor of Science in Business Administration - Major in Marketing Management  ", "Bachelor of Science in Business Administration - Major in Financial Management  ", "Bachelor of Science in Business Administration - Major in Human Resource Developm" &
-                "ent Management  ", "Bachelor of Science in Computer Science  ", "Bachelor of Science in Information Technology  ", "Bachelor of Science in Criminology  ", "Bachelor of Elementary Education  Bachelor of Secondary Education - Major in Engl" &
-                "ish  ", "Bachelor of Secondary Education - Major in Filipino  ", "Bachelor of Secondary Education - Major in Mathematics  ", "Bachelor of Technical Vocational Teacher Education - Major in Automotive Technolo" &
-                "gy  ", "Bachelor of Technical Vocational Teacher Education - Major in Computer Programmin" &
-                "g", "Bachelor of Technical Vocational Teacher Education - Major in Food Service Manage" &
-                "ment  ", "Bachelor of Technical Vocational Teacher Education - Major in Electronics Technol" &
-                "ogy", "Bachelor of Technical Vocational Teacher Education - Major in Welding and Fabrica" &
-                "tion  ", "Bachelor of Science in Industrial Engineering  ", "Bachelor of Science in Computer Engineering ", "Juris Doctor Program  ", "Bachelor of Science in Real Estate Management", "Bachelor of Science in Tourism Management  ", "Bachelor of Science in Hospitality Management  ", "Diploma in Information and Communication Technology  ", "Diploma in Hotel and Restaurant Services  "})
-        Me.cboCourse.Location = New System.Drawing.Point(839, 51)
-        Me.cboCourse.Name = "cboCourse"
-        Me.cboCourse.Size = New System.Drawing.Size(260, 25)
-        Me.cboCourse.TabIndex = 52
-        '
         'Label12
         '
         Me.Label12.AutoSize = True
@@ -442,6 +415,7 @@ Partial Class frmNewRequest
         Me.txtLastName.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtLastName.Location = New System.Drawing.Point(112, 89)
         Me.txtLastName.Name = "txtLastName"
+        Me.txtLastName.ReadOnly = True
         Me.txtLastName.Size = New System.Drawing.Size(239, 25)
         Me.txtLastName.TabIndex = 42
         '
@@ -461,6 +435,7 @@ Partial Class frmNewRequest
         Me.txtMiddleName.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtMiddleName.Location = New System.Drawing.Point(480, 90)
         Me.txtMiddleName.Name = "txtMiddleName"
+        Me.txtMiddleName.ReadOnly = True
         Me.txtMiddleName.Size = New System.Drawing.Size(243, 25)
         Me.txtMiddleName.TabIndex = 40
         '
@@ -480,6 +455,7 @@ Partial Class frmNewRequest
         Me.txtFirstName.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtFirstName.Location = New System.Drawing.Point(480, 52)
         Me.txtFirstName.Name = "txtFirstName"
+        Me.txtFirstName.ReadOnly = True
         Me.txtFirstName.Size = New System.Drawing.Size(243, 25)
         Me.txtFirstName.TabIndex = 38
         '
@@ -567,18 +543,23 @@ Partial Class frmNewRequest
         '
         'Button1
         '
+        Me.Button1.BackColor = System.Drawing.Color.Navy
+        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button1.ForeColor = System.Drawing.Color.White
         Me.Button1.Location = New System.Drawing.Point(967, 50)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(130, 28)
         Me.Button1.TabIndex = 57
         Me.Button1.Text = "Add to list"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.Button1.UseVisualStyleBackColor = False
         '
         'txtSubtotal
         '
+        Me.txtSubtotal.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtSubtotal.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtSubtotal.Location = New System.Drawing.Point(809, 51)
         Me.txtSubtotal.Name = "txtSubtotal"
+        Me.txtSubtotal.ReadOnly = True
         Me.txtSubtotal.Size = New System.Drawing.Size(112, 25)
         Me.txtSubtotal.TabIndex = 56
         '
@@ -594,9 +575,11 @@ Partial Class frmNewRequest
         '
         'txtFee
         '
+        Me.txtFee.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtFee.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtFee.Location = New System.Drawing.Point(599, 50)
         Me.txtFee.Name = "txtFee"
+        Me.txtFee.ReadOnly = True
         Me.txtFee.Size = New System.Drawing.Size(112, 25)
         Me.txtFee.TabIndex = 54
         '
@@ -641,6 +624,7 @@ Partial Class frmNewRequest
         '
         'txtQuantity
         '
+        Me.txtQuantity.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtQuantity.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtQuantity.Location = New System.Drawing.Point(423, 50)
         Me.txtQuantity.Name = "txtQuantity"
@@ -660,20 +644,13 @@ Partial Class frmNewRequest
         'Panel7
         '
         Me.Panel7.BackColor = System.Drawing.Color.White
+        Me.Panel7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel7.Controls.Add(Me.Panel16)
         Me.Panel7.Controls.Add(Me.dgvReqDoc)
-        Me.Panel7.Location = New System.Drawing.Point(279, 551)
+        Me.Panel7.Location = New System.Drawing.Point(279, 353)
         Me.Panel7.Name = "Panel7"
-        Me.Panel7.Size = New System.Drawing.Size(1121, 250)
+        Me.Panel7.Size = New System.Drawing.Size(1122, 250)
         Me.Panel7.TabIndex = 62
-        '
-        'Panel16
-        '
-        Me.Panel16.BackColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
-        Me.Panel16.Controls.Add(Me.Label11)
-        Me.Panel16.Location = New System.Drawing.Point(279, 551)
-        Me.Panel16.Name = "Panel16"
-        Me.Panel16.Size = New System.Drawing.Size(1122, 35)
-        Me.Panel16.TabIndex = 68
         '
         'dgvReqDoc
         '
@@ -720,12 +697,21 @@ Partial Class frmNewRequest
         Me.Action.Name = "Action"
         Me.Action.Width = 108
         '
+        'Panel16
+        '
+        Me.Panel16.BackColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
+        Me.Panel16.Controls.Add(Me.Label11)
+        Me.Panel16.Location = New System.Drawing.Point(-3, -1)
+        Me.Panel16.Name = "Panel16"
+        Me.Panel16.Size = New System.Drawing.Size(1135, 35)
+        Me.Panel16.TabIndex = 68
+        '
         'Label11
         '
         Me.Label11.AutoSize = True
         Me.Label11.Font = New System.Drawing.Font("Segoe UI", 14.0!, System.Drawing.FontStyle.Bold)
         Me.Label11.ForeColor = System.Drawing.Color.White
-        Me.Label11.Location = New System.Drawing.Point(3, 3)
+        Me.Label11.Location = New System.Drawing.Point(7, 5)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(203, 25)
         Me.Label11.TabIndex = 58
@@ -746,7 +732,7 @@ Partial Class frmNewRequest
         Me.Panel8.Controls.Add(Me.Label21)
         Me.Panel8.Controls.Add(Me.txtRequestNo)
         Me.Panel8.Controls.Add(Me.Label22)
-        Me.Panel8.Location = New System.Drawing.Point(279, 353)
+        Me.Panel8.Location = New System.Drawing.Point(279, 621)
         Me.Panel8.Name = "Panel8"
         Me.Panel8.Size = New System.Drawing.Size(642, 180)
         Me.Panel8.TabIndex = 62
@@ -812,6 +798,7 @@ Partial Class frmNewRequest
         '
         'txtCreatedBy
         '
+        Me.txtCreatedBy.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtCreatedBy.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtCreatedBy.Location = New System.Drawing.Point(135, 128)
         Me.txtCreatedBy.Name = "txtCreatedBy"
@@ -850,9 +837,11 @@ Partial Class frmNewRequest
         '
         'txtRequestNo
         '
+        Me.txtRequestNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtRequestNo.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtRequestNo.Location = New System.Drawing.Point(135, 51)
         Me.txtRequestNo.Name = "txtRequestNo"
+        Me.txtRequestNo.ReadOnly = True
         Me.txtRequestNo.Size = New System.Drawing.Size(180, 25)
         Me.txtRequestNo.TabIndex = 38
         '
@@ -869,13 +858,34 @@ Partial Class frmNewRequest
         'Panel9
         '
         Me.Panel9.BackColor = System.Drawing.Color.White
+        Me.Panel9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel9.Controls.Add(Me.Panel18)
         Me.Panel9.Controls.Add(Me.txtTotalAmount)
         Me.Panel9.Controls.Add(Me.Label24)
-        Me.Panel9.Location = New System.Drawing.Point(941, 353)
+        Me.Panel9.Location = New System.Drawing.Point(939, 621)
         Me.Panel9.Name = "Panel9"
-        Me.Panel9.Size = New System.Drawing.Size(459, 125)
+        Me.Panel9.Size = New System.Drawing.Size(463, 125)
         Me.Panel9.TabIndex = 63
+        '
+        'Panel18
+        '
+        Me.Panel18.BackColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
+        Me.Panel18.Controls.Add(Me.Label29)
+        Me.Panel18.Location = New System.Drawing.Point(0, 0)
+        Me.Panel18.Name = "Panel18"
+        Me.Panel18.Size = New System.Drawing.Size(462, 36)
+        Me.Panel18.TabIndex = 54
+        '
+        'Label29
+        '
+        Me.Label29.AutoSize = True
+        Me.Label29.Font = New System.Drawing.Font("Segoe UI", 14.0!, System.Drawing.FontStyle.Bold)
+        Me.Label29.ForeColor = System.Drawing.Color.White
+        Me.Label29.Location = New System.Drawing.Point(6, 5)
+        Me.Label29.Name = "Label29"
+        Me.Label29.Size = New System.Drawing.Size(133, 25)
+        Me.Label29.TabIndex = 53
+        Me.Label29.Text = "Total Amount"
         '
         'txtTotalAmount
         '
@@ -883,6 +893,7 @@ Partial Class frmNewRequest
         Me.txtTotalAmount.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtTotalAmount.Location = New System.Drawing.Point(147, 64)
         Me.txtTotalAmount.Name = "txtTotalAmount"
+        Me.txtTotalAmount.ReadOnly = True
         Me.txtTotalAmount.Size = New System.Drawing.Size(234, 28)
         Me.txtTotalAmount.TabIndex = 53
         '
@@ -902,7 +913,7 @@ Partial Class frmNewRequest
         Me.Button2.BackColor = System.Drawing.Color.Navy
         Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button2.ForeColor = System.Drawing.Color.White
-        Me.Button2.Location = New System.Drawing.Point(941, 495)
+        Me.Button2.Location = New System.Drawing.Point(939, 763)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(155, 38)
         Me.Button2.TabIndex = 64
@@ -914,7 +925,7 @@ Partial Class frmNewRequest
         Me.Button3.BackColor = System.Drawing.Color.CornflowerBlue
         Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button3.ForeColor = System.Drawing.Color.White
-        Me.Button3.Location = New System.Drawing.Point(1108, 495)
+        Me.Button3.Location = New System.Drawing.Point(1106, 763)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(143, 38)
         Me.Button3.TabIndex = 65
@@ -926,7 +937,7 @@ Partial Class frmNewRequest
         Me.Button4.BackColor = System.Drawing.Color.IndianRed
         Me.Button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button4.ForeColor = System.Drawing.Color.White
-        Me.Button4.Location = New System.Drawing.Point(1263, 495)
+        Me.Button4.Location = New System.Drawing.Point(1261, 763)
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(138, 38)
         Me.Button4.TabIndex = 66
@@ -990,32 +1001,31 @@ Partial Class frmNewRequest
         Me.Label28.TabIndex = 51
         Me.Label28.Text = "Request Information"
         '
-        'Panel18
+        'txtCourse
         '
-        Me.Panel18.BackColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
-        Me.Panel18.Controls.Add(Me.Label29)
-        Me.Panel18.Location = New System.Drawing.Point(0, 1)
-        Me.Panel18.Name = "Panel18"
-        Me.Panel18.Size = New System.Drawing.Size(459, 36)
-        Me.Panel18.TabIndex = 54
+        Me.txtCourse.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtCourse.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtCourse.Location = New System.Drawing.Point(839, 54)
+        Me.txtCourse.Name = "txtCourse"
+        Me.txtCourse.ReadOnly = True
+        Me.txtCourse.Size = New System.Drawing.Size(260, 25)
+        Me.txtCourse.TabIndex = 63
         '
-        'Label29
+        'txtYearLevel
         '
-        Me.Label29.AutoSize = True
-        Me.Label29.Font = New System.Drawing.Font("Segoe UI", 14.0!, System.Drawing.FontStyle.Bold)
-        Me.Label29.ForeColor = System.Drawing.Color.White
-        Me.Label29.Location = New System.Drawing.Point(6, 5)
-        Me.Label29.Name = "Label29"
-        Me.Label29.Size = New System.Drawing.Size(133, 25)
-        Me.Label29.TabIndex = 53
-        Me.Label29.Text = "Total Amount"
+        Me.txtYearLevel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtYearLevel.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtYearLevel.Location = New System.Drawing.Point(839, 89)
+        Me.txtYearLevel.Name = "txtYearLevel"
+        Me.txtYearLevel.ReadOnly = True
+        Me.txtYearLevel.Size = New System.Drawing.Size(260, 25)
+        Me.txtYearLevel.TabIndex = 64
         '
         'frmNewRequest
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1424, 821)
-        Me.Controls.Add(Me.Panel16)
         Me.Controls.Add(Me.Button4)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.Button2)
@@ -1045,9 +1055,9 @@ Partial Class frmNewRequest
         Me.Panel12.ResumeLayout(False)
         Me.Panel12.PerformLayout()
         Me.Panel7.ResumeLayout(False)
+        CType(Me.dgvReqDoc, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel16.ResumeLayout(False)
         Me.Panel16.PerformLayout()
-        CType(Me.dgvReqDoc, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel8.ResumeLayout(False)
         Me.Panel8.PerformLayout()
         Me.Panel15.ResumeLayout(False)
@@ -1077,8 +1087,6 @@ Partial Class frmNewRequest
     Friend WithEvents Label5 As Label
     Friend WithEvents Label15 As Label
     Friend WithEvents Panel5 As Panel
-    Friend WithEvents cboYearLevel As ComboBox
-    Friend WithEvents cboCourse As ComboBox
     Friend WithEvents Label14 As Label
     Friend WithEvents Label12 As Label
     Friend WithEvents Label13 As Label
@@ -1144,4 +1152,6 @@ Partial Class frmNewRequest
     Friend WithEvents Label29 As Label
     Friend WithEvents Panel17 As Panel
     Friend WithEvents Label28 As Label
+    Friend WithEvents txtYearLevel As TextBox
+    Friend WithEvents txtCourse As TextBox
 End Class
