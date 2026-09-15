@@ -167,7 +167,7 @@ Public Class frmNewRequest
         Dim fee As Decimal = currentDocFee
         Dim subtotal As Decimal = fee * qty
 
-        For Each row As DataGridViewRow In DataGridView1.Rows
+        For Each row As DataGridViewRow In dgvReqDoc.Rows
             If row.IsNewRow Then Continue For
 
             If row.Cells("DocumentID").Value IsNot Nothing AndAlso row.Cells("DocumentID").Value.ToString() = docId Then
@@ -180,8 +180,8 @@ Public Class frmNewRequest
             End If
         Next
 
-        Dim rowIndex As Integer = DataGridView1.Rows.Add()
-        With DataGridView1.Rows(rowIndex)
+        Dim rowIndex As Integer = dgvReqDoc.Rows.Add()
+        With dgvReqDoc.Rows(rowIndex)
             .Cells("DocumentID").Value = docId
             .Cells("DocumentName").Value = docName
             .Cells("Fee").Value = fee.ToString("N2")
@@ -200,19 +200,19 @@ Public Class frmNewRequest
         txtFee.Clear()
         txtSubtotal.Clear()
     End Sub
-    Private Sub DataGridView1_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellClick
+    Private Sub dgvReqDoc_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvReqDoc.CellClick
         If e.RowIndex < 0 Then Exit Sub
-        If DataGridView1.Rows(e.RowIndex).IsNewRow Then Exit Sub
+        If dgvReqDoc.Rows(e.RowIndex).IsNewRow Then Exit Sub
 
-        If DataGridView1.Columns(e.ColumnIndex).Name = "Action" Then
-            DataGridView1.Rows.RemoveAt(e.RowIndex)
+        If dgvReqDoc.Columns(e.ColumnIndex).Name = "Action" Then
+            dgvReqDoc.Rows.RemoveAt(e.RowIndex)
             RecalculateTotal()
         End If
     End Sub
 
     Private Sub RecalculateTotal()
         Dim total As Decimal = 0
-        For Each row As DataGridViewRow In DataGridView1.Rows
+        For Each row As DataGridViewRow In dgvReqDoc.Rows
             If row.IsNewRow Then Continue For
 
             If row.Cells("Subtotal").Value IsNot Nothing Then
@@ -234,8 +234,8 @@ Public Class frmNewRequest
             MsgBox("Student not found. Please search a valid Student ID.", vbExclamation, "New Document Request")
             txtStudentID.Focus()
             Return False
-        ElseIf DataGridView1.Rows.Count = 0 OrElse
-               (DataGridView1.Rows.Count = 1 AndAlso DataGridView1.Rows(0).IsNewRow) Then
+        ElseIf dgvReqDoc.Rows.Count = 0 OrElse
+               (dgvReqDoc.Rows.Count = 1 AndAlso dgvReqDoc.Rows(0).IsNewRow) Then
             MsgBox("Please add at least one document to the request.", vbExclamation, "New Document Request")
             Return False
         ElseIf cboPaymentStatus.SelectedIndex = -1 Then
@@ -273,7 +273,7 @@ Public Class frmNewRequest
 
             Dim newRequestId As Long = cmd.LastInsertedId
 
-            For Each row As DataGridViewRow In DataGridView1.Rows
+            For Each row As DataGridViewRow In dgvReqDoc.Rows
                 If row.IsNewRow Then Continue For
 
                 sql = "INSERT INTO tblrequestdetails (RequestID, DocumentID, Quantity, Amount, SubTotal) " &
@@ -306,7 +306,7 @@ Public Class frmNewRequest
     Private Sub ClearForm()
         txtStudentID.Clear()
         ClearStudentFields()
-        DataGridView1.Rows.Clear()
+        dgvReqDoc.Rows.Clear()
         ClearDocumentEntryFields()
         cboPaymentStatus.SelectedIndex = 0
         cboStatus.SelectedIndex = 0
