@@ -13,7 +13,6 @@ Public Class frmNewRequest
         dtpRequestDate.Value = Today
 
         txtCreatedBy.Text = CurrentUser.FullName
-        txtCreatedBy.ReadOnly = True
 
         ClearDocumentEntryFields()
         RecalculateTotal()

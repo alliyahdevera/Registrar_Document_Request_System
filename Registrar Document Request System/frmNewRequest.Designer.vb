@@ -802,6 +802,7 @@ Partial Class frmNewRequest
         Me.txtCreatedBy.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtCreatedBy.Location = New System.Drawing.Point(135, 128)
         Me.txtCreatedBy.Name = "txtCreatedBy"
+        Me.txtCreatedBy.ReadOnly = True
         Me.txtCreatedBy.Size = New System.Drawing.Size(180, 25)
         Me.txtCreatedBy.TabIndex = 54
         '
