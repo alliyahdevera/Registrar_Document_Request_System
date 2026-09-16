@@ -124,9 +124,7 @@
   <ItemGroup>
     <Compile Include="CurrentUser.vb" />
     <Compile Include="dbConnect.vb" />
-    <Compile Include="frmLogin.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="frmLogin.vb" />
     <Compile Include="frmLogin.Designer.vb">
       <DependentUpon>frmLogin.vb</DependentUpon>
       <SubType>Form</SubType>
