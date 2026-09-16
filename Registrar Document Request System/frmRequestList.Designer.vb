@@ -23,14 +23,22 @@ Partial Class frmRequestList
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmRequestList))
-        Me.Button2 = New System.Windows.Forms.Button()
+        Me.btnViewDetails = New System.Windows.Forms.Button()
         Me.Panel7 = New System.Windows.Forms.Panel()
         Me.Panel16 = New System.Windows.Forms.Panel()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.dgvReqDoc = New System.Windows.Forms.DataGridView()
+        Me.RequestNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me._date = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.StudentID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FirstName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.LastName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Documents = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TotalAmount = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Status = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.Panel10 = New System.Windows.Forms.Panel()
-        Me.txtStudentID = New System.Windows.Forms.TextBox()
+        Me.txtSearch = New System.Windows.Forms.TextBox()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -48,14 +56,6 @@ Partial Class frmRequestList
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Logo = New System.Windows.Forms.PictureBox()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.RequestNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me._date = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.StudentID = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.FirstName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.LastName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Documents = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TotalAmount = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Status = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel7.SuspendLayout()
         Me.Panel16.SuspendLayout()
         CType(Me.dgvReqDoc, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -66,17 +66,17 @@ Partial Class frmRequestList
         CType(Me.Logo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'Button2
+        'btnViewDetails
         '
-        Me.Button2.BackColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
-        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button2.ForeColor = System.Drawing.Color.White
-        Me.Button2.Location = New System.Drawing.Point(1242, 82)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(155, 35)
-        Me.Button2.TabIndex = 75
-        Me.Button2.Text = "View Details"
-        Me.Button2.UseVisualStyleBackColor = False
+        Me.btnViewDetails.BackColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
+        Me.btnViewDetails.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnViewDetails.ForeColor = System.Drawing.Color.White
+        Me.btnViewDetails.Location = New System.Drawing.Point(1242, 82)
+        Me.btnViewDetails.Name = "btnViewDetails"
+        Me.btnViewDetails.Size = New System.Drawing.Size(155, 35)
+        Me.btnViewDetails.TabIndex = 75
+        Me.btnViewDetails.Text = "View Details"
+        Me.btnViewDetails.UseVisualStyleBackColor = False
         '
         'Panel7
         '
@@ -118,6 +118,51 @@ Partial Class frmRequestList
         Me.dgvReqDoc.Size = New System.Drawing.Size(1123, 629)
         Me.dgvReqDoc.TabIndex = 59
         '
+        'RequestNo
+        '
+        Me.RequestNo.HeaderText = "Request Number"
+        Me.RequestNo.Name = "RequestNo"
+        '
+        '_date
+        '
+        Me._date.HeaderText = "Date"
+        Me._date.Name = "_date"
+        Me._date.Width = 130
+        '
+        'StudentID
+        '
+        Me.StudentID.HeaderText = "Student ID"
+        Me.StudentID.Name = "StudentID"
+        '
+        'FirstName
+        '
+        Me.FirstName.HeaderText = "First Name"
+        Me.FirstName.Name = "FirstName"
+        Me.FirstName.Width = 170
+        '
+        'LastName
+        '
+        Me.LastName.HeaderText = "Last Name"
+        Me.LastName.Name = "LastName"
+        Me.LastName.Width = 170
+        '
+        'Documents
+        '
+        Me.Documents.HeaderText = "Document(s)"
+        Me.Documents.Name = "Documents"
+        Me.Documents.Width = 200
+        '
+        'TotalAmount
+        '
+        Me.TotalAmount.HeaderText = "Total Amount"
+        Me.TotalAmount.Name = "TotalAmount"
+        '
+        'Status
+        '
+        Me.Status.HeaderText = "Status"
+        Me.Status.Name = "Status"
+        Me.Status.Width = 110
+        '
         'Label15
         '
         Me.Label15.AutoSize = True
@@ -133,21 +178,21 @@ Partial Class frmRequestList
         '
         Me.Panel10.BackColor = System.Drawing.Color.White
         Me.Panel10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel10.Controls.Add(Me.txtStudentID)
+        Me.Panel10.Controls.Add(Me.txtSearch)
         Me.Panel10.Controls.Add(Me.PictureBox1)
         Me.Panel10.Location = New System.Drawing.Point(342, 85)
         Me.Panel10.Name = "Panel10"
         Me.Panel10.Size = New System.Drawing.Size(238, 28)
         Me.Panel10.TabIndex = 61
         '
-        'txtStudentID
+        'txtSearch
         '
-        Me.txtStudentID.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtStudentID.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtStudentID.Location = New System.Drawing.Point(3, 4)
-        Me.txtStudentID.Name = "txtStudentID"
-        Me.txtStudentID.Size = New System.Drawing.Size(210, 18)
-        Me.txtStudentID.TabIndex = 32
+        Me.txtSearch.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtSearch.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtSearch.Location = New System.Drawing.Point(3, 4)
+        Me.txtSearch.Name = "txtSearch"
+        Me.txtSearch.Size = New System.Drawing.Size(210, 18)
+        Me.txtSearch.TabIndex = 32
         '
         'PictureBox1
         '
@@ -374,57 +419,12 @@ Partial Class frmRequestList
         Me.Label5.TabIndex = 24
         Me.Label5.Text = "Document Request System"
         '
-        'RequestNo
-        '
-        Me.RequestNo.HeaderText = "Request Number"
-        Me.RequestNo.Name = "RequestNo"
-        '
-        '_date
-        '
-        Me._date.HeaderText = "Date"
-        Me._date.Name = "_date"
-        Me._date.Width = 130
-        '
-        'StudentID
-        '
-        Me.StudentID.HeaderText = "Student ID"
-        Me.StudentID.Name = "StudentID"
-        '
-        'FirstName
-        '
-        Me.FirstName.HeaderText = "First Name"
-        Me.FirstName.Name = "FirstName"
-        Me.FirstName.Width = 170
-        '
-        'LastName
-        '
-        Me.LastName.HeaderText = "Last Name"
-        Me.LastName.Name = "LastName"
-        Me.LastName.Width = 170
-        '
-        'Documents
-        '
-        Me.Documents.HeaderText = "Document(s)"
-        Me.Documents.Name = "Documents"
-        Me.Documents.Width = 200
-        '
-        'TotalAmount
-        '
-        Me.TotalAmount.HeaderText = "Total Amount"
-        Me.TotalAmount.Name = "TotalAmount"
-        '
-        'Status
-        '
-        Me.Status.HeaderText = "Status"
-        Me.Status.Name = "Status"
-        Me.Status.Width = 110
-        '
         'frmRequestList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1424, 821)
-        Me.Controls.Add(Me.Button2)
+        Me.Controls.Add(Me.btnViewDetails)
         Me.Controls.Add(Me.Panel7)
         Me.Controls.Add(Me.Label15)
         Me.Controls.Add(Me.Panel10)
@@ -449,14 +449,14 @@ Partial Class frmRequestList
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents Button2 As Button
+    Friend WithEvents btnViewDetails As Button
     Friend WithEvents Panel7 As Panel
     Friend WithEvents Panel16 As Panel
     Friend WithEvents Label11 As Label
     Friend WithEvents dgvReqDoc As DataGridView
     Friend WithEvents Label15 As Label
     Friend WithEvents Panel10 As Panel
-    Friend WithEvents txtStudentID As TextBox
+    Friend WithEvents txtSearch As TextBox
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents Label3 As Label
     Friend WithEvents Label1 As Label
