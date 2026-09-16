@@ -147,6 +147,18 @@
     <Compile Include="frmNewRequest.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmRequestDetails.Designer.vb">
+      <DependentUpon>frmRequestDetails.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmRequestDetails.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRequestList.Designer.vb">
+      <DependentUpon>frmRequestList.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmRequestList.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmStudentManagement.Designer.vb">
       <DependentUpon>frmStudentManagement.vb</DependentUpon>
     </Compile>
@@ -182,6 +194,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmNewRequest.resx">
       <DependentUpon>frmNewRequest.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRequestDetails.resx">
+      <DependentUpon>frmRequestDetails.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRequestList.resx">
+      <DependentUpon>frmRequestList.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmStudentManagement.resx">
       <DependentUpon>frmStudentManagement.vb</DependentUpon>

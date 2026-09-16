@@ -76,6 +76,7 @@ Partial Class frmStudentManagement
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Logo = New System.Windows.Forms.PictureBox()
         Me.Label5 = New System.Windows.Forms.Label()
+        Me.Panel7 = New System.Windows.Forms.Panel()
         CType(Me.dgvStudents, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel5.SuspendLayout()
         Me.Panel6.SuspendLayout()
@@ -83,6 +84,7 @@ Partial Class frmStudentManagement
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         CType(Me.Logo, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel7.SuspendLayout()
         Me.SuspendLayout()
         '
         'Label1
@@ -185,9 +187,9 @@ Partial Class frmStudentManagement
         Me.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAdd.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnAdd.ForeColor = System.Drawing.Color.White
-        Me.btnAdd.Location = New System.Drawing.Point(1057, 280)
+        Me.btnAdd.Location = New System.Drawing.Point(957, 274)
         Me.btnAdd.Name = "btnAdd"
-        Me.btnAdd.Size = New System.Drawing.Size(112, 26)
+        Me.btnAdd.Size = New System.Drawing.Size(143, 30)
         Me.btnAdd.TabIndex = 30
         Me.btnAdd.Text = "Add"
         Me.btnAdd.UseVisualStyleBackColor = False
@@ -196,7 +198,7 @@ Partial Class frmStudentManagement
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Segoe UI Semibold", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(272, 283)
+        Me.Label2.Location = New System.Drawing.Point(272, 278)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(152, 20)
         Me.Label2.TabIndex = 31
@@ -205,7 +207,7 @@ Partial Class frmStudentManagement
         'txtStudentID
         '
         Me.txtStudentID.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtStudentID.Location = New System.Drawing.Point(113, 56)
+        Me.txtStudentID.Location = New System.Drawing.Point(115, 57)
         Me.txtStudentID.Name = "txtStudentID"
         Me.txtStudentID.Size = New System.Drawing.Size(237, 27)
         Me.txtStudentID.TabIndex = 32
@@ -214,7 +216,7 @@ Partial Class frmStudentManagement
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Segoe UI Semibold", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(19, 59)
+        Me.Label3.Location = New System.Drawing.Point(21, 60)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(81, 20)
         Me.Label3.TabIndex = 33
@@ -224,7 +226,7 @@ Partial Class frmStudentManagement
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Segoe UI Semibold", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(19, 97)
+        Me.Label6.Location = New System.Drawing.Point(21, 98)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(37, 20)
         Me.Label6.TabIndex = 35
@@ -233,7 +235,7 @@ Partial Class frmStudentManagement
         'txtLRN
         '
         Me.txtLRN.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtLRN.Location = New System.Drawing.Point(113, 94)
+        Me.txtLRN.Location = New System.Drawing.Point(115, 95)
         Me.txtLRN.Name = "txtLRN"
         Me.txtLRN.Size = New System.Drawing.Size(237, 27)
         Me.txtLRN.TabIndex = 34
@@ -242,7 +244,7 @@ Partial Class frmStudentManagement
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Segoe UI Semibold", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(19, 136)
+        Me.Label7.Location = New System.Drawing.Point(21, 137)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(90, 20)
         Me.Label7.TabIndex = 37
@@ -251,7 +253,7 @@ Partial Class frmStudentManagement
         'txtContactNo
         '
         Me.txtContactNo.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtContactNo.Location = New System.Drawing.Point(113, 133)
+        Me.txtContactNo.Location = New System.Drawing.Point(115, 134)
         Me.txtContactNo.Name = "txtContactNo"
         Me.txtContactNo.Size = New System.Drawing.Size(237, 27)
         Me.txtContactNo.TabIndex = 36
@@ -260,7 +262,7 @@ Partial Class frmStudentManagement
         '
         Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("Segoe UI Semibold", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(369, 136)
+        Me.Label8.Location = New System.Drawing.Point(371, 137)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(80, 20)
         Me.Label8.TabIndex = 43
@@ -269,7 +271,7 @@ Partial Class frmStudentManagement
         'txtLastName
         '
         Me.txtLastName.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtLastName.Location = New System.Drawing.Point(479, 133)
+        Me.txtLastName.Location = New System.Drawing.Point(481, 134)
         Me.txtLastName.Name = "txtLastName"
         Me.txtLastName.Size = New System.Drawing.Size(243, 27)
         Me.txtLastName.TabIndex = 42
@@ -278,7 +280,7 @@ Partial Class frmStudentManagement
         '
         Me.Label9.AutoSize = True
         Me.Label9.Font = New System.Drawing.Font("Segoe UI Semibold", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(369, 97)
+        Me.Label9.Location = New System.Drawing.Point(371, 98)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(102, 20)
         Me.Label9.TabIndex = 41
@@ -287,7 +289,7 @@ Partial Class frmStudentManagement
         'txtMiddleName
         '
         Me.txtMiddleName.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtMiddleName.Location = New System.Drawing.Point(479, 94)
+        Me.txtMiddleName.Location = New System.Drawing.Point(481, 95)
         Me.txtMiddleName.Name = "txtMiddleName"
         Me.txtMiddleName.Size = New System.Drawing.Size(243, 27)
         Me.txtMiddleName.TabIndex = 40
@@ -296,7 +298,7 @@ Partial Class frmStudentManagement
         '
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("Segoe UI Semibold", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(369, 59)
+        Me.Label10.Location = New System.Drawing.Point(371, 60)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(83, 20)
         Me.Label10.TabIndex = 39
@@ -305,7 +307,7 @@ Partial Class frmStudentManagement
         'txtFirstName
         '
         Me.txtFirstName.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtFirstName.Location = New System.Drawing.Point(479, 56)
+        Me.txtFirstName.Location = New System.Drawing.Point(481, 57)
         Me.txtFirstName.Name = "txtFirstName"
         Me.txtFirstName.Size = New System.Drawing.Size(243, 27)
         Me.txtFirstName.TabIndex = 38
@@ -314,7 +316,7 @@ Partial Class frmStudentManagement
         '
         Me.Label11.AutoSize = True
         Me.Label11.Font = New System.Drawing.Font("Segoe UI Semibold", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label11.Location = New System.Drawing.Point(745, 136)
+        Me.Label11.Location = New System.Drawing.Point(747, 137)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(59, 20)
         Me.Label11.TabIndex = 49
@@ -323,7 +325,7 @@ Partial Class frmStudentManagement
         'txtSection
         '
         Me.txtSection.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtSection.Location = New System.Drawing.Point(838, 133)
+        Me.txtSection.Location = New System.Drawing.Point(840, 134)
         Me.txtSection.Name = "txtSection"
         Me.txtSection.Size = New System.Drawing.Size(260, 27)
         Me.txtSection.TabIndex = 48
@@ -332,7 +334,7 @@ Partial Class frmStudentManagement
         '
         Me.Label12.AutoSize = True
         Me.Label12.Font = New System.Drawing.Font("Segoe UI Semibold", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label12.Location = New System.Drawing.Point(745, 96)
+        Me.Label12.Location = New System.Drawing.Point(747, 97)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(78, 20)
         Me.Label12.TabIndex = 47
@@ -342,7 +344,7 @@ Partial Class frmStudentManagement
         '
         Me.Label13.AutoSize = True
         Me.Label13.Font = New System.Drawing.Font("Segoe UI Semibold", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label13.Location = New System.Drawing.Point(745, 59)
+        Me.Label13.Location = New System.Drawing.Point(747, 60)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(56, 20)
         Me.Label13.TabIndex = 45
@@ -352,9 +354,9 @@ Partial Class frmStudentManagement
         '
         Me.Panel5.BackColor = System.Drawing.Color.White
         Me.Panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel5.Controls.Add(Me.Panel7)
         Me.Panel5.Controls.Add(Me.cboYearLevel)
         Me.Panel5.Controls.Add(Me.cboCourse)
-        Me.Panel5.Controls.Add(Me.Label14)
         Me.Panel5.Controls.Add(Me.Label11)
         Me.Panel5.Controls.Add(Me.txtSection)
         Me.Panel5.Controls.Add(Me.Label12)
@@ -381,7 +383,7 @@ Partial Class frmStudentManagement
         Me.cboYearLevel.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboYearLevel.FormattingEnabled = True
         Me.cboYearLevel.Items.AddRange(New Object() {"1st Year", "2nd Year", "3rd Year", "4th year"})
-        Me.cboYearLevel.Location = New System.Drawing.Point(838, 93)
+        Me.cboYearLevel.Location = New System.Drawing.Point(840, 94)
         Me.cboYearLevel.Name = "cboYearLevel"
         Me.cboYearLevel.Size = New System.Drawing.Size(260, 28)
         Me.cboYearLevel.TabIndex = 53
@@ -398,7 +400,7 @@ Partial Class frmStudentManagement
                 "ment  ", "Bachelor of Technical Vocational Teacher Education - Major in Electronics Technol" &
                 "ogy", "Bachelor of Technical Vocational Teacher Education - Major in Welding and Fabrica" &
                 "tion  ", "Bachelor of Science in Industrial Engineering  ", "Bachelor of Science in Computer Engineering ", "Juris Doctor Program  ", "Bachelor of Science in Real Estate Management", "Bachelor of Science in Tourism Management  ", "Bachelor of Science in Hospitality Management  ", "Diploma in Information and Communication Technology  ", "Diploma in Hotel and Restaurant Services  "})
-        Me.cboCourse.Location = New System.Drawing.Point(838, 55)
+        Me.cboCourse.Location = New System.Drawing.Point(840, 56)
         Me.cboCourse.Name = "cboCourse"
         Me.cboCourse.Size = New System.Drawing.Size(260, 28)
         Me.cboCourse.TabIndex = 52
@@ -407,8 +409,8 @@ Partial Class frmStudentManagement
         '
         Me.Label14.AutoSize = True
         Me.Label14.Font = New System.Drawing.Font("Segoe UI", 14.0!, System.Drawing.FontStyle.Bold)
-        Me.Label14.ForeColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
-        Me.Label14.Location = New System.Drawing.Point(17, 16)
+        Me.Label14.ForeColor = System.Drawing.Color.White
+        Me.Label14.Location = New System.Drawing.Point(9, 7)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(196, 25)
         Me.Label14.TabIndex = 51
@@ -421,9 +423,9 @@ Partial Class frmStudentManagement
         Me.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnEdit.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnEdit.ForeColor = System.Drawing.Color.White
-        Me.btnEdit.Location = New System.Drawing.Point(1183, 280)
+        Me.btnEdit.Location = New System.Drawing.Point(1115, 274)
         Me.btnEdit.Name = "btnEdit"
-        Me.btnEdit.Size = New System.Drawing.Size(105, 26)
+        Me.btnEdit.Size = New System.Drawing.Size(136, 30)
         Me.btnEdit.TabIndex = 51
         Me.btnEdit.Text = "Edit"
         Me.btnEdit.UseVisualStyleBackColor = False
@@ -435,9 +437,9 @@ Partial Class frmStudentManagement
         Me.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnDelete.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDelete.ForeColor = System.Drawing.Color.White
-        Me.btnDelete.Location = New System.Drawing.Point(1302, 280)
+        Me.btnDelete.Location = New System.Drawing.Point(1271, 274)
         Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(96, 26)
+        Me.btnDelete.Size = New System.Drawing.Size(127, 30)
         Me.btnDelete.TabIndex = 52
         Me.btnDelete.Text = "Delete"
         Me.btnDelete.UseVisualStyleBackColor = False
@@ -448,7 +450,7 @@ Partial Class frmStudentManagement
         Me.Panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel6.Controls.Add(Me.PictureBox1)
         Me.Panel6.Controls.Add(Me.txtSearch)
-        Me.Panel6.Location = New System.Drawing.Point(439, 280)
+        Me.Panel6.Location = New System.Drawing.Point(439, 275)
         Me.Panel6.Name = "Panel6"
         Me.Panel6.Size = New System.Drawing.Size(263, 26)
         Me.Panel6.TabIndex = 53
@@ -667,6 +669,15 @@ Partial Class frmStudentManagement
         Me.Label5.TabIndex = 24
         Me.Label5.Text = "Document Request System"
         '
+        'Panel7
+        '
+        Me.Panel7.BackColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
+        Me.Panel7.Controls.Add(Me.Label14)
+        Me.Panel7.Location = New System.Drawing.Point(-2, -1)
+        Me.Panel7.Name = "Panel7"
+        Me.Panel7.Size = New System.Drawing.Size(1122, 41)
+        Me.Panel7.TabIndex = 54
+        '
         'frmStudentManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -677,12 +688,12 @@ Partial Class frmStudentManagement
         Me.Controls.Add(Me.Label15)
         Me.Controls.Add(Me.Panel6)
         Me.Controls.Add(Me.btnDelete)
-        Me.Controls.Add(Me.btnEdit)
         Me.Controls.Add(Me.Panel5)
         Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.btnAdd)
+        Me.Controls.Add(Me.btnEdit)
         Me.Controls.Add(Me.dgvStudents)
         Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.btnAdd)
         Me.Name = "frmStudentManagement"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "frmStudentManagement"
@@ -696,6 +707,8 @@ Partial Class frmStudentManagement
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
         CType(Me.Logo, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel7.ResumeLayout(False)
+        Me.Panel7.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -754,4 +767,5 @@ Partial Class frmStudentManagement
     Friend WithEvents Label4 As Label
     Friend WithEvents Logo As PictureBox
     Friend WithEvents Label5 As Label
+    Friend WithEvents Panel7 As Panel
 End Class
