@@ -3,39 +3,33 @@
 Public Class frmRequestList
 
     Private Sub frmRequestList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ' Force whole row highlight on click
+        ' Enable full row selection
         dgvReqDoc.SelectionMode = DataGridViewSelectionMode.FullRowSelect
         dgvReqDoc.MultiSelect = False
 
-        If CurrentUser.Role <> "Administrator" Then
-            btnUserManagement.Visible = False
-        End If
-
         LoadRequests()
     End Sub
-
     Public Sub LoadRequests(Optional searchTerm As String = "")
         Call connection()
 
-        ' MIN() guarantees only ONE document name is selected without slashes or commas
-        sql = "SELECT r.RequestNo, r.RequestDate, r.StudentID, s.FirstName, s.LastName, " &
-          "IFNULL( " &
-          "  MIN(d.DocumentName), " &
-          "  (SELECT doc.DocumentName FROM tbldocuments doc WHERE doc.Fee = r.TotalAmount OR (r.TotalAmount % doc.Fee = 0 AND doc.Fee > 0) LIMIT 1) " &
-          ") AS DocumentsRequested, " &
+        sql = "SELECT r.RequestNo, r.RequestDate, r.StudentID, " &
+          "s.FirstName, s.LastName, " &
+          "IFNULL(MIN(d.DocumentName), 'N/A') AS DocumentRequested, " &
           "r.TotalAmount, r.Status " &
           "FROM tblrequest r " &
-          "LEFT JOIN tblstudents s ON r.StudentID = s.StudentID " &
+          "JOIN tblstudents s ON r.StudentID = s.StudentID " &
           "LEFT JOIN tblrequestdetails rd ON r.RequestID = rd.RequestID " &
           "LEFT JOIN tbldocuments d ON rd.DocumentID = d.DocumentID "
 
+        ' Apply search filter if search term is provided
         If Not String.IsNullOrWhiteSpace(searchTerm) Then
             sql &= "WHERE r.RequestNo LIKE @search OR r.StudentID LIKE @search " &
                "OR s.FirstName LIKE @search OR s.LastName LIKE @search OR r.Status LIKE @search "
         End If
 
-        sql &= "GROUP BY r.RequestID, r.RequestNo, r.RequestDate, r.StudentID, s.FirstName, s.LastName, r.TotalAmount, r.Status " &
-           "ORDER BY r.RequestDate DESC, r.RequestNo DESC"
+        ' Append GROUP BY and ORDER BY once at the end
+        sql &= " GROUP BY r.RequestID, r.RequestNo, r.RequestDate, r.StudentID, s.FirstName, s.LastName, r.TotalAmount, r.Status " &
+           " ORDER BY r.RequestDate DESC, r.RequestNo DESC"
 
         cmd = New MySqlCommand(sql, cn)
 
@@ -44,11 +38,14 @@ Public Class frmRequestList
         End If
 
         dr = cmd.ExecuteReader()
-
         dgvReqDoc.Rows.Clear()
+
         While dr.Read()
             Dim formattedDate As String = Convert.ToDateTime(dr("RequestDate")).ToString("yyyy-MM-dd")
             Dim formattedTotal As String = Convert.ToDecimal(dr("TotalAmount")).ToString("N2")
+
+            Dim currentStatus As String = dr("Status").ToString()
+            If String.IsNullOrWhiteSpace(currentStatus) Then currentStatus = "Pending"
 
             dgvReqDoc.Rows.Add(
             dr("RequestNo").ToString(),
@@ -56,9 +53,9 @@ Public Class frmRequestList
             dr("StudentID").ToString(),
             dr("FirstName").ToString(),
             dr("LastName").ToString(),
-            If(IsDBNull(dr("DocumentsRequested")), "Unmapped Request", dr("DocumentsRequested").ToString()),
+            dr("DocumentRequested").ToString(),
             formattedTotal,
-            dr("Status").ToString()
+            currentStatus
         )
         End While
 
@@ -66,64 +63,33 @@ Public Class frmRequestList
         cn.Close()
     End Sub
 
-    ' Search box filter handler
+    ' Search functionality
     Private Sub txtSearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearch.TextChanged
-        LoadRequests(txtSearch.Text)
+        LoadRequests(txtSearch.Text.Trim())
     End Sub
 
-    ' View Details button logic
+    ' View Details Button Navigation
     Private Sub btnViewDetails_Click(sender As Object, e As EventArgs) Handles btnViewDetails.Click
-        OpenSelectedRequestDetails()
+        OpenSelectedDetails()
     End Sub
 
-    ' Double-clicking a grid row
+    ' Double-Click Row Navigation
     Private Sub dgvReqDoc_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvReqDoc.CellDoubleClick
         If e.RowIndex >= 0 Then
-            OpenSelectedRequestDetails()
+            OpenSelectedDetails()
         End If
     End Sub
 
-    Private Sub OpenSelectedRequestDetails()
-        If dgvReqDoc.CurrentRow Is Nothing OrElse dgvReqDoc.CurrentRow.IsNewRow Then
-            MsgBox("Please select a request from the list.", vbExclamation, "Request List")
-            Exit Sub
-        End If
+    Private Sub OpenSelectedDetails()
+        If dgvReqDoc.SelectedRows.Count > 0 Then
+            Dim reqNo As String = dgvReqDoc.SelectedRows(0).Cells(0).Value.ToString()
 
-        Dim selectedRequestNo As String = dgvReqDoc.CurrentRow.Cells(0).Value.ToString()
-
-        ' Pass selected RequestNo to frmRequestDetails and navigate
-        frmRequestDetails.SelectedRequestNo = selectedRequestNo
-        frmRequestDetails.Show()
-        Me.Hide()
-    End Sub
-
-    ' Navigation Menu Handlers
-    Private Sub btnMainMenu_Click(sender As Object, e As EventArgs) Handles btnMainMenu.Click
-        frmMainMenu.Show()
-        Me.Hide()
-    End Sub
-
-    Private Sub btnStudentManagement_Click(sender As Object, e As EventArgs) Handles btnStudentManagement.Click
-        frmStudentManagement.Show()
-        Me.Hide()
-    End Sub
-
-    Private Sub btnDocumentManagement_Click(sender As Object, e As EventArgs) Handles btnDocumentManagement.Click
-        frmDocumentManagement.Show()
-        Me.Hide()
-    End Sub
-
-    Private Sub btnDocumentRequests_Click(sender As Object, e As EventArgs) Handles btnDocumentRequests.Click
-        LoadRequests()
-    End Sub
-
-    Private Sub btnLogout_Click(sender As Object, e As EventArgs) Handles btnLogout.Click
-        If MsgBox("Are you sure you want to logout?", vbYesNo + vbQuestion, "Confirm Logout") = MsgBoxResult.Yes Then
-            CurrentUser.UserID = 0
-            CurrentUser.FullName = ""
-            CurrentUser.Role = ""
-            frmLogin.Show()
-            Me.Close()
+            Dim detailsForm As New frmRequestDetails()
+            detailsForm.SelectedRequestNo = reqNo
+            detailsForm.Show()
+            Me.Hide()
+        Else
+            MessageBox.Show("Please select a request from the list first.", "Select Request", MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
     End Sub
 
