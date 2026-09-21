@@ -5,7 +5,7 @@ Public Class frmNewRequest
 
     Private Sub frmNewRequest_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If CurrentUser.Role <> "Administrator" Then
-            btnUserManagement.Visible = False
+            btnReports.Visible = False
         End If
 
         LoadDocumentsCombo()
@@ -329,5 +329,10 @@ Public Class frmNewRequest
             frmLogin.Show()
             Me.Close()
         End If
+    End Sub
+
+    Private Sub btnReqList_Click(sender As Object, e As EventArgs) Handles btnReqList.Click
+        frmRequestList.Show()
+        Me.Hide()
     End Sub
 End Class

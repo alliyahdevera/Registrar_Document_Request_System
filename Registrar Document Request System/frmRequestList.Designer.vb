@@ -44,8 +44,9 @@ Partial Class frmRequestList
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.btnUserManagement = New System.Windows.Forms.Button()
-        Me.btnLogout = New System.Windows.Forms.Button()
         Me.btnReports = New System.Windows.Forms.Button()
+        Me.btnReqList = New System.Windows.Forms.Button()
+        Me.btnLogout = New System.Windows.Forms.Button()
         Me.btnDocumentRequests = New System.Windows.Forms.Button()
         Me.btnDocumentManagement = New System.Windows.Forms.Button()
         Me.btnStudentManagement = New System.Windows.Forms.Button()
@@ -230,8 +231,9 @@ Partial Class frmRequestList
         '
         Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
         Me.Panel1.Controls.Add(Me.btnUserManagement)
-        Me.Panel1.Controls.Add(Me.btnLogout)
         Me.Panel1.Controls.Add(Me.btnReports)
+        Me.Panel1.Controls.Add(Me.btnReqList)
+        Me.Panel1.Controls.Add(Me.btnLogout)
         Me.Panel1.Controls.Add(Me.btnDocumentRequests)
         Me.Panel1.Controls.Add(Me.btnDocumentManagement)
         Me.Panel1.Controls.Add(Me.btnStudentManagement)
@@ -254,12 +256,44 @@ Partial Class frmRequestList
         Me.btnUserManagement.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnUserManagement.ForeColor = System.Drawing.Color.White
         Me.btnUserManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnUserManagement.Location = New System.Drawing.Point(15, 345)
+        Me.btnUserManagement.Location = New System.Drawing.Point(15, 394)
         Me.btnUserManagement.Name = "btnUserManagement"
         Me.btnUserManagement.Size = New System.Drawing.Size(220, 49)
-        Me.btnUserManagement.TabIndex = 11
+        Me.btnUserManagement.TabIndex = 15
         Me.btnUserManagement.Text = " User Management"
         Me.btnUserManagement.UseVisualStyleBackColor = False
+        '
+        'btnReports
+        '
+        Me.btnReports.BackColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
+        Me.btnReports.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnReports.FlatAppearance.BorderSize = 0
+        Me.btnReports.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnReports.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnReports.ForeColor = System.Drawing.Color.White
+        Me.btnReports.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnReports.Location = New System.Drawing.Point(15, 345)
+        Me.btnReports.Name = "btnReports"
+        Me.btnReports.Size = New System.Drawing.Size(220, 49)
+        Me.btnReports.TabIndex = 14
+        Me.btnReports.Text = "Reports"
+        Me.btnReports.UseVisualStyleBackColor = False
+        '
+        'btnReqList
+        '
+        Me.btnReqList.BackColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
+        Me.btnReqList.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnReqList.FlatAppearance.BorderSize = 0
+        Me.btnReqList.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnReqList.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnReqList.ForeColor = System.Drawing.Color.White
+        Me.btnReqList.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnReqList.Location = New System.Drawing.Point(15, 296)
+        Me.btnReqList.Name = "btnReqList"
+        Me.btnReqList.Size = New System.Drawing.Size(220, 49)
+        Me.btnReqList.TabIndex = 13
+        Me.btnReqList.Text = "Request List"
+        Me.btnReqList.UseVisualStyleBackColor = False
         '
         'btnLogout
         '
@@ -276,22 +310,6 @@ Partial Class frmRequestList
         Me.btnLogout.TabIndex = 10
         Me.btnLogout.Text = "Logout"
         Me.btnLogout.UseVisualStyleBackColor = False
-        '
-        'btnReports
-        '
-        Me.btnReports.BackColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
-        Me.btnReports.Dock = System.Windows.Forms.DockStyle.Top
-        Me.btnReports.FlatAppearance.BorderSize = 0
-        Me.btnReports.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnReports.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnReports.ForeColor = System.Drawing.Color.White
-        Me.btnReports.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnReports.Location = New System.Drawing.Point(15, 296)
-        Me.btnReports.Name = "btnReports"
-        Me.btnReports.Size = New System.Drawing.Size(220, 49)
-        Me.btnReports.TabIndex = 8
-        Me.btnReports.Text = "Reports"
-        Me.btnReports.UseVisualStyleBackColor = False
         '
         'btnDocumentRequests
         '
@@ -461,9 +479,7 @@ Partial Class frmRequestList
     Friend WithEvents Label3 As Label
     Friend WithEvents Label1 As Label
     Friend WithEvents Panel1 As Panel
-    Friend WithEvents btnUserManagement As Button
     Friend WithEvents btnLogout As Button
-    Friend WithEvents btnReports As Button
     Friend WithEvents btnDocumentRequests As Button
     Friend WithEvents btnDocumentManagement As Button
     Friend WithEvents btnStudentManagement As Button
@@ -482,4 +498,7 @@ Partial Class frmRequestList
     Friend WithEvents Documents As DataGridViewTextBoxColumn
     Friend WithEvents TotalAmount As DataGridViewTextBoxColumn
     Friend WithEvents Status As DataGridViewTextBoxColumn
+    Friend WithEvents btnUserManagement As Button
+    Friend WithEvents btnReports As Button
+    Friend WithEvents btnReqList As Button
 End Class

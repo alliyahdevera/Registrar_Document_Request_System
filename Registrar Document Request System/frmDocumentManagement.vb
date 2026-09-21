@@ -208,4 +208,9 @@ Public Class frmDocumentManagement
         dr.Close()
         cn.Close()
     End Sub
+
+    Private Sub btnReqList_Click(sender As Object, e As EventArgs) Handles btnReqList.Click
+        frmRequestList.Show()
+        Me.Hide()
+    End Sub
 End Class

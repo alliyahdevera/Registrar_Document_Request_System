@@ -62,8 +62,6 @@ Public Class frmRequestList
         dr.Close()
         cn.Close()
     End Sub
-
-    ' Search functionality
     Private Sub txtSearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearch.TextChanged
         LoadRequests(txtSearch.Text.Trim())
     End Sub
@@ -93,4 +91,23 @@ Public Class frmRequestList
         End If
     End Sub
 
+    Private Sub btnMainMenu_Click(sender As Object, e As EventArgs) Handles btnMainMenu.Click
+        frmMainMenu.Show()
+        Me.Hide()
+    End Sub
+
+    Private Sub btnStudentManagement_Click(sender As Object, e As EventArgs) Handles btnStudentManagement.Click
+        frmStudentManagement.Show()
+        Me.Hide()
+    End Sub
+
+    Private Sub btnDocumentManagement_Click(sender As Object, e As EventArgs) Handles btnDocumentManagement.Click
+        frmDocumentManagement.Show()
+        Me.Hide()
+    End Sub
+
+    Private Sub btnDocumentRequests_Click(sender As Object, e As EventArgs) Handles btnDocumentRequests.Click
+        frmNewRequest.Show()
+        Me.Hide()
+    End Sub
 End Class

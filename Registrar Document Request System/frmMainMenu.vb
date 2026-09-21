@@ -4,7 +4,7 @@ Public Class frmMainMenu
 
     Private Sub frmMainMenu_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If CurrentUser.Role <> "Administrator" Then
-            btnUserManagement.Visible = False
+            btnReport.Visible = False
         End If
         TotalStudents()
         TotalRequest()
@@ -114,7 +114,7 @@ Public Class frmMainMenu
         Me.Hide()
     End Sub
 
-    Private Sub btnReports_Click(sender As Object, e As EventArgs) Handles btnReports.Click
+    Private Sub btnReqList_Click(sender As Object, e As EventArgs) Handles btnReqList.Click
         frmRequestList.Show()
         Me.Hide()
     End Sub
