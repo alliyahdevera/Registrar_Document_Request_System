@@ -10,22 +10,11 @@ Public Class frmRequestDetails
         dgvReqDoc.SelectionMode = DataGridViewSelectionMode.FullRowSelect
         dgvReqDoc.MultiSelect = False
 
-        SetFieldsReadOnly()
 
         If Not String.IsNullOrEmpty(SelectedRequestNo) Then
             LoadRequestHeaderAndStudent()
             LoadRequestedDocuments()
         End If
-    End Sub
-
-    Private Sub SetFieldsReadOnly()
-        txtRequestNo.ReadOnly = True
-        txtRequestDate.ReadOnly = True
-        txtStudentID.ReadOnly = True
-        txtStudentName.ReadOnly = True
-        txtCourse.ReadOnly = True
-        txtYearLevel.ReadOnly = True
-        txtTotalAmount.ReadOnly = True
     End Sub
 
     ' Loads student and request header details
