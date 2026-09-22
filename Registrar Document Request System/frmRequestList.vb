@@ -192,4 +192,8 @@ Public Class frmRequestList
         End If
     End Sub
 
+    Private Sub btnViewDetails_Click(sender As Object, e As EventArgs) Handles btnViewDetails.Click
+        frmRequestDetails.Show()
+        Me.Hide()
+    End Sub
 End Class

@@ -538,6 +538,9 @@ Partial Class frmRequestList
         Me.Label2.TabIndex = 76
         Me.Label2.Text = "Name:"
         '
+        'Timer1
+        '
+        '
         'frmRequestList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
