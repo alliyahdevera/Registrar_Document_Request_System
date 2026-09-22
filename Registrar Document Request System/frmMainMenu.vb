@@ -21,6 +21,9 @@ Public Class frmMainMenu
         TotalRequest()
         PendingRequest()
         CompletedRequest()
+
+        ' Load recent paid requests grid
+        LoadRecentRequests()
     End Sub
 
     ' Real-time date/time clock event
@@ -48,7 +51,7 @@ Public Class frmMainMenu
 
     Private Sub TotalRequest()
         Call connection()
-        sql = "SELECT COUNT(RequestID) FROM tblrequest"
+        sql = "SELECT COUNT(RequestID) FROM tblrequest WHERE PaymentStatus = 'Paid'"
         cmd = New MySqlCommand(sql, cn)
         dr = cmd.ExecuteReader()
 
@@ -62,7 +65,7 @@ Public Class frmMainMenu
 
     Private Sub PendingRequest()
         Call connection()
-        sql = "SELECT COUNT(RequestID) FROM tblrequest WHERE Status = 'Pending'"
+        sql = "SELECT COUNT(RequestID) FROM tblrequest WHERE Status = 'Pending' AND PaymentStatus = 'Paid'"
         cmd = New MySqlCommand(sql, cn)
         dr = cmd.ExecuteReader()
 
@@ -76,7 +79,7 @@ Public Class frmMainMenu
 
     Private Sub CompletedRequest()
         Call connection()
-        sql = "SELECT COUNT(RequestID) FROM tblrequest WHERE Status = 'Released' OR Status = 'Completed'"
+        sql = "SELECT COUNT(RequestID) FROM tblrequest WHERE (Status = 'Released' OR Status = 'Completed') AND PaymentStatus = 'Paid'"
         cmd = New MySqlCommand(sql, cn)
         dr = cmd.ExecuteReader()
 
@@ -86,6 +89,50 @@ Public Class frmMainMenu
 
         dr.Close()
         cn.Close()
+    End Sub
+
+    ''' <summary>
+    ''' Populates dgvRecentReqDoc with recent document requests that are Paid.
+    ''' </summary>
+    Public Sub LoadRecentRequests()
+        Try
+            Call connection()
+
+            sql = "SELECT r.RequestNo, " &
+                  "CONCAT(s.FirstName, ' ', s.LastName) AS StudentName, " &
+                  "GROUP_CONCAT(DISTINCT d.DocumentName SEPARATOR ', ') AS DocumentNames, " &
+                  "r.Status, r.RequestDate " &
+                  "FROM tblrequest r " &
+                  "LEFT JOIN tblstudents s ON r.StudentID = s.StudentID " &
+                  "LEFT JOIN tblrequestdetails rd ON r.RequestID = rd.RequestID " &
+                  "LEFT JOIN tbldocuments d ON CAST(rd.DocumentID AS CHAR) = CAST(d.DocumentID AS CHAR) " &
+                  "WHERE r.PaymentStatus = 'Paid' " &
+                  "GROUP BY r.RequestID, r.RequestNo, StudentName, r.Status, r.RequestDate " &
+                  "ORDER BY r.RequestID DESC " &
+                  "LIMIT 10"
+
+            cmd = New MySqlCommand(sql, cn)
+            dr = cmd.ExecuteReader()
+
+            dgvrecentreqdoc.Rows.Clear()
+            While dr.Read()
+                Dim reqDateStr As String = If(IsDBNull(dr("RequestDate")), "-", Convert.ToDateTime(dr("RequestDate")).ToString("yyyy-MM-dd"))
+
+                dgvrecentreqdoc.Rows.Add(
+                    dr("RequestNo").ToString(),
+                    If(IsDBNull(dr("StudentName")), "-", dr("StudentName").ToString()),
+                    If(IsDBNull(dr("DocumentNames")), "-", dr("DocumentNames").ToString()),
+                    If(IsDBNull(dr("Status")) OrElse String.IsNullOrWhiteSpace(dr("Status").ToString()), "-", dr("Status").ToString()),
+                    reqDateStr
+                )
+            End While
+
+            dr.Close()
+            cn.Close()
+        Catch ex As Exception
+            If cn.State = ConnectionState.Open Then cn.Close()
+            MsgBox("Error loading dashboard requests: " & ex.Message, vbCritical, "Error")
+        End Try
     End Sub
 
     ' Navigation Handlers
