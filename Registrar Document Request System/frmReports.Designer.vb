@@ -22,6 +22,7 @@ Partial Class frmReports
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmReports))
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.btnUserManagement = New System.Windows.Forms.Button()
@@ -48,7 +49,7 @@ Partial Class frmReports
         Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
         Me.DateTimePicker2 = New System.Windows.Forms.DateTimePicker()
         Me.Label6 = New System.Windows.Forms.Label()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnGenerateReport = New System.Windows.Forms.Button()
         Me.Panel7 = New System.Windows.Forms.Panel()
         Me.Panel16 = New System.Windows.Forms.Panel()
         Me.Label11 = New System.Windows.Forms.Label()
@@ -72,7 +73,8 @@ Partial Class frmReports
         Me.lblname = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.lbltotalrecords = New System.Windows.Forms.Label()
-        Me.Button2 = New System.Windows.Forms.Button()
+        Me.btnExportExcel = New System.Windows.Forms.Button()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         CType(Me.Logo, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -394,15 +396,15 @@ Partial Class frmReports
         Me.Label6.TabIndex = 77
         Me.Label6.Text = "To"
         '
-        'Button1
+        'btnGenerateReport
         '
-        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button1.Location = New System.Drawing.Point(904, 139)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(128, 27)
-        Me.Button1.TabIndex = 79
-        Me.Button1.Text = "Generate Report"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.btnGenerateReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnGenerateReport.Location = New System.Drawing.Point(904, 139)
+        Me.btnGenerateReport.Name = "btnGenerateReport"
+        Me.btnGenerateReport.Size = New System.Drawing.Size(128, 27)
+        Me.btnGenerateReport.TabIndex = 79
+        Me.btnGenerateReport.Text = "Generate Report"
+        Me.btnGenerateReport.UseVisualStyleBackColor = True
         '
         'Panel7
         '
@@ -599,22 +601,25 @@ Partial Class frmReports
         Me.lbltotalrecords.TabIndex = 88
         Me.lbltotalrecords.Text = "-"
         '
-        'Button2
+        'btnExportExcel
         '
-        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button2.Location = New System.Drawing.Point(1270, 141)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(128, 27)
-        Me.Button2.TabIndex = 89
-        Me.Button2.Text = "Export to Excel"
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.btnExportExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnExportExcel.Location = New System.Drawing.Point(1270, 141)
+        Me.btnExportExcel.Name = "btnExportExcel"
+        Me.btnExportExcel.Size = New System.Drawing.Size(128, 27)
+        Me.btnExportExcel.TabIndex = 89
+        Me.btnExportExcel.Text = "Export to Excel"
+        Me.btnExportExcel.UseVisualStyleBackColor = True
+        '
+        'Timer1
+        '
         '
         'frmReports
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1424, 836)
-        Me.Controls.Add(Me.Button2)
+        Me.Controls.Add(Me.btnExportExcel)
         Me.Controls.Add(Me.lbltotalrecords)
         Me.Controls.Add(Me.lbldatetime)
         Me.Controls.Add(Me.Label19)
@@ -624,7 +629,7 @@ Partial Class frmReports
         Me.Controls.Add(Me.Label16)
         Me.Controls.Add(Me.Label7)
         Me.Controls.Add(Me.Panel7)
-        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.btnGenerateReport)
         Me.Controls.Add(Me.DateTimePicker2)
         Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.DateTimePicker1)
@@ -677,7 +682,7 @@ Partial Class frmReports
     Friend WithEvents DateTimePicker1 As DateTimePicker
     Friend WithEvents DateTimePicker2 As DateTimePicker
     Friend WithEvents Label6 As Label
-    Friend WithEvents Button1 As Button
+    Friend WithEvents btnGenerateReport As Button
     Friend WithEvents Panel7 As Panel
     Friend WithEvents Panel16 As Panel
     Friend WithEvents Label11 As Label
@@ -701,5 +706,6 @@ Partial Class frmReports
     Friend WithEvents lblname As Label
     Friend WithEvents Label16 As Label
     Friend WithEvents lbltotalrecords As Label
-    Friend WithEvents Button2 As Button
+    Friend WithEvents btnExportExcel As Button
+    Friend WithEvents Timer1 As Timer
 End Class

@@ -175,4 +175,13 @@ Public Class frmMainMenu
         frmReports.Show()
         Me.Hide()
     End Sub
+
+    Private Sub btnUserManagement_Click(sender As Object, e As EventArgs) Handles btnUserManagement.Click
+        frmUserManagement.Show()
+        Me.Hide()
+    End Sub
+
+    Private Sub pnlreqstatus_Paint(sender As Object, e As PaintEventArgs) Handles pnlreqstatus.Paint
+
+    End Sub
 End Class

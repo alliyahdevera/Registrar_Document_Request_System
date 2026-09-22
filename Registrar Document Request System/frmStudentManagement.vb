@@ -1,28 +1,51 @@
 ﻿Imports MySql.Data.MySqlClient
-
 Public Class frmStudentManagement
 
     Private Sub frmStudentManagement_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ' Load footer details from CurrentUser global class
+
         lblname.Text = CurrentUser.FullName
         lblposition.Text = CurrentUser.Role
 
-        ' Initialize and start real-time timer
+
         Timer1.Interval = 1000
         Timer1.Start()
         UpdateFooterDateTime()
 
-        ' Load data grid
-        LoadStudents()
-    End Sub
 
-    ' Real-time date/time clock event
+        LoadStudents()
+
+
+        SetAddMode()
+    End Sub
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         UpdateFooterDateTime()
     End Sub
-
     Private Sub UpdateFooterDateTime()
         lbldatetime.Text = DateTime.Now.ToString("dddd, MMMM d, yyyy h:mm:ss tt")
+    End Sub
+
+    Private Sub SetAddMode()
+        txtStudentID.ReadOnly = False
+        txtLRN.ReadOnly = False
+        txtStudentID.BackColor = Color.White
+        txtLRN.BackColor = Color.White
+    End Sub
+    Private Sub SetEditMode()
+        txtStudentID.ReadOnly = True
+        txtLRN.ReadOnly = True
+        txtStudentID.BackColor = Color.Gainsboro
+        txtLRN.BackColor = Color.Gainsboro
+    End Sub
+    Private Sub ClearFields()
+        txtStudentID.Clear()
+        txtLRN.Clear()
+        txtLastName.Clear()
+        txtFirstName.Clear()
+        txtMiddleName.Clear()
+        cboCourse.Text = ""
+        cboYearLevel.Text = ""
+        txtSection.Clear()
+        txtContactNo.Clear()
     End Sub
 
     Private Sub LoadStudents()
@@ -108,10 +131,18 @@ Public Class frmStudentManagement
             cboYearLevel.Text = dgvStudents.Rows(e.RowIndex).Cells(6).Value.ToString()
             txtSection.Text = dgvStudents.Rows(e.RowIndex).Cells(7).Value.ToString()
             txtContactNo.Text = dgvStudents.Rows(e.RowIndex).Cells(8).Value.ToString()
+
+
+            SetEditMode()
         End If
     End Sub
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
+        If txtStudentID.ReadOnly Then
+            MsgBox("Cannot add: a record is currently selected for editing. Clear the form first.", vbExclamation, "Student Management")
+            Exit Sub
+        End If
+
         If Not IsValidInput() Then Exit Sub
         If IsStudentIDExists() Then
             MsgBox("A student with that Student ID already exists.", vbExclamation, "Student Management")
@@ -134,10 +165,19 @@ Public Class frmStudentManagement
         cmd.ExecuteNonQuery()
         cn.Close()
 
+        MsgBox("Student added successfully!", vbInformation, "Success")
+
         LoadStudents()
+        ClearFields()
+        SetAddMode()
     End Sub
 
     Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
+        If Not txtStudentID.ReadOnly Then
+            MsgBox("Please select a student from the list to edit.", vbExclamation, "Student Management")
+            Exit Sub
+        End If
+
         If Not IsValidInput() Then Exit Sub
 
         Call connection()
@@ -162,6 +202,8 @@ Public Class frmStudentManagement
         cn.Close()
 
         LoadStudents()
+        ClearFields()
+        SetAddMode()
     End Sub
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
@@ -187,6 +229,8 @@ Public Class frmStudentManagement
         cn.Close()
 
         LoadStudents()
+        ClearFields()
+        SetAddMode()
     End Sub
 
     Private Sub txtSearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearch.TextChanged
@@ -213,8 +257,6 @@ Public Class frmStudentManagement
         dr.Close()
         cn.Close()
     End Sub
-
-    ' Navigation Handlers
     Private Sub btnMainMenu_Click(sender As Object, e As EventArgs) Handles btnMainMenu.Click
         frmMainMenu.Show()
         Me.Hide()
