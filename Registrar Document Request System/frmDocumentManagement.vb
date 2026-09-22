@@ -239,4 +239,9 @@ Public Class frmDocumentManagement
         End If
     End Sub
 
+    Private Sub btnReport_Click(sender As Object, e As EventArgs) Handles btnReport.Click
+        frmReports.Show()
+        Me.Hide()
+
+    End Sub
 End Class

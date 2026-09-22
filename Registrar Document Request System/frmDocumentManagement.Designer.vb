@@ -165,10 +165,10 @@ Partial Class frmDocumentManagement
         '
         'txtStatus
         '
+        Me.txtStatus.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtStatus.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtStatus.Location = New System.Drawing.Point(541, 96)
         Me.txtStatus.Name = "txtStatus"
-        Me.txtStatus.ReadOnly = True
         Me.txtStatus.Size = New System.Drawing.Size(229, 27)
         Me.txtStatus.TabIndex = 40
         '
@@ -184,10 +184,10 @@ Partial Class frmDocumentManagement
         '
         'txtFee
         '
+        Me.txtFee.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtFee.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtFee.Location = New System.Drawing.Point(541, 55)
         Me.txtFee.Name = "txtFee"
-        Me.txtFee.ReadOnly = True
         Me.txtFee.Size = New System.Drawing.Size(229, 27)
         Me.txtFee.TabIndex = 38
         '
@@ -203,10 +203,10 @@ Partial Class frmDocumentManagement
         '
         'txtDescription
         '
+        Me.txtDescription.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtDescription.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtDescription.Location = New System.Drawing.Point(140, 138)
         Me.txtDescription.Name = "txtDescription"
-        Me.txtDescription.ReadOnly = True
         Me.txtDescription.Size = New System.Drawing.Size(284, 27)
         Me.txtDescription.TabIndex = 36
         '
@@ -222,10 +222,10 @@ Partial Class frmDocumentManagement
         '
         'txtName
         '
+        Me.txtName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtName.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtName.Location = New System.Drawing.Point(140, 96)
         Me.txtName.Name = "txtName"
-        Me.txtName.ReadOnly = True
         Me.txtName.Size = New System.Drawing.Size(284, 27)
         Me.txtName.TabIndex = 34
         '
@@ -241,10 +241,10 @@ Partial Class frmDocumentManagement
         '
         'txtDocumentID
         '
+        Me.txtDocumentID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtDocumentID.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtDocumentID.Location = New System.Drawing.Point(140, 54)
         Me.txtDocumentID.Name = "txtDocumentID"
-        Me.txtDocumentID.ReadOnly = True
         Me.txtDocumentID.Size = New System.Drawing.Size(284, 27)
         Me.txtDocumentID.TabIndex = 32
         '
@@ -306,7 +306,7 @@ Partial Class frmDocumentManagement
         Me.Panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel6.Controls.Add(Me.PictureBox1)
         Me.Panel6.Controls.Add(Me.txtsearch)
-        Me.Panel6.Location = New System.Drawing.Point(456, 293)
+        Me.Panel6.Location = New System.Drawing.Point(596, 290)
         Me.Panel6.Name = "Panel6"
         Me.Panel6.Size = New System.Drawing.Size(263, 26)
         Me.Panel6.TabIndex = 62
@@ -334,11 +334,11 @@ Partial Class frmDocumentManagement
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Segoe UI Semibold", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(277, 296)
+        Me.Label2.Location = New System.Drawing.Point(277, 292)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(170, 20)
+        Me.Label2.Size = New System.Drawing.Size(309, 20)
         Me.Label2.TabIndex = 61
-        Me.Label2.Text = "Search by Document ID"
+        Me.Label2.Text = "Search by Document ID or Document Name"
         '
         'Label8
         '
@@ -368,7 +368,7 @@ Partial Class frmDocumentManagement
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Left
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(250, 833)
+        Me.Panel1.Size = New System.Drawing.Size(250, 836)
         Me.Panel1.TabIndex = 63
         '
         'btnUserManagement
@@ -428,7 +428,7 @@ Partial Class frmDocumentManagement
         Me.btnLogout.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnLogout.ForeColor = System.Drawing.Color.White
         Me.btnLogout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnLogout.Location = New System.Drawing.Point(15, 784)
+        Me.btnLogout.Location = New System.Drawing.Point(15, 787)
         Me.btnLogout.Name = "btnLogout"
         Me.btnLogout.Size = New System.Drawing.Size(220, 49)
         Me.btnLogout.TabIndex = 10
@@ -505,7 +505,7 @@ Partial Class frmDocumentManagement
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Right
         Me.Panel4.Location = New System.Drawing.Point(235, 100)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(15, 733)
+        Me.Panel4.Size = New System.Drawing.Size(15, 736)
         Me.Panel4.TabIndex = 2
         '
         'Panel3
@@ -514,7 +514,7 @@ Partial Class frmDocumentManagement
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Left
         Me.Panel3.Location = New System.Drawing.Point(0, 100)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(15, 733)
+        Me.Panel3.Size = New System.Drawing.Size(15, 736)
         Me.Panel3.TabIndex = 1
         '
         'Panel2
@@ -633,11 +633,14 @@ Partial Class frmDocumentManagement
         Me.Label15.TabIndex = 64
         Me.Label15.Text = "Name:"
         '
+        'Timer1
+        '
+        '
         'frmDocumentManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1424, 833)
+        Me.ClientSize = New System.Drawing.Size(1424, 836)
         Me.Controls.Add(Me.lbldatetime)
         Me.Controls.Add(Me.Label19)
         Me.Controls.Add(Me.lblposition)

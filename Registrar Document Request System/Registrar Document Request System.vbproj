@@ -149,6 +149,12 @@
     <Compile Include="frmNewRequest.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmReports.Designer.vb">
+      <DependentUpon>frmReports.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmReports.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmRequestDetails.Designer.vb">
       <DependentUpon>frmRequestDetails.vb</DependentUpon>
     </Compile>
@@ -165,6 +171,12 @@
       <DependentUpon>frmStudentManagement.vb</DependentUpon>
     </Compile>
     <Compile Include="frmStudentManagement.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmUserManagement.Designer.vb">
+      <DependentUpon>frmUserManagement.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmUserManagement.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -197,6 +209,9 @@
     <EmbeddedResource Include="frmNewRequest.resx">
       <DependentUpon>frmNewRequest.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmReports.resx">
+      <DependentUpon>frmReports.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmRequestDetails.resx">
       <DependentUpon>frmRequestDetails.vb</DependentUpon>
     </EmbeddedResource>
@@ -205,6 +220,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmStudentManagement.resx">
       <DependentUpon>frmStudentManagement.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmUserManagement.resx">
+      <DependentUpon>frmUserManagement.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>

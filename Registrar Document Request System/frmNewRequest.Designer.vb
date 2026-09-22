@@ -152,7 +152,7 @@ Partial Class frmNewRequest
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Left
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(250, 839)
+        Me.Panel1.Size = New System.Drawing.Size(250, 836)
         Me.Panel1.TabIndex = 56
         '
         'btnUserManagement
@@ -196,7 +196,7 @@ Partial Class frmNewRequest
         Me.btnLogout.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnLogout.ForeColor = System.Drawing.Color.White
         Me.btnLogout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnLogout.Location = New System.Drawing.Point(15, 790)
+        Me.btnLogout.Location = New System.Drawing.Point(15, 787)
         Me.btnLogout.Name = "btnLogout"
         Me.btnLogout.Size = New System.Drawing.Size(220, 49)
         Me.btnLogout.TabIndex = 10
@@ -289,7 +289,7 @@ Partial Class frmNewRequest
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Right
         Me.Panel4.Location = New System.Drawing.Point(235, 100)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(15, 739)
+        Me.Panel4.Size = New System.Drawing.Size(15, 736)
         Me.Panel4.TabIndex = 2
         '
         'Panel3
@@ -298,7 +298,7 @@ Partial Class frmNewRequest
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Left
         Me.Panel3.Location = New System.Drawing.Point(0, 100)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(15, 739)
+        Me.Panel3.Size = New System.Drawing.Size(15, 736)
         Me.Panel3.TabIndex = 1
         '
         'Panel2
@@ -1152,7 +1152,7 @@ Partial Class frmNewRequest
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1424, 839)
+        Me.ClientSize = New System.Drawing.Size(1424, 836)
         Me.Controls.Add(Me.lbldatetime)
         Me.Controls.Add(Me.Label31)
         Me.Controls.Add(Me.lblposition)

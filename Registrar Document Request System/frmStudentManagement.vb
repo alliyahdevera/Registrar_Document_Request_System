@@ -245,4 +245,9 @@ Public Class frmStudentManagement
         End If
     End Sub
 
+    Private Sub btnReports_Click(sender As Object, e As EventArgs) Handles btnReports.Click
+        frmReports.Show()
+        Me.Hide()
+
+    End Sub
 End Class
