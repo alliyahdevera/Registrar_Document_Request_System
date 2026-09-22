@@ -309,6 +309,11 @@ Public Class frmNewRequest
             MsgBox("Document request saved successfully!" & vbCrLf & "Request No: " & txtRequestNo.Text, vbInformation, "Success")
             ClearForm()
 
+            ' Automatically refresh and navigate to the Request List screen
+            frmRequestList.LoadRequests()
+            frmRequestList.Show()
+            Me.Hide()
+
         Catch ex As Exception
             MsgBox("Failed to save request: " & ex.Message, vbCritical, "Error")
         Finally
