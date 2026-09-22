@@ -208,4 +208,9 @@ Public Class frmStudentManagement
         frmRequestList.Show()
         Me.Hide()
     End Sub
+
+    Private Sub btnDocumentRequests_Click(sender As Object, e As EventArgs) Handles btnDocumentRequests.Click
+        frmNewRequest.Show()
+        Me.Hide()
+    End Sub
 End Class

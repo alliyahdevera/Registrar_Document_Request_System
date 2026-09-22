@@ -22,6 +22,7 @@ Partial Class frmRequestList
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmRequestList))
         Me.btnViewDetails = New System.Windows.Forms.Button()
         Me.Panel7 = New System.Windows.Forms.Panel()
@@ -66,6 +67,7 @@ Partial Class frmRequestList
         Me.Label17 = New System.Windows.Forms.Label()
         Me.lblname = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.Panel7.SuspendLayout()
         Me.Panel16.SuspendLayout()
         CType(Me.dgvReqDoc, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -615,4 +617,5 @@ Partial Class frmRequestList
     Friend WithEvents Label17 As Label
     Friend WithEvents lblname As Label
     Friend WithEvents Label2 As Label
+    Friend WithEvents Timer1 As Timer
 End Class
