@@ -1,13 +1,31 @@
-﻿Imports System.Data.SqlClient
-Imports System.Windows.Forms.VisualStyles.VisualStyleElement
-Imports MySql.Data.MySqlClient
+﻿Imports MySql.Data.MySqlClient
 
 Public Class frmDocumentManagement
+
     Private Sub frmDocumentManagement_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If CurrentUser.Role <> "Administrator" Then
             btnUserManagement.Visible = False
         End If
+
+        ' Set bottom footer values
+        lblname.Text = CurrentUser.FullName
+        lblposition.Text = CurrentUser.Role
+
+        ' Initialize and start real-time clock timer
+        Timer1.Interval = 1000
+        Timer1.Start()
+        UpdateFooterDateTime()
+
         LoadDocuments()
+    End Sub
+
+    ' Real-time date/time clock event
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        UpdateFooterDateTime()
+    End Sub
+
+    Private Sub UpdateFooterDateTime()
+        lbldatetime.Text = DateTime.Now.ToString("dddd, MMMM d, yyyy h:mm:ss tt")
     End Sub
 
     Private Sub LoadDocuments()
@@ -55,6 +73,7 @@ Public Class frmDocumentManagement
         IsDocumentNameExists = Convert.ToInt32(cmd.ExecuteScalar()) > 0
         cn.Close()
     End Function
+
     Private Function IsValidInput(Optional isEditMode As Boolean = False) As Boolean
         If String.IsNullOrWhiteSpace(txtDocumentID.Text) Then
             MsgBox("Fill in Document ID", vbExclamation, "Document Management")
@@ -100,7 +119,6 @@ Public Class frmDocumentManagement
     End Sub
 
     Private Sub btnAddDocument_Click(sender As Object, e As EventArgs) Handles btnAddDocument.Click
-        ' Pass False for isEditMode (default)
         If Not IsValidInput(isEditMode:=False) Then Exit Sub
 
         If IsDocumentIDExists() Then
@@ -169,30 +187,11 @@ Public Class frmDocumentManagement
         LoadDocuments()
     End Sub
 
-    Private Sub btnMainMenu_Click(sender As Object, e As EventArgs) Handles btnMainMenu.Click
-        frmMainMenu.Show()
-        Me.Hide()
-    End Sub
-
-    Private Sub btnStudentManagement_Click_1(sender As Object, e As EventArgs) Handles btnStudentManagement.Click
-        frmStudentManagement.Show()
-        Me.Hide()
-    End Sub
-
-    Private Sub btnLogout_Click_1(sender As Object, e As EventArgs) Handles btnLogout.Click
-        If MsgBox("Are you sure you want to logout?", vbYesNo + vbQuestion, "Confirm Logout") = MsgBoxResult.Yes Then
-            CurrentUser.UserID = 0
-            CurrentUser.FullName = ""
-            CurrentUser.Role = ""
-            frmLogin.Show()
-            Me.Close()
-        End If
-    End Sub
-
     Private Sub txtsearch_TextChanged(sender As Object, e As EventArgs) Handles txtsearch.TextChanged
         Call connection()
-        sql = "SELECT * FROM tbldocuments WHERE DocumentID LIKE '%" & txtsearch.Text & "%' OR DocumentName LIKE '%" & txtsearch.Text & "%'"
+        sql = "SELECT * FROM tbldocuments WHERE DocumentID LIKE @search OR DocumentName LIKE @search"
         cmd = New MySqlCommand(sql, cn)
+        cmd.Parameters.AddWithValue("@search", "%" & txtsearch.Text.Trim() & "%")
         dr = cmd.ExecuteReader()
 
         dgvDocument.Rows.Clear()
@@ -209,6 +208,17 @@ Public Class frmDocumentManagement
         cn.Close()
     End Sub
 
+    ' Navigation Handlers
+    Private Sub btnMainMenu_Click(sender As Object, e As EventArgs) Handles btnMainMenu.Click
+        frmMainMenu.Show()
+        Me.Hide()
+    End Sub
+
+    Private Sub btnStudentManagement_Click(sender As Object, e As EventArgs) Handles btnStudentManagement.Click
+        frmStudentManagement.Show()
+        Me.Hide()
+    End Sub
+
     Private Sub btnReqList_Click(sender As Object, e As EventArgs) Handles btnReqList.Click
         frmRequestList.Show()
         Me.Hide()
@@ -218,4 +228,15 @@ Public Class frmDocumentManagement
         frmNewRequest.Show()
         Me.Hide()
     End Sub
+
+    Private Sub btnLogout_Click(sender As Object, e As EventArgs) Handles btnLogout.Click
+        If MsgBox("Are you sure you want to logout?", vbYesNo + vbQuestion, "Confirm Logout") = MsgBoxResult.Yes Then
+            CurrentUser.UserID = 0
+            CurrentUser.FullName = ""
+            CurrentUser.Role = ""
+            frmLogin.Show()
+            Me.Close()
+        End If
+    End Sub
+
 End Class

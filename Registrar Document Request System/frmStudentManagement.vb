@@ -1,6 +1,30 @@
 ﻿Imports MySql.Data.MySqlClient
 
 Public Class frmStudentManagement
+
+    Private Sub frmStudentManagement_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ' Load footer details from CurrentUser global class
+        lblname.Text = CurrentUser.FullName
+        lblposition.Text = CurrentUser.Role
+
+        ' Initialize and start real-time timer
+        Timer1.Interval = 1000
+        Timer1.Start()
+        UpdateFooterDateTime()
+
+        ' Load data grid
+        LoadStudents()
+    End Sub
+
+    ' Real-time date/time clock event
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        UpdateFooterDateTime()
+    End Sub
+
+    Private Sub UpdateFooterDateTime()
+        lbldatetime.Text = DateTime.Now.ToString("dddd, MMMM d, yyyy h:mm:ss tt")
+    End Sub
+
     Private Sub LoadStudents()
         Call connection()
         sql = "SELECT * FROM tblstudents WHERE Status = 'Active'"
@@ -24,6 +48,7 @@ Public Class frmStudentManagement
         dr.Close()
         cn.Close()
     End Sub
+
     Private Function IsStudentIDExists() As Boolean
         Call connection()
         sql = "SELECT COUNT(*) FROM tblstudents WHERE StudentID = @id"
@@ -32,6 +57,7 @@ Public Class frmStudentManagement
         IsStudentIDExists = Convert.ToInt32(cmd.ExecuteScalar()) > 0
         cn.Close()
     End Function
+
     Private Function IsValidInput() As Boolean
         If String.IsNullOrWhiteSpace(txtStudentID.Text) Then
             MsgBox("Fill in Student ID", vbExclamation, "Student Management")
@@ -70,6 +96,7 @@ Public Class frmStudentManagement
 
         Return True
     End Function
+
     Private Sub dgvStudents_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvStudents.CellClick
         If e.RowIndex >= 0 Then
             txtStudentID.Text = dgvStudents.Rows(e.RowIndex).Cells(0).Value.ToString()
@@ -83,16 +110,17 @@ Public Class frmStudentManagement
             txtContactNo.Text = dgvStudents.Rows(e.RowIndex).Cells(8).Value.ToString()
         End If
     End Sub
+
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
-        If Not IsValidInput() Then Exit Sub
         If Not IsValidInput() Then Exit Sub
         If IsStudentIDExists() Then
             MsgBox("A student with that Student ID already exists.", vbExclamation, "Student Management")
             Exit Sub
         End If
+
         Call connection()
         sql = "INSERT INTO tblstudents (StudentID, LRN, LastName, FirstName, MiddleName, Course, YearLevel, Section, ContactNo) " &
-                  "VALUES (@id,@lrn,@ln,@fn,@mn,@course,@year,@section,@contact)"
+              "VALUES (@id,@lrn,@ln,@fn,@mn,@course,@year,@section,@contact)"
         cmd = New MySqlCommand(sql, cn)
         cmd.Parameters.AddWithValue("@id", txtStudentID.Text.Trim())
         cmd.Parameters.AddWithValue("@lrn", txtLRN.Text.Trim())
@@ -105,13 +133,16 @@ Public Class frmStudentManagement
         cmd.Parameters.AddWithValue("@contact", txtContactNo.Text.Trim())
         cmd.ExecuteNonQuery()
         cn.Close()
+
         LoadStudents()
     End Sub
+
     Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
         If Not IsValidInput() Then Exit Sub
+
         Call connection()
         sql = "UPDATE tblstudents SET LRN=@lrn, LastName=@ln, FirstName=@fn, MiddleName=@mn, " &
-                  "Course=@course, YearLevel=@year, Section=@section, ContactNo=@contact WHERE StudentID=@id"
+              "Course=@course, YearLevel=@year, Section=@section, ContactNo=@contact WHERE StudentID=@id"
         cmd = New MySqlCommand(sql, cn)
         cmd.Parameters.AddWithValue("@id", txtStudentID.Text.Trim())
         cmd.Parameters.AddWithValue("@lrn", txtLRN.Text.Trim())
@@ -132,6 +163,7 @@ Public Class frmStudentManagement
 
         LoadStudents()
     End Sub
+
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
         If String.IsNullOrWhiteSpace(txtStudentID.Text) Then
             MsgBox("Please select or enter a Student ID to delete.", vbInformation, "Validation Error")
@@ -144,46 +176,24 @@ Public Class frmStudentManagement
 
         Call connection()
         sql = "UPDATE tblstudents SET Status = 'Inactive' WHERE StudentID = @id"
-            cmd = New MySqlCommand(sql, cn)
-            cmd.Parameters.AddWithValue("@id", txtStudentID.Text.Trim())
+        cmd = New MySqlCommand(sql, cn)
+        cmd.Parameters.AddWithValue("@id", txtStudentID.Text.Trim())
 
-            If cmd.ExecuteNonQuery() > 0 Then
-                MsgBox("Student record successfully deleted.", vbInformation, "Success")
-            Else
-                MsgBox("No matching Student ID found.", vbExclamation, "Record Not Found")
-            End If
-            cn.Close()
-        LoadStudents()
-    End Sub
-
-    Private Sub btnMainMenu_Click(sender As Object, e As EventArgs) Handles btnMainMenu.Click
-        frmMainMenu.Show()
-        Me.Hide()
-    End Sub
-
-    Private Sub btnDocumentManagement_Click(sender As Object, e As EventArgs) Handles btnDocumentManagement.Click
-        frmDocumentManagement.Show()
-        Me.Hide()
-    End Sub
-
-    Private Sub frmStudentManagement_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        LoadStudents()
-    End Sub
-
-    Private Sub btnLogout_Click(sender As Object, e As EventArgs) Handles btnLogout.Click
-        If MsgBox("Are you sure you want to logout?", vbYesNo + vbQuestion, "Confirm Logout") = MsgBoxResult.Yes Then
-            CurrentUser.UserID = 0
-            CurrentUser.FullName = ""
-            CurrentUser.Role = ""
-            frmLogin.Show()
-            Me.Close()
+        If cmd.ExecuteNonQuery() > 0 Then
+            MsgBox("Student record successfully deleted.", vbInformation, "Success")
+        Else
+            MsgBox("No matching Student ID found.", vbExclamation, "Record Not Found")
         End If
+        cn.Close()
+
+        LoadStudents()
     End Sub
 
     Private Sub txtSearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearch.TextChanged
         Call connection()
-        sql = "Select * from tblstudents where Status = 'Active' and (studentID like '%" & txtSearch.Text & "%' or lastname like '%" & txtSearch.Text & "%')"
+        sql = "SELECT * FROM tblstudents WHERE Status = 'Active' AND (StudentID LIKE @search OR LastName LIKE @search)"
         cmd = New MySqlCommand(sql, cn)
+        cmd.Parameters.AddWithValue("@search", "%" & txtSearch.Text.Trim() & "%")
         dr = cmd.ExecuteReader()
 
         dgvStudents.Rows.Clear()
@@ -204,6 +214,17 @@ Public Class frmStudentManagement
         cn.Close()
     End Sub
 
+    ' Navigation Handlers
+    Private Sub btnMainMenu_Click(sender As Object, e As EventArgs) Handles btnMainMenu.Click
+        frmMainMenu.Show()
+        Me.Hide()
+    End Sub
+
+    Private Sub btnDocumentManagement_Click(sender As Object, e As EventArgs) Handles btnDocumentManagement.Click
+        frmDocumentManagement.Show()
+        Me.Hide()
+    End Sub
+
     Private Sub btnReqList_Click(sender As Object, e As EventArgs) Handles btnReqList.Click
         frmRequestList.Show()
         Me.Hide()
@@ -213,4 +234,15 @@ Public Class frmStudentManagement
         frmNewRequest.Show()
         Me.Hide()
     End Sub
+
+    Private Sub btnLogout_Click(sender As Object, e As EventArgs) Handles btnLogout.Click
+        If MsgBox("Are you sure you want to logout?", vbYesNo + vbQuestion, "Confirm Logout") = MsgBoxResult.Yes Then
+            CurrentUser.UserID = 0
+            CurrentUser.FullName = ""
+            CurrentUser.Role = ""
+            frmLogin.Show()
+            Me.Close()
+        End If
+    End Sub
+
 End Class

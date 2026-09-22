@@ -22,6 +22,7 @@ Partial Class frmStudentManagement
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmStudentManagement))
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtSearch = New System.Windows.Forms.TextBox()
@@ -84,6 +85,7 @@ Partial Class frmStudentManagement
         Me.Label17 = New System.Windows.Forms.Label()
         Me.lblname = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         CType(Me.dgvStudents, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel5.SuspendLayout()
         Me.Panel7.SuspendLayout()
@@ -884,4 +886,5 @@ Partial Class frmStudentManagement
     Friend WithEvents Label17 As Label
     Friend WithEvents lblname As Label
     Friend WithEvents Label16 As Label
+    Friend WithEvents Timer1 As Timer
 End Class

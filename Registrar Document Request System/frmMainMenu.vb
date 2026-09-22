@@ -6,69 +6,49 @@ Public Class frmMainMenu
         If CurrentUser.Role <> "Administrator" Then
             btnReport.Visible = False
         End If
+
+        ' Set bottom footer values
+        lblname.Text = CurrentUser.FullName
+        lblposition.Text = CurrentUser.Role
+
+        ' Initialize and start real-time clock timer
+        Timer1.Interval = 1000
+        Timer1.Start()
+        UpdateFooterDateTime()
+
+        ' Load dashboard counts
         TotalStudents()
         TotalRequest()
         PendingRequest()
         CompletedRequest()
     End Sub
-    Private Sub btnLogout_Click(sender As Object, e As EventArgs)
-        If MsgBox("Are you sure you want to logout?", vbYesNo + vbQuestion, "Confirm Logout") = MsgBoxResult.Yes Then
-            CurrentUser.UserID = 0
-            CurrentUser.FullName = ""
-            CurrentUser.Role = ""
-            frmLogin.Show()
-            Me.Close()
-        End If
+
+    ' Real-time date/time clock event
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        UpdateFooterDateTime()
     End Sub
 
-    Private Sub btnStudentManagement_Click(sender As Object, e As EventArgs)
-        frmStudentManagement.Show()
-        Me.Hide()
-    End Sub
-
-    Private Sub btnDocumentManagement_Click(sender As Object, e As EventArgs)
-        frmDocumentManagement.Show()
-        Me.Hide()
-    End Sub
-
-    Private Sub btnStudentManagement_Click_1(sender As Object, e As EventArgs) Handles btnStudentManagement.Click
-        frmStudentManagement.Show()
-        Me.Hide()
-
-    End Sub
-
-    Private Sub btnDocumentManagement_Click_1(sender As Object, e As EventArgs) Handles btnDocumentManagement.Click
-        frmDocumentManagement.Show()
-        Me.Hide()
-    End Sub
-
-    Private Sub btnLogout_Click_1(sender As Object, e As EventArgs) Handles btnLogout.Click
-        If MsgBox("Are you sure you want to logout?", vbYesNo + vbQuestion, "Confirm Logout") = MsgBoxResult.Yes Then
-            CurrentUser.UserID = 0
-            CurrentUser.FullName = ""
-            CurrentUser.Role = ""
-            frmLogin.Show()
-            Me.Close()
-        End If
+    Private Sub UpdateFooterDateTime()
+        lbldatetime.Text = DateTime.Now.ToString("dddd, MMMM d, yyyy h:mm:ss tt")
     End Sub
 
     Private Sub TotalStudents()
         Call connection()
-        sql = "Select count(StudentID) from tblstudents"
-            cmd = New MySqlCommand(sql, cn)
-            dr = cmd.ExecuteReader()
+        sql = "SELECT COUNT(StudentID) FROM tblstudents"
+        cmd = New MySqlCommand(sql, cn)
+        dr = cmd.ExecuteReader()
 
-            If dr.Read() Then
-                lbltotalstudents.Text = dr(0).ToString()
-            End If
+        If dr.Read() Then
+            lbltotalstudents.Text = dr(0).ToString()
+        End If
 
-            dr.Close()
+        dr.Close()
         cn.Close()
     End Sub
 
     Private Sub TotalRequest()
         Call connection()
-        sql = "Select count(RequestID) from tblrequest"
+        sql = "SELECT COUNT(RequestID) FROM tblrequest"
         cmd = New MySqlCommand(sql, cn)
         dr = cmd.ExecuteReader()
 
@@ -82,7 +62,6 @@ Public Class frmMainMenu
 
     Private Sub PendingRequest()
         Call connection()
-
         sql = "SELECT COUNT(RequestID) FROM tblrequest WHERE Status = 'Pending'"
         cmd = New MySqlCommand(sql, cn)
         dr = cmd.ExecuteReader()
@@ -94,10 +73,10 @@ Public Class frmMainMenu
         dr.Close()
         cn.Close()
     End Sub
+
     Private Sub CompletedRequest()
         Call connection()
-
-        sql = "SELECT COUNT(RequestID) FROM tblrequest " & "WHERE PaymentStatus = 'Paid' " & "AND (Status IS NULL OR Status = '')"
+        sql = "SELECT COUNT(RequestID) FROM tblrequest WHERE Status = 'Released' OR Status = 'Completed'"
         cmd = New MySqlCommand(sql, cn)
         dr = cmd.ExecuteReader()
 
@@ -107,6 +86,17 @@ Public Class frmMainMenu
 
         dr.Close()
         cn.Close()
+    End Sub
+
+    ' Navigation Handlers
+    Private Sub btnStudentManagement_Click(sender As Object, e As EventArgs) Handles btnStudentManagement.Click
+        frmStudentManagement.Show()
+        Me.Hide()
+    End Sub
+
+    Private Sub btnDocumentManagement_Click(sender As Object, e As EventArgs) Handles btnDocumentManagement.Click
+        frmDocumentManagement.Show()
+        Me.Hide()
     End Sub
 
     Private Sub btnDocumentRequests_Click(sender As Object, e As EventArgs) Handles btnDocumentRequests.Click
@@ -123,4 +113,15 @@ Public Class frmMainMenu
         frmRequestList.Show()
         Me.Hide()
     End Sub
+
+    Private Sub btnLogout_Click(sender As Object, e As EventArgs) Handles btnLogout.Click
+        If MsgBox("Are you sure you want to logout?", vbYesNo + vbQuestion, "Confirm Logout") = MsgBoxResult.Yes Then
+            CurrentUser.UserID = 0
+            CurrentUser.FullName = ""
+            CurrentUser.Role = ""
+            frmLogin.Show()
+            Me.Close()
+        End If
+    End Sub
+
 End Class

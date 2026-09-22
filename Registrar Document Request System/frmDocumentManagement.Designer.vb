@@ -22,6 +22,7 @@ Partial Class frmDocumentManagement
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmDocumentManagement))
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnDelete = New System.Windows.Forms.Button()
@@ -71,6 +72,7 @@ Partial Class frmDocumentManagement
         Me.Label17 = New System.Windows.Forms.Label()
         Me.lblname = New System.Windows.Forms.Label()
         Me.Label15 = New System.Windows.Forms.Label()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.Panel5.SuspendLayout()
         CType(Me.dgvDocument, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel6.SuspendLayout()
@@ -718,4 +720,5 @@ Partial Class frmDocumentManagement
     Friend WithEvents Label17 As Label
     Friend WithEvents lblname As Label
     Friend WithEvents Label15 As Label
+    Friend WithEvents Timer1 As Timer
 End Class
