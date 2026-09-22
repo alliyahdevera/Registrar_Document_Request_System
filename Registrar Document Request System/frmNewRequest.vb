@@ -8,15 +8,37 @@ Public Class frmNewRequest
             btnReports.Visible = False
         End If
 
+        ' Set bottom footer values without repeating visual prefixes
+        lblname.Text = CurrentUser.FullName
+        lblposition.Text = CurrentUser.Role
+
+        ' Start real-time clock timer
+        Timer1.Interval = 1000
+        Timer1.Start()
+        UpdateFooterDateTime()
+
         LoadDocumentsCombo()
 
         dtpRequestDate.Value = Today
-
         txtCreatedBy.Text = CurrentUser.FullName
+
+        ' Set default status choices
+        cboPaymentStatus.Text = "Unpaid"
+        cboStatus.Text = "Pending"
 
         ClearDocumentEntryFields()
         RecalculateTotal()
     End Sub
+
+    ' Real-time date/time update event
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        UpdateFooterDateTime()
+    End Sub
+
+    Private Sub UpdateFooterDateTime()
+        lbldatetime.Text = DateTime.Now.ToString("dddd, MMMM d, yyyy h:mm:ss tt")
+    End Sub
+
     Private Sub frmNewRequest_Activated(sender As Object, e As EventArgs) Handles Me.Activated
         GenerateRequestNo()
     End Sub
@@ -34,6 +56,7 @@ Public Class frmNewRequest
         cboDocument.ValueMember = "DocumentID"
         cboDocument.SelectedIndex = -1
     End Sub
+
     Private Sub GenerateRequestNo()
         Dim year As String = Now.Year.ToString()
         Dim nextNumber As Integer = 1
@@ -184,6 +207,7 @@ Public Class frmNewRequest
         txtFee.Clear()
         txtSubtotal.Clear()
     End Sub
+
     Private Sub dgvReqDoc_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvReqDoc.CellClick
         If e.RowIndex < 0 Then Exit Sub
         If dgvReqDoc.Rows(e.RowIndex).IsNewRow Then Exit Sub
@@ -195,18 +219,29 @@ Public Class frmNewRequest
     End Sub
 
     Private Sub RecalculateTotal()
-        Dim total As Decimal = 0
+        Dim totalAmount As Decimal = 0
+        Dim totalQty As Integer = 0
+
         For Each row As DataGridViewRow In dgvReqDoc.Rows
             If row.IsNewRow Then Continue For
 
             If row.Cells("Subtotal").Value IsNot Nothing Then
                 Dim lineTotal As Decimal
                 If Decimal.TryParse(row.Cells("Subtotal").Value.ToString(), lineTotal) Then
-                    total += lineTotal
+                    totalAmount += lineTotal
+                End If
+            End If
+
+            If row.Cells("Quantity").Value IsNot Nothing Then
+                Dim qty As Integer
+                If Integer.TryParse(row.Cells("Quantity").Value.ToString(), qty) Then
+                    totalQty += qty
                 End If
             End If
         Next
-        txtTotalAmount.Text = total.ToString("N2")
+
+        txtTotalAmount.Text = totalAmount.ToString("N2")
+        txtTotalQuantity.Text = totalQty.ToString()
     End Sub
 
     Private Function IsValidRequest() As Boolean
@@ -222,10 +257,10 @@ Public Class frmNewRequest
                (dgvReqDoc.Rows.Count = 1 AndAlso dgvReqDoc.Rows(0).IsNewRow) Then
             MsgBox("Please add at least one document to the request.", vbExclamation, "New Document Request")
             Return False
-        ElseIf cboPaymentStatus.SelectedIndex = -1 Then
+        ElseIf String.IsNullOrWhiteSpace(cboPaymentStatus.Text) Then
             MsgBox("Please select a Payment Status.", vbExclamation, "New Document Request")
             Return False
-        ElseIf cboStatus.SelectedIndex = -1 Then
+        ElseIf String.IsNullOrWhiteSpace(cboStatus.Text) Then
             MsgBox("Please select a Request Status.", vbExclamation, "New Document Request")
             Return False
         End If
@@ -292,8 +327,10 @@ Public Class frmNewRequest
         ClearStudentFields()
         dgvReqDoc.Rows.Clear()
         ClearDocumentEntryFields()
-        cboPaymentStatus.SelectedIndex = 0
-        cboStatus.SelectedIndex = 0
+
+        cboPaymentStatus.Text = "Unpaid"
+        cboStatus.Text = "Pending"
+
         dtpRequestDate.Value = Today
         RecalculateTotal()
         GenerateRequestNo()

@@ -22,6 +22,7 @@ Partial Class frmNewRequest
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmNewRequest))
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.btnUserManagement = New System.Windows.Forms.Button()
@@ -94,7 +95,7 @@ Partial Class frmNewRequest
         Me.txtRequestNo = New System.Windows.Forms.TextBox()
         Me.Label22 = New System.Windows.Forms.Label()
         Me.Panel9 = New System.Windows.Forms.Panel()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.txtTotalQuantity = New System.Windows.Forms.TextBox()
         Me.Label30 = New System.Windows.Forms.Label()
         Me.Panel18 = New System.Windows.Forms.Panel()
         Me.Label29 = New System.Windows.Forms.Label()
@@ -115,6 +116,7 @@ Partial Class frmNewRequest
         Me.Label32 = New System.Windows.Forms.Label()
         Me.lblname = New System.Windows.Forms.Label()
         Me.Label33 = New System.Windows.Forms.Label()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         CType(Me.Logo, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -904,7 +906,7 @@ Partial Class frmNewRequest
         '
         Me.Panel9.BackColor = System.Drawing.Color.White
         Me.Panel9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel9.Controls.Add(Me.TextBox1)
+        Me.Panel9.Controls.Add(Me.txtTotalQuantity)
         Me.Panel9.Controls.Add(Me.Label30)
         Me.Panel9.Controls.Add(Me.Panel18)
         Me.Panel9.Controls.Add(Me.txtTotalAmount)
@@ -914,15 +916,15 @@ Partial Class frmNewRequest
         Me.Panel9.Size = New System.Drawing.Size(463, 125)
         Me.Panel9.TabIndex = 63
         '
-        'TextBox1
+        'txtTotalQuantity
         '
-        Me.TextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.TextBox1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(22, 78)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.ReadOnly = True
-        Me.TextBox1.Size = New System.Drawing.Size(171, 29)
-        Me.TextBox1.TabIndex = 56
+        Me.txtTotalQuantity.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtTotalQuantity.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtTotalQuantity.Location = New System.Drawing.Point(22, 78)
+        Me.txtTotalQuantity.Name = "txtTotalQuantity"
+        Me.txtTotalQuantity.ReadOnly = True
+        Me.txtTotalQuantity.Size = New System.Drawing.Size(171, 29)
+        Me.txtTotalQuantity.TabIndex = 56
         '
         'Label30
         '
@@ -1087,11 +1089,11 @@ Partial Class frmNewRequest
         Me.Label31.BackColor = System.Drawing.Color.Transparent
         Me.Label31.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label31.ForeColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
-        Me.Label31.Location = New System.Drawing.Point(776, 810)
+        Me.Label31.Location = New System.Drawing.Point(787, 810)
         Me.Label31.Name = "Label31"
-        Me.Label31.Size = New System.Drawing.Size(65, 21)
+        Me.Label31.Size = New System.Drawing.Size(68, 21)
         Me.Label31.TabIndex = 71
-        Me.Label31.Text = "Today is"
+        Me.Label31.Text = "Today is:"
         '
         'lblposition
         '
@@ -1099,7 +1101,7 @@ Partial Class frmNewRequest
         Me.lblposition.BackColor = System.Drawing.Color.Transparent
         Me.lblposition.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblposition.ForeColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
-        Me.lblposition.Location = New System.Drawing.Point(587, 810)
+        Me.lblposition.Location = New System.Drawing.Point(596, 810)
         Me.lblposition.Name = "lblposition"
         Me.lblposition.Size = New System.Drawing.Size(82, 21)
         Me.lblposition.TabIndex = 70
@@ -1111,7 +1113,7 @@ Partial Class frmNewRequest
         Me.Label32.BackColor = System.Drawing.Color.Transparent
         Me.Label32.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label32.ForeColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
-        Me.Label32.Location = New System.Drawing.Point(521, 810)
+        Me.Label32.Location = New System.Drawing.Point(530, 810)
         Me.Label32.Name = "Label32"
         Me.Label32.Size = New System.Drawing.Size(68, 21)
         Me.Label32.TabIndex = 69
@@ -1140,6 +1142,11 @@ Partial Class frmNewRequest
         Me.Label33.Size = New System.Drawing.Size(55, 21)
         Me.Label33.TabIndex = 67
         Me.Label33.Text = "Name:"
+        '
+        'Timer1
+        '
+        Me.Timer1.Enabled = True
+        Me.Timer1.Interval = 1000
         '
         'frmNewRequest
         '
@@ -1284,7 +1291,7 @@ Partial Class frmNewRequest
     Friend WithEvents btnDocumentManagement As Button
     Friend WithEvents btnStudentManagement As Button
     Friend WithEvents btnMainMenu As Button
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents txtTotalQuantity As TextBox
     Friend WithEvents Label30 As Label
     Friend WithEvents lbldatetime As Label
     Friend WithEvents Label31 As Label
@@ -1292,4 +1299,5 @@ Partial Class frmNewRequest
     Friend WithEvents Label32 As Label
     Friend WithEvents lblname As Label
     Friend WithEvents Label33 As Label
+    Friend WithEvents Timer1 As Timer
 End Class
