@@ -36,6 +36,9 @@ Partial Class frmRequestList
         Me.Documents = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TotalAmount = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Status = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CreateReq = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ProcessedReq = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ReleasedBy = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.Panel10 = New System.Windows.Forms.Panel()
         Me.txtSearch = New System.Windows.Forms.TextBox()
@@ -57,6 +60,12 @@ Partial Class frmRequestList
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Logo = New System.Windows.Forms.PictureBox()
         Me.Label5 = New System.Windows.Forms.Label()
+        Me.lbldatetime = New System.Windows.Forms.Label()
+        Me.Label19 = New System.Windows.Forms.Label()
+        Me.lblposition = New System.Windows.Forms.Label()
+        Me.Label17 = New System.Windows.Forms.Label()
+        Me.lblname = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
         Me.Panel7.SuspendLayout()
         Me.Panel16.SuspendLayout()
         CType(Me.dgvReqDoc, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -113,7 +122,7 @@ Partial Class frmRequestList
         'dgvReqDoc
         '
         Me.dgvReqDoc.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvReqDoc.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.RequestNo, Me._date, Me.StudentID, Me.FirstName, Me.LastName, Me.Documents, Me.TotalAmount, Me.Status})
+        Me.dgvReqDoc.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.RequestNo, Me._date, Me.StudentID, Me.FirstName, Me.LastName, Me.Documents, Me.TotalAmount, Me.Status, Me.CreateReq, Me.ProcessedReq, Me.ReleasedBy})
         Me.dgvReqDoc.Location = New System.Drawing.Point(-1, 34)
         Me.dgvReqDoc.Name = "dgvReqDoc"
         Me.dgvReqDoc.Size = New System.Drawing.Size(1123, 629)
@@ -139,13 +148,13 @@ Partial Class frmRequestList
         '
         Me.FirstName.HeaderText = "First Name"
         Me.FirstName.Name = "FirstName"
-        Me.FirstName.Width = 170
+        Me.FirstName.Width = 130
         '
         'LastName
         '
         Me.LastName.HeaderText = "Last Name"
         Me.LastName.Name = "LastName"
-        Me.LastName.Width = 170
+        Me.LastName.Width = 130
         '
         'Documents
         '
@@ -163,6 +172,24 @@ Partial Class frmRequestList
         Me.Status.HeaderText = "Status"
         Me.Status.Name = "Status"
         Me.Status.Width = 110
+        '
+        'CreateReq
+        '
+        Me.CreateReq.HeaderText = "Create Request"
+        Me.CreateReq.Name = "CreateReq"
+        Me.CreateReq.Width = 120
+        '
+        'ProcessedReq
+        '
+        Me.ProcessedReq.HeaderText = "Processed Request"
+        Me.ProcessedReq.Name = "ProcessedReq"
+        Me.ProcessedReq.Width = 120
+        '
+        'ReleasedBy
+        '
+        Me.ReleasedBy.HeaderText = "Released By"
+        Me.ReleasedBy.Name = "ReleasedBy"
+        Me.ReleasedBy.Width = 120
         '
         'Label15
         '
@@ -244,7 +271,7 @@ Partial Class frmRequestList
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Left
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(250, 821)
+        Me.Panel1.Size = New System.Drawing.Size(250, 837)
         Me.Panel1.TabIndex = 67
         '
         'btnUserManagement
@@ -304,7 +331,7 @@ Partial Class frmRequestList
         Me.btnLogout.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnLogout.ForeColor = System.Drawing.Color.White
         Me.btnLogout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnLogout.Location = New System.Drawing.Point(15, 772)
+        Me.btnLogout.Location = New System.Drawing.Point(15, 788)
         Me.btnLogout.Name = "btnLogout"
         Me.btnLogout.Size = New System.Drawing.Size(220, 49)
         Me.btnLogout.TabIndex = 10
@@ -381,7 +408,7 @@ Partial Class frmRequestList
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Right
         Me.Panel4.Location = New System.Drawing.Point(235, 100)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(15, 721)
+        Me.Panel4.Size = New System.Drawing.Size(15, 737)
         Me.Panel4.TabIndex = 2
         '
         'Panel3
@@ -390,7 +417,7 @@ Partial Class frmRequestList
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Left
         Me.Panel3.Location = New System.Drawing.Point(0, 100)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(15, 721)
+        Me.Panel3.Size = New System.Drawing.Size(15, 737)
         Me.Panel3.TabIndex = 1
         '
         'Panel2
@@ -437,11 +464,89 @@ Partial Class frmRequestList
         Me.Label5.TabIndex = 24
         Me.Label5.Text = "Document Request System"
         '
+        'lbldatetime
+        '
+        Me.lbldatetime.AutoSize = True
+        Me.lbldatetime.BackColor = System.Drawing.Color.Transparent
+        Me.lbldatetime.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbldatetime.ForeColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
+        Me.lbldatetime.Location = New System.Drawing.Point(847, 807)
+        Me.lbldatetime.Name = "lbldatetime"
+        Me.lbldatetime.Size = New System.Drawing.Size(16, 21)
+        Me.lbldatetime.TabIndex = 81
+        Me.lbldatetime.Text = "-"
+        '
+        'Label19
+        '
+        Me.Label19.AutoSize = True
+        Me.Label19.BackColor = System.Drawing.Color.Transparent
+        Me.Label19.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label19.ForeColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
+        Me.Label19.Location = New System.Drawing.Point(775, 807)
+        Me.Label19.Name = "Label19"
+        Me.Label19.Size = New System.Drawing.Size(65, 21)
+        Me.Label19.TabIndex = 80
+        Me.Label19.Text = "Today is"
+        '
+        'lblposition
+        '
+        Me.lblposition.AutoSize = True
+        Me.lblposition.BackColor = System.Drawing.Color.Transparent
+        Me.lblposition.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblposition.ForeColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
+        Me.lblposition.Location = New System.Drawing.Point(586, 807)
+        Me.lblposition.Name = "lblposition"
+        Me.lblposition.Size = New System.Drawing.Size(82, 21)
+        Me.lblposition.TabIndex = 79
+        Me.lblposition.Text = "NPosition"
+        '
+        'Label17
+        '
+        Me.Label17.AutoSize = True
+        Me.Label17.BackColor = System.Drawing.Color.Transparent
+        Me.Label17.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label17.ForeColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
+        Me.Label17.Location = New System.Drawing.Point(520, 807)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(68, 21)
+        Me.Label17.TabIndex = 78
+        Me.Label17.Text = "Position:"
+        '
+        'lblname
+        '
+        Me.lblname.AutoSize = True
+        Me.lblname.BackColor = System.Drawing.Color.Transparent
+        Me.lblname.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblname.ForeColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
+        Me.lblname.Location = New System.Drawing.Point(325, 807)
+        Me.lblname.Name = "lblname"
+        Me.lblname.Size = New System.Drawing.Size(53, 21)
+        Me.lblname.TabIndex = 77
+        Me.lblname.Text = "Name"
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.BackColor = System.Drawing.Color.Transparent
+        Me.Label2.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
+        Me.Label2.Location = New System.Drawing.Point(275, 807)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(55, 21)
+        Me.Label2.TabIndex = 76
+        Me.Label2.Text = "Name:"
+        '
         'frmRequestList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1424, 821)
+        Me.ClientSize = New System.Drawing.Size(1424, 837)
+        Me.Controls.Add(Me.lbldatetime)
+        Me.Controls.Add(Me.Label19)
+        Me.Controls.Add(Me.lblposition)
+        Me.Controls.Add(Me.Label17)
+        Me.Controls.Add(Me.lblname)
+        Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.btnViewDetails)
         Me.Controls.Add(Me.Panel7)
         Me.Controls.Add(Me.Label15)
@@ -490,6 +595,9 @@ Partial Class frmRequestList
     Friend WithEvents Label4 As Label
     Friend WithEvents Logo As PictureBox
     Friend WithEvents Label5 As Label
+    Friend WithEvents btnUserManagement As Button
+    Friend WithEvents btnReports As Button
+    Friend WithEvents btnReqList As Button
     Friend WithEvents RequestNo As DataGridViewTextBoxColumn
     Friend WithEvents _date As DataGridViewTextBoxColumn
     Friend WithEvents StudentID As DataGridViewTextBoxColumn
@@ -498,7 +606,13 @@ Partial Class frmRequestList
     Friend WithEvents Documents As DataGridViewTextBoxColumn
     Friend WithEvents TotalAmount As DataGridViewTextBoxColumn
     Friend WithEvents Status As DataGridViewTextBoxColumn
-    Friend WithEvents btnUserManagement As Button
-    Friend WithEvents btnReports As Button
-    Friend WithEvents btnReqList As Button
+    Friend WithEvents CreateReq As DataGridViewTextBoxColumn
+    Friend WithEvents ProcessedReq As DataGridViewTextBoxColumn
+    Friend WithEvents ReleasedBy As DataGridViewTextBoxColumn
+    Friend WithEvents lbldatetime As Label
+    Friend WithEvents Label19 As Label
+    Friend WithEvents lblposition As Label
+    Friend WithEvents Label17 As Label
+    Friend WithEvents lblname As Label
+    Friend WithEvents Label2 As Label
 End Class

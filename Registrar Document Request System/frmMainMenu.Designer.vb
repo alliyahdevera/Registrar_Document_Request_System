@@ -22,16 +22,14 @@ Partial Class frmMainMenu
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMainMenu))
-        Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim ChartArea2 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend2 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series2 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
         Dim ChartArea3 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
         Dim Legend3 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
         Dim Series3 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea4 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend4 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series4 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.btnUserManagement = New System.Windows.Forms.Button()
@@ -70,12 +68,11 @@ Partial Class frmMainMenu
         Me.Label3 = New System.Windows.Forms.Label()
         Me.pnlreqstatus = New System.Windows.Forms.Panel()
         Me.Label8 = New System.Windows.Forms.Label()
-        Me.chtreqstatus = New System.Windows.Forms.DataVisualization.Charting.Chart()
         Me.pnlmostreqdoc = New System.Windows.Forms.Panel()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.chtMostreqdoc = New System.Windows.Forms.DataVisualization.Charting.Chart()
         Me.pnlrecentreqdoc = New System.Windows.Forms.Panel()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnViewReq = New System.Windows.Forms.Button()
         Me.dgvrecentreqdoc = New System.Windows.Forms.DataGridView()
         Me.RequestNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.StudentName = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -83,6 +80,13 @@ Partial Class frmMainMenu
         Me.Status = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DateRequested = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Label11 = New System.Windows.Forms.Label()
+        Me.lbldatetime = New System.Windows.Forms.Label()
+        Me.Label19 = New System.Windows.Forms.Label()
+        Me.lblposition = New System.Windows.Forms.Label()
+        Me.Label17 = New System.Windows.Forms.Label()
+        Me.lblname = New System.Windows.Forms.Label()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.tmrDateTime = New System.Windows.Forms.Timer(Me.components)
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         CType(Me.Logo, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -97,7 +101,6 @@ Partial Class frmMainMenu
         CType(Me.chtdocreqpermonth, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlDocreqpermonth.SuspendLayout()
         Me.pnlreqstatus.SuspendLayout()
-        CType(Me.chtreqstatus, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlmostreqdoc.SuspendLayout()
         CType(Me.chtMostreqdoc, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlrecentreqdoc.SuspendLayout()
@@ -133,7 +136,7 @@ Partial Class frmMainMenu
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Left
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(250, 821)
+        Me.Panel1.Size = New System.Drawing.Size(250, 835)
         Me.Panel1.TabIndex = 27
         '
         'btnUserManagement
@@ -177,7 +180,7 @@ Partial Class frmMainMenu
         Me.btnLogout.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnLogout.ForeColor = System.Drawing.Color.White
         Me.btnLogout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnLogout.Location = New System.Drawing.Point(15, 772)
+        Me.btnLogout.Location = New System.Drawing.Point(15, 786)
         Me.btnLogout.Name = "btnLogout"
         Me.btnLogout.Size = New System.Drawing.Size(220, 49)
         Me.btnLogout.TabIndex = 10
@@ -270,7 +273,7 @@ Partial Class frmMainMenu
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Right
         Me.Panel4.Location = New System.Drawing.Point(235, 100)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(15, 721)
+        Me.Panel4.Size = New System.Drawing.Size(15, 735)
         Me.Panel4.TabIndex = 2
         '
         'Panel3
@@ -279,7 +282,7 @@ Partial Class frmMainMenu
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Left
         Me.Panel3.Location = New System.Drawing.Point(0, 100)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(15, 721)
+        Me.Panel3.Size = New System.Drawing.Size(15, 735)
         Me.Panel3.TabIndex = 1
         '
         'Panel2
@@ -508,17 +511,17 @@ Partial Class frmMainMenu
         '
         'chtdocreqpermonth
         '
-        ChartArea1.Name = "ChartArea1"
-        Me.chtdocreqpermonth.ChartAreas.Add(ChartArea1)
-        Legend1.Name = "Legend1"
-        Me.chtdocreqpermonth.Legends.Add(Legend1)
+        ChartArea3.Name = "ChartArea1"
+        Me.chtdocreqpermonth.ChartAreas.Add(ChartArea3)
+        Legend3.Name = "Legend1"
+        Me.chtdocreqpermonth.Legends.Add(Legend3)
         Me.chtdocreqpermonth.Location = New System.Drawing.Point(3, 62)
         Me.chtdocreqpermonth.Name = "chtdocreqpermonth"
-        Series1.ChartArea = "ChartArea1"
-        Series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
-        Series1.Legend = "Legend1"
-        Series1.Name = "Series1"
-        Me.chtdocreqpermonth.Series.Add(Series1)
+        Series3.ChartArea = "ChartArea1"
+        Series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
+        Series3.Legend = "Legend1"
+        Series3.Name = "Series1"
+        Me.chtdocreqpermonth.Series.Add(Series3)
         Me.chtdocreqpermonth.Size = New System.Drawing.Size(541, 198)
         Me.chtdocreqpermonth.TabIndex = 35
         Me.chtdocreqpermonth.Text = "Chart1"
@@ -557,7 +560,6 @@ Partial Class frmMainMenu
         '
         Me.pnlreqstatus.BackColor = System.Drawing.Color.White
         Me.pnlreqstatus.Controls.Add(Me.Label8)
-        Me.pnlreqstatus.Controls.Add(Me.chtreqstatus)
         Me.pnlreqstatus.Location = New System.Drawing.Point(961, 209)
         Me.pnlreqstatus.Name = "pnlreqstatus"
         Me.pnlreqstatus.Size = New System.Drawing.Size(432, 282)
@@ -569,26 +571,9 @@ Partial Class frmMainMenu
         Me.Label8.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label8.Location = New System.Drawing.Point(19, 18)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(137, 21)
+        Me.Label8.Size = New System.Drawing.Size(151, 21)
         Me.Label8.TabIndex = 36
-        Me.Label8.Text = "REQUEST STATUS"
-        '
-        'chtreqstatus
-        '
-        ChartArea2.Name = "ChartArea1"
-        Me.chtreqstatus.ChartAreas.Add(ChartArea2)
-        Legend2.Name = "Legend1"
-        Me.chtreqstatus.Legends.Add(Legend2)
-        Me.chtreqstatus.Location = New System.Drawing.Point(24, 66)
-        Me.chtreqstatus.Name = "chtreqstatus"
-        Series2.ChartArea = "ChartArea1"
-        Series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut
-        Series2.Legend = "Legend1"
-        Series2.Name = "Series1"
-        Me.chtreqstatus.Series.Add(Series2)
-        Me.chtreqstatus.Size = New System.Drawing.Size(385, 198)
-        Me.chtreqstatus.TabIndex = 35
-        Me.chtreqstatus.Text = "Chart2"
+        Me.Label8.Text = "OVERDUE REQUEST"
         '
         'pnlmostreqdoc
         '
@@ -612,17 +597,17 @@ Partial Class frmMainMenu
         '
         'chtMostreqdoc
         '
-        ChartArea3.Name = "ChartArea1"
-        Me.chtMostreqdoc.ChartAreas.Add(ChartArea3)
-        Legend3.Name = "Legend1"
-        Me.chtMostreqdoc.Legends.Add(Legend3)
+        ChartArea4.Name = "ChartArea1"
+        Me.chtMostreqdoc.ChartAreas.Add(ChartArea4)
+        Legend4.Name = "Legend1"
+        Me.chtMostreqdoc.Legends.Add(Legend4)
         Me.chtMostreqdoc.Location = New System.Drawing.Point(27, 62)
         Me.chtMostreqdoc.Name = "chtMostreqdoc"
-        Series3.ChartArea = "ChartArea1"
-        Series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Bar
-        Series3.Legend = "Legend1"
-        Series3.Name = "Series1"
-        Me.chtMostreqdoc.Series.Add(Series3)
+        Series4.ChartArea = "ChartArea1"
+        Series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Bar
+        Series4.Legend = "Legend1"
+        Series4.Name = "Series1"
+        Me.chtMostreqdoc.Series.Add(Series4)
         Me.chtMostreqdoc.Size = New System.Drawing.Size(475, 198)
         Me.chtMostreqdoc.TabIndex = 35
         Me.chtMostreqdoc.Text = "Chart3"
@@ -630,7 +615,7 @@ Partial Class frmMainMenu
         'pnlrecentreqdoc
         '
         Me.pnlrecentreqdoc.BackColor = System.Drawing.Color.White
-        Me.pnlrecentreqdoc.Controls.Add(Me.Button1)
+        Me.pnlrecentreqdoc.Controls.Add(Me.btnViewReq)
         Me.pnlrecentreqdoc.Controls.Add(Me.dgvrecentreqdoc)
         Me.pnlrecentreqdoc.Controls.Add(Me.Label11)
         Me.pnlrecentreqdoc.Location = New System.Drawing.Point(284, 210)
@@ -638,17 +623,17 @@ Partial Class frmMainMenu
         Me.pnlrecentreqdoc.Size = New System.Drawing.Size(648, 282)
         Me.pnlrecentreqdoc.TabIndex = 39
         '
-        'Button1
+        'btnViewReq
         '
-        Me.Button1.BackColor = System.Drawing.Color.Navy
-        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button1.ForeColor = System.Drawing.Color.White
-        Me.Button1.Location = New System.Drawing.Point(527, 15)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(107, 23)
-        Me.Button1.TabIndex = 38
-        Me.Button1.Text = "View All Requests"
-        Me.Button1.UseVisualStyleBackColor = False
+        Me.btnViewReq.BackColor = System.Drawing.Color.Navy
+        Me.btnViewReq.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnViewReq.ForeColor = System.Drawing.Color.White
+        Me.btnViewReq.Location = New System.Drawing.Point(527, 15)
+        Me.btnViewReq.Name = "btnViewReq"
+        Me.btnViewReq.Size = New System.Drawing.Size(107, 23)
+        Me.btnViewReq.TabIndex = 38
+        Me.btnViewReq.Text = "View All Requests"
+        Me.btnViewReq.UseVisualStyleBackColor = False
         '
         'dgvrecentreqdoc
         '
@@ -691,17 +676,95 @@ Partial Class frmMainMenu
         '
         Me.Label11.AutoSize = True
         Me.Label11.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label11.Location = New System.Drawing.Point(23, 17)
+        Me.Label11.Location = New System.Drawing.Point(16, 15)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(230, 21)
         Me.Label11.TabIndex = 36
         Me.Label11.Text = "RECENT REQUEST DOCUMENT"
         '
+        'lbldatetime
+        '
+        Me.lbldatetime.AutoSize = True
+        Me.lbldatetime.BackColor = System.Drawing.Color.Transparent
+        Me.lbldatetime.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbldatetime.ForeColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
+        Me.lbldatetime.Location = New System.Drawing.Point(852, 804)
+        Me.lbldatetime.Name = "lbldatetime"
+        Me.lbldatetime.Size = New System.Drawing.Size(16, 21)
+        Me.lbldatetime.TabIndex = 62
+        Me.lbldatetime.Text = "-"
+        '
+        'Label19
+        '
+        Me.Label19.AutoSize = True
+        Me.Label19.BackColor = System.Drawing.Color.Transparent
+        Me.Label19.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label19.ForeColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
+        Me.Label19.Location = New System.Drawing.Point(780, 804)
+        Me.Label19.Name = "Label19"
+        Me.Label19.Size = New System.Drawing.Size(65, 21)
+        Me.Label19.TabIndex = 61
+        Me.Label19.Text = "Today is"
+        '
+        'lblposition
+        '
+        Me.lblposition.AutoSize = True
+        Me.lblposition.BackColor = System.Drawing.Color.Transparent
+        Me.lblposition.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblposition.ForeColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
+        Me.lblposition.Location = New System.Drawing.Point(591, 804)
+        Me.lblposition.Name = "lblposition"
+        Me.lblposition.Size = New System.Drawing.Size(82, 21)
+        Me.lblposition.TabIndex = 60
+        Me.lblposition.Text = "NPosition"
+        '
+        'Label17
+        '
+        Me.Label17.AutoSize = True
+        Me.Label17.BackColor = System.Drawing.Color.Transparent
+        Me.Label17.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label17.ForeColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
+        Me.Label17.Location = New System.Drawing.Point(525, 804)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(68, 21)
+        Me.Label17.TabIndex = 59
+        Me.Label17.Text = "Position:"
+        '
+        'lblname
+        '
+        Me.lblname.AutoSize = True
+        Me.lblname.BackColor = System.Drawing.Color.Transparent
+        Me.lblname.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblname.ForeColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
+        Me.lblname.Location = New System.Drawing.Point(330, 804)
+        Me.lblname.Name = "lblname"
+        Me.lblname.Size = New System.Drawing.Size(53, 21)
+        Me.lblname.TabIndex = 58
+        Me.lblname.Text = "Name"
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.BackColor = System.Drawing.Color.Transparent
+        Me.Label15.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label15.ForeColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
+        Me.Label15.Location = New System.Drawing.Point(280, 804)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(55, 21)
+        Me.Label15.TabIndex = 57
+        Me.Label15.Text = "Name:"
+        '
         'frmMainMenu
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1424, 821)
+        Me.ClientSize = New System.Drawing.Size(1424, 835)
+        Me.Controls.Add(Me.lbldatetime)
+        Me.Controls.Add(Me.Label19)
+        Me.Controls.Add(Me.lblposition)
+        Me.Controls.Add(Me.Label17)
+        Me.Controls.Add(Me.lblname)
+        Me.Controls.Add(Me.Label15)
         Me.Controls.Add(Me.pnlrecentreqdoc)
         Me.Controls.Add(Me.pnlmostreqdoc)
         Me.Controls.Add(Me.pnlreqstatus)
@@ -736,7 +799,6 @@ Partial Class frmMainMenu
         Me.pnlDocreqpermonth.PerformLayout()
         Me.pnlreqstatus.ResumeLayout(False)
         Me.pnlreqstatus.PerformLayout()
-        CType(Me.chtreqstatus, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlmostreqdoc.ResumeLayout(False)
         Me.pnlmostreqdoc.PerformLayout()
         CType(Me.chtMostreqdoc, System.ComponentModel.ISupportInitialize).EndInit()
@@ -784,12 +846,11 @@ Partial Class frmMainMenu
     Friend WithEvents cboDocreqpermonth As ComboBox
     Friend WithEvents pnlreqstatus As Panel
     Friend WithEvents Label8 As Label
-    Friend WithEvents chtreqstatus As DataVisualization.Charting.Chart
     Friend WithEvents pnlmostreqdoc As Panel
     Friend WithEvents Label10 As Label
     Friend WithEvents chtMostreqdoc As DataVisualization.Charting.Chart
     Friend WithEvents pnlrecentreqdoc As Panel
-    Friend WithEvents Button1 As Button
+    Friend WithEvents btnViewReq As Button
     Friend WithEvents dgvrecentreqdoc As DataGridView
     Friend WithEvents Label11 As Label
     Friend WithEvents RequestNo As DataGridViewTextBoxColumn
@@ -798,4 +859,11 @@ Partial Class frmMainMenu
     Friend WithEvents Status As DataGridViewTextBoxColumn
     Friend WithEvents DateRequested As DataGridViewTextBoxColumn
     Friend WithEvents btnUserManagement As Button
+    Friend WithEvents lbldatetime As Label
+    Friend WithEvents Label19 As Label
+    Friend WithEvents lblposition As Label
+    Friend WithEvents Label17 As Label
+    Friend WithEvents lblname As Label
+    Friend WithEvents Label15 As Label
+    Friend WithEvents tmrDateTime As Timer
 End Class

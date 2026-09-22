@@ -118,4 +118,9 @@ Public Class frmMainMenu
         frmRequestList.Show()
         Me.Hide()
     End Sub
+
+    Private Sub btnViewReq_Click(sender As Object, e As EventArgs) Handles btnViewReq.Click
+        frmRequestList.Show()
+        Me.Hide()
+    End Sub
 End Class

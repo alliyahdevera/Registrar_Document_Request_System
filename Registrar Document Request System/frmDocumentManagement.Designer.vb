@@ -51,6 +51,9 @@ Partial Class frmDocumentManagement
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.btnUserManagement = New System.Windows.Forms.Button()
+        Me.btnReport = New System.Windows.Forms.Button()
+        Me.btnReqList = New System.Windows.Forms.Button()
         Me.btnLogout = New System.Windows.Forms.Button()
         Me.btnDocumentRequests = New System.Windows.Forms.Button()
         Me.btnDocumentManagement = New System.Windows.Forms.Button()
@@ -62,9 +65,12 @@ Partial Class frmDocumentManagement
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Logo = New System.Windows.Forms.PictureBox()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.btnUserManagement = New System.Windows.Forms.Button()
-        Me.btnReport = New System.Windows.Forms.Button()
-        Me.btnReqList = New System.Windows.Forms.Button()
+        Me.lbldatetime = New System.Windows.Forms.Label()
+        Me.Label19 = New System.Windows.Forms.Label()
+        Me.lblposition = New System.Windows.Forms.Label()
+        Me.Label17 = New System.Windows.Forms.Label()
+        Me.lblname = New System.Windows.Forms.Label()
+        Me.Label15 = New System.Windows.Forms.Label()
         Me.Panel5.SuspendLayout()
         CType(Me.dgvDocument, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel6.SuspendLayout()
@@ -160,6 +166,7 @@ Partial Class frmDocumentManagement
         Me.txtStatus.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtStatus.Location = New System.Drawing.Point(541, 96)
         Me.txtStatus.Name = "txtStatus"
+        Me.txtStatus.ReadOnly = True
         Me.txtStatus.Size = New System.Drawing.Size(229, 27)
         Me.txtStatus.TabIndex = 40
         '
@@ -178,6 +185,7 @@ Partial Class frmDocumentManagement
         Me.txtFee.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtFee.Location = New System.Drawing.Point(541, 55)
         Me.txtFee.Name = "txtFee"
+        Me.txtFee.ReadOnly = True
         Me.txtFee.Size = New System.Drawing.Size(229, 27)
         Me.txtFee.TabIndex = 38
         '
@@ -196,6 +204,7 @@ Partial Class frmDocumentManagement
         Me.txtDescription.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtDescription.Location = New System.Drawing.Point(140, 138)
         Me.txtDescription.Name = "txtDescription"
+        Me.txtDescription.ReadOnly = True
         Me.txtDescription.Size = New System.Drawing.Size(284, 27)
         Me.txtDescription.TabIndex = 36
         '
@@ -214,6 +223,7 @@ Partial Class frmDocumentManagement
         Me.txtName.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtName.Location = New System.Drawing.Point(140, 96)
         Me.txtName.Name = "txtName"
+        Me.txtName.ReadOnly = True
         Me.txtName.Size = New System.Drawing.Size(284, 27)
         Me.txtName.TabIndex = 34
         '
@@ -232,6 +242,7 @@ Partial Class frmDocumentManagement
         Me.txtDocumentID.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtDocumentID.Location = New System.Drawing.Point(140, 54)
         Me.txtDocumentID.Name = "txtDocumentID"
+        Me.txtDocumentID.ReadOnly = True
         Me.txtDocumentID.Size = New System.Drawing.Size(284, 27)
         Me.txtDocumentID.TabIndex = 32
         '
@@ -355,8 +366,56 @@ Partial Class frmDocumentManagement
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Left
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(250, 821)
+        Me.Panel1.Size = New System.Drawing.Size(250, 833)
         Me.Panel1.TabIndex = 63
+        '
+        'btnUserManagement
+        '
+        Me.btnUserManagement.BackColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
+        Me.btnUserManagement.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnUserManagement.FlatAppearance.BorderSize = 0
+        Me.btnUserManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnUserManagement.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnUserManagement.ForeColor = System.Drawing.Color.White
+        Me.btnUserManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnUserManagement.Location = New System.Drawing.Point(15, 394)
+        Me.btnUserManagement.Name = "btnUserManagement"
+        Me.btnUserManagement.Size = New System.Drawing.Size(220, 49)
+        Me.btnUserManagement.TabIndex = 15
+        Me.btnUserManagement.Text = " User Management"
+        Me.btnUserManagement.UseVisualStyleBackColor = False
+        '
+        'btnReport
+        '
+        Me.btnReport.BackColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
+        Me.btnReport.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnReport.FlatAppearance.BorderSize = 0
+        Me.btnReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnReport.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnReport.ForeColor = System.Drawing.Color.White
+        Me.btnReport.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnReport.Location = New System.Drawing.Point(15, 345)
+        Me.btnReport.Name = "btnReport"
+        Me.btnReport.Size = New System.Drawing.Size(220, 49)
+        Me.btnReport.TabIndex = 14
+        Me.btnReport.Text = "Reports"
+        Me.btnReport.UseVisualStyleBackColor = False
+        '
+        'btnReqList
+        '
+        Me.btnReqList.BackColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
+        Me.btnReqList.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnReqList.FlatAppearance.BorderSize = 0
+        Me.btnReqList.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnReqList.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnReqList.ForeColor = System.Drawing.Color.White
+        Me.btnReqList.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnReqList.Location = New System.Drawing.Point(15, 296)
+        Me.btnReqList.Name = "btnReqList"
+        Me.btnReqList.Size = New System.Drawing.Size(220, 49)
+        Me.btnReqList.TabIndex = 13
+        Me.btnReqList.Text = "Request List"
+        Me.btnReqList.UseVisualStyleBackColor = False
         '
         'btnLogout
         '
@@ -367,7 +426,7 @@ Partial Class frmDocumentManagement
         Me.btnLogout.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnLogout.ForeColor = System.Drawing.Color.White
         Me.btnLogout.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnLogout.Location = New System.Drawing.Point(15, 772)
+        Me.btnLogout.Location = New System.Drawing.Point(15, 784)
         Me.btnLogout.Name = "btnLogout"
         Me.btnLogout.Size = New System.Drawing.Size(220, 49)
         Me.btnLogout.TabIndex = 10
@@ -444,7 +503,7 @@ Partial Class frmDocumentManagement
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Right
         Me.Panel4.Location = New System.Drawing.Point(235, 100)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(15, 721)
+        Me.Panel4.Size = New System.Drawing.Size(15, 733)
         Me.Panel4.TabIndex = 2
         '
         'Panel3
@@ -453,7 +512,7 @@ Partial Class frmDocumentManagement
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Left
         Me.Panel3.Location = New System.Drawing.Point(0, 100)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(15, 721)
+        Me.Panel3.Size = New System.Drawing.Size(15, 733)
         Me.Panel3.TabIndex = 1
         '
         'Panel2
@@ -500,59 +559,89 @@ Partial Class frmDocumentManagement
         Me.Label5.TabIndex = 24
         Me.Label5.Text = "Document Request System"
         '
-        'btnUserManagement
+        'lbldatetime
         '
-        Me.btnUserManagement.BackColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
-        Me.btnUserManagement.Dock = System.Windows.Forms.DockStyle.Top
-        Me.btnUserManagement.FlatAppearance.BorderSize = 0
-        Me.btnUserManagement.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnUserManagement.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnUserManagement.ForeColor = System.Drawing.Color.White
-        Me.btnUserManagement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnUserManagement.Location = New System.Drawing.Point(15, 394)
-        Me.btnUserManagement.Name = "btnUserManagement"
-        Me.btnUserManagement.Size = New System.Drawing.Size(220, 49)
-        Me.btnUserManagement.TabIndex = 15
-        Me.btnUserManagement.Text = " User Management"
-        Me.btnUserManagement.UseVisualStyleBackColor = False
+        Me.lbldatetime.AutoSize = True
+        Me.lbldatetime.BackColor = System.Drawing.Color.Transparent
+        Me.lbldatetime.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbldatetime.ForeColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
+        Me.lbldatetime.Location = New System.Drawing.Point(848, 803)
+        Me.lbldatetime.Name = "lbldatetime"
+        Me.lbldatetime.Size = New System.Drawing.Size(16, 21)
+        Me.lbldatetime.TabIndex = 69
+        Me.lbldatetime.Text = "-"
         '
-        'btnReport
+        'Label19
         '
-        Me.btnReport.BackColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
-        Me.btnReport.Dock = System.Windows.Forms.DockStyle.Top
-        Me.btnReport.FlatAppearance.BorderSize = 0
-        Me.btnReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnReport.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnReport.ForeColor = System.Drawing.Color.White
-        Me.btnReport.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnReport.Location = New System.Drawing.Point(15, 345)
-        Me.btnReport.Name = "btnReport"
-        Me.btnReport.Size = New System.Drawing.Size(220, 49)
-        Me.btnReport.TabIndex = 14
-        Me.btnReport.Text = "Reports"
-        Me.btnReport.UseVisualStyleBackColor = False
+        Me.Label19.AutoSize = True
+        Me.Label19.BackColor = System.Drawing.Color.Transparent
+        Me.Label19.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label19.ForeColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
+        Me.Label19.Location = New System.Drawing.Point(776, 803)
+        Me.Label19.Name = "Label19"
+        Me.Label19.Size = New System.Drawing.Size(65, 21)
+        Me.Label19.TabIndex = 68
+        Me.Label19.Text = "Today is"
         '
-        'btnReqList
+        'lblposition
         '
-        Me.btnReqList.BackColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
-        Me.btnReqList.Dock = System.Windows.Forms.DockStyle.Top
-        Me.btnReqList.FlatAppearance.BorderSize = 0
-        Me.btnReqList.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnReqList.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnReqList.ForeColor = System.Drawing.Color.White
-        Me.btnReqList.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnReqList.Location = New System.Drawing.Point(15, 296)
-        Me.btnReqList.Name = "btnReqList"
-        Me.btnReqList.Size = New System.Drawing.Size(220, 49)
-        Me.btnReqList.TabIndex = 13
-        Me.btnReqList.Text = "Request List"
-        Me.btnReqList.UseVisualStyleBackColor = False
+        Me.lblposition.AutoSize = True
+        Me.lblposition.BackColor = System.Drawing.Color.Transparent
+        Me.lblposition.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblposition.ForeColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
+        Me.lblposition.Location = New System.Drawing.Point(587, 803)
+        Me.lblposition.Name = "lblposition"
+        Me.lblposition.Size = New System.Drawing.Size(82, 21)
+        Me.lblposition.TabIndex = 67
+        Me.lblposition.Text = "NPosition"
+        '
+        'Label17
+        '
+        Me.Label17.AutoSize = True
+        Me.Label17.BackColor = System.Drawing.Color.Transparent
+        Me.Label17.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label17.ForeColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
+        Me.Label17.Location = New System.Drawing.Point(521, 803)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(68, 21)
+        Me.Label17.TabIndex = 66
+        Me.Label17.Text = "Position:"
+        '
+        'lblname
+        '
+        Me.lblname.AutoSize = True
+        Me.lblname.BackColor = System.Drawing.Color.Transparent
+        Me.lblname.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblname.ForeColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
+        Me.lblname.Location = New System.Drawing.Point(326, 803)
+        Me.lblname.Name = "lblname"
+        Me.lblname.Size = New System.Drawing.Size(53, 21)
+        Me.lblname.TabIndex = 65
+        Me.lblname.Text = "Name"
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.BackColor = System.Drawing.Color.Transparent
+        Me.Label15.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label15.ForeColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
+        Me.Label15.Location = New System.Drawing.Point(276, 803)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(55, 21)
+        Me.Label15.TabIndex = 64
+        Me.Label15.Text = "Name:"
         '
         'frmDocumentManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1424, 821)
+        Me.ClientSize = New System.Drawing.Size(1424, 833)
+        Me.Controls.Add(Me.lbldatetime)
+        Me.Controls.Add(Me.Label19)
+        Me.Controls.Add(Me.lblposition)
+        Me.Controls.Add(Me.Label17)
+        Me.Controls.Add(Me.lblname)
+        Me.Controls.Add(Me.Label15)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.Panel6)
@@ -623,4 +712,10 @@ Partial Class frmDocumentManagement
     Friend WithEvents btnUserManagement As Button
     Friend WithEvents btnReport As Button
     Friend WithEvents btnReqList As Button
+    Friend WithEvents lbldatetime As Label
+    Friend WithEvents Label19 As Label
+    Friend WithEvents lblposition As Label
+    Friend WithEvents Label17 As Label
+    Friend WithEvents lblname As Label
+    Friend WithEvents Label15 As Label
 End Class
