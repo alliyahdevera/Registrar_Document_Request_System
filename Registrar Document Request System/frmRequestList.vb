@@ -1,35 +1,62 @@
-﻿Imports MySql.Data.MySqlClient
+﻿Imports System.Data.SqlTypes
+Imports MySql.Data.MySqlClient
 
 Public Class frmRequestList
 
     Private Sub frmRequestList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ' Set bottom footer values
+        lblname.Text = CurrentUser.FullName
+        lblposition.Text = CurrentUser.Role
+
+        ' Start real-time clock timer
+        Timer1.Interval = 1000
+        Timer1.Start()
+        UpdateFooterDateTime()
+
         ' Enable full row selection
         dgvReqDoc.SelectionMode = DataGridViewSelectionMode.FullRowSelect
         dgvReqDoc.MultiSelect = False
 
         LoadRequests()
     End Sub
+
+    ' Real-time date/time update event
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        UpdateFooterDateTime()
+    End Sub
+
+    Private Sub UpdateFooterDateTime()
+        lbldatetime.Text = DateTime.Now.ToString("dddd, MMMM d, yyyy h:mm:ss tt")
+    End Sub
+
     Public Sub LoadRequests(Optional searchTerm As String = "")
         Call connection()
 
+        ' SQL Query with CAST to handle DocumentID type/formatting mismatches
         sql = "SELECT r.RequestNo, r.RequestDate, r.StudentID, " &
-          "s.FirstName, s.LastName, " &
-          "IFNULL(MIN(d.DocumentName), 'N/A') AS DocumentRequested, " &
-          "r.TotalAmount, r.Status " &
-          "FROM tblrequest r " &
-          "JOIN tblstudents s ON r.StudentID = s.StudentID " &
-          "LEFT JOIN tblrequestdetails rd ON r.RequestID = rd.RequestID " &
-          "LEFT JOIN tbldocuments d ON rd.DocumentID = d.DocumentID "
+              "s.FirstName, s.LastName, " &
+              "IFNULL(GROUP_CONCAT(DISTINCT d.DocumentName SEPARATOR ', '), 'N/A') AS DocumentRequested, " &
+              "r.TotalAmount, r.Status, " &
+              "IFNULL(u1.FullName, '-') AS CreatedBy, " &
+              "IFNULL(u2.FullName, '-') AS ProcessedBy, " &
+              "IFNULL(u3.FullName, '-') AS ReleasedBy " &
+              "FROM tblrequest r " &
+              "JOIN tblstudents s ON r.StudentID = s.StudentID " &
+              "LEFT JOIN tblrequestdetails rd ON r.RequestID = rd.RequestID " &
+              "LEFT JOIN tbldocuments d ON CAST(rd.DocumentID AS CHAR) = CAST(d.DocumentID AS CHAR) " &
+              "LEFT JOIN tblusers u1 ON r.CreatedBy = u1.UserID " &
+              "LEFT JOIN tblusers u2 ON r.ProcessedBy = u2.UserID " &
+              "LEFT JOIN tblusers u3 ON r.ReleasedBy = u3.UserID "
 
         ' Apply search filter if search term is provided
         If Not String.IsNullOrWhiteSpace(searchTerm) Then
             sql &= "WHERE r.RequestNo LIKE @search OR r.StudentID LIKE @search " &
-               "OR s.FirstName LIKE @search OR s.LastName LIKE @search OR r.Status LIKE @search "
+                   "OR s.FirstName LIKE @search OR s.LastName LIKE @search OR r.Status LIKE @search "
         End If
 
-        ' Append GROUP BY and ORDER BY once at the end
-        sql &= " GROUP BY r.RequestID, r.RequestNo, r.RequestDate, r.StudentID, s.FirstName, s.LastName, r.TotalAmount, r.Status " &
-           " ORDER BY r.RequestDate DESC, r.RequestNo DESC"
+        ' Group by RequestID to aggregate documents
+        sql &= " GROUP BY r.RequestID, r.RequestNo, r.RequestDate, r.StudentID, s.FirstName, s.LastName, r.TotalAmount, r.Status, u1.FullName, u2.FullName, u3.FullName " &
+               " ORDER BY r.RequestDate DESC, r.RequestNo DESC"
 
         cmd = New MySqlCommand(sql, cn)
 
@@ -48,20 +75,24 @@ Public Class frmRequestList
             If String.IsNullOrWhiteSpace(currentStatus) Then currentStatus = "Pending"
 
             dgvReqDoc.Rows.Add(
-            dr("RequestNo").ToString(),
-            formattedDate,
-            dr("StudentID").ToString(),
-            dr("FirstName").ToString(),
-            dr("LastName").ToString(),
-            dr("DocumentRequested").ToString(),
-            formattedTotal,
-            currentStatus
-        )
+                dr("RequestNo").ToString(),
+                formattedDate,
+                dr("StudentID").ToString(),
+                dr("FirstName").ToString(),
+                dr("LastName").ToString(),
+                dr("DocumentRequested").ToString(),
+                formattedTotal,
+                currentStatus,
+                dr("CreatedBy").ToString(),
+                dr("ProcessedBy").ToString(),
+                dr("ReleasedBy").ToString()
+            )
         End While
 
         dr.Close()
         cn.Close()
     End Sub
+
     Private Sub txtSearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearch.TextChanged
         LoadRequests(txtSearch.Text.Trim())
     End Sub
@@ -110,4 +141,15 @@ Public Class frmRequestList
         frmNewRequest.Show()
         Me.Hide()
     End Sub
+
+    Private Sub btnLogout_Click(sender As Object, e As EventArgs) Handles btnLogout.Click
+        If MsgBox("Are you sure you want to logout?", vbYesNo + vbQuestion, "Confirm Logout") = MsgBoxResult.Yes Then
+            CurrentUser.UserID = 0
+            CurrentUser.FullName = ""
+            CurrentUser.Role = ""
+            frmLogin.Show()
+            Me.Close()
+        End If
+    End Sub
+
 End Class
