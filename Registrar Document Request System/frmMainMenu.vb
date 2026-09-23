@@ -10,6 +10,9 @@ Public Class frmMainMenu
         Timer1.Start()
         UpdateFooterDateTime()
 
+        ' Auto-cancel pending requests older than 7 days prior to dashboard refresh
+        AutoCancelPendingRequests()
+
         ' Load all dashboard counts and widgets
         RefreshDashboard()
     End Sub
@@ -18,7 +21,24 @@ Public Class frmMainMenu
     ' every time this form becomes visible again.
     Private Sub frmMainMenu_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
         RefreshUserSession()
+        AutoCancelPendingRequests()
         RefreshDashboard()
+    End Sub
+    Private Sub AutoCancelPendingRequests()
+        Try
+            Call connection()
+
+            sql = "UPDATE tblrequest " &
+              "SET Status = 'Cancelled' " &
+              "WHERE (Status = 'Pending' OR Status IS NULL OR Status = '') " &
+              "AND RequestDate <= DATE_SUB(CURDATE(), INTERVAL 7 DAY)"
+
+            cmd = New MySqlCommand(sql, cn)
+            cmd.ExecuteNonQuery()
+            cn.Close()
+        Catch ex As Exception
+            If cn.State = ConnectionState.Open Then cn.Close()
+        End Try
     End Sub
 
     ''' <summary>
@@ -176,8 +196,7 @@ Public Class frmMainMenu
     End Sub
 
     ''' <summary>
-    ''' Populates the Overdue Request grid: any request whose current status
-    ''' is not Cancelled or Completed/Released, and whose RequestDate is more than 7 days old.
+    ''' Populates the Overdue Request grid including Cancelled requests older than 7 days.
     ''' </summary>
     Private Sub LoadOverdueRequests()
         Try
@@ -191,7 +210,7 @@ Public Class frmMainMenu
                   "LEFT JOIN tblstudents s ON r.StudentID = s.StudentID " &
                   "LEFT JOIN tblrequestdetails rd ON r.RequestID = rd.RequestID " &
                   "LEFT JOIN tbldocuments d ON CAST(rd.DocumentID AS CHAR) = CAST(d.DocumentID AS CHAR) " &
-                  "WHERE r.Status NOT IN ('Cancelled', 'Completed', 'Released') " &
+                  "WHERE r.Status NOT IN ('Completed', 'Released') " &
                   "AND r.RequestDate <= DATE_SUB(CURDATE(), INTERVAL 7 DAY) " &
                   "GROUP BY r.RequestID, r.RequestNo, StudentName, r.Status, r.RequestDate " &
                   "ORDER BY r.RequestDate ASC"
@@ -332,6 +351,5 @@ Public Class frmMainMenu
         frmUserManagement.Show()
         Me.Hide()
     End Sub
-
 
 End Class

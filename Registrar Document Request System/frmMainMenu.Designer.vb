@@ -24,12 +24,12 @@ Partial Class frmMainMenu
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMainMenu))
-        Dim ChartArea5 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend5 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series5 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim ChartArea6 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend6 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series6 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea2 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend2 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series2 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.btnUserManagement = New System.Windows.Forms.Button()
@@ -64,7 +64,6 @@ Partial Class frmMainMenu
         Me.Label9 = New System.Windows.Forms.Label()
         Me.chtdocreqpermonth = New System.Windows.Forms.DataVisualization.Charting.Chart()
         Me.pnlDocreqpermonth = New System.Windows.Forms.Panel()
-        Me.cboDocreqpermonth1 = New System.Windows.Forms.ComboBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.pnlreqstatus = New System.Windows.Forms.Panel()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
@@ -523,17 +522,17 @@ Partial Class frmMainMenu
         '
         'chtdocreqpermonth
         '
-        ChartArea5.Name = "ChartArea1"
-        Me.chtdocreqpermonth.ChartAreas.Add(ChartArea5)
-        Legend5.Name = "Legend1"
-        Me.chtdocreqpermonth.Legends.Add(Legend5)
+        ChartArea1.Name = "ChartArea1"
+        Me.chtdocreqpermonth.ChartAreas.Add(ChartArea1)
+        Legend1.Name = "Legend1"
+        Me.chtdocreqpermonth.Legends.Add(Legend1)
         Me.chtdocreqpermonth.Location = New System.Drawing.Point(3, 62)
         Me.chtdocreqpermonth.Name = "chtdocreqpermonth"
-        Series5.ChartArea = "ChartArea1"
-        Series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
-        Series5.Legend = "Legend1"
-        Series5.Name = "Series1"
-        Me.chtdocreqpermonth.Series.Add(Series5)
+        Series1.ChartArea = "ChartArea1"
+        Series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
+        Series1.Legend = "Legend1"
+        Series1.Name = "Series1"
+        Me.chtdocreqpermonth.Series.Add(Series1)
         Me.chtdocreqpermonth.Size = New System.Drawing.Size(528, 198)
         Me.chtdocreqpermonth.TabIndex = 35
         Me.chtdocreqpermonth.Text = "Chart1"
@@ -542,22 +541,12 @@ Partial Class frmMainMenu
         '
         Me.pnlDocreqpermonth.BackColor = System.Drawing.Color.White
         Me.pnlDocreqpermonth.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.pnlDocreqpermonth.Controls.Add(Me.cboDocreqpermonth1)
         Me.pnlDocreqpermonth.Controls.Add(Me.Label3)
         Me.pnlDocreqpermonth.Controls.Add(Me.chtdocreqpermonth)
         Me.pnlDocreqpermonth.Location = New System.Drawing.Point(860, 508)
         Me.pnlDocreqpermonth.Name = "pnlDocreqpermonth"
         Me.pnlDocreqpermonth.Size = New System.Drawing.Size(534, 282)
         Me.pnlDocreqpermonth.TabIndex = 37
-        '
-        'cboDocreqpermonth1
-        '
-        Me.cboDocreqpermonth1.FormattingEnabled = True
-        Me.cboDocreqpermonth1.Items.AddRange(New Object() {"2026"})
-        Me.cboDocreqpermonth1.Location = New System.Drawing.Point(407, 17)
-        Me.cboDocreqpermonth1.Name = "cboDocreqpermonth1"
-        Me.cboDocreqpermonth1.Size = New System.Drawing.Size(95, 21)
-        Me.cboDocreqpermonth1.TabIndex = 37
         '
         'Label3
         '
@@ -650,17 +639,17 @@ Partial Class frmMainMenu
         '
         'chtMostreqdoc
         '
-        ChartArea6.Name = "ChartArea1"
-        Me.chtMostreqdoc.ChartAreas.Add(ChartArea6)
-        Legend6.Name = "Legend1"
-        Me.chtMostreqdoc.Legends.Add(Legend6)
+        ChartArea2.Name = "ChartArea1"
+        Me.chtMostreqdoc.ChartAreas.Add(ChartArea2)
+        Legend2.Name = "Legend1"
+        Me.chtMostreqdoc.Legends.Add(Legend2)
         Me.chtMostreqdoc.Location = New System.Drawing.Point(27, 62)
         Me.chtMostreqdoc.Name = "chtMostreqdoc"
-        Series6.ChartArea = "ChartArea1"
-        Series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Bar
-        Series6.Legend = "Legend1"
-        Series6.Name = "Series1"
-        Me.chtMostreqdoc.Series.Add(Series6)
+        Series2.ChartArea = "ChartArea1"
+        Series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Bar
+        Series2.Legend = "Legend1"
+        Series2.Name = "Series1"
+        Me.chtMostreqdoc.Series.Add(Series2)
         Me.chtMostreqdoc.Size = New System.Drawing.Size(475, 198)
         Me.chtMostreqdoc.TabIndex = 35
         Me.chtMostreqdoc.Text = "Chart3"
@@ -901,7 +890,6 @@ Partial Class frmMainMenu
     Friend WithEvents chtdocreqpermonth As DataVisualization.Charting.Chart
     Friend WithEvents pnlDocreqpermonth As Panel
     Friend WithEvents Label3 As Label
-    Friend WithEvents cboDocreqpermonth1 As ComboBox
     Friend WithEvents pnlreqstatus As Panel
     Friend WithEvents Label8 As Label
     Friend WithEvents pnlmostreqdoc As Panel

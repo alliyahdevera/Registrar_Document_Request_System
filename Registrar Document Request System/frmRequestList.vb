@@ -10,7 +10,11 @@ Public Class frmRequestList
         Timer1.Start()
         UpdateFooterDateTime()
 
-        ' Automatically cancel unpaid requests past 7 days before loading grid
+        ' Enable Full Row Selection on DataGridView
+        dgvReqDoc.SelectionMode = DataGridViewSelectionMode.FullRowSelect
+        dgvReqDoc.MultiSelect = False
+
+        ' Automatically cancel pending/blank requests past 7 days before loading grid
         AutoCancelUnpaidRequests()
 
         ' Load request data
@@ -19,6 +23,8 @@ Public Class frmRequestList
 
     Private Sub frmRequestList_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
         RefreshUserSession()
+        AutoCancelUnpaidRequests()
+        LoadRequests()
     End Sub
 
     Private Sub RefreshUserSession()
@@ -36,15 +42,16 @@ Public Class frmRequestList
     End Sub
 
     ''' <summary>
-    ''' Automatically updates status to 'Cancelled' for any unpaid requests older than 7 days.
+    ''' Automatically updates status to 'Cancelled' for any requests 
+    ''' that are 'Pending' or blank after 7 days.
     ''' </summary>
     Private Sub AutoCancelUnpaidRequests()
         Try
             Call connection()
+
             sql = "UPDATE tblrequest " &
                   "SET Status = 'Cancelled' " &
-                  "WHERE PaymentStatus = 'Unpaid' " &
-                  "AND Status != 'Cancelled' " &
+                  "WHERE (Status = 'Pending' OR Status IS NULL OR Status = '') " &
                   "AND RequestDate <= DATE_SUB(CURDATE(), INTERVAL 7 DAY)"
 
             cmd = New MySqlCommand(sql, cn)
@@ -56,7 +63,7 @@ Public Class frmRequestList
     End Sub
 
     ''' <summary>
-    ''' Fetches requests and maps them directly to the DataGridView columns using '-' for null fields.
+    ''' Fetches requests and maps them directly to the DataGridView columns.
     ''' </summary>
     Public Sub LoadRequests()
         Try
@@ -65,7 +72,7 @@ Public Class frmRequestList
             sql = "SELECT r.RequestID, r.RequestNo, r.StudentID, " &
                   "s.FirstName, s.LastName, " &
                   "GROUP_CONCAT(DISTINCT d.DocumentName SEPARATOR ', ') AS DocumentNames, " &
-                  "r.RequestDate, r.TotalAmount, r.Status, " &
+                  "r.RequestDate, r.TotalAmount, r.Status, r.ORNo, r.ORDate, " &
                   "u1.FullName AS CreatedByStaff, " &
                   "u2.FullName AS ProcessedByStaff, " &
                   "u3.FullName AS ReleasedByStaff " &
@@ -77,7 +84,7 @@ Public Class frmRequestList
                   "LEFT JOIN tblusers u2 ON r.ProcessedBy = u2.UserID " &
                   "LEFT JOIN tblusers u3 ON r.ReleasedBy = u3.UserID " &
                   "GROUP BY r.RequestID, r.RequestNo, r.StudentID, s.FirstName, s.LastName, " &
-                  "r.RequestDate, r.TotalAmount, r.Status, " &
+                  "r.RequestDate, r.TotalAmount, r.Status, r.ORNo, r.ORDate, " &
                   "CreatedByStaff, ProcessedByStaff, ReleasedByStaff " &
                   "ORDER BY r.RequestID DESC"
 
@@ -87,6 +94,7 @@ Public Class frmRequestList
             dgvReqDoc.Rows.Clear()
             While dr.Read()
                 Dim reqDateStr As String = If(IsDBNull(dr("RequestDate")), "-", Convert.ToDateTime(dr("RequestDate")).ToString("yyyy-MM-dd"))
+                Dim orDateStr As String = If(IsDBNull(dr("ORDate")), "-", Convert.ToDateTime(dr("ORDate")).ToString("yyyy-MM-dd"))
                 Dim totalAmtStr As String = If(IsDBNull(dr("TotalAmount")), "0.00", Convert.ToDecimal(dr("TotalAmount")).ToString("N2"))
 
                 dgvReqDoc.Rows.Add(
@@ -98,6 +106,8 @@ Public Class frmRequestList
                     If(IsDBNull(dr("DocumentNames")), "-", dr("DocumentNames").ToString()),
                     totalAmtStr,
                     If(IsDBNull(dr("Status")) OrElse String.IsNullOrWhiteSpace(dr("Status").ToString()), "-", dr("Status").ToString()),
+                    If(IsDBNull(dr("ORNo")), "-", dr("ORNo").ToString()),
+                    orDateStr,
                     If(IsDBNull(dr("CreatedByStaff")), "-", dr("CreatedByStaff").ToString()),
                     If(IsDBNull(dr("ProcessedByStaff")), "-", dr("ProcessedByStaff").ToString()),
                     If(IsDBNull(dr("ReleasedByStaff")), "-", dr("ReleasedByStaff").ToString())
@@ -120,7 +130,7 @@ Public Class frmRequestList
             sql = "SELECT r.RequestID, r.RequestNo, r.StudentID, " &
                   "s.FirstName, s.LastName, " &
                   "GROUP_CONCAT(DISTINCT d.DocumentName SEPARATOR ', ') AS DocumentNames, " &
-                  "r.RequestDate, r.TotalAmount, r.Status, " &
+                  "r.RequestDate, r.TotalAmount, r.Status, r.ORNo, r.ORDate, " &
                   "u1.FullName AS CreatedByStaff, " &
                   "u2.FullName AS ProcessedByStaff, " &
                   "u3.FullName AS ReleasedByStaff " &
@@ -133,7 +143,7 @@ Public Class frmRequestList
                   "LEFT JOIN tblusers u3 ON r.ReleasedBy = u3.UserID " &
                   "WHERE r.RequestNo LIKE @search OR r.StudentID LIKE @search OR s.LastName LIKE @search OR s.FirstName LIKE @search " &
                   "GROUP BY r.RequestID, r.RequestNo, r.StudentID, s.FirstName, s.LastName, " &
-                  "r.RequestDate, r.TotalAmount, r.Status, " &
+                  "r.RequestDate, r.TotalAmount, r.Status, r.ORNo, r.ORDate, " &
                   "CreatedByStaff, ProcessedByStaff, ReleasedByStaff " &
                   "ORDER BY r.RequestID DESC"
 
@@ -144,6 +154,7 @@ Public Class frmRequestList
             dgvReqDoc.Rows.Clear()
             While dr.Read()
                 Dim reqDateStr As String = If(IsDBNull(dr("RequestDate")), "-", Convert.ToDateTime(dr("RequestDate")).ToString("yyyy-MM-dd"))
+                Dim orDateStr As String = If(IsDBNull(dr("ORDate")), "-", Convert.ToDateTime(dr("ORDate")).ToString("yyyy-MM-dd"))
                 Dim totalAmtStr As String = If(IsDBNull(dr("TotalAmount")), "0.00", Convert.ToDecimal(dr("TotalAmount")).ToString("N2"))
 
                 dgvReqDoc.Rows.Add(
@@ -155,6 +166,8 @@ Public Class frmRequestList
                     If(IsDBNull(dr("DocumentNames")), "-", dr("DocumentNames").ToString()),
                     totalAmtStr,
                     If(IsDBNull(dr("Status")) OrElse String.IsNullOrWhiteSpace(dr("Status").ToString()), "-", dr("Status").ToString()),
+                    If(IsDBNull(dr("ORNo")), "-", dr("ORNo").ToString()),
+                    orDateStr,
                     If(IsDBNull(dr("CreatedByStaff")), "-", dr("CreatedByStaff").ToString()),
                     If(IsDBNull(dr("ProcessedByStaff")), "-", dr("ProcessedByStaff").ToString()),
                     If(IsDBNull(dr("ReleasedByStaff")), "-", dr("ReleasedByStaff").ToString())
@@ -166,6 +179,31 @@ Public Class frmRequestList
         Catch ex As Exception
             If cn.State = ConnectionState.Open Then cn.Close()
         End Try
+    End Sub
+
+    ' Details View Handlers
+    Private Sub btnViewDetails_Click(sender As Object, e As EventArgs) Handles btnViewDetails.Click
+        OpenSelectedRequestDetails()
+    End Sub
+
+    Private Sub dgvReqDoc_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvReqDoc.CellDoubleClick
+        If e.RowIndex >= 0 Then
+            OpenSelectedRequestDetails()
+        End If
+    End Sub
+
+    Private Sub OpenSelectedRequestDetails()
+        If dgvReqDoc.SelectedRows.Count > 0 Then
+            ' Retrieve RequestNo from the first cell (Column 0) of selected row
+            Dim selectedReqNo As String = dgvReqDoc.SelectedRows(0).Cells(0).Value.ToString()
+
+            frmRequestDetails.SelectedRequestNo = selectedReqNo
+            frmRequestDetails.LoadRequestDetailsInfo(selectedReqNo)
+            frmRequestDetails.Show()
+            Me.Hide()
+        Else
+            MsgBox("Please select a request row from the list first.", vbInformation, "No Selection")
+        End If
     End Sub
 
     ' Navigation Handlers
@@ -199,11 +237,6 @@ Public Class frmRequestList
         End If
     End Sub
 
-    Private Sub btnViewDetails_Click(sender As Object, e As EventArgs) Handles btnViewDetails.Click
-        frmRequestDetails.Show()
-        Me.Hide()
-    End Sub
-
     Private Sub btnReports_Click(sender As Object, e As EventArgs) Handles btnReports.Click
         frmReports.Show()
         Me.Hide()
@@ -213,4 +246,5 @@ Public Class frmRequestList
         frmUserManagement.Show()
         Me.Hide()
     End Sub
+
 End Class
