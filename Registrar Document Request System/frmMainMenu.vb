@@ -24,14 +24,15 @@ Public Class frmMainMenu
         AutoCancelPendingRequests()
         RefreshDashboard()
     End Sub
+
     Private Sub AutoCancelPendingRequests()
         Try
             Call connection()
 
             sql = "UPDATE tblrequest " &
-              "SET Status = 'Cancelled' " &
-              "WHERE (Status = 'Pending' OR Status IS NULL OR Status = '') " &
-              "AND RequestDate <= DATE_SUB(CURDATE(), INTERVAL 7 DAY)"
+                  "SET Status = 'Cancelled' " &
+                  "WHERE (Status = 'Pending' OR Status IS NULL OR Status = '') " &
+                  "AND RequestDate <= DATE_SUB(CURDATE(), INTERVAL 7 DAY)"
 
             cmd = New MySqlCommand(sql, cn)
             cmd.ExecuteNonQuery()
@@ -150,26 +151,26 @@ Public Class frmMainMenu
     End Sub
 
     ''' <summary>
-    ''' Populates dgvRecentReqDoc with requests that are Paid and currently
-    ''' being worked on (Processing or Ready for Release).
+    ''' Populates dgvRecentReqDoc with current requests while preserving their original status and excluding 2025 records.
     ''' </summary>
     Public Sub LoadRecentRequests()
         Try
             Call connection()
 
             sql = "SELECT r.RequestNo, " &
-                  "CONCAT(s.FirstName, ' ', s.LastName) AS StudentName, " &
-                  "GROUP_CONCAT(DISTINCT d.DocumentName SEPARATOR ', ') AS DocumentNames, " &
-                  "r.Status, r.RequestDate " &
-                  "FROM tblrequest r " &
-                  "LEFT JOIN tblstudents s ON r.StudentID = s.StudentID " &
-                  "LEFT JOIN tblrequestdetails rd ON r.RequestID = rd.RequestID " &
-                  "LEFT JOIN tbldocuments d ON CAST(rd.DocumentID AS CHAR) = CAST(d.DocumentID AS CHAR) " &
-                  "WHERE r.PaymentStatus = 'Paid' " &
-                  "AND r.Status IN ('Processing', 'Ready for Release') " &
-                  "GROUP BY r.RequestID, r.RequestNo, StudentName, r.Status, r.RequestDate " &
-                  "ORDER BY r.RequestID DESC " &
-                  "LIMIT 10"
+              "CONCAT(s.FirstName, ' ', s.LastName) AS StudentName, " &
+              "GROUP_CONCAT(DISTINCT d.DocumentName SEPARATOR ', ') AS DocumentNames, " &
+              "r.Status, r.RequestDate " &
+              "FROM tblrequest r " &
+              "LEFT JOIN tblstudents s ON r.StudentID = s.StudentID " &
+              "LEFT JOIN tblrequestdetails rd ON r.RequestID = rd.RequestID " &
+              "LEFT JOIN tbldocuments d ON CAST(rd.DocumentID AS CHAR) = CAST(d.DocumentID AS CHAR) " &
+              "WHERE r.PaymentStatus = 'Paid' " &
+              "AND YEAR(r.RequestDate) <> 2025 " &
+              "AND r.Status IN ('Processing', 'Ready for Release', 'Released') " &
+              "GROUP BY r.RequestID, r.RequestNo, StudentName, r.Status, r.RequestDate " &
+              "ORDER BY r.RequestID DESC " &
+              "LIMIT 10"
 
             cmd = New MySqlCommand(sql, cn)
             dr = cmd.ExecuteReader()
@@ -179,12 +180,12 @@ Public Class frmMainMenu
                 Dim reqDateStr As String = If(IsDBNull(dr("RequestDate")), "-", Convert.ToDateTime(dr("RequestDate")).ToString("yyyy-MM-dd"))
 
                 dgvrecentreqdoc.Rows.Add(
-                    dr("RequestNo").ToString(),
-                    If(IsDBNull(dr("StudentName")), "-", dr("StudentName").ToString()),
-                    If(IsDBNull(dr("DocumentNames")), "-", dr("DocumentNames").ToString()),
-                    If(IsDBNull(dr("Status")) OrElse String.IsNullOrWhiteSpace(dr("Status").ToString()), "-", dr("Status").ToString()),
-                    reqDateStr
-                )
+                dr("RequestNo").ToString(),
+                If(IsDBNull(dr("StudentName")), "-", dr("StudentName").ToString()),
+                If(IsDBNull(dr("DocumentNames")), "-", dr("DocumentNames").ToString()),
+                If(IsDBNull(dr("Status")) OrElse String.IsNullOrWhiteSpace(dr("Status").ToString()), "-", dr("Status").ToString()),
+                reqDateStr
+            )
             End While
 
             dr.Close()
@@ -240,9 +241,9 @@ Public Class frmMainMenu
     End Sub
 
     ''' <summary>
-    ''' Populates the Most Requested Documents chart using the entire request history.
+    ''' Populates the Most Requested Documents chart.
     ''' </summary>
-    Private Sub LoadMostRequestedDocuments()
+    Public Sub LoadMostRequestedDocuments()
         Try
             Call connection()
 

@@ -17,7 +17,7 @@ Public Class frmRequestDetails
 
     ''' <summary>
     ''' Public method accessible from external forms (e.g., frmRequestList)
-    ''' to load request header details, student info, and document line items.
+    ''' to load request header details, student info, payment info, and document line items.
     ''' </summary>
     Public Sub LoadRequestDetailsInfo(ByVal reqNo As String)
         SelectedRequestNo = reqNo
@@ -25,12 +25,13 @@ Public Class frmRequestDetails
         LoadRequestedDocuments()
     End Sub
 
-    ' Loads student and request header details
+    ' Loads student, request header, payment details, and request status
     Private Sub LoadRequestHeaderAndStudent()
         Try
             Call connection()
 
             sql = "SELECT r.RequestID, r.RequestNo, r.RequestDate, r.TotalAmount, r.Status, r.PaymentStatus, " &
+                  "r.ORNo, r.ORDate, r.AmountPaid, " &
                   "s.StudentID, CONCAT(s.FirstName, ' ', IFNULL(s.MiddleName, ''), ' ', s.LastName) AS StudentName, " &
                   "s.Course, s.YearLevel " &
                   "FROM tblrequest r " &
@@ -43,6 +44,8 @@ Public Class frmRequestDetails
 
             If dr.Read() Then
                 currentRequestID = Convert.ToInt32(dr("RequestID"))
+
+                ' Request Information
                 txtRequestNo.Text = dr("RequestNo").ToString()
                 txtRequestDate.Text = If(IsDBNull(dr("RequestDate")), "-", Convert.ToDateTime(dr("RequestDate")).ToString("yyyy-MM-dd"))
                 txtStudentID.Text = dr("StudentID").ToString()
@@ -50,6 +53,20 @@ Public Class frmRequestDetails
                 txtCourse.Text = If(IsDBNull(dr("Course")), "-", dr("Course").ToString())
                 txtYearLevel.Text = If(IsDBNull(dr("YearLevel")), "-", dr("YearLevel").ToString())
                 txtTotalAmount.Text = If(IsDBNull(dr("TotalAmount")), "0.00", Convert.ToDecimal(dr("TotalAmount")).ToString("N2"))
+
+                ' Request Status Section
+                txtRequestsID.Text = currentRequestID.ToString()
+                cboStatus.Text = If(IsDBNull(dr("Status")) OrElse String.IsNullOrWhiteSpace(dr("Status").ToString()), "Pending", dr("Status").ToString())
+
+                ' Payment Information Section
+                txtORNo.Text = If(IsDBNull(dr("ORNo")), "", dr("ORNo").ToString())
+                If Not IsDBNull(dr("ORDate")) Then
+                    dtpORDate.Value = Convert.ToDateTime(dr("ORDate"))
+                Else
+                    dtpORDate.Value = DateTime.Now
+                End If
+                txtAmountPaid.Text = If(IsDBNull(dr("AmountPaid")), "0.00", Convert.ToDecimal(dr("AmountPaid")).ToString("N2"))
+                cboPaymentStatus.Text = If(IsDBNull(dr("PaymentStatus")) OrElse String.IsNullOrWhiteSpace(dr("PaymentStatus").ToString()), "Unpaid", dr("PaymentStatus").ToString())
             End If
 
             dr.Close()

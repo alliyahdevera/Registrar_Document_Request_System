@@ -55,17 +55,17 @@ Partial Class frmRequestDetails
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.dtpRequestDate = New System.Windows.Forms.DateTimePicker()
+        Me.txtAmountPaid = New System.Windows.Forms.TextBox()
+        Me.dtpORDate = New System.Windows.Forms.DateTimePicker()
         Me.Label16 = New System.Windows.Forms.Label()
-        Me.txtCreatedBy = New System.Windows.Forms.TextBox()
+        Me.txtORNo = New System.Windows.Forms.TextBox()
         Me.cboPaymentStatus = New System.Windows.Forms.ComboBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label21 = New System.Windows.Forms.Label()
         Me.cboStatus = New System.Windows.Forms.ComboBox()
         Me.Label23 = New System.Windows.Forms.Label()
         Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.txtRequestID = New System.Windows.Forms.TextBox()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Panel4 = New System.Windows.Forms.Panel()
@@ -375,10 +375,10 @@ Partial Class frmRequestDetails
         Me.Panel1.Controls.Add(Me.btnGenerateReport)
         Me.Panel1.Controls.Add(Me.Label7)
         Me.Panel1.Controls.Add(Me.Panel2)
-        Me.Panel1.Controls.Add(Me.TextBox1)
-        Me.Panel1.Controls.Add(Me.dtpRequestDate)
+        Me.Panel1.Controls.Add(Me.txtAmountPaid)
+        Me.Panel1.Controls.Add(Me.dtpORDate)
         Me.Panel1.Controls.Add(Me.Label16)
-        Me.Panel1.Controls.Add(Me.txtCreatedBy)
+        Me.Panel1.Controls.Add(Me.txtORNo)
         Me.Panel1.Controls.Add(Me.cboPaymentStatus)
         Me.Panel1.Controls.Add(Me.Label6)
         Me.Panel1.Controls.Add(Me.Label21)
@@ -430,23 +430,23 @@ Partial Class frmRequestDetails
         Me.Label5.TabIndex = 51
         Me.Label5.Text = "Payment Information"
         '
-        'TextBox1
+        'txtAmountPaid
         '
-        Me.TextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.TextBox1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(449, 52)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(163, 25)
-        Me.TextBox1.TabIndex = 68
+        Me.txtAmountPaid.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtAmountPaid.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtAmountPaid.Location = New System.Drawing.Point(449, 52)
+        Me.txtAmountPaid.Name = "txtAmountPaid"
+        Me.txtAmountPaid.Size = New System.Drawing.Size(163, 25)
+        Me.txtAmountPaid.TabIndex = 68
         '
-        'dtpRequestDate
+        'dtpORDate
         '
-        Me.dtpRequestDate.CalendarFont = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dtpRequestDate.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dtpRequestDate.Location = New System.Drawing.Point(94, 95)
-        Me.dtpRequestDate.Name = "dtpRequestDate"
-        Me.dtpRequestDate.Size = New System.Drawing.Size(209, 25)
-        Me.dtpRequestDate.TabIndex = 58
+        Me.dtpORDate.CalendarFont = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dtpORDate.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dtpORDate.Location = New System.Drawing.Point(94, 95)
+        Me.dtpORDate.Name = "dtpORDate"
+        Me.dtpORDate.Size = New System.Drawing.Size(209, 25)
+        Me.dtpORDate.TabIndex = 58
         '
         'Label16
         '
@@ -458,14 +458,14 @@ Partial Class frmRequestDetails
         Me.Label16.TabIndex = 55
         Me.Label16.Text = "OR Date"
         '
-        'txtCreatedBy
+        'txtORNo
         '
-        Me.txtCreatedBy.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtCreatedBy.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCreatedBy.Location = New System.Drawing.Point(94, 55)
-        Me.txtCreatedBy.Name = "txtCreatedBy"
-        Me.txtCreatedBy.Size = New System.Drawing.Size(209, 25)
-        Me.txtCreatedBy.TabIndex = 54
+        Me.txtORNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtORNo.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtORNo.Location = New System.Drawing.Point(94, 55)
+        Me.txtORNo.Name = "txtORNo"
+        Me.txtORNo.Size = New System.Drawing.Size(209, 25)
+        Me.txtORNo.TabIndex = 54
         '
         'cboPaymentStatus
         '
@@ -521,7 +521,7 @@ Partial Class frmRequestDetails
         '
         Me.Panel3.BackColor = System.Drawing.Color.White
         Me.Panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel3.Controls.Add(Me.TextBox2)
+        Me.Panel3.Controls.Add(Me.txtRequestID)
         Me.Panel3.Controls.Add(Me.Button1)
         Me.Panel3.Controls.Add(Me.Label8)
         Me.Panel3.Controls.Add(Me.Panel4)
@@ -532,15 +532,15 @@ Partial Class frmRequestDetails
         Me.Panel3.Size = New System.Drawing.Size(402, 183)
         Me.Panel3.TabIndex = 81
         '
-        'TextBox2
+        'txtRequestID
         '
-        Me.TextBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.TextBox2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox2.Location = New System.Drawing.Point(136, 55)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.ReadOnly = True
-        Me.TextBox2.Size = New System.Drawing.Size(229, 25)
-        Me.TextBox2.TabIndex = 79
+        Me.txtRequestID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtRequestID.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtRequestID.Location = New System.Drawing.Point(136, 55)
+        Me.txtRequestID.Name = "txtRequestID"
+        Me.txtRequestID.ReadOnly = True
+        Me.txtRequestID.Size = New System.Drawing.Size(229, 25)
+        Me.txtRequestID.TabIndex = 79
         '
         'Button1
         '
@@ -651,21 +651,21 @@ Partial Class frmRequestDetails
     Friend WithEvents Panel1 As Panel
     Friend WithEvents Panel2 As Panel
     Friend WithEvents Label5 As Label
-    Friend WithEvents dtpRequestDate As DateTimePicker
+    Friend WithEvents dtpORDate As DateTimePicker
     Friend WithEvents Label16 As Label
-    Friend WithEvents txtCreatedBy As TextBox
+    Friend WithEvents txtORNo As TextBox
     Friend WithEvents cboPaymentStatus As ComboBox
     Friend WithEvents Label6 As Label
     Friend WithEvents Label21 As Label
     Friend WithEvents cboStatus As ComboBox
     Friend WithEvents Label23 As Label
     Friend WithEvents Label7 As Label
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents txtAmountPaid As TextBox
     Friend WithEvents btnGenerateReport As Button
     Friend WithEvents Panel3 As Panel
     Friend WithEvents Button1 As Button
     Friend WithEvents Panel4 As Panel
     Friend WithEvents Label9 As Label
-    Friend WithEvents TextBox2 As TextBox
+    Friend WithEvents txtRequestID As TextBox
     Friend WithEvents Label8 As Label
 End Class

@@ -5,12 +5,22 @@ Public Class frmDocumentManagement
     Private Sub frmDocumentManagement_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         RefreshUserSession()
 
+        ' Lock Document ID field so users cannot edit primary key values
+        txtDocumentID.ReadOnly = True
+
+        ' Enable full-row selection for the DataGridView
+        dgvDocument.SelectionMode = DataGridViewSelectionMode.FullRowSelect
+        dgvDocument.MultiSelect = False
+
         ' Initialize and start real-time clock timer
         Timer1.Interval = 1000
         Timer1.Start()
         UpdateFooterDateTime()
 
         LoadDocuments()
+
+        ' Keep Document ID clear on initial load
+        ClearFields()
     End Sub
 
     Private Sub frmDocumentManagement_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
@@ -34,6 +44,21 @@ Public Class frmDocumentManagement
         lbldatetime.Text = DateTime.Now.ToString("dddd, MMMM d, yyyy h:mm:ss tt")
     End Sub
 
+    ''' <summary>
+    ''' Automatically generates and sets the next available integer Document ID.
+    ''' </summary>
+    Private Sub SetNextDocumentID()
+        Try
+            Call connection()
+            sql = "SELECT IFNULL(MAX(CAST(DocumentID AS UNSIGNED)), 0) + 1 FROM tbldocuments"
+            cmd = New MySqlCommand(sql, cn)
+            txtDocumentID.Text = cmd.ExecuteScalar().ToString()
+            cn.Close()
+        Catch ex As Exception
+            If cn.State = ConnectionState.Open Then cn.Close()
+        End Try
+    End Sub
+
     Private Sub LoadDocuments()
         Call connection()
         sql = "SELECT * FROM tbldocuments"
@@ -54,15 +79,6 @@ Public Class frmDocumentManagement
         cn.Close()
     End Sub
 
-    Private Function IsDocumentIDExists() As Boolean
-        Call connection()
-        sql = "SELECT COUNT(*) FROM tbldocuments WHERE DocumentID = @id"
-        cmd = New MySqlCommand(sql, cn)
-        cmd.Parameters.AddWithValue("@id", txtDocumentID.Text.Trim())
-        IsDocumentIDExists = Convert.ToInt32(cmd.ExecuteScalar()) > 0
-        cn.Close()
-    End Function
-
     Private Function IsDocumentNameExists(Optional currentDocumentId As String = "") As Boolean
         Call connection()
         If String.IsNullOrEmpty(currentDocumentId) Then
@@ -81,11 +97,7 @@ Public Class frmDocumentManagement
     End Function
 
     Private Function IsValidInput(Optional isEditMode As Boolean = False) As Boolean
-        If String.IsNullOrWhiteSpace(txtDocumentID.Text) Then
-            MsgBox("Fill in Document ID", vbExclamation, "Document Management")
-            txtDocumentID.Focus()
-            Return False
-        ElseIf String.IsNullOrWhiteSpace(txtName.Text) Then
+        If String.IsNullOrWhiteSpace(txtName.Text) Then
             MsgBox("Fill in Document Name", vbExclamation, "Document Management")
             txtName.Focus()
             Return False
@@ -115,22 +127,24 @@ Public Class frmDocumentManagement
     End Function
 
     Private Sub dgvDocument_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvDocument.CellClick
-        If e.RowIndex >= 0 Then
-            txtDocumentID.Text = dgvDocument.Rows(e.RowIndex).Cells(0).Value.ToString()
-            txtName.Text = dgvDocument.Rows(e.RowIndex).Cells(1).Value.ToString()
-            txtDescription.Text = dgvDocument.Rows(e.RowIndex).Cells(2).Value.ToString()
-            txtFee.Text = dgvDocument.Rows(e.RowIndex).Cells(3).Value.ToString()
-            txtStatus.Text = dgvDocument.Rows(e.RowIndex).Cells(4).Value.ToString()
+        If e.RowIndex >= 0 AndAlso e.RowIndex < dgvDocument.Rows.Count Then
+            Dim row As DataGridViewRow = dgvDocument.Rows(e.RowIndex)
+
+            txtDocumentID.Text = If(row.Cells(0).Value IsNot Nothing, row.Cells(0).Value.ToString(), "")
+            txtName.Text = If(row.Cells(1).Value IsNot Nothing, row.Cells(1).Value.ToString(), "")
+            txtDescription.Text = If(row.Cells(2).Value IsNot Nothing, row.Cells(2).Value.ToString(), "")
+            txtFee.Text = If(row.Cells(3).Value IsNot Nothing, row.Cells(3).Value.ToString(), "")
+            txtStatus.Text = If(row.Cells(4).Value IsNot Nothing, row.Cells(4).Value.ToString(), "")
         End If
     End Sub
 
     Private Sub btnAddDocument_Click(sender As Object, e As EventArgs) Handles btnAddDocument.Click
-        If Not IsValidInput(isEditMode:=False) Then Exit Sub
-
-        If IsDocumentIDExists() Then
-            MsgBox("A document with that Document ID already exists.", vbExclamation, "Document Management")
-            Exit Sub
+        ' Generate next available Document ID right before insertion
+        If String.IsNullOrWhiteSpace(txtDocumentID.Text) Then
+            SetNextDocumentID()
         End If
+
+        If Not IsValidInput(isEditMode:=False) Then Exit Sub
 
         Call connection()
         sql = "INSERT INTO tbldocuments (DocumentID, DocumentName, Description, Fee, Status) VALUES (@id, @name, @desc, @fee, @status)"
@@ -143,10 +157,18 @@ Public Class frmDocumentManagement
         cmd.ExecuteNonQuery()
         cn.Close()
 
+        MsgBox("Document added successfully!", vbInformation, "Success")
+
+        ClearFields()
         LoadDocuments()
     End Sub
 
     Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
+        If String.IsNullOrWhiteSpace(txtDocumentID.Text) Then
+            MsgBox("Please select a Document to edit from the list.", vbExclamation, "Validation Error")
+            Exit Sub
+        End If
+
         If Not IsValidInput(isEditMode:=True) Then Exit Sub
 
         Call connection()
@@ -165,12 +187,13 @@ Public Class frmDocumentManagement
         End If
         cn.Close()
 
+        ClearFields()
         LoadDocuments()
     End Sub
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
         If String.IsNullOrWhiteSpace(txtDocumentID.Text) Then
-            MsgBox("Please select or enter a Document ID to delete.", vbInformation, "Validation Error")
+            MsgBox("Please select a Document to delete.", vbInformation, "Validation Error")
             Exit Sub
         End If
 
@@ -184,13 +207,22 @@ Public Class frmDocumentManagement
         cmd.Parameters.AddWithValue("@id", txtDocumentID.Text.Trim())
 
         If cmd.ExecuteNonQuery() > 0 Then
-            MsgBox("Document record successfully deleted.", vbInformation, "Success")
+            MsgBox("Document record successfully set to Inactive.", vbInformation, "Success")
         Else
             MsgBox("No matching Document ID found.", vbExclamation, "Record Not Found")
         End If
         cn.Close()
 
+        ClearFields()
         LoadDocuments()
+    End Sub
+
+    Private Sub ClearFields()
+        txtDocumentID.Clear()
+        txtName.Clear()
+        txtDescription.Clear()
+        txtFee.Clear()
+        txtStatus.Clear()
     End Sub
 
     Private Sub txtsearch_TextChanged(sender As Object, e As EventArgs) Handles txtsearch.TextChanged
@@ -248,10 +280,11 @@ Public Class frmDocumentManagement
     Private Sub btnReport_Click(sender As Object, e As EventArgs) Handles btnReport.Click
         frmReports.Show()
         Me.Hide()
-
     End Sub
+
     Private Sub btnUserManagement_Click(sender As Object, e As EventArgs) Handles btnUserManagement.Click
         frmUserManagement.Show()
         Me.Hide()
     End Sub
+
 End Class
