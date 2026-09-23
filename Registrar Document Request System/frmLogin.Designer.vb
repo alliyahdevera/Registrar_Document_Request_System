@@ -24,13 +24,13 @@ Partial Class frmLogin
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmLogin))
         Me.LoginPanel = New System.Windows.Forms.Panel()
-        Me.Label6 = New System.Windows.Forms.Label()
+        Me.lnklblForgotPass = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Logo = New System.Windows.Forms.PictureBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.PWPanel = New System.Windows.Forms.Panel()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnShowPass = New System.Windows.Forms.Button()
         Me.PW = New System.Windows.Forms.PictureBox()
         Me.txtPassword = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -57,7 +57,7 @@ Partial Class frmLogin
         'LoginPanel
         '
         Me.LoginPanel.BackColor = System.Drawing.Color.White
-        Me.LoginPanel.Controls.Add(Me.Label6)
+        Me.LoginPanel.Controls.Add(Me.lnklblForgotPass)
         Me.LoginPanel.Controls.Add(Me.Label8)
         Me.LoginPanel.Controls.Add(Me.Label7)
         Me.LoginPanel.Controls.Add(Me.Logo)
@@ -76,16 +76,16 @@ Partial Class frmLogin
         Me.LoginPanel.Size = New System.Drawing.Size(600, 723)
         Me.LoginPanel.TabIndex = 24
         '
-        'Label6
+        'lnklblForgotPass
         '
-        Me.Label6.AutoSize = True
-        Me.Label6.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.ForeColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
-        Me.Label6.Location = New System.Drawing.Point(322, 489)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(125, 20)
-        Me.Label6.TabIndex = 27
-        Me.Label6.Text = "Forgot Password?"
+        Me.lnklblForgotPass.AutoSize = True
+        Me.lnklblForgotPass.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lnklblForgotPass.ForeColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
+        Me.lnklblForgotPass.Location = New System.Drawing.Point(322, 489)
+        Me.lnklblForgotPass.Name = "lnklblForgotPass"
+        Me.lnklblForgotPass.Size = New System.Drawing.Size(125, 20)
+        Me.lnklblForgotPass.TabIndex = 27
+        Me.lnklblForgotPass.Text = "Forgot Password?"
         '
         'Label8
         '
@@ -133,7 +133,7 @@ Partial Class frmLogin
         'PWPanel
         '
         Me.PWPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.PWPanel.Controls.Add(Me.Button1)
+        Me.PWPanel.Controls.Add(Me.btnShowPass)
         Me.PWPanel.Controls.Add(Me.PW)
         Me.PWPanel.Controls.Add(Me.txtPassword)
         Me.PWPanel.Location = New System.Drawing.Point(146, 449)
@@ -141,19 +141,19 @@ Partial Class frmLogin
         Me.PWPanel.Size = New System.Drawing.Size(296, 37)
         Me.PWPanel.TabIndex = 18
         '
-        'Button1
+        'btnShowPass
         '
-        Me.Button1.BackgroundImage = CType(resources.GetObject("Button1.BackgroundImage"), System.Drawing.Image)
-        Me.Button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.Button1.FlatAppearance.BorderSize = 0
-        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.Location = New System.Drawing.Point(267, 12)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(20, 12)
-        Me.Button1.TabIndex = 12
-        Me.Button1.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.btnShowPass.BackgroundImage = CType(resources.GetObject("btnShowPass.BackgroundImage"), System.Drawing.Image)
+        Me.btnShowPass.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnShowPass.FlatAppearance.BorderSize = 0
+        Me.btnShowPass.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnShowPass.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnShowPass.Location = New System.Drawing.Point(267, 12)
+        Me.btnShowPass.Name = "btnShowPass"
+        Me.btnShowPass.Size = New System.Drawing.Size(20, 12)
+        Me.btnShowPass.TabIndex = 12
+        Me.btnShowPass.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnShowPass.UseVisualStyleBackColor = True
         '
         'PW
         '
@@ -291,9 +291,9 @@ Partial Class frmLogin
         Me.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnExit.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnExit.ForeColor = System.Drawing.Color.White
-        Me.btnExit.Location = New System.Drawing.Point(1138, 0)
+        Me.btnExit.Location = New System.Drawing.Point(1132, 4)
         Me.btnExit.Name = "btnExit"
-        Me.btnExit.Size = New System.Drawing.Size(36, 23)
+        Me.btnExit.Size = New System.Drawing.Size(41, 36)
         Me.btnExit.TabIndex = 26
         Me.btnExit.Text = "X"
         Me.btnExit.UseVisualStyleBackColor = True
@@ -342,8 +342,8 @@ Partial Class frmLogin
     Friend WithEvents Label4 As Label
     Friend WithEvents Label3 As Label
     Friend WithEvents btnLogin As Button
-    Friend WithEvents Button1 As Button
-    Friend WithEvents Label6 As Label
+    Friend WithEvents btnShowPass As Button
+    Friend WithEvents lnklblForgotPass As Label
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents PictureBox2 As PictureBox
     Friend WithEvents btnExit As Button

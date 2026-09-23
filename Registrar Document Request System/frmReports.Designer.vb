@@ -317,7 +317,7 @@ Partial Class frmReports
         Me.Panel10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel10.Controls.Add(Me.txtSearch)
         Me.Panel10.Controls.Add(Me.PictureBox1)
-        Me.Panel10.Location = New System.Drawing.Point(337, 92)
+        Me.Panel10.Location = New System.Drawing.Point(495, 93)
         Me.Panel10.Name = "Panel10"
         Me.Panel10.Size = New System.Drawing.Size(238, 28)
         Me.Panel10.TabIndex = 72
@@ -359,9 +359,9 @@ Partial Class frmReports
         Me.Label3.Font = New System.Drawing.Font("Segoe UI Semibold", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label3.Location = New System.Drawing.Point(273, 96)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(55, 20)
+        Me.Label3.Size = New System.Drawing.Size(216, 20)
         Me.Label3.TabIndex = 71
-        Me.Label3.Text = "Search"
+        Me.Label3.Text = "Search by Student ID or Name"
         '
         'Label2
         '

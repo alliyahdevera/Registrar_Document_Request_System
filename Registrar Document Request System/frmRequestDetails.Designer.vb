@@ -51,25 +51,25 @@ Partial Class frmRequestDetails
         Me.Amount = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Subtotal = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.btnGenerateReport = New System.Windows.Forms.Button()
+        Me.Label7 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Label5 = New System.Windows.Forms.Label()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.dtpRequestDate = New System.Windows.Forms.DateTimePicker()
-        Me.cboStatus = New System.Windows.Forms.ComboBox()
-        Me.Label23 = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.txtCreatedBy = New System.Windows.Forms.TextBox()
         Me.cboPaymentStatus = New System.Windows.Forms.ComboBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label21 = New System.Windows.Forms.Label()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.btnGenerateReport = New System.Windows.Forms.Button()
+        Me.cboStatus = New System.Windows.Forms.ComboBox()
+        Me.Label23 = New System.Windows.Forms.Label()
         Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.TextBox2 = New System.Windows.Forms.TextBox()
         Me.Button1 = New System.Windows.Forms.Button()
+        Me.Label8 = New System.Windows.Forms.Label()
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
-        Me.Label8 = New System.Windows.Forms.Label()
         Me.Panel11.SuspendLayout()
         Me.Panel8.SuspendLayout()
         Me.Panel15.SuspendLayout()
@@ -387,6 +387,29 @@ Partial Class frmRequestDetails
         Me.Panel1.Size = New System.Drawing.Size(641, 183)
         Me.Panel1.TabIndex = 66
         '
+        'btnGenerateReport
+        '
+        Me.btnGenerateReport.BackColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
+        Me.btnGenerateReport.FlatAppearance.BorderSize = 0
+        Me.btnGenerateReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnGenerateReport.ForeColor = System.Drawing.Color.White
+        Me.btnGenerateReport.Location = New System.Drawing.Point(449, 137)
+        Me.btnGenerateReport.Name = "btnGenerateReport"
+        Me.btnGenerateReport.Size = New System.Drawing.Size(163, 27)
+        Me.btnGenerateReport.TabIndex = 80
+        Me.btnGenerateReport.Text = "Save Payment"
+        Me.btnGenerateReport.UseVisualStyleBackColor = False
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Font = New System.Drawing.Font("Segoe UI Semibold", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.Location = New System.Drawing.Point(320, 55)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(98, 20)
+        Me.Label7.TabIndex = 69
+        Me.Label7.Text = "Amount Paid"
+        '
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.CornflowerBlue
@@ -407,6 +430,15 @@ Partial Class frmRequestDetails
         Me.Label5.TabIndex = 51
         Me.Label5.Text = "Payment Information"
         '
+        'TextBox1
+        '
+        Me.TextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TextBox1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox1.Location = New System.Drawing.Point(449, 52)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(163, 25)
+        Me.TextBox1.TabIndex = 68
+        '
         'dtpRequestDate
         '
         Me.dtpRequestDate.CalendarFont = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -415,26 +447,6 @@ Partial Class frmRequestDetails
         Me.dtpRequestDate.Name = "dtpRequestDate"
         Me.dtpRequestDate.Size = New System.Drawing.Size(209, 25)
         Me.dtpRequestDate.TabIndex = 58
-        '
-        'cboStatus
-        '
-        Me.cboStatus.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cboStatus.FormattingEnabled = True
-        Me.cboStatus.Items.AddRange(New Object() {"Pending", "Processing", "Ready for Release", "Released", "Cancelled"})
-        Me.cboStatus.Location = New System.Drawing.Point(136, 95)
-        Me.cboStatus.Name = "cboStatus"
-        Me.cboStatus.Size = New System.Drawing.Size(229, 25)
-        Me.cboStatus.TabIndex = 57
-        '
-        'Label23
-        '
-        Me.Label23.AutoSize = True
-        Me.Label23.Font = New System.Drawing.Font("Segoe UI Semibold", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label23.Location = New System.Drawing.Point(37, 96)
-        Me.Label23.Name = "Label23"
-        Me.Label23.Size = New System.Drawing.Size(50, 20)
-        Me.Label23.TabIndex = 56
-        Me.Label23.Text = "Status"
         '
         'Label16
         '
@@ -485,37 +497,25 @@ Partial Class frmRequestDetails
         Me.Label21.TabIndex = 39
         Me.Label21.Text = "Payment Status"
         '
-        'TextBox1
+        'cboStatus
         '
-        Me.TextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.TextBox1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(449, 52)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(163, 25)
-        Me.TextBox1.TabIndex = 68
+        Me.cboStatus.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cboStatus.FormattingEnabled = True
+        Me.cboStatus.Items.AddRange(New Object() {"Pending", "Processing", "Ready for Release", "Released", "Cancelled"})
+        Me.cboStatus.Location = New System.Drawing.Point(136, 95)
+        Me.cboStatus.Name = "cboStatus"
+        Me.cboStatus.Size = New System.Drawing.Size(229, 25)
+        Me.cboStatus.TabIndex = 57
         '
-        'Label7
+        'Label23
         '
-        Me.Label7.AutoSize = True
-        Me.Label7.Font = New System.Drawing.Font("Segoe UI Semibold", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(320, 55)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(98, 20)
-        Me.Label7.TabIndex = 69
-        Me.Label7.Text = "Amount Paid"
-        '
-        'btnGenerateReport
-        '
-        Me.btnGenerateReport.BackColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
-        Me.btnGenerateReport.FlatAppearance.BorderSize = 0
-        Me.btnGenerateReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnGenerateReport.ForeColor = System.Drawing.Color.White
-        Me.btnGenerateReport.Location = New System.Drawing.Point(449, 137)
-        Me.btnGenerateReport.Name = "btnGenerateReport"
-        Me.btnGenerateReport.Size = New System.Drawing.Size(163, 27)
-        Me.btnGenerateReport.TabIndex = 80
-        Me.btnGenerateReport.Text = "Save Payment"
-        Me.btnGenerateReport.UseVisualStyleBackColor = False
+        Me.Label23.AutoSize = True
+        Me.Label23.Font = New System.Drawing.Font("Segoe UI Semibold", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label23.Location = New System.Drawing.Point(37, 96)
+        Me.Label23.Name = "Label23"
+        Me.Label23.Size = New System.Drawing.Size(50, 20)
+        Me.Label23.TabIndex = 56
+        Me.Label23.Text = "Status"
         '
         'Panel3
         '
@@ -532,6 +532,16 @@ Partial Class frmRequestDetails
         Me.Panel3.Size = New System.Drawing.Size(402, 183)
         Me.Panel3.TabIndex = 81
         '
+        'TextBox2
+        '
+        Me.TextBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TextBox2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox2.Location = New System.Drawing.Point(136, 55)
+        Me.TextBox2.Name = "TextBox2"
+        Me.TextBox2.ReadOnly = True
+        Me.TextBox2.Size = New System.Drawing.Size(229, 25)
+        Me.TextBox2.TabIndex = 79
+        '
         'Button1
         '
         Me.Button1.BackColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
@@ -544,6 +554,16 @@ Partial Class frmRequestDetails
         Me.Button1.TabIndex = 80
         Me.Button1.Text = "Update Status"
         Me.Button1.UseVisualStyleBackColor = False
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Font = New System.Drawing.Font("Segoe UI Semibold", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.Location = New System.Drawing.Point(37, 55)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(82, 20)
+        Me.Label8.TabIndex = 78
+        Me.Label8.Text = "Request ID"
         '
         'Panel4
         '
@@ -565,31 +585,11 @@ Partial Class frmRequestDetails
         Me.Label9.TabIndex = 51
         Me.Label9.Text = "Request Status"
         '
-        'TextBox2
-        '
-        Me.TextBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.TextBox2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox2.Location = New System.Drawing.Point(136, 55)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.ReadOnly = True
-        Me.TextBox2.Size = New System.Drawing.Size(229, 25)
-        Me.TextBox2.TabIndex = 79
-        '
-        'Label8
-        '
-        Me.Label8.AutoSize = True
-        Me.Label8.Font = New System.Drawing.Font("Segoe UI Semibold", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(37, 55)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(82, 20)
-        Me.Label8.TabIndex = 78
-        Me.Label8.Text = "Request ID"
-        '
         'frmRequestDetails
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1121, 857)
+        Me.ClientSize = New System.Drawing.Size(1121, 799)
         Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Panel7)
