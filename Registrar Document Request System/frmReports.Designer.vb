@@ -75,6 +75,11 @@ Partial Class frmReports
         Me.lbltotalrecords = New System.Windows.Forms.Label()
         Me.btnExportExcel = New System.Windows.Forms.Button()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.Button3 = New System.Windows.Forms.Button()
+        Me.lbltotalamount = New System.Windows.Forms.Label()
+        Me.Label9 = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         CType(Me.Logo, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -300,7 +305,7 @@ Partial Class frmReports
         Me.Label15.AutoSize = True
         Me.Label15.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label15.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.Label15.Location = New System.Drawing.Point(272, 53)
+        Me.Label15.Location = New System.Drawing.Point(274, 54)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(189, 15)
         Me.Label15.TabIndex = 74
@@ -312,7 +317,7 @@ Partial Class frmReports
         Me.Panel10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel10.Controls.Add(Me.txtSearch)
         Me.Panel10.Controls.Add(Me.PictureBox1)
-        Me.Panel10.Location = New System.Drawing.Point(335, 88)
+        Me.Panel10.Location = New System.Drawing.Point(337, 92)
         Me.Panel10.Name = "Panel10"
         Me.Panel10.Size = New System.Drawing.Size(238, 28)
         Me.Panel10.TabIndex = 72
@@ -342,7 +347,7 @@ Partial Class frmReports
         Me.Label1.BackColor = System.Drawing.Color.Transparent
         Me.Label1.Font = New System.Drawing.Font("Segoe UI", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
-        Me.Label1.Location = New System.Drawing.Point(269, 21)
+        Me.Label1.Location = New System.Drawing.Point(271, 22)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(103, 32)
         Me.Label1.TabIndex = 73
@@ -352,7 +357,7 @@ Partial Class frmReports
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Segoe UI Semibold", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(271, 92)
+        Me.Label3.Location = New System.Drawing.Point(273, 96)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(55, 20)
         Me.Label3.TabIndex = 71
@@ -362,7 +367,7 @@ Partial Class frmReports
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Segoe UI Semibold", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(271, 141)
+        Me.Label2.Location = New System.Drawing.Point(272, 139)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(81, 20)
         Me.Label2.TabIndex = 75
@@ -372,25 +377,25 @@ Partial Class frmReports
         '
         Me.DateTimePicker1.CalendarFont = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.DateTimePicker1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DateTimePicker1.Location = New System.Drawing.Point(358, 139)
+        Me.DateTimePicker1.Location = New System.Drawing.Point(359, 137)
         Me.DateTimePicker1.Name = "DateTimePicker1"
-        Me.DateTimePicker1.Size = New System.Drawing.Size(234, 25)
+        Me.DateTimePicker1.Size = New System.Drawing.Size(213, 25)
         Me.DateTimePicker1.TabIndex = 76
         '
         'DateTimePicker2
         '
         Me.DateTimePicker2.CalendarFont = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.DateTimePicker2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DateTimePicker2.Location = New System.Drawing.Point(639, 139)
+        Me.DateTimePicker2.Location = New System.Drawing.Point(608, 137)
         Me.DateTimePicker2.Name = "DateTimePicker2"
-        Me.DateTimePicker2.Size = New System.Drawing.Size(234, 25)
+        Me.DateTimePicker2.Size = New System.Drawing.Size(213, 25)
         Me.DateTimePicker2.TabIndex = 78
         '
         'Label6
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Segoe UI Semibold", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(608, 141)
+        Me.Label6.Location = New System.Drawing.Point(577, 139)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(25, 20)
         Me.Label6.TabIndex = 77
@@ -398,13 +403,16 @@ Partial Class frmReports
         '
         'btnGenerateReport
         '
+        Me.btnGenerateReport.BackColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
+        Me.btnGenerateReport.FlatAppearance.BorderSize = 0
         Me.btnGenerateReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnGenerateReport.Location = New System.Drawing.Point(904, 139)
+        Me.btnGenerateReport.ForeColor = System.Drawing.Color.White
+        Me.btnGenerateReport.Location = New System.Drawing.Point(836, 136)
         Me.btnGenerateReport.Name = "btnGenerateReport"
         Me.btnGenerateReport.Size = New System.Drawing.Size(128, 27)
         Me.btnGenerateReport.TabIndex = 79
         Me.btnGenerateReport.Text = "Generate Report"
-        Me.btnGenerateReport.UseVisualStyleBackColor = True
+        Me.btnGenerateReport.UseVisualStyleBackColor = False
         '
         'Panel7
         '
@@ -603,22 +611,87 @@ Partial Class frmReports
         '
         'btnExportExcel
         '
+        Me.btnExportExcel.BackColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.btnExportExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnExportExcel.Location = New System.Drawing.Point(1270, 141)
+        Me.btnExportExcel.Location = New System.Drawing.Point(1269, 771)
         Me.btnExportExcel.Name = "btnExportExcel"
         Me.btnExportExcel.Size = New System.Drawing.Size(128, 27)
         Me.btnExportExcel.TabIndex = 89
         Me.btnExportExcel.Text = "Export to Excel"
-        Me.btnExportExcel.UseVisualStyleBackColor = True
+        Me.btnExportExcel.UseVisualStyleBackColor = False
         '
         'Timer1
         '
+        '
+        'Button1
+        '
+        Me.Button1.BackColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
+        Me.Button1.FlatAppearance.BorderSize = 0
+        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button1.ForeColor = System.Drawing.Color.White
+        Me.Button1.Location = New System.Drawing.Point(1010, 136)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(109, 28)
+        Me.Button1.TabIndex = 90
+        Me.Button1.Text = "Pending Requests"
+        Me.Button1.UseVisualStyleBackColor = False
+        '
+        'Button2
+        '
+        Me.Button2.BackColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
+        Me.Button2.FlatAppearance.BorderSize = 0
+        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button2.ForeColor = System.Drawing.Color.White
+        Me.Button2.Location = New System.Drawing.Point(1242, 136)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(156, 28)
+        Me.Button2.TabIndex = 91
+        Me.Button2.Text = "Request by Document Type"
+        Me.Button2.UseVisualStyleBackColor = False
+        '
+        'Button3
+        '
+        Me.Button3.BackColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
+        Me.Button3.FlatAppearance.BorderSize = 0
+        Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button3.ForeColor = System.Drawing.Color.White
+        Me.Button3.Location = New System.Drawing.Point(1125, 136)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(111, 28)
+        Me.Button3.TabIndex = 92
+        Me.Button3.Text = "Released Request"
+        Me.Button3.UseVisualStyleBackColor = False
+        '
+        'lbltotalamount
+        '
+        Me.lbltotalamount.AutoSize = True
+        Me.lbltotalamount.Font = New System.Drawing.Font("Segoe UI Semibold", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbltotalamount.Location = New System.Drawing.Point(1132, 771)
+        Me.lbltotalamount.Name = "lbltotalamount"
+        Me.lbltotalamount.Size = New System.Drawing.Size(15, 20)
+        Me.lbltotalamount.TabIndex = 94
+        Me.lbltotalamount.Text = "-"
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Font = New System.Drawing.Font("Segoe UI Semibold", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label9.Location = New System.Drawing.Point(1024, 771)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(105, 20)
+        Me.Label9.TabIndex = 93
+        Me.Label9.Text = "Total Amount:"
         '
         'frmReports
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1424, 836)
+        Me.Controls.Add(Me.lbltotalamount)
+        Me.Controls.Add(Me.Label9)
+        Me.Controls.Add(Me.Button3)
+        Me.Controls.Add(Me.Button2)
+        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.btnExportExcel)
         Me.Controls.Add(Me.lbltotalrecords)
         Me.Controls.Add(Me.lbldatetime)
@@ -709,4 +782,9 @@ Partial Class frmReports
     Friend WithEvents lbltotalrecords As Label
     Friend WithEvents btnExportExcel As Button
     Friend WithEvents Timer1 As Timer
+    Friend WithEvents Button1 As Button
+    Friend WithEvents Button2 As Button
+    Friend WithEvents Button3 As Button
+    Friend WithEvents lbltotalamount As Label
+    Friend WithEvents Label9 As Label
 End Class
