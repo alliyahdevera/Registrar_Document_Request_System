@@ -88,6 +88,12 @@ Partial Class frmMainMenu
         Me.Label15 = New System.Windows.Forms.Label()
         Me.tmrDateTime = New System.Windows.Forms.Timer(Me.components)
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         CType(Me.Logo, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -106,6 +112,7 @@ Partial Class frmMainMenu
         CType(Me.chtMostreqdoc, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlrecentreqdoc.SuspendLayout()
         CType(Me.dgvrecentreqdoc, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label1
@@ -333,10 +340,11 @@ Partial Class frmMainMenu
         'Panel5
         '
         Me.Panel5.BackColor = System.Drawing.Color.White
+        Me.Panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel5.Controls.Add(Me.PictureBox1)
         Me.Panel5.Controls.Add(Me.lbltotalstudents)
         Me.Panel5.Controls.Add(Me.Label2)
-        Me.Panel5.Location = New System.Drawing.Point(284, 74)
+        Me.Panel5.Location = New System.Drawing.Point(284, 73)
         Me.Panel5.Name = "Panel5"
         Me.Panel5.Size = New System.Drawing.Size(246, 111)
         Me.Panel5.TabIndex = 28
@@ -378,10 +386,11 @@ Partial Class frmMainMenu
         'Panel6
         '
         Me.Panel6.BackColor = System.Drawing.Color.White
+        Me.Panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel6.Controls.Add(Me.PictureBox2)
         Me.Panel6.Controls.Add(Me.lbltotrequests)
         Me.Panel6.Controls.Add(Me.Label6)
-        Me.Panel6.Location = New System.Drawing.Point(574, 74)
+        Me.Panel6.Location = New System.Drawing.Point(574, 73)
         Me.Panel6.Name = "Panel6"
         Me.Panel6.Size = New System.Drawing.Size(246, 111)
         Me.Panel6.TabIndex = 32
@@ -423,10 +432,11 @@ Partial Class frmMainMenu
         'Panel7
         '
         Me.Panel7.BackColor = System.Drawing.Color.White
+        Me.Panel7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel7.Controls.Add(Me.PictureBox3)
         Me.Panel7.Controls.Add(Me.lblpendingrequests)
         Me.Panel7.Controls.Add(Me.Label7)
-        Me.Panel7.Location = New System.Drawing.Point(860, 74)
+        Me.Panel7.Location = New System.Drawing.Point(860, 73)
         Me.Panel7.Name = "Panel7"
         Me.Panel7.Size = New System.Drawing.Size(246, 111)
         Me.Panel7.TabIndex = 33
@@ -468,10 +478,11 @@ Partial Class frmMainMenu
         'Panel8
         '
         Me.Panel8.BackColor = System.Drawing.Color.White
+        Me.Panel8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel8.Controls.Add(Me.PictureBox4)
         Me.Panel8.Controls.Add(Me.lblcompleted)
         Me.Panel8.Controls.Add(Me.Label9)
-        Me.Panel8.Location = New System.Drawing.Point(1145, 74)
+        Me.Panel8.Location = New System.Drawing.Point(1145, 73)
         Me.Panel8.Name = "Panel8"
         Me.Panel8.Size = New System.Drawing.Size(246, 111)
         Me.Panel8.TabIndex = 34
@@ -523,19 +534,20 @@ Partial Class frmMainMenu
         Series1.Legend = "Legend1"
         Series1.Name = "Series1"
         Me.chtdocreqpermonth.Series.Add(Series1)
-        Me.chtdocreqpermonth.Size = New System.Drawing.Size(541, 198)
+        Me.chtdocreqpermonth.Size = New System.Drawing.Size(528, 198)
         Me.chtdocreqpermonth.TabIndex = 35
         Me.chtdocreqpermonth.Text = "Chart1"
         '
         'pnlDocreqpermonth
         '
         Me.pnlDocreqpermonth.BackColor = System.Drawing.Color.White
+        Me.pnlDocreqpermonth.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.pnlDocreqpermonth.Controls.Add(Me.cboDocreqpermonth)
         Me.pnlDocreqpermonth.Controls.Add(Me.Label3)
         Me.pnlDocreqpermonth.Controls.Add(Me.chtdocreqpermonth)
-        Me.pnlDocreqpermonth.Location = New System.Drawing.Point(847, 512)
+        Me.pnlDocreqpermonth.Location = New System.Drawing.Point(860, 508)
         Me.pnlDocreqpermonth.Name = "pnlDocreqpermonth"
-        Me.pnlDocreqpermonth.Size = New System.Drawing.Size(547, 282)
+        Me.pnlDocreqpermonth.Size = New System.Drawing.Size(534, 282)
         Me.pnlDocreqpermonth.TabIndex = 37
         '
         'cboDocreqpermonth
@@ -551,7 +563,7 @@ Partial Class frmMainMenu
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(23, 17)
+        Me.Label3.Location = New System.Drawing.Point(17, 17)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(264, 21)
         Me.Label3.TabIndex = 36
@@ -560,17 +572,19 @@ Partial Class frmMainMenu
         'pnlreqstatus
         '
         Me.pnlreqstatus.BackColor = System.Drawing.Color.White
+        Me.pnlreqstatus.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.pnlreqstatus.Controls.Add(Me.DataGridView1)
         Me.pnlreqstatus.Controls.Add(Me.Label8)
-        Me.pnlreqstatus.Location = New System.Drawing.Point(961, 209)
+        Me.pnlreqstatus.Location = New System.Drawing.Point(860, 204)
         Me.pnlreqstatus.Name = "pnlreqstatus"
-        Me.pnlreqstatus.Size = New System.Drawing.Size(432, 282)
+        Me.pnlreqstatus.Size = New System.Drawing.Size(533, 282)
         Me.pnlreqstatus.TabIndex = 38
         '
         'Label8
         '
         Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(19, 18)
+        Me.Label8.Location = New System.Drawing.Point(12, 15)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(151, 21)
         Me.Label8.TabIndex = 36
@@ -579,11 +593,12 @@ Partial Class frmMainMenu
         'pnlmostreqdoc
         '
         Me.pnlmostreqdoc.BackColor = System.Drawing.Color.White
+        Me.pnlmostreqdoc.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.pnlmostreqdoc.Controls.Add(Me.Label10)
         Me.pnlmostreqdoc.Controls.Add(Me.chtMostreqdoc)
-        Me.pnlmostreqdoc.Location = New System.Drawing.Point(284, 512)
+        Me.pnlmostreqdoc.Location = New System.Drawing.Point(284, 508)
         Me.pnlmostreqdoc.Name = "pnlmostreqdoc"
-        Me.pnlmostreqdoc.Size = New System.Drawing.Size(530, 282)
+        Me.pnlmostreqdoc.Size = New System.Drawing.Size(536, 282)
         Me.pnlmostreqdoc.TabIndex = 38
         '
         'Label10
@@ -616,12 +631,13 @@ Partial Class frmMainMenu
         'pnlrecentreqdoc
         '
         Me.pnlrecentreqdoc.BackColor = System.Drawing.Color.White
+        Me.pnlrecentreqdoc.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.pnlrecentreqdoc.Controls.Add(Me.btnViewReq)
         Me.pnlrecentreqdoc.Controls.Add(Me.dgvrecentreqdoc)
         Me.pnlrecentreqdoc.Controls.Add(Me.Label11)
-        Me.pnlrecentreqdoc.Location = New System.Drawing.Point(284, 210)
+        Me.pnlrecentreqdoc.Location = New System.Drawing.Point(284, 205)
         Me.pnlrecentreqdoc.Name = "pnlrecentreqdoc"
-        Me.pnlrecentreqdoc.Size = New System.Drawing.Size(648, 282)
+        Me.pnlrecentreqdoc.Size = New System.Drawing.Size(536, 282)
         Me.pnlrecentreqdoc.TabIndex = 39
         '
         'btnViewReq
@@ -629,7 +645,7 @@ Partial Class frmMainMenu
         Me.btnViewReq.BackColor = System.Drawing.Color.Navy
         Me.btnViewReq.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnViewReq.ForeColor = System.Drawing.Color.White
-        Me.btnViewReq.Location = New System.Drawing.Point(527, 15)
+        Me.btnViewReq.Location = New System.Drawing.Point(423, 14)
         Me.btnViewReq.Name = "btnViewReq"
         Me.btnViewReq.Size = New System.Drawing.Size(107, 23)
         Me.btnViewReq.TabIndex = 38
@@ -642,7 +658,7 @@ Partial Class frmMainMenu
         Me.dgvrecentreqdoc.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.RequestNo, Me.StudentName, Me.Document, Me.Status, Me.DateRequested})
         Me.dgvrecentreqdoc.Location = New System.Drawing.Point(0, 52)
         Me.dgvrecentreqdoc.Name = "dgvrecentreqdoc"
-        Me.dgvrecentreqdoc.Size = New System.Drawing.Size(648, 229)
+        Me.dgvrecentreqdoc.Size = New System.Drawing.Size(536, 229)
         Me.dgvrecentreqdoc.TabIndex = 37
         '
         'RequestNo
@@ -758,6 +774,43 @@ Partial Class frmMainMenu
         'Timer1
         '
         '
+        'DataGridView1
+        '
+        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn5})
+        Me.DataGridView1.Location = New System.Drawing.Point(0, 52)
+        Me.DataGridView1.Name = "DataGridView1"
+        Me.DataGridView1.Size = New System.Drawing.Size(536, 229)
+        Me.DataGridView1.TabIndex = 38
+        '
+        'DataGridViewTextBoxColumn1
+        '
+        Me.DataGridViewTextBoxColumn1.HeaderText = "Request #"
+        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
+        '
+        'DataGridViewTextBoxColumn2
+        '
+        Me.DataGridViewTextBoxColumn2.HeaderText = "Student Name"
+        Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
+        Me.DataGridViewTextBoxColumn2.Width = 150
+        '
+        'DataGridViewTextBoxColumn3
+        '
+        Me.DataGridViewTextBoxColumn3.HeaderText = "Document"
+        Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
+        Me.DataGridViewTextBoxColumn3.Width = 150
+        '
+        'DataGridViewTextBoxColumn4
+        '
+        Me.DataGridViewTextBoxColumn4.HeaderText = "Status"
+        Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
+        '
+        'DataGridViewTextBoxColumn5
+        '
+        Me.DataGridViewTextBoxColumn5.HeaderText = "Date Requested"
+        Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
+        Me.DataGridViewTextBoxColumn5.Width = 105
+        '
         'frmMainMenu
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -809,6 +862,7 @@ Partial Class frmMainMenu
         Me.pnlrecentreqdoc.ResumeLayout(False)
         Me.pnlrecentreqdoc.PerformLayout()
         CType(Me.dgvrecentreqdoc, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -871,4 +925,10 @@ Partial Class frmMainMenu
     Friend WithEvents Label15 As Label
     Friend WithEvents tmrDateTime As Timer
     Friend WithEvents Timer1 As Timer
+    Friend WithEvents DataGridView1 As DataGridView
+    Friend WithEvents DataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn3 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn4 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn5 As DataGridViewTextBoxColumn
 End Class

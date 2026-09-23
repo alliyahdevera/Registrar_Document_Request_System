@@ -180,8 +180,4 @@ Public Class frmMainMenu
         frmUserManagement.Show()
         Me.Hide()
     End Sub
-
-    Private Sub pnlreqstatus_Paint(sender As Object, e As PaintEventArgs) Handles pnlreqstatus.Paint
-
-    End Sub
 End Class

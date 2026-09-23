@@ -640,6 +640,7 @@ Partial Class frmReports
         Me.Controls.Add(Me.Label3)
         Me.Controls.Add(Me.Panel1)
         Me.Name = "frmReports"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "frmReports"
         Me.Panel1.ResumeLayout(False)
         Me.Panel2.ResumeLayout(False)

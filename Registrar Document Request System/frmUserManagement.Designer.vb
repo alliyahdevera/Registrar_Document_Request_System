@@ -73,6 +73,9 @@ Partial Class frmUserManagement
         Me.Label2 = New System.Windows.Forms.Label()
         Me.btnEdit = New System.Windows.Forms.Button()
         Me.dgvUsers = New System.Windows.Forms.DataGridView()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.btnAdd = New System.Windows.Forms.Button()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.UserID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Username = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Password = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -80,9 +83,6 @@ Partial Class frmUserManagement
         Me.LastName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Role = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Status = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.btnAdd = New System.Windows.Forms.Button()
-        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         CType(Me.Logo, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -99,7 +99,7 @@ Partial Class frmUserManagement
         Me.lbldatetime.BackColor = System.Drawing.Color.Transparent
         Me.lbldatetime.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbldatetime.ForeColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
-        Me.lbldatetime.Location = New System.Drawing.Point(843, 803)
+        Me.lbldatetime.Location = New System.Drawing.Point(843, 807)
         Me.lbldatetime.Name = "lbldatetime"
         Me.lbldatetime.Size = New System.Drawing.Size(16, 21)
         Me.lbldatetime.TabIndex = 84
@@ -111,7 +111,7 @@ Partial Class frmUserManagement
         Me.Label19.BackColor = System.Drawing.Color.Transparent
         Me.Label19.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label19.ForeColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
-        Me.Label19.Location = New System.Drawing.Point(771, 803)
+        Me.Label19.Location = New System.Drawing.Point(771, 807)
         Me.Label19.Name = "Label19"
         Me.Label19.Size = New System.Drawing.Size(65, 21)
         Me.Label19.TabIndex = 83
@@ -123,7 +123,7 @@ Partial Class frmUserManagement
         Me.lblposition.BackColor = System.Drawing.Color.Transparent
         Me.lblposition.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblposition.ForeColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
-        Me.lblposition.Location = New System.Drawing.Point(582, 803)
+        Me.lblposition.Location = New System.Drawing.Point(582, 807)
         Me.lblposition.Name = "lblposition"
         Me.lblposition.Size = New System.Drawing.Size(82, 21)
         Me.lblposition.TabIndex = 82
@@ -135,7 +135,7 @@ Partial Class frmUserManagement
         Me.Label17.BackColor = System.Drawing.Color.Transparent
         Me.Label17.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label17.ForeColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
-        Me.Label17.Location = New System.Drawing.Point(516, 803)
+        Me.Label17.Location = New System.Drawing.Point(516, 807)
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(68, 21)
         Me.Label17.TabIndex = 81
@@ -147,7 +147,7 @@ Partial Class frmUserManagement
         Me.lblname.BackColor = System.Drawing.Color.Transparent
         Me.lblname.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblname.ForeColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
-        Me.lblname.Location = New System.Drawing.Point(321, 803)
+        Me.lblname.Location = New System.Drawing.Point(321, 807)
         Me.lblname.Name = "lblname"
         Me.lblname.Size = New System.Drawing.Size(53, 21)
         Me.lblname.TabIndex = 80
@@ -159,7 +159,7 @@ Partial Class frmUserManagement
         Me.Label16.BackColor = System.Drawing.Color.Transparent
         Me.Label16.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label16.ForeColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
-        Me.Label16.Location = New System.Drawing.Point(271, 803)
+        Me.Label16.Location = New System.Drawing.Point(271, 807)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(55, 21)
         Me.Label16.TabIndex = 79
@@ -494,7 +494,7 @@ Partial Class frmUserManagement
         '
         Me.cboStatus.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboStatus.FormattingEnabled = True
-        Me.cboStatus.Items.AddRange(New Object() {"1st Year", "2nd Year", "3rd Year", "4th year"})
+        Me.cboStatus.Items.AddRange(New Object() {"Active", "Inactive"})
         Me.cboStatus.Location = New System.Drawing.Point(883, 97)
         Me.cboStatus.Name = "cboStatus"
         Me.cboStatus.Size = New System.Drawing.Size(213, 28)
@@ -504,14 +504,7 @@ Partial Class frmUserManagement
         '
         Me.cboRoles.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboRoles.FormattingEnabled = True
-        Me.cboRoles.Items.AddRange(New Object() {"Bachelor of Science in Psychology  ", "Bachelor of Science in Accountancy  ", "Bachelor of Science in Customs Administration  ", "Bachelor of Science in Business Administration - Major in Marketing Management  ", "Bachelor of Science in Business Administration - Major in Financial Management  ", "Bachelor of Science in Business Administration - Major in Human Resource Developm" &
-                "ent Management  ", "Bachelor of Science in Computer Science  ", "Bachelor of Science in Information Technology  ", "Bachelor of Science in Criminology  ", "Bachelor of Elementary Education  Bachelor of Secondary Education - Major in Engl" &
-                "ish  ", "Bachelor of Secondary Education - Major in Filipino  ", "Bachelor of Secondary Education - Major in Mathematics  ", "Bachelor of Technical Vocational Teacher Education - Major in Automotive Technolo" &
-                "gy  ", "Bachelor of Technical Vocational Teacher Education - Major in Computer Programmin" &
-                "g", "Bachelor of Technical Vocational Teacher Education - Major in Food Service Manage" &
-                "ment  ", "Bachelor of Technical Vocational Teacher Education - Major in Electronics Technol" &
-                "ogy", "Bachelor of Technical Vocational Teacher Education - Major in Welding and Fabrica" &
-                "tion  ", "Bachelor of Science in Industrial Engineering  ", "Bachelor of Science in Computer Engineering ", "Juris Doctor Program  ", "Bachelor of Science in Real Estate Management", "Bachelor of Science in Tourism Management  ", "Bachelor of Science in Hospitality Management  ", "Diploma in Information and Communication Technology  ", "Diploma in Hotel and Restaurant Services  "})
+        Me.cboRoles.Items.AddRange(New Object() {"Administrator", "Registrar Staff"})
         Me.cboRoles.Location = New System.Drawing.Point(883, 56)
         Me.cboRoles.Name = "cboRoles"
         Me.cboRoles.Size = New System.Drawing.Size(213, 28)
@@ -685,54 +678,6 @@ Partial Class frmUserManagement
         Me.dgvUsers.Size = New System.Drawing.Size(1123, 471)
         Me.dgvUsers.TabIndex = 70
         '
-        'UserID
-        '
-        Me.UserID.HeaderText = "UserID"
-        Me.UserID.MinimumWidth = 6
-        Me.UserID.Name = "UserID"
-        Me.UserID.Width = 130
-        '
-        'Username
-        '
-        Me.Username.HeaderText = "Username"
-        Me.Username.MinimumWidth = 6
-        Me.Username.Name = "Username"
-        Me.Username.Width = 135
-        '
-        'Password
-        '
-        Me.Password.HeaderText = "Password"
-        Me.Password.Name = "Password"
-        Me.Password.Width = 130
-        '
-        'FirstName
-        '
-        Me.FirstName.HeaderText = "First Name"
-        Me.FirstName.MinimumWidth = 6
-        Me.FirstName.Name = "FirstName"
-        Me.FirstName.Width = 140
-        '
-        'LastName
-        '
-        Me.LastName.HeaderText = "Last Name"
-        Me.LastName.MinimumWidth = 6
-        Me.LastName.Name = "LastName"
-        Me.LastName.Width = 140
-        '
-        'Role
-        '
-        Me.Role.HeaderText = "Role"
-        Me.Role.MinimumWidth = 6
-        Me.Role.Name = "Role"
-        Me.Role.Width = 140
-        '
-        'Status
-        '
-        Me.Status.HeaderText = "Status"
-        Me.Status.MinimumWidth = 6
-        Me.Status.Name = "Status"
-        Me.Status.Width = 125
-        '
         'Label1
         '
         Me.Label1.AutoSize = True
@@ -761,6 +706,54 @@ Partial Class frmUserManagement
         'Timer1
         '
         '
+        'UserID
+        '
+        Me.UserID.HeaderText = "UserID"
+        Me.UserID.MinimumWidth = 6
+        Me.UserID.Name = "UserID"
+        Me.UserID.Width = 130
+        '
+        'Username
+        '
+        Me.Username.HeaderText = "Username"
+        Me.Username.MinimumWidth = 6
+        Me.Username.Name = "Username"
+        Me.Username.Width = 150
+        '
+        'Password
+        '
+        Me.Password.HeaderText = "Password"
+        Me.Password.Name = "Password"
+        Me.Password.Width = 150
+        '
+        'FirstName
+        '
+        Me.FirstName.HeaderText = "First Name"
+        Me.FirstName.MinimumWidth = 6
+        Me.FirstName.Name = "FirstName"
+        Me.FirstName.Width = 190
+        '
+        'LastName
+        '
+        Me.LastName.HeaderText = "Last Name"
+        Me.LastName.MinimumWidth = 6
+        Me.LastName.Name = "LastName"
+        Me.LastName.Width = 190
+        '
+        'Role
+        '
+        Me.Role.HeaderText = "Role"
+        Me.Role.MinimumWidth = 6
+        Me.Role.Name = "Role"
+        Me.Role.Width = 135
+        '
+        'Status
+        '
+        Me.Status.HeaderText = "Status"
+        Me.Status.MinimumWidth = 6
+        Me.Status.Name = "Status"
+        Me.Status.Width = 125
+        '
         'frmUserManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -783,6 +776,7 @@ Partial Class frmUserManagement
         Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.btnAdd)
         Me.Name = "frmUserManagement"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "frmUserManagement"
         Me.Panel1.ResumeLayout(False)
         Me.Panel2.ResumeLayout(False)
