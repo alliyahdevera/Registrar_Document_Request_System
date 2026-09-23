@@ -3,9 +3,7 @@
 Public Class frmRequestList
 
     Private Sub frmRequestList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ' Set bottom footer values
-        lblname.Text = CurrentUser.FullName
-        lblposition.Text = CurrentUser.Role
+        RefreshUserSession()
 
         ' Initialize and start real-time clock timer
         Timer1.Interval = 1000
@@ -17,6 +15,15 @@ Public Class frmRequestList
 
         ' Load request data
         LoadRequests()
+    End Sub
+
+    Private Sub frmRequestList_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
+        RefreshUserSession()
+    End Sub
+
+    Private Sub RefreshUserSession()
+        lblname.Text = CurrentUser.FullName
+        lblposition.Text = CurrentUser.Role
     End Sub
 
     ' Real-time date/time clock event
@@ -199,6 +206,11 @@ Public Class frmRequestList
 
     Private Sub btnReports_Click(sender As Object, e As EventArgs) Handles btnReports.Click
         frmReports.Show()
+        Me.Hide()
+    End Sub
+
+    Private Sub btnUserManagement_Click(sender As Object, e As EventArgs) Handles btnUserManagement.Click
+        frmUserManagement.Show()
         Me.Hide()
     End Sub
 End Class

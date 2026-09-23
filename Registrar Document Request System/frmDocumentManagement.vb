@@ -3,13 +3,7 @@
 Public Class frmDocumentManagement
 
     Private Sub frmDocumentManagement_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If CurrentUser.Role <> "Administrator" Then
-            btnUserManagement.Visible = False
-        End If
-
-        ' Set bottom footer values
-        lblname.Text = CurrentUser.FullName
-        lblposition.Text = CurrentUser.Role
+        RefreshUserSession()
 
         ' Initialize and start real-time clock timer
         Timer1.Interval = 1000
@@ -17,6 +11,18 @@ Public Class frmDocumentManagement
         UpdateFooterDateTime()
 
         LoadDocuments()
+    End Sub
+
+    Private Sub frmDocumentManagement_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
+        RefreshUserSession()
+    End Sub
+
+    Private Sub RefreshUserSession()
+        btnUserManagement.Visible = (CurrentUser.Role = "Administrator")
+
+        ' Set bottom footer values
+        lblname.Text = CurrentUser.FullName
+        lblposition.Text = CurrentUser.Role
     End Sub
 
     ' Real-time date/time clock event
@@ -243,5 +249,9 @@ Public Class frmDocumentManagement
         frmReports.Show()
         Me.Hide()
 
+    End Sub
+    Private Sub btnUserManagement_Click(sender As Object, e As EventArgs) Handles btnUserManagement.Click
+        frmUserManagement.Show()
+        Me.Hide()
     End Sub
 End Class

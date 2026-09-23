@@ -4,13 +4,7 @@ Public Class frmNewRequest
     Private currentDocFee As Decimal = 0
 
     Private Sub frmNewRequest_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If CurrentUser.Role <> "Administrator" Then
-            btnReports.Visible = False
-        End If
-
-        ' Set bottom footer values without repeating visual prefixes
-        lblname.Text = CurrentUser.FullName
-        lblposition.Text = CurrentUser.Role
+        RefreshUserSession()
 
         ' Start real-time clock timer
         Timer1.Interval = 1000
@@ -30,6 +24,25 @@ Public Class frmNewRequest
         RecalculateTotal()
     End Sub
 
+    ' Re-applies the logged-in user's info to this form every time it becomes
+    ' visible again (also regenerates the Request No., as before). Navigation
+    ' between screens uses Show()/Hide() rather than Close(), so a form that was
+    ' already created keeps showing whoever was logged in when it first loaded
+    ' unless we also refresh here.
+    Private Sub frmNewRequest_Activated(sender As Object, e As EventArgs) Handles Me.Activated
+        RefreshUserSession()
+        txtCreatedBy.Text = CurrentUser.FullName
+        GenerateRequestNo()
+    End Sub
+
+    Private Sub RefreshUserSession()
+        btnReports.Visible = (CurrentUser.Role = "Administrator")
+
+        ' Set bottom footer values without repeating visual prefixes
+        lblname.Text = CurrentUser.FullName
+        lblposition.Text = CurrentUser.Role
+    End Sub
+
     ' Real-time date/time update event
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         UpdateFooterDateTime()
@@ -39,9 +52,6 @@ Public Class frmNewRequest
         lbldatetime.Text = DateTime.Now.ToString("dddd, MMMM d, yyyy h:mm:ss tt")
     End Sub
 
-    Private Sub frmNewRequest_Activated(sender As Object, e As EventArgs) Handles Me.Activated
-        GenerateRequestNo()
-    End Sub
 
     Private Sub LoadDocumentsCombo()
         Call connection()
@@ -380,6 +390,10 @@ Public Class frmNewRequest
 
     Private Sub btnReports_Click(sender As Object, e As EventArgs) Handles btnReports.Click
         frmReports.Show()
+        Me.Hide()
+    End Sub
+    Private Sub btnUserManagement_Click(sender As Object, e As EventArgs) Handles btnUserManagement.Click
+        frmUserManagement.Show()
         Me.Hide()
     End Sub
 End Class

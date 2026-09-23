@@ -2,20 +2,24 @@
 Public Class frmStudentManagement
 
     Private Sub frmStudentManagement_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-        lblname.Text = CurrentUser.FullName
-        lblposition.Text = CurrentUser.Role
-
+        RefreshUserSession()
 
         Timer1.Interval = 1000
         Timer1.Start()
         UpdateFooterDateTime()
 
-
         LoadStudents()
 
-
         SetAddMode()
+    End Sub
+
+    Private Sub frmStudentManagement_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
+        RefreshUserSession()
+    End Sub
+
+    Private Sub RefreshUserSession()
+        lblname.Text = CurrentUser.FullName
+        lblposition.Text = CurrentUser.Role
     End Sub
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         UpdateFooterDateTime()
@@ -291,5 +295,9 @@ Public Class frmStudentManagement
         frmReports.Show()
         Me.Hide()
 
+    End Sub
+    Private Sub btnUserManagement_Click(sender As Object, e As EventArgs) Handles btnUserManagement.Click
+        frmUserManagement.Show()
+        Me.Hide()
     End Sub
 End Class

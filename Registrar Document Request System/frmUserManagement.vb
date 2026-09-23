@@ -1,23 +1,45 @@
 ﻿Imports MySql.Data.MySqlClient
-Imports Org.BouncyCastle.Asn1.Cmp
 
 Public Class frmUserManagement
 
+    ' Real (plain-text) password of the row currently loaded into the form,
+    ' captured when a grid row is clicked. Used so Edit can keep the password
+    ' unchanged when the admin didn't type a new one.
+    Private _originalPassword As String = ""
+
     Private Sub frmUserManagement_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-        lblname.Text = CurrentUser.FullName
-        lblposition.Text = CurrentUser.Role
-
+        RefreshUserSession()
 
         Timer1.Interval = 1000
         Timer1.Start()
         UpdateFooterDateTime()
 
+        ' Mask password characters as they're typed
+        txtPassword.UseSystemPasswordChar = True
+        txtConfirmPassword.UseSystemPasswordChar = True
+
+        ' Hidden column that carries the real password so it can still be
+        ' looked up when saving an edit. Not shown to the user - the visible
+        ' "Password" column shows a display-only hash instead.
+        If Not dgvUsers.Columns.Contains("colRealPassword") Then
+            Dim hiddenCol As New DataGridViewTextBoxColumn()
+            hiddenCol.Name = "colRealPassword"
+            hiddenCol.Visible = False
+            dgvUsers.Columns.Add(hiddenCol)
+        End If
 
         LoadUsers()
 
-
         SetAddMode()
+    End Sub
+
+    Private Sub frmUserManagement_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
+        RefreshUserSession()
+    End Sub
+
+    Private Sub RefreshUserSession()
+        lblname.Text = CurrentUser.FullName
+        lblposition.Text = CurrentUser.Role
     End Sub
 
 
@@ -33,12 +55,19 @@ Public Class frmUserManagement
     Private Sub SetAddMode()
         txtUserID.ReadOnly = False
         txtUserID.BackColor = Color.White
+
+        ' New users are always created Active - lock the combo box so it can't be changed.
+        cboStatus.Text = "Active"
+        cboStatus.Enabled = False
     End Sub
 
 
     Private Sub SetEditMode()
         txtUserID.ReadOnly = True
         txtUserID.BackColor = Color.Gainsboro
+
+        ' Only when editing an existing user can the status be changed.
+        cboStatus.Enabled = True
     End Sub
 
     Private Sub ClearFields()
@@ -50,6 +79,7 @@ Public Class frmUserManagement
         txtLastName.Clear()
         cboRoles.Text = ""
         cboStatus.Text = ""
+        _originalPassword = ""
     End Sub
 
     Private Sub LoadUsers()
@@ -68,11 +98,12 @@ Public Class frmUserManagement
             dgvUsers.Rows.Add(
                 dr("UserID").ToString(),
                 dr("Username").ToString(),
-                dr("Password").ToString(),
+                PasswordHelper.GetDisplayHash(dr("Password").ToString()),
                 firstName,
                 lastName,
                 dr("Role").ToString(),
-                dr("Status").ToString())
+                dr("Status").ToString(),
+                dr("Password").ToString())
         End While
 
         dr.Close()
@@ -81,7 +112,7 @@ Public Class frmUserManagement
 
 
     Private Function BuildFullName() As String
-        Return (txtConfirmPassword.Text.Trim() & " " & txtLastName.Text.Trim()).Trim()
+        Return (txtFirstName.Text.Trim() & " " & txtLastName.Text.Trim()).Trim()
     End Function
 
 
@@ -162,6 +193,9 @@ Public Class frmUserManagement
             cboRole.Text = dgvUsers.Rows(e.RowIndex).Cells(5).Value.ToString()
             cboStatus.Text = dgvUsers.Rows(e.RowIndex).Cells(6).Value.ToString()
 
+            ' Remember the real password behind the displayed hash, in case
+            ' the admin saves the edit without changing it.
+            _originalPassword = dgvUsers.Rows(e.RowIndex).Cells("colRealPassword").Value.ToString()
 
             SetEditMode()
         End If
@@ -220,8 +254,13 @@ Public Class frmUserManagement
               "Role=@role, Status=@status WHERE UserID=@id"
         cmd = New MySqlCommand(sql, cn)
         cmd.Parameters.AddWithValue("@id", txtUserID.Text.Trim())
+        Dim passwordToSave As String = txtPassword.Text.Trim()
+        If passwordToSave = PasswordHelper.GetDisplayHash(_originalPassword) Then
+            passwordToSave = _originalPassword
+        End If
+
         cmd.Parameters.AddWithValue("@uname", txtUsername.Text.Trim())
-        cmd.Parameters.AddWithValue("@pass", txtPassword.Text.Trim())
+        cmd.Parameters.AddWithValue("@pass", passwordToSave)
         cmd.Parameters.AddWithValue("@fullname", BuildFullName())
         cmd.Parameters.AddWithValue("@role", cboRole.Text.Trim())
         cmd.Parameters.AddWithValue("@status", cboStatus.Text.Trim())
@@ -287,11 +326,12 @@ Public Class frmUserManagement
             dgvUsers.Rows.Add(
                 dr("UserID").ToString(),
                 dr("Username").ToString(),
-                dr("Password").ToString(),
+                PasswordHelper.GetDisplayHash(dr("Password").ToString()),
                 firstName,
                 lastName,
                 dr("Role").ToString(),
-                dr("Status").ToString())
+                dr("Status").ToString(),
+                dr("Password").ToString())
         End While
 
         dr.Close()
@@ -341,11 +381,4 @@ Public Class frmUserManagement
         End If
     End Sub
 
-    Private Sub txtLastName_TextChanged(sender As Object, e As EventArgs) Handles txtLastName.TextChanged
-
-    End Sub
-
-    Private Sub cboStatus_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboStatus.SelectedIndexChanged
-
-    End Sub
 End Class

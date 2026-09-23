@@ -5,9 +5,7 @@ Imports System.Text
 Public Class frmReports
 
     Private Sub frmReports_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ' Load footer details from CurrentUser global class
-        lblname.Text = CurrentUser.FullName
-        lblposition.Text = CurrentUser.Role
+        RefreshUserSession()
 
         ' Initialize and start real-time timer
         Timer1.Interval = 1000
@@ -22,6 +20,16 @@ Public Class frmReports
         lbltotalrecords.Text = "-"
     End Sub
 
+    Private Sub frmReports_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
+        RefreshUserSession()
+    End Sub
+
+    Private Sub RefreshUserSession()
+        ' Load footer details from CurrentUser global class
+        lblname.Text = CurrentUser.FullName
+        lblposition.Text = CurrentUser.Role
+    End Sub
+
     ' Real-time date/time clock event
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         UpdateFooterDateTime()
@@ -30,53 +38,60 @@ Public Class frmReports
     Private Sub UpdateFooterDateTime()
         lbldatetime.Text = DateTime.Now.ToString("dddd, MMMM d, yyyy h:mm:ss tt")
     End Sub
-
-    ' Pulls requests within the selected date range (and optional search term),
-    ' with the document tracking trail: Created By, Processed By, Released By.
     Private Sub LoadReports()
-        Call connection()
-        sql = "SELECT r.RequestNo, r.RequestDate, r.StudentID, s.FirstName, s.LastName, " &
-              "GROUP_CONCAT(d.DocumentName SEPARATOR ', ') AS Documents, " &
-              "r.TotalAmount, r.Status, " &
-              "uc.FullName AS CreatedByName, up.FullName AS ProcessedByName, ur.FullName AS ReleasedByName " &
-              "FROM tblrequest r " &
-              "JOIN tblstudents s ON r.StudentID = s.StudentID " &
-              "LEFT JOIN tblrequestdetails rd ON rd.RequestID = r.RequestID " &
-              "LEFT JOIN tbldocuments d ON d.DocumentID = rd.DocumentID " &
-              "LEFT JOIN tblusers uc ON uc.UserID = r.CreatedBy " &
-              "LEFT JOIN tblusers up ON up.UserID = r.ProcessedBy " &
-              "LEFT JOIN tblusers ur ON ur.UserID = r.ReleasedBy " &
-              "WHERE r.RequestDate BETWEEN @from AND @to " &
-              "AND (r.RequestNo LIKE @search OR r.StudentID LIKE @search OR s.LastName LIKE @search) " &
-              "GROUP BY r.RequestID " &
-              "ORDER BY r.RequestDate DESC"
+        Try
+            Call connection()
+            sql = "SELECT r.RequestNo, r.RequestDate, r.StudentID, s.FirstName, s.LastName, " &
+                  "GROUP_CONCAT(d.DocumentName SEPARATOR ', ') AS Documents, " &
+                  "r.TotalAmount, r.Status, " &
+                  "uc.FullName AS CreatedByName, up.FullName AS ProcessedByName, ur.FullName AS ReleasedByName " &
+                  "FROM tblrequest r " &
+                  "JOIN tblstudents s ON r.StudentID = s.StudentID " &
+                  "LEFT JOIN tblrequestdetails rd ON rd.RequestID = r.RequestID " &
+                  "LEFT JOIN tbldocuments d ON d.DocumentID = rd.DocumentID " &
+                  "LEFT JOIN tblusers uc ON uc.UserID = r.CreatedBy " &
+                  "LEFT JOIN tblusers up ON up.UserID = r.ProcessedBy " &
+                  "LEFT JOIN tblusers ur ON ur.UserID = r.ReleasedBy " &
+                  "WHERE r.RequestDate BETWEEN @from AND @to " &
+                  "AND (r.RequestNo LIKE @search OR r.StudentID LIKE @search OR s.LastName LIKE @search OR s.FirstName LIKE @search) " &
+                  "GROUP BY r.RequestID, r.RequestNo, r.RequestDate, r.StudentID, s.FirstName, s.LastName, " &
+                  "r.TotalAmount, r.Status, CreatedByName, ProcessedByName, ReleasedByName " &
+                  "ORDER BY r.RequestDate DESC"
 
-        cmd = New MySqlCommand(sql, cn)
-        cmd.Parameters.AddWithValue("@from", DateTimePicker1.Value.Date)
-        cmd.Parameters.AddWithValue("@to", DateTimePicker2.Value.Date)
-        cmd.Parameters.AddWithValue("@search", "%" & txtSearch.Text.Trim() & "%")
-        dr = cmd.ExecuteReader()
+            cmd = New MySqlCommand(sql, cn)
+            cmd.Parameters.AddWithValue("@from", DateTimePicker1.Value.Date)
+            cmd.Parameters.AddWithValue("@to", DateTimePicker2.Value.Date)
+            cmd.Parameters.AddWithValue("@search", "%" & txtSearch.Text.Trim() & "%")
+            dr = cmd.ExecuteReader()
 
-        dgvReqDoc.Rows.Clear()
-        While dr.Read()
-            dgvReqDoc.Rows.Add(
-                dr("RequestNo").ToString(),
-                Convert.ToDateTime(dr("RequestDate")).ToString("MMM d, yyyy"),
-                dr("StudentID").ToString(),
-                dr("FirstName").ToString(),
-                dr("LastName").ToString(),
-                If(IsDBNull(dr("Documents")), "", dr("Documents").ToString()),
-                Convert.ToDecimal(dr("TotalAmount")).ToString("N2"),
-                dr("Status").ToString(),
-                If(IsDBNull(dr("CreatedByName")), "", dr("CreatedByName").ToString()),
-                If(IsDBNull(dr("ProcessedByName")), "", dr("ProcessedByName").ToString()),
-                If(IsDBNull(dr("ReleasedByName")), "", dr("ReleasedByName").ToString()))
-        End While
+            dgvReqDoc.Rows.Clear()
+            While dr.Read()
+                dgvReqDoc.Rows.Add(
+                    dr("RequestNo").ToString(),
+                    Convert.ToDateTime(dr("RequestDate")).ToString("MMM d, yyyy"),
+                    dr("StudentID").ToString(),
+                    dr("FirstName").ToString(),
+                    dr("LastName").ToString(),
+                    If(IsDBNull(dr("Documents")), "", dr("Documents").ToString()),
+                    Convert.ToDecimal(dr("TotalAmount")).ToString("N2"),
+                    dr("Status").ToString(),
+                    If(IsDBNull(dr("CreatedByName")), "", dr("CreatedByName").ToString()),
+                    If(IsDBNull(dr("ProcessedByName")), "", dr("ProcessedByName").ToString()),
+                    If(IsDBNull(dr("ReleasedByName")), "", dr("ReleasedByName").ToString()))
+            End While
 
-        dr.Close()
-        cn.Close()
+            dr.Close()
+            cn.Close()
 
-        lbltotalrecords.Text = dgvReqDoc.Rows.Count.ToString()
+            lbltotalrecords.Text = dgvReqDoc.Rows.Count.ToString()
+        Catch ex As Exception
+            If cn.State = ConnectionState.Open Then cn.Close()
+            MsgBox("Error loading report: " & ex.Message, vbCritical, "Reports")
+        End Try
+    End Sub
+
+    Private Sub txtSearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearch.TextChanged
+        LoadReports()
     End Sub
 
     Private Sub btnGenerateReport_Click(sender As Object, e As EventArgs) Handles btnGenerateReport.Click
@@ -102,14 +117,13 @@ Public Class frmReports
                 Try
                     Dim sb As New StringBuilder()
 
-                    ' Header row
+
                     Dim headers As New List(Of String)
                     For Each col As DataGridViewColumn In dgvReqDoc.Columns
                         headers.Add(EscapeCsv(col.HeaderText))
                     Next
                     sb.AppendLine(String.Join(",", headers))
 
-                    ' Data rows
                     For Each row As DataGridViewRow In dgvReqDoc.Rows
                         If row.IsNewRow Then Continue For
                         Dim fields As New List(Of String)
@@ -136,7 +150,6 @@ Public Class frmReports
         Return value
     End Function
 
-    ' Navigation Handlers
     Private Sub btnMainMenu_Click(sender As Object, e As EventArgs) Handles btnMainMenu.Click
         frmMainMenu.Show()
         Me.Hide()
@@ -159,6 +172,7 @@ Public Class frmReports
 
     Private Sub btnDocumentRequests_Click(sender As Object, e As EventArgs) Handles btnDocumentRequests.Click
         frmNewRequest.Show()
+        frmNewRequest.Show()
         Me.Hide()
     End Sub
 
@@ -176,6 +190,4 @@ Public Class frmReports
             Me.Close()
         End If
     End Sub
-
-
 End Class

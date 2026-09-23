@@ -3,13 +3,7 @@
 Public Class frmMainMenu
 
     Private Sub frmMainMenu_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        If CurrentUser.Role <> "Administrator" Then
-            btnReport.Visible = False
-        End If
-
-        ' Set bottom footer values
-        lblname.Text = CurrentUser.FullName
-        lblposition.Text = CurrentUser.Role
+        RefreshUserSession()
 
         ' Initialize and start real-time clock timer
         Timer1.Interval = 1000
@@ -24,6 +18,22 @@ Public Class frmMainMenu
 
         ' Load recent paid requests grid
         LoadRecentRequests()
+    End Sub
+
+    ' Re-applies the logged-in user's info to this form every time it becomes
+    ' visible again. Navigation between screens uses Show()/Hide() rather than
+    ' Close(), so a form that was already created keeps showing whoever was
+    ' logged in when it first loaded unless we also refresh here.
+    Private Sub frmMainMenu_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
+        RefreshUserSession()
+    End Sub
+
+    Private Sub RefreshUserSession()
+        btnReport.Visible = (CurrentUser.Role = "Administrator")
+
+        ' Set bottom footer values
+        lblname.Text = CurrentUser.FullName
+        lblposition.Text = CurrentUser.Role
     End Sub
 
     ' Real-time date/time clock event
