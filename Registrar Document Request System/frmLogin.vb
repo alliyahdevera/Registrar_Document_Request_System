@@ -1,6 +1,13 @@
 ﻿Imports MySql.Data.MySqlClient
 
 Public Class frmLogin
+
+    Private Sub frmLogin_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ' Use system password masking (circles/dots) by default
+        txtPassword.UseSystemPasswordChar = True
+        txtPassword.PasswordChar = ControlChars.NullChar
+    End Sub
+
     Private Sub btnLogin_Click(sender As Object, e As EventArgs) Handles btnLogin.Click
         Call connection()
         sql = "SELECT * FROM tblusers WHERE Username=@u AND Password=@p AND Status='Active'"
@@ -25,16 +32,12 @@ Public Class frmLogin
     End Sub
 
     Private Sub btnExit_Click(sender As Object, e As EventArgs) Handles btnExit.Click
-        End
+        Application.Exit()
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        If txtPassword.PasswordChar = "*"c OrElse txtPassword.UseSystemPasswordChar Then
-            txtPassword.PasswordChar = ControlChars.NullChar
-            txtPassword.UseSystemPasswordChar = False
-        Else
-            txtPassword.PasswordChar = "*"c
-            txtPassword.UseSystemPasswordChar = True
-        End If
+        ' Toggle between plain text and system circle masking
+        txtPassword.UseSystemPasswordChar = Not txtPassword.UseSystemPasswordChar
     End Sub
+
 End Class

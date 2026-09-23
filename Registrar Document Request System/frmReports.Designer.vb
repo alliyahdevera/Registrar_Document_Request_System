@@ -75,9 +75,9 @@ Partial Class frmReports
         Me.lbltotalrecords = New System.Windows.Forms.Label()
         Me.btnExportExcel = New System.Windows.Forms.Button()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.Button3 = New System.Windows.Forms.Button()
+        Me.btnPendingRequests = New System.Windows.Forms.Button()
+        Me.btnReqByDocType = New System.Windows.Forms.Button()
+        Me.btnReleasedRequest = New System.Windows.Forms.Button()
         Me.lbltotalamount = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
@@ -623,44 +623,44 @@ Partial Class frmReports
         'Timer1
         '
         '
-        'Button1
+        'btnPendingRequests
         '
-        Me.Button1.BackColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
-        Me.Button1.FlatAppearance.BorderSize = 0
-        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button1.ForeColor = System.Drawing.Color.White
-        Me.Button1.Location = New System.Drawing.Point(1010, 136)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(109, 28)
-        Me.Button1.TabIndex = 90
-        Me.Button1.Text = "Pending Requests"
-        Me.Button1.UseVisualStyleBackColor = False
+        Me.btnPendingRequests.BackColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
+        Me.btnPendingRequests.FlatAppearance.BorderSize = 0
+        Me.btnPendingRequests.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnPendingRequests.ForeColor = System.Drawing.Color.White
+        Me.btnPendingRequests.Location = New System.Drawing.Point(1010, 136)
+        Me.btnPendingRequests.Name = "btnPendingRequests"
+        Me.btnPendingRequests.Size = New System.Drawing.Size(109, 28)
+        Me.btnPendingRequests.TabIndex = 90
+        Me.btnPendingRequests.Text = "Pending Requests"
+        Me.btnPendingRequests.UseVisualStyleBackColor = False
         '
-        'Button2
+        'btnReqByDocType
         '
-        Me.Button2.BackColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
-        Me.Button2.FlatAppearance.BorderSize = 0
-        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button2.ForeColor = System.Drawing.Color.White
-        Me.Button2.Location = New System.Drawing.Point(1242, 136)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(156, 28)
-        Me.Button2.TabIndex = 91
-        Me.Button2.Text = "Request by Document Type"
-        Me.Button2.UseVisualStyleBackColor = False
+        Me.btnReqByDocType.BackColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
+        Me.btnReqByDocType.FlatAppearance.BorderSize = 0
+        Me.btnReqByDocType.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnReqByDocType.ForeColor = System.Drawing.Color.White
+        Me.btnReqByDocType.Location = New System.Drawing.Point(1242, 136)
+        Me.btnReqByDocType.Name = "btnReqByDocType"
+        Me.btnReqByDocType.Size = New System.Drawing.Size(156, 28)
+        Me.btnReqByDocType.TabIndex = 91
+        Me.btnReqByDocType.Text = "Request by Document Type"
+        Me.btnReqByDocType.UseVisualStyleBackColor = False
         '
-        'Button3
+        'btnReleasedRequest
         '
-        Me.Button3.BackColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
-        Me.Button3.FlatAppearance.BorderSize = 0
-        Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button3.ForeColor = System.Drawing.Color.White
-        Me.Button3.Location = New System.Drawing.Point(1125, 136)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(111, 28)
-        Me.Button3.TabIndex = 92
-        Me.Button3.Text = "Released Request"
-        Me.Button3.UseVisualStyleBackColor = False
+        Me.btnReleasedRequest.BackColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
+        Me.btnReleasedRequest.FlatAppearance.BorderSize = 0
+        Me.btnReleasedRequest.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnReleasedRequest.ForeColor = System.Drawing.Color.White
+        Me.btnReleasedRequest.Location = New System.Drawing.Point(1125, 136)
+        Me.btnReleasedRequest.Name = "btnReleasedRequest"
+        Me.btnReleasedRequest.Size = New System.Drawing.Size(111, 28)
+        Me.btnReleasedRequest.TabIndex = 92
+        Me.btnReleasedRequest.Text = "Released Request"
+        Me.btnReleasedRequest.UseVisualStyleBackColor = False
         '
         'lbltotalamount
         '
@@ -689,9 +689,9 @@ Partial Class frmReports
         Me.ClientSize = New System.Drawing.Size(1424, 836)
         Me.Controls.Add(Me.lbltotalamount)
         Me.Controls.Add(Me.Label9)
-        Me.Controls.Add(Me.Button3)
-        Me.Controls.Add(Me.Button2)
-        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.btnReleasedRequest)
+        Me.Controls.Add(Me.btnReqByDocType)
+        Me.Controls.Add(Me.btnPendingRequests)
         Me.Controls.Add(Me.btnExportExcel)
         Me.Controls.Add(Me.lbltotalrecords)
         Me.Controls.Add(Me.lbldatetime)
@@ -782,9 +782,9 @@ Partial Class frmReports
     Friend WithEvents lbltotalrecords As Label
     Friend WithEvents btnExportExcel As Button
     Friend WithEvents Timer1 As Timer
-    Friend WithEvents Button1 As Button
-    Friend WithEvents Button2 As Button
-    Friend WithEvents Button3 As Button
+    Friend WithEvents btnPendingRequests As Button
+    Friend WithEvents btnReqByDocType As Button
+    Friend WithEvents btnReleasedRequest As Button
     Friend WithEvents lbltotalamount As Label
     Friend WithEvents Label9 As Label
 End Class

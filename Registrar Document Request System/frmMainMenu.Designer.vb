@@ -24,12 +24,12 @@ Partial Class frmMainMenu
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMainMenu))
-        Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim ChartArea2 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend2 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series2 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea5 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend5 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series5 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea6 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend6 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series6 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.btnUserManagement = New System.Windows.Forms.Button()
@@ -64,9 +64,15 @@ Partial Class frmMainMenu
         Me.Label9 = New System.Windows.Forms.Label()
         Me.chtdocreqpermonth = New System.Windows.Forms.DataVisualization.Charting.Chart()
         Me.pnlDocreqpermonth = New System.Windows.Forms.Panel()
-        Me.cboDocreqpermonth = New System.Windows.Forms.ComboBox()
+        Me.cboDocreqpermonth1 = New System.Windows.Forms.ComboBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.pnlreqstatus = New System.Windows.Forms.Panel()
+        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.pnlmostreqdoc = New System.Windows.Forms.Panel()
         Me.Label10 = New System.Windows.Forms.Label()
@@ -88,12 +94,6 @@ Partial Class frmMainMenu
         Me.Label15 = New System.Windows.Forms.Label()
         Me.tmrDateTime = New System.Windows.Forms.Timer(Me.components)
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         CType(Me.Logo, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -108,11 +108,11 @@ Partial Class frmMainMenu
         CType(Me.chtdocreqpermonth, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlDocreqpermonth.SuspendLayout()
         Me.pnlreqstatus.SuspendLayout()
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlmostreqdoc.SuspendLayout()
         CType(Me.chtMostreqdoc, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlrecentreqdoc.SuspendLayout()
         CType(Me.dgvrecentreqdoc, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Label1
@@ -523,17 +523,17 @@ Partial Class frmMainMenu
         '
         'chtdocreqpermonth
         '
-        ChartArea1.Name = "ChartArea1"
-        Me.chtdocreqpermonth.ChartAreas.Add(ChartArea1)
-        Legend1.Name = "Legend1"
-        Me.chtdocreqpermonth.Legends.Add(Legend1)
+        ChartArea5.Name = "ChartArea1"
+        Me.chtdocreqpermonth.ChartAreas.Add(ChartArea5)
+        Legend5.Name = "Legend1"
+        Me.chtdocreqpermonth.Legends.Add(Legend5)
         Me.chtdocreqpermonth.Location = New System.Drawing.Point(3, 62)
         Me.chtdocreqpermonth.Name = "chtdocreqpermonth"
-        Series1.ChartArea = "ChartArea1"
-        Series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
-        Series1.Legend = "Legend1"
-        Series1.Name = "Series1"
-        Me.chtdocreqpermonth.Series.Add(Series1)
+        Series5.ChartArea = "ChartArea1"
+        Series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
+        Series5.Legend = "Legend1"
+        Series5.Name = "Series1"
+        Me.chtdocreqpermonth.Series.Add(Series5)
         Me.chtdocreqpermonth.Size = New System.Drawing.Size(528, 198)
         Me.chtdocreqpermonth.TabIndex = 35
         Me.chtdocreqpermonth.Text = "Chart1"
@@ -542,7 +542,7 @@ Partial Class frmMainMenu
         '
         Me.pnlDocreqpermonth.BackColor = System.Drawing.Color.White
         Me.pnlDocreqpermonth.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.pnlDocreqpermonth.Controls.Add(Me.cboDocreqpermonth)
+        Me.pnlDocreqpermonth.Controls.Add(Me.cboDocreqpermonth1)
         Me.pnlDocreqpermonth.Controls.Add(Me.Label3)
         Me.pnlDocreqpermonth.Controls.Add(Me.chtdocreqpermonth)
         Me.pnlDocreqpermonth.Location = New System.Drawing.Point(860, 508)
@@ -550,14 +550,14 @@ Partial Class frmMainMenu
         Me.pnlDocreqpermonth.Size = New System.Drawing.Size(534, 282)
         Me.pnlDocreqpermonth.TabIndex = 37
         '
-        'cboDocreqpermonth
+        'cboDocreqpermonth1
         '
-        Me.cboDocreqpermonth.FormattingEnabled = True
-        Me.cboDocreqpermonth.Items.AddRange(New Object() {"2026"})
-        Me.cboDocreqpermonth.Location = New System.Drawing.Point(417, 20)
-        Me.cboDocreqpermonth.Name = "cboDocreqpermonth"
-        Me.cboDocreqpermonth.Size = New System.Drawing.Size(95, 21)
-        Me.cboDocreqpermonth.TabIndex = 37
+        Me.cboDocreqpermonth1.FormattingEnabled = True
+        Me.cboDocreqpermonth1.Items.AddRange(New Object() {"2026"})
+        Me.cboDocreqpermonth1.Location = New System.Drawing.Point(407, 17)
+        Me.cboDocreqpermonth1.Name = "cboDocreqpermonth1"
+        Me.cboDocreqpermonth1.Size = New System.Drawing.Size(95, 21)
+        Me.cboDocreqpermonth1.TabIndex = 37
         '
         'Label3
         '
@@ -579,6 +579,43 @@ Partial Class frmMainMenu
         Me.pnlreqstatus.Name = "pnlreqstatus"
         Me.pnlreqstatus.Size = New System.Drawing.Size(533, 282)
         Me.pnlreqstatus.TabIndex = 38
+        '
+        'DataGridView1
+        '
+        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn5})
+        Me.DataGridView1.Location = New System.Drawing.Point(0, 52)
+        Me.DataGridView1.Name = "DataGridView1"
+        Me.DataGridView1.Size = New System.Drawing.Size(536, 229)
+        Me.DataGridView1.TabIndex = 38
+        '
+        'DataGridViewTextBoxColumn1
+        '
+        Me.DataGridViewTextBoxColumn1.HeaderText = "Request #"
+        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
+        '
+        'DataGridViewTextBoxColumn2
+        '
+        Me.DataGridViewTextBoxColumn2.HeaderText = "Student Name"
+        Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
+        Me.DataGridViewTextBoxColumn2.Width = 150
+        '
+        'DataGridViewTextBoxColumn3
+        '
+        Me.DataGridViewTextBoxColumn3.HeaderText = "Document"
+        Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
+        Me.DataGridViewTextBoxColumn3.Width = 150
+        '
+        'DataGridViewTextBoxColumn4
+        '
+        Me.DataGridViewTextBoxColumn4.HeaderText = "Status"
+        Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
+        '
+        'DataGridViewTextBoxColumn5
+        '
+        Me.DataGridViewTextBoxColumn5.HeaderText = "Date Requested"
+        Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
+        Me.DataGridViewTextBoxColumn5.Width = 105
         '
         'Label8
         '
@@ -613,17 +650,17 @@ Partial Class frmMainMenu
         '
         'chtMostreqdoc
         '
-        ChartArea2.Name = "ChartArea1"
-        Me.chtMostreqdoc.ChartAreas.Add(ChartArea2)
-        Legend2.Name = "Legend1"
-        Me.chtMostreqdoc.Legends.Add(Legend2)
+        ChartArea6.Name = "ChartArea1"
+        Me.chtMostreqdoc.ChartAreas.Add(ChartArea6)
+        Legend6.Name = "Legend1"
+        Me.chtMostreqdoc.Legends.Add(Legend6)
         Me.chtMostreqdoc.Location = New System.Drawing.Point(27, 62)
         Me.chtMostreqdoc.Name = "chtMostreqdoc"
-        Series2.ChartArea = "ChartArea1"
-        Series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Bar
-        Series2.Legend = "Legend1"
-        Series2.Name = "Series1"
-        Me.chtMostreqdoc.Series.Add(Series2)
+        Series6.ChartArea = "ChartArea1"
+        Series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Bar
+        Series6.Legend = "Legend1"
+        Series6.Name = "Series1"
+        Me.chtMostreqdoc.Series.Add(Series6)
         Me.chtMostreqdoc.Size = New System.Drawing.Size(475, 198)
         Me.chtMostreqdoc.TabIndex = 35
         Me.chtMostreqdoc.Text = "Chart3"
@@ -774,43 +811,6 @@ Partial Class frmMainMenu
         'Timer1
         '
         '
-        'DataGridView1
-        '
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn5})
-        Me.DataGridView1.Location = New System.Drawing.Point(0, 52)
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(536, 229)
-        Me.DataGridView1.TabIndex = 38
-        '
-        'DataGridViewTextBoxColumn1
-        '
-        Me.DataGridViewTextBoxColumn1.HeaderText = "Request #"
-        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
-        '
-        'DataGridViewTextBoxColumn2
-        '
-        Me.DataGridViewTextBoxColumn2.HeaderText = "Student Name"
-        Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
-        Me.DataGridViewTextBoxColumn2.Width = 150
-        '
-        'DataGridViewTextBoxColumn3
-        '
-        Me.DataGridViewTextBoxColumn3.HeaderText = "Document"
-        Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
-        Me.DataGridViewTextBoxColumn3.Width = 150
-        '
-        'DataGridViewTextBoxColumn4
-        '
-        Me.DataGridViewTextBoxColumn4.HeaderText = "Status"
-        Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
-        '
-        'DataGridViewTextBoxColumn5
-        '
-        Me.DataGridViewTextBoxColumn5.HeaderText = "Date Requested"
-        Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
-        Me.DataGridViewTextBoxColumn5.Width = 105
-        '
         'frmMainMenu
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -856,13 +856,13 @@ Partial Class frmMainMenu
         Me.pnlDocreqpermonth.PerformLayout()
         Me.pnlreqstatus.ResumeLayout(False)
         Me.pnlreqstatus.PerformLayout()
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlmostreqdoc.ResumeLayout(False)
         Me.pnlmostreqdoc.PerformLayout()
         CType(Me.chtMostreqdoc, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlrecentreqdoc.ResumeLayout(False)
         Me.pnlrecentreqdoc.PerformLayout()
         CType(Me.dgvrecentreqdoc, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -901,7 +901,7 @@ Partial Class frmMainMenu
     Friend WithEvents chtdocreqpermonth As DataVisualization.Charting.Chart
     Friend WithEvents pnlDocreqpermonth As Panel
     Friend WithEvents Label3 As Label
-    Friend WithEvents cboDocreqpermonth As ComboBox
+    Friend WithEvents cboDocreqpermonth1 As ComboBox
     Friend WithEvents pnlreqstatus As Panel
     Friend WithEvents Label8 As Label
     Friend WithEvents pnlmostreqdoc As Panel
