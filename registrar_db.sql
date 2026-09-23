@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 23, 2026 at 02:14 PM
+-- Generation Time: Sep 23, 2026 at 04:59 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -59,6 +59,7 @@ CREATE TABLE `tblrequest` (
   `RequestDate` date NOT NULL,
   `TotalAmount` decimal(10,2) DEFAULT 0.00,
   `PaymentStatus` enum('Unpaid','Paid') DEFAULT 'Unpaid',
+  `AmountPaid` decimal(10,2) DEFAULT 0.00,
   `ORNo` varchar(30) DEFAULT NULL,
   `ORDate` date DEFAULT NULL,
   `Status` enum('Pending','Processing','Ready for Release','Released','Cancelled') DEFAULT 'Pending',
@@ -71,43 +72,43 @@ CREATE TABLE `tblrequest` (
 -- Dumping data for table `tblrequest`
 --
 
-INSERT INTO `tblrequest` (`RequestID`, `RequestNo`, `StudentID`, `RequestDate`, `TotalAmount`, `PaymentStatus`, `ORNo`, `ORDate`, `Status`, `CreatedBy`, `ProcessedBy`, `ReleasedBy`) VALUES
-(1, 'REQ-2026-001', '1123-24', '2026-02-01', 150.00, 'Paid', 'OR-10001', '2026-02-01', 'Cancelled', 4, NULL, NULL),
-(2, 'REQ-2026-002', '1127-24', '2026-02-01', 50.00, 'Paid', 'OR-10002', '2026-02-01', 'Cancelled', 2, NULL, NULL),
-(3, 'REQ-2026-003', '1208-24', '2026-02-02', 100.00, '', NULL, NULL, 'Cancelled', 4, NULL, NULL),
-(4, 'REQ-2026-004', '1314-24', '2026-02-02', 200.00, 'Paid', 'OR-10003', '2026-02-02', 'Processing', 2, NULL, NULL),
-(5, 'REQ-2026-005', '1327-24', '2026-02-03', 50.00, 'Paid', 'OR-10004', '2026-02-03', 'Cancelled', 4, NULL, NULL),
-(6, 'REQ-2026-006', '1395-24', '2026-02-03', 100.00, '', NULL, NULL, 'Cancelled', 2, NULL, NULL),
-(7, 'REQ-2026-007', '1396-24', '2026-02-04', 150.00, 'Paid', 'OR-10005', '2026-02-04', 'Processing', 4, NULL, NULL),
-(8, 'REQ-2026-008', '1522-24', '2026-02-04', 50.00, 'Paid', 'OR-10006', '2026-02-04', 'Cancelled', 2, NULL, NULL),
-(9, 'REQ-2026-009', '1808-23', '2026-02-05', 250.00, 'Paid', 'OR-10007', '2026-02-05', 'Processing', 4, NULL, NULL),
-(10, 'REQ-2026-010', '2055-24', '2026-02-05', 100.00, '', NULL, NULL, 'Cancelled', 2, NULL, NULL),
-(11, 'REQ-2026-011', '2096-24', '2026-02-06', 150.00, 'Paid', 'OR-10008', '2026-02-06', 'Cancelled', 4, NULL, NULL),
-(12, 'REQ-2026-012', '2194-24', '2026-02-06', 50.00, '', NULL, NULL, 'Cancelled', 2, NULL, NULL),
-(13, 'REQ-2026-013', '2208-24', '2026-02-07', 100.00, 'Paid', 'OR-10009', '2026-02-07', 'Processing', 4, NULL, NULL),
-(14, 'REQ-2026-014', '2786-24', '2026-02-07', 200.00, 'Paid', 'OR-10010', '2026-02-07', 'Cancelled', 2, NULL, NULL),
-(15, 'REQ-2026-015', '2789-24', '2026-02-08', 50.00, '', NULL, NULL, 'Cancelled', 4, NULL, NULL),
-(16, 'REQ-2026-016', '1395-24', '2026-09-22', 50.00, 'Unpaid', NULL, NULL, 'Pending', 4, NULL, NULL),
-(17, 'REQ-2024-001', '1123-24', '2024-03-15', 150.00, 'Paid', NULL, NULL, 'Released', 4, 2, 3),
-(18, 'REQ-2024-002', '1127-24', '2024-05-20', 50.00, 'Paid', NULL, NULL, 'Released', 4, 2, 2),
-(19, 'REQ-2024-003', '1208-24', '2024-08-10', 200.00, 'Paid', NULL, NULL, 'Released', 2, 2, 3),
-(20, 'REQ-2024-004', '1314-24', '2024-10-05', 100.00, 'Paid', NULL, NULL, 'Released', 4, 2, 2),
-(21, 'REQ-2024-005', '1327-24', '2024-11-12', 150.00, 'Paid', NULL, NULL, 'Released', 2, 2, 3),
-(22, 'REQ-2025-001', '1395-24', '2025-01-14', 100.00, 'Paid', NULL, NULL, 'Released', 4, 2, 3),
-(23, 'REQ-2025-002', '1396-24', '2025-03-22', 150.00, 'Paid', NULL, NULL, 'Released', 2, 2, 2),
-(24, 'REQ-2025-003', '1522-24', '2025-06-18', 50.00, 'Paid', NULL, NULL, 'Processing', 4, 2, NULL),
-(25, 'REQ-2025-004', '1808-23', '2025-09-02', 200.00, 'Paid', NULL, NULL, 'Cancelled', 2, NULL, NULL),
-(26, 'REQ-2025-005', '2055-24', '2025-11-10', 100.00, 'Unpaid', NULL, NULL, 'Cancelled', 4, NULL, NULL),
-(27, 'REQ-2026-017', '1123-24', '2026-08-05', 150.00, 'Paid', 'OR-10011', '2026-08-05', 'Released', 4, 2, 3),
-(28, 'REQ-2026-018', '1127-24', '2026-08-12', 50.00, 'Paid', 'OR-10012', '2026-08-12', 'Released', 2, 3, 4),
-(29, 'REQ-2026-019', '1208-24', '2026-08-18', 200.00, 'Paid', 'OR-10013', '2026-08-18', 'Released', 3, 4, 2),
-(30, 'REQ-2026-020', '1314-24', '2026-08-22', 100.00, 'Paid', 'OR-10014', '2026-08-22', 'Released', 4, 2, 3),
-(31, 'REQ-2026-021', '1327-24', '2026-08-28', 150.00, 'Paid', 'OR-10015', '2026-08-28', 'Released', 2, 4, 3),
-(32, 'REQ-2026-022', '1395-24', '2026-09-02', 100.00, 'Paid', 'OR-10016', '2026-09-02', 'Released', 3, 2, 4),
-(33, 'REQ-2026-023', '1396-24', '2026-09-07', 150.00, 'Paid', 'OR-10017', '2026-09-07', 'Released', 4, 3, 2),
-(34, 'REQ-2026-024', '1522-24', '2026-09-12', 50.00, 'Paid', 'OR-10018', '2026-09-12', 'Released', 2, 4, 3),
-(35, 'REQ-2026-025', '1808-23', '2026-09-16', 200.00, 'Paid', 'OR-10019', '2026-09-16', 'Released', 3, 2, 4),
-(36, 'REQ-2026-026', '2055-24', '2026-09-20', 100.00, 'Paid', 'OR-10020', '2026-09-20', 'Released', 4, 3, 2);
+INSERT INTO `tblrequest` (`RequestID`, `RequestNo`, `StudentID`, `RequestDate`, `TotalAmount`, `PaymentStatus`, `AmountPaid`, `ORNo`, `ORDate`, `Status`, `CreatedBy`, `ProcessedBy`, `ReleasedBy`) VALUES
+(1, 'REQ-2026-001', '1123-24', '2026-02-01', 150.00, 'Paid', 0.00, 'OR-10001', '2026-02-01', 'Cancelled', 4, NULL, NULL),
+(2, 'REQ-2026-002', '1127-24', '2026-02-01', 50.00, 'Paid', 0.00, 'OR-10002', '2026-02-01', 'Cancelled', 2, NULL, NULL),
+(3, 'REQ-2026-003', '1208-24', '2026-02-02', 100.00, '', 0.00, NULL, NULL, 'Cancelled', 4, NULL, NULL),
+(4, 'REQ-2026-004', '1314-24', '2026-02-02', 200.00, 'Paid', 0.00, 'OR-10003', '2026-02-02', 'Processing', 2, NULL, NULL),
+(5, 'REQ-2026-005', '1327-24', '2026-02-03', 50.00, 'Paid', 0.00, 'OR-10004', '2026-02-03', 'Cancelled', 4, NULL, NULL),
+(6, 'REQ-2026-006', '1395-24', '2026-02-03', 100.00, '', 0.00, NULL, NULL, 'Cancelled', 2, NULL, NULL),
+(7, 'REQ-2026-007', '1396-24', '2026-02-04', 150.00, 'Paid', 0.00, 'OR-10005', '2026-02-04', 'Processing', 4, NULL, NULL),
+(8, 'REQ-2026-008', '1522-24', '2026-02-04', 50.00, 'Paid', 0.00, 'OR-10006', '2026-02-04', 'Cancelled', 2, NULL, NULL),
+(9, 'REQ-2026-009', '1808-23', '2026-02-05', 250.00, 'Paid', 0.00, 'OR-10007', '2026-02-05', 'Processing', 4, NULL, NULL),
+(10, 'REQ-2026-010', '2055-24', '2026-02-05', 100.00, '', 0.00, NULL, NULL, 'Cancelled', 2, NULL, NULL),
+(11, 'REQ-2026-011', '2096-24', '2026-02-06', 150.00, 'Paid', 0.00, 'OR-10008', '2026-02-06', 'Cancelled', 4, NULL, NULL),
+(12, 'REQ-2026-012', '2194-24', '2026-02-06', 50.00, '', 0.00, NULL, NULL, 'Cancelled', 2, NULL, NULL),
+(13, 'REQ-2026-013', '2208-24', '2026-02-07', 100.00, 'Paid', 0.00, 'OR-10009', '2026-02-07', 'Processing', 4, NULL, NULL),
+(14, 'REQ-2026-014', '2786-24', '2026-02-07', 200.00, 'Paid', 0.00, 'OR-10010', '2026-02-07', 'Cancelled', 2, NULL, NULL),
+(15, 'REQ-2026-015', '2789-24', '2026-02-08', 50.00, '', 0.00, NULL, NULL, 'Cancelled', 4, NULL, NULL),
+(16, 'REQ-2026-016', '1395-24', '2026-09-22', 50.00, 'Unpaid', 0.00, NULL, NULL, 'Pending', 4, NULL, NULL),
+(17, 'REQ-2024-001', '1123-24', '2024-03-15', 150.00, 'Paid', 0.00, NULL, NULL, 'Released', 4, 2, 3),
+(18, 'REQ-2024-002', '1127-24', '2024-05-20', 50.00, 'Paid', 0.00, NULL, NULL, 'Released', 4, 2, 2),
+(19, 'REQ-2024-003', '1208-24', '2024-08-10', 200.00, 'Paid', 0.00, NULL, NULL, 'Released', 2, 2, 3),
+(20, 'REQ-2024-004', '1314-24', '2024-10-05', 100.00, 'Paid', 0.00, NULL, NULL, 'Released', 4, 2, 2),
+(21, 'REQ-2024-005', '1327-24', '2024-11-12', 150.00, 'Paid', 0.00, NULL, NULL, 'Released', 2, 2, 3),
+(22, 'REQ-2025-001', '1395-24', '2025-01-14', 100.00, 'Paid', 0.00, NULL, NULL, 'Released', 4, 2, 3),
+(23, 'REQ-2025-002', '1396-24', '2025-03-22', 150.00, 'Paid', 0.00, NULL, NULL, 'Released', 2, 2, 2),
+(24, 'REQ-2025-003', '1522-24', '2025-06-18', 50.00, 'Paid', 0.00, NULL, NULL, 'Processing', 4, 2, NULL),
+(25, 'REQ-2025-004', '1808-23', '2025-09-02', 200.00, 'Paid', 0.00, NULL, NULL, 'Cancelled', 2, NULL, NULL),
+(26, 'REQ-2025-005', '2055-24', '2025-11-10', 100.00, 'Unpaid', 0.00, NULL, NULL, 'Cancelled', 4, NULL, NULL),
+(27, 'REQ-2026-017', '1123-24', '2026-08-05', 150.00, 'Paid', 0.00, 'OR-10011', '2026-08-05', 'Released', 4, 2, 3),
+(28, 'REQ-2026-018', '1127-24', '2026-08-12', 50.00, 'Paid', 0.00, 'OR-10012', '2026-08-12', 'Released', 2, 3, 4),
+(29, 'REQ-2026-019', '1208-24', '2026-08-18', 200.00, 'Paid', 0.00, 'OR-10013', '2026-08-18', 'Ready for Release', 3, 4, 2),
+(30, 'REQ-2026-020', '1314-24', '2026-08-22', 100.00, 'Paid', 0.00, 'OR-10014', '2026-08-22', 'Processing', 4, 2, 3),
+(31, 'REQ-2026-021', '1327-24', '2026-08-28', 150.00, 'Paid', 0.00, 'OR-10015', '2026-08-28', 'Ready for Release', 2, 4, 3),
+(32, 'REQ-2026-022', '1395-24', '2026-09-02', 100.00, 'Paid', 0.00, 'OR-10016', '2026-09-02', 'Processing', 3, 2, 4),
+(33, 'REQ-2026-023', '1396-24', '2026-09-07', 150.00, 'Paid', 0.00, 'OR-10017', '2026-09-07', 'Ready for Release', 4, 3, 2),
+(34, 'REQ-2026-024', '1522-24', '2026-09-12', 50.00, 'Paid', 0.00, 'OR-10018', '2026-09-12', 'Processing', 2, 4, 3),
+(35, 'REQ-2026-025', '1808-23', '2026-09-16', 200.00, 'Paid', 0.00, 'OR-10019', '2026-09-16', 'Ready for Release', 3, 2, 4),
+(36, 'REQ-2026-026', '2055-24', '2026-09-20', 100.00, 'Paid', 0.00, 'OR-10020', '2026-09-20', 'Processing', 4, 3, 2);
 
 -- --------------------------------------------------------
 
