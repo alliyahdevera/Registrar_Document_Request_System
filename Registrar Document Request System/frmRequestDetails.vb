@@ -55,7 +55,7 @@ Public Class frmRequestDetails
                 txtTotalAmount.Text = If(IsDBNull(dr("TotalAmount")), "0.00", Convert.ToDecimal(dr("TotalAmount")).ToString("N2"))
 
                 ' Request Status Section
-                txtRequestsID.Text = currentRequestID.ToString()
+                txtRequestID.Text = currentRequestID.ToString()
                 cboStatus.Text = If(IsDBNull(dr("Status")) OrElse String.IsNullOrWhiteSpace(dr("Status").ToString()), "Pending", dr("Status").ToString())
 
                 ' Payment Information Section
@@ -137,5 +137,4 @@ Public Class frmRequestDetails
         frmRequestList.Show()
         Me.Close()
     End Sub
-
 End Class

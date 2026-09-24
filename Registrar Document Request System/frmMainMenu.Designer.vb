@@ -66,7 +66,7 @@ Partial Class frmMainMenu
         Me.pnlDocreqpermonth = New System.Windows.Forms.Panel()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.pnlreqstatus = New System.Windows.Forms.Panel()
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.dgvOverdueReq = New System.Windows.Forms.DataGridView()
         Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -107,7 +107,7 @@ Partial Class frmMainMenu
         CType(Me.chtdocreqpermonth, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlDocreqpermonth.SuspendLayout()
         Me.pnlreqstatus.SuspendLayout()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.dgvOverdueReq, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlmostreqdoc.SuspendLayout()
         CType(Me.chtMostreqdoc, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlrecentreqdoc.SuspendLayout()
@@ -526,14 +526,14 @@ Partial Class frmMainMenu
         Me.chtdocreqpermonth.ChartAreas.Add(ChartArea1)
         Legend1.Name = "Legend1"
         Me.chtdocreqpermonth.Legends.Add(Legend1)
-        Me.chtdocreqpermonth.Location = New System.Drawing.Point(-15, 62)
+        Me.chtdocreqpermonth.Location = New System.Drawing.Point(21, 62)
         Me.chtdocreqpermonth.Name = "chtdocreqpermonth"
         Series1.ChartArea = "ChartArea1"
         Series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
         Series1.Legend = "Legend1"
         Series1.Name = "Series1"
         Me.chtdocreqpermonth.Series.Add(Series1)
-        Me.chtdocreqpermonth.Size = New System.Drawing.Size(656, 198)
+        Me.chtdocreqpermonth.Size = New System.Drawing.Size(450, 198)
         Me.chtdocreqpermonth.TabIndex = 35
         Me.chtdocreqpermonth.Text = "Chart1"
         '
@@ -562,21 +562,21 @@ Partial Class frmMainMenu
         '
         Me.pnlreqstatus.BackColor = System.Drawing.Color.White
         Me.pnlreqstatus.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.pnlreqstatus.Controls.Add(Me.DataGridView1)
+        Me.pnlreqstatus.Controls.Add(Me.dgvOverdueReq)
         Me.pnlreqstatus.Controls.Add(Me.Label8)
         Me.pnlreqstatus.Location = New System.Drawing.Point(860, 204)
         Me.pnlreqstatus.Name = "pnlreqstatus"
         Me.pnlreqstatus.Size = New System.Drawing.Size(533, 282)
         Me.pnlreqstatus.TabIndex = 38
         '
-        'DataGridView1
+        'dgvOverdueReq
         '
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn5})
-        Me.DataGridView1.Location = New System.Drawing.Point(0, 52)
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(536, 229)
-        Me.DataGridView1.TabIndex = 38
+        Me.dgvOverdueReq.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvOverdueReq.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn5})
+        Me.dgvOverdueReq.Location = New System.Drawing.Point(0, 52)
+        Me.dgvOverdueReq.Name = "dgvOverdueReq"
+        Me.dgvOverdueReq.Size = New System.Drawing.Size(536, 229)
+        Me.dgvOverdueReq.TabIndex = 38
         '
         'DataGridViewTextBoxColumn1
         '
@@ -643,14 +643,14 @@ Partial Class frmMainMenu
         Me.chtMostreqdoc.ChartAreas.Add(ChartArea2)
         Legend2.Name = "Legend1"
         Me.chtMostreqdoc.Legends.Add(Legend2)
-        Me.chtMostreqdoc.Location = New System.Drawing.Point(-10, 62)
+        Me.chtMostreqdoc.Location = New System.Drawing.Point(20, 62)
         Me.chtMostreqdoc.Name = "chtMostreqdoc"
         Series2.ChartArea = "ChartArea1"
         Series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Bar
         Series2.Legend = "Legend1"
         Series2.Name = "Series1"
         Me.chtMostreqdoc.Series.Add(Series2)
-        Me.chtMostreqdoc.Size = New System.Drawing.Size(664, 198)
+        Me.chtMostreqdoc.Size = New System.Drawing.Size(499, 198)
         Me.chtMostreqdoc.TabIndex = 35
         Me.chtMostreqdoc.Text = "Chart3"
         '
@@ -845,7 +845,7 @@ Partial Class frmMainMenu
         Me.pnlDocreqpermonth.PerformLayout()
         Me.pnlreqstatus.ResumeLayout(False)
         Me.pnlreqstatus.PerformLayout()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dgvOverdueReq, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlmostreqdoc.ResumeLayout(False)
         Me.pnlmostreqdoc.PerformLayout()
         CType(Me.chtMostreqdoc, System.ComponentModel.ISupportInitialize).EndInit()
@@ -913,7 +913,7 @@ Partial Class frmMainMenu
     Friend WithEvents Label15 As Label
     Friend WithEvents tmrDateTime As Timer
     Friend WithEvents Timer1 As Timer
-    Friend WithEvents DataGridView1 As DataGridView
+    Friend WithEvents dgvOverdueReq As DataGridView
     Friend WithEvents DataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
     Friend WithEvents DataGridViewTextBoxColumn3 As DataGridViewTextBoxColumn

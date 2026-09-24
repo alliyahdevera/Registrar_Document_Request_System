@@ -51,7 +51,7 @@ Partial Class frmRequestDetails
         Me.Amount = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Subtotal = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.btnGenerateReport = New System.Windows.Forms.Button()
+        Me.btnSave = New System.Windows.Forms.Button()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Label5 = New System.Windows.Forms.Label()
@@ -66,10 +66,12 @@ Partial Class frmRequestDetails
         Me.Label23 = New System.Windows.Forms.Label()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.txtRequestID = New System.Windows.Forms.TextBox()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnupdatestat = New System.Windows.Forms.Button()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.Label9 = New System.Windows.Forms.Label()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.Panel11.SuspendLayout()
         Me.Panel8.SuspendLayout()
         Me.Panel15.SuspendLayout()
@@ -372,7 +374,9 @@ Partial Class frmRequestDetails
         '
         Me.Panel1.BackColor = System.Drawing.Color.White
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel1.Controls.Add(Me.btnGenerateReport)
+        Me.Panel1.Controls.Add(Me.Label10)
+        Me.Panel1.Controls.Add(Me.TextBox1)
+        Me.Panel1.Controls.Add(Me.btnSave)
         Me.Panel1.Controls.Add(Me.Label7)
         Me.Panel1.Controls.Add(Me.Panel2)
         Me.Panel1.Controls.Add(Me.txtAmountPaid)
@@ -387,24 +391,24 @@ Partial Class frmRequestDetails
         Me.Panel1.Size = New System.Drawing.Size(641, 183)
         Me.Panel1.TabIndex = 66
         '
-        'btnGenerateReport
+        'btnSave
         '
-        Me.btnGenerateReport.BackColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
-        Me.btnGenerateReport.FlatAppearance.BorderSize = 0
-        Me.btnGenerateReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnGenerateReport.ForeColor = System.Drawing.Color.White
-        Me.btnGenerateReport.Location = New System.Drawing.Point(449, 137)
-        Me.btnGenerateReport.Name = "btnGenerateReport"
-        Me.btnGenerateReport.Size = New System.Drawing.Size(163, 27)
-        Me.btnGenerateReport.TabIndex = 80
-        Me.btnGenerateReport.Text = "Save Payment"
-        Me.btnGenerateReport.UseVisualStyleBackColor = False
+        Me.btnSave.BackColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
+        Me.btnSave.FlatAppearance.BorderSize = 0
+        Me.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSave.ForeColor = System.Drawing.Color.White
+        Me.btnSave.Location = New System.Drawing.Point(452, 137)
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(163, 27)
+        Me.btnSave.TabIndex = 80
+        Me.btnSave.Text = "Save Payment"
+        Me.btnSave.UseVisualStyleBackColor = False
         '
         'Label7
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Segoe UI Semibold", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(320, 55)
+        Me.Label7.Location = New System.Drawing.Point(330, 55)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(98, 20)
         Me.Label7.TabIndex = 69
@@ -434,7 +438,7 @@ Partial Class frmRequestDetails
         '
         Me.txtAmountPaid.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtAmountPaid.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtAmountPaid.Location = New System.Drawing.Point(449, 52)
+        Me.txtAmountPaid.Location = New System.Drawing.Point(452, 55)
         Me.txtAmountPaid.Name = "txtAmountPaid"
         Me.txtAmountPaid.Size = New System.Drawing.Size(163, 25)
         Me.txtAmountPaid.TabIndex = 68
@@ -443,7 +447,7 @@ Partial Class frmRequestDetails
         '
         Me.dtpORDate.CalendarFont = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtpORDate.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dtpORDate.Location = New System.Drawing.Point(94, 95)
+        Me.dtpORDate.Location = New System.Drawing.Point(110, 95)
         Me.dtpORDate.Name = "dtpORDate"
         Me.dtpORDate.Size = New System.Drawing.Size(209, 25)
         Me.dtpORDate.TabIndex = 58
@@ -452,7 +456,7 @@ Partial Class frmRequestDetails
         '
         Me.Label16.AutoSize = True
         Me.Label16.Font = New System.Drawing.Font("Segoe UI Semibold", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label16.Location = New System.Drawing.Point(18, 95)
+        Me.Label16.Location = New System.Drawing.Point(11, 96)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(65, 20)
         Me.Label16.TabIndex = 55
@@ -462,7 +466,7 @@ Partial Class frmRequestDetails
         '
         Me.txtORNo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtORNo.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtORNo.Location = New System.Drawing.Point(94, 55)
+        Me.txtORNo.Location = New System.Drawing.Point(110, 55)
         Me.txtORNo.Name = "txtORNo"
         Me.txtORNo.Size = New System.Drawing.Size(209, 25)
         Me.txtORNo.TabIndex = 54
@@ -472,7 +476,7 @@ Partial Class frmRequestDetails
         Me.cboPaymentStatus.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboPaymentStatus.FormattingEnabled = True
         Me.cboPaymentStatus.Items.AddRange(New Object() {"Unpaid", "Paid"})
-        Me.cboPaymentStatus.Location = New System.Drawing.Point(449, 94)
+        Me.cboPaymentStatus.Location = New System.Drawing.Point(452, 97)
         Me.cboPaymentStatus.Name = "cboPaymentStatus"
         Me.cboPaymentStatus.Size = New System.Drawing.Size(163, 25)
         Me.cboPaymentStatus.TabIndex = 53
@@ -481,7 +485,7 @@ Partial Class frmRequestDetails
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Segoe UI Semibold", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(18, 55)
+        Me.Label6.Location = New System.Drawing.Point(11, 56)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(58, 20)
         Me.Label6.TabIndex = 45
@@ -491,7 +495,7 @@ Partial Class frmRequestDetails
         '
         Me.Label21.AutoSize = True
         Me.Label21.Font = New System.Drawing.Font("Segoe UI Semibold", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label21.Location = New System.Drawing.Point(320, 95)
+        Me.Label21.Location = New System.Drawing.Point(330, 95)
         Me.Label21.Name = "Label21"
         Me.Label21.Size = New System.Drawing.Size(114, 20)
         Me.Label21.TabIndex = 39
@@ -522,7 +526,7 @@ Partial Class frmRequestDetails
         Me.Panel3.BackColor = System.Drawing.Color.White
         Me.Panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel3.Controls.Add(Me.txtRequestID)
-        Me.Panel3.Controls.Add(Me.Button1)
+        Me.Panel3.Controls.Add(Me.btnupdatestat)
         Me.Panel3.Controls.Add(Me.Label8)
         Me.Panel3.Controls.Add(Me.Panel4)
         Me.Panel3.Controls.Add(Me.cboStatus)
@@ -542,18 +546,18 @@ Partial Class frmRequestDetails
         Me.txtRequestID.Size = New System.Drawing.Size(229, 25)
         Me.txtRequestID.TabIndex = 79
         '
-        'Button1
+        'btnupdatestat
         '
-        Me.Button1.BackColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
-        Me.Button1.FlatAppearance.BorderSize = 0
-        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button1.ForeColor = System.Drawing.Color.White
-        Me.Button1.Location = New System.Drawing.Point(136, 137)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(229, 27)
-        Me.Button1.TabIndex = 80
-        Me.Button1.Text = "Update Status"
-        Me.Button1.UseVisualStyleBackColor = False
+        Me.btnupdatestat.BackColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
+        Me.btnupdatestat.FlatAppearance.BorderSize = 0
+        Me.btnupdatestat.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnupdatestat.ForeColor = System.Drawing.Color.White
+        Me.btnupdatestat.Location = New System.Drawing.Point(136, 137)
+        Me.btnupdatestat.Name = "btnupdatestat"
+        Me.btnupdatestat.Size = New System.Drawing.Size(229, 27)
+        Me.btnupdatestat.TabIndex = 80
+        Me.btnupdatestat.Text = "Update Status"
+        Me.btnupdatestat.UseVisualStyleBackColor = False
         '
         'Label8
         '
@@ -584,6 +588,25 @@ Partial Class frmRequestDetails
         Me.Label9.Size = New System.Drawing.Size(143, 25)
         Me.Label9.TabIndex = 51
         Me.Label9.Text = "Request Status"
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Font = New System.Drawing.Font("Segoe UI Semibold", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label10.Location = New System.Drawing.Point(11, 140)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(90, 20)
+        Me.Label10.TabIndex = 82
+        Me.Label10.Text = "Released By"
+        '
+        'TextBox1
+        '
+        Me.TextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TextBox1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox1.Location = New System.Drawing.Point(110, 139)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(209, 25)
+        Me.TextBox1.TabIndex = 81
         '
         'frmRequestDetails
         '
@@ -661,11 +684,13 @@ Partial Class frmRequestDetails
     Friend WithEvents Label23 As Label
     Friend WithEvents Label7 As Label
     Friend WithEvents txtAmountPaid As TextBox
-    Friend WithEvents btnGenerateReport As Button
+    Friend WithEvents btnSave As Button
     Friend WithEvents Panel3 As Panel
-    Friend WithEvents Button1 As Button
+    Friend WithEvents btnupdatestat As Button
     Friend WithEvents Panel4 As Panel
     Friend WithEvents Label9 As Label
     Friend WithEvents txtRequestID As TextBox
     Friend WithEvents Label8 As Label
+    Friend WithEvents Label10 As Label
+    Friend WithEvents TextBox1 As TextBox
 End Class

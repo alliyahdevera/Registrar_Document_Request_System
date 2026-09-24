@@ -15,6 +15,9 @@ Public Class frmMainMenu
 
         ' Load all dashboard counts and widgets
         RefreshDashboard()
+
+        chtdocreqpermonth.Legends(0).Enabled = False
+        chtMostreqdoc.Legends(0).Enabled = False
     End Sub
 
     ' Re-applies the logged-in user's info AND refreshes the dashboard data
@@ -219,11 +222,11 @@ Public Class frmMainMenu
             cmd = New MySqlCommand(sql, cn)
             dr = cmd.ExecuteReader()
 
-            DataGridView1.Rows.Clear()
+            dgvOverdueReq.Rows.Clear()
             While dr.Read()
                 Dim reqDateStr As String = If(IsDBNull(dr("RequestDate")), "-", Convert.ToDateTime(dr("RequestDate")).ToString("yyyy-MM-dd"))
 
-                DataGridView1.Rows.Add(
+                dgvOverdueReq.Rows.Add(
                     dr("RequestNo").ToString(),
                     If(IsDBNull(dr("StudentName")), "-", dr("StudentName").ToString()),
                     If(IsDBNull(dr("DocumentNames")), "-", dr("DocumentNames").ToString()),
@@ -352,5 +355,4 @@ Public Class frmMainMenu
         frmUserManagement.Show()
         Me.Hide()
     End Sub
-
 End Class
