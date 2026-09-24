@@ -42,6 +42,7 @@ Public Class frmReports
 
     ''' <summary>
     ''' Centralized report loader supporting date range, search text, and optional status filtering.
+    ''' Restricted to searching strictly by StudentID or LastName.
     ''' </summary>
     ''' <param name="statusFilter">
     ''' Pass empty string for All, or specific status like "Pending", "Released", or "ByDocType"
@@ -62,7 +63,7 @@ Public Class frmReports
                   "LEFT JOIN tblusers up ON up.UserID = r.ProcessedBy " &
                   "LEFT JOIN tblusers ur ON ur.UserID = r.ReleasedBy " &
                   "WHERE r.RequestDate >= @from AND r.RequestDate < @to " &
-                  "AND (r.RequestNo LIKE @search OR r.StudentID LIKE @search OR s.LastName LIKE @search OR s.FirstName LIKE @search OR d.DocumentName LIKE @search) "
+                  "AND (r.StudentID LIKE @search OR s.LastName LIKE @search) "
 
             ' Apply status/filter condition dynamically
             If statusFilter = "Pending" Then
@@ -257,4 +258,5 @@ Public Class frmReports
             Me.Close()
         End If
     End Sub
+
 End Class
