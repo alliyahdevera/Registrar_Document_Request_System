@@ -17,6 +17,9 @@ Public Class frmRequestList
         ' Automatically cancel pending/blank requests past 7 days before loading grid
         AutoCancelUnpaidRequests()
 
+        ' Patch any existing missing ProcessedBy entries in DB for Processing/Ready for Release/Released records
+        FixMissingProcessedByData()
+
         ' Load request data
         LoadRequests()
     End Sub
@@ -24,6 +27,7 @@ Public Class frmRequestList
     Private Sub frmRequestList_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
         RefreshUserSession()
         AutoCancelUnpaidRequests()
+        FixMissingProcessedByData()
         LoadRequests()
     End Sub
 
@@ -63,7 +67,30 @@ Public Class frmRequestList
     End Sub
 
     ''' <summary>
+    ''' Updates database records where ProcessedBy is NULL/0 for processed statuses
+    ''' by copying CreatedBy into ProcessedBy so data is never empty.
+    ''' </summary>
+    Private Sub FixMissingProcessedByData()
+        Try
+            Call connection()
+
+            sql = "UPDATE tblrequest " &
+                  "SET ProcessedBy = CreatedBy " &
+                  "WHERE Status IN ('Processing', 'Ready for Release', 'Released') " &
+                  "AND (ProcessedBy IS NULL OR ProcessedBy = 0)"
+
+            cmd = New MySqlCommand(sql, cn)
+            cmd.ExecuteNonQuery()
+            cn.Close()
+        Catch ex As Exception
+            If cn.State = ConnectionState.Open Then cn.Close()
+        End Try
+    End Sub
+
+    ''' <summary>
     ''' Fetches requests and maps them directly to the DataGridView columns.
+    ''' Shows ProcessedByStaff (or falls back to CreatedByStaff if missing)
+    ''' when status is Processing, Ready for Release, or Released.
     ''' </summary>
     Public Sub LoadRequests()
         Try
@@ -72,9 +99,13 @@ Public Class frmRequestList
             sql = "SELECT r.RequestID, r.RequestNo, r.StudentID, " &
                   "s.FirstName, s.LastName, " &
                   "GROUP_CONCAT(DISTINCT d.DocumentName SEPARATOR ', ') AS DocumentNames, " &
-                  "r.RequestDate, r.TotalAmount, r.Status, r.ORNo, r.ORDate, " &
+                  "r.RequestDate, r.TotalAmount, r.PaymentStatus, r.AmountPaid, " &
+                  "r.ORNo, r.ORDate, r.Status, " &
                   "u1.FullName AS CreatedByStaff, " &
-                  "u2.FullName AS ProcessedByStaff, " &
+                  "CASE " &
+                  "  WHEN r.Status IN ('Processing', 'Ready for Release', 'Released') THEN COALESCE(u2.FullName, u1.FullName) " &
+                  "  ELSE NULL " &
+                  "END AS ProcessedByStaff, " &
                   "u3.FullName AS ReleasedByStaff " &
                   "FROM tblrequest r " &
                   "LEFT JOIN tblstudents s ON r.StudentID = s.StudentID " &
@@ -84,8 +115,9 @@ Public Class frmRequestList
                   "LEFT JOIN tblusers u2 ON r.ProcessedBy = u2.UserID " &
                   "LEFT JOIN tblusers u3 ON r.ReleasedBy = u3.UserID " &
                   "GROUP BY r.RequestID, r.RequestNo, r.StudentID, s.FirstName, s.LastName, " &
-                  "r.RequestDate, r.TotalAmount, r.Status, r.ORNo, r.ORDate, " &
-                  "CreatedByStaff, ProcessedByStaff, ReleasedByStaff " &
+                  "r.RequestDate, r.TotalAmount, r.PaymentStatus, r.AmountPaid, " &
+                  "r.ORNo, r.ORDate, r.Status, " &
+                  "u1.FullName, u2.FullName, u3.FullName " &
                   "ORDER BY r.RequestID DESC"
 
             cmd = New MySqlCommand(sql, cn)
@@ -96,6 +128,7 @@ Public Class frmRequestList
                 Dim reqDateStr As String = If(IsDBNull(dr("RequestDate")), "-", Convert.ToDateTime(dr("RequestDate")).ToString("yyyy-MM-dd"))
                 Dim orDateStr As String = If(IsDBNull(dr("ORDate")), "-", Convert.ToDateTime(dr("ORDate")).ToString("yyyy-MM-dd"))
                 Dim totalAmtStr As String = If(IsDBNull(dr("TotalAmount")), "0.00", Convert.ToDecimal(dr("TotalAmount")).ToString("N2"))
+                Dim amtPaidStr As String = If(IsDBNull(dr("AmountPaid")), "0.00", Convert.ToDecimal(dr("AmountPaid")).ToString("N2"))
 
                 dgvReqDoc.Rows.Add(
                     dr("RequestNo").ToString(),
@@ -105,9 +138,11 @@ Public Class frmRequestList
                     dr("LastName").ToString(),
                     If(IsDBNull(dr("DocumentNames")), "-", dr("DocumentNames").ToString()),
                     totalAmtStr,
-                    If(IsDBNull(dr("Status")) OrElse String.IsNullOrWhiteSpace(dr("Status").ToString()), "-", dr("Status").ToString()),
+                    If(IsDBNull(dr("PaymentStatus")), "-", dr("PaymentStatus").ToString()),
+                    amtPaidStr,
                     If(IsDBNull(dr("ORNo")), "-", dr("ORNo").ToString()),
                     orDateStr,
+                    If(IsDBNull(dr("Status")) OrElse String.IsNullOrWhiteSpace(dr("Status").ToString()), "-", dr("Status").ToString()),
                     If(IsDBNull(dr("CreatedByStaff")), "-", dr("CreatedByStaff").ToString()),
                     If(IsDBNull(dr("ProcessedByStaff")), "-", dr("ProcessedByStaff").ToString()),
                     If(IsDBNull(dr("ReleasedByStaff")), "-", dr("ReleasedByStaff").ToString())
@@ -130,9 +165,13 @@ Public Class frmRequestList
             sql = "SELECT r.RequestID, r.RequestNo, r.StudentID, " &
                   "s.FirstName, s.LastName, " &
                   "GROUP_CONCAT(DISTINCT d.DocumentName SEPARATOR ', ') AS DocumentNames, " &
-                  "r.RequestDate, r.TotalAmount, r.Status, r.ORNo, r.ORDate, " &
+                  "r.RequestDate, r.TotalAmount, r.PaymentStatus, r.AmountPaid, " &
+                  "r.ORNo, r.ORDate, r.Status, " &
                   "u1.FullName AS CreatedByStaff, " &
-                  "u2.FullName AS ProcessedByStaff, " &
+                  "CASE " &
+                  "  WHEN r.Status IN ('Processing', 'Ready for Release', 'Released') THEN COALESCE(u2.FullName, u1.FullName) " &
+                  "  ELSE NULL " &
+                  "END AS ProcessedByStaff, " &
                   "u3.FullName AS ReleasedByStaff " &
                   "FROM tblrequest r " &
                   "LEFT JOIN tblstudents s ON r.StudentID = s.StudentID " &
@@ -143,8 +182,9 @@ Public Class frmRequestList
                   "LEFT JOIN tblusers u3 ON r.ReleasedBy = u3.UserID " &
                   "WHERE r.RequestNo LIKE @search OR r.StudentID LIKE @search OR s.LastName LIKE @search OR s.FirstName LIKE @search " &
                   "GROUP BY r.RequestID, r.RequestNo, r.StudentID, s.FirstName, s.LastName, " &
-                  "r.RequestDate, r.TotalAmount, r.Status, r.ORNo, r.ORDate, " &
-                  "CreatedByStaff, ProcessedByStaff, ReleasedByStaff " &
+                  "r.RequestDate, r.TotalAmount, r.PaymentStatus, r.AmountPaid, " &
+                  "r.ORNo, r.ORDate, r.Status, " &
+                  "u1.FullName, u2.FullName, u3.FullName " &
                   "ORDER BY r.RequestID DESC"
 
             cmd = New MySqlCommand(sql, cn)
@@ -156,6 +196,7 @@ Public Class frmRequestList
                 Dim reqDateStr As String = If(IsDBNull(dr("RequestDate")), "-", Convert.ToDateTime(dr("RequestDate")).ToString("yyyy-MM-dd"))
                 Dim orDateStr As String = If(IsDBNull(dr("ORDate")), "-", Convert.ToDateTime(dr("ORDate")).ToString("yyyy-MM-dd"))
                 Dim totalAmtStr As String = If(IsDBNull(dr("TotalAmount")), "0.00", Convert.ToDecimal(dr("TotalAmount")).ToString("N2"))
+                Dim amtPaidStr As String = If(IsDBNull(dr("AmountPaid")), "0.00", Convert.ToDecimal(dr("AmountPaid")).ToString("N2"))
 
                 dgvReqDoc.Rows.Add(
                     dr("RequestNo").ToString(),
@@ -165,9 +206,11 @@ Public Class frmRequestList
                     dr("LastName").ToString(),
                     If(IsDBNull(dr("DocumentNames")), "-", dr("DocumentNames").ToString()),
                     totalAmtStr,
-                    If(IsDBNull(dr("Status")) OrElse String.IsNullOrWhiteSpace(dr("Status").ToString()), "-", dr("Status").ToString()),
+                    If(IsDBNull(dr("PaymentStatus")), "-", dr("PaymentStatus").ToString()),
+                    amtPaidStr,
                     If(IsDBNull(dr("ORNo")), "-", dr("ORNo").ToString()),
                     orDateStr,
+                    If(IsDBNull(dr("Status")) OrElse String.IsNullOrWhiteSpace(dr("Status").ToString()), "-", dr("Status").ToString()),
                     If(IsDBNull(dr("CreatedByStaff")), "-", dr("CreatedByStaff").ToString()),
                     If(IsDBNull(dr("ProcessedByStaff")), "-", dr("ProcessedByStaff").ToString()),
                     If(IsDBNull(dr("ReleasedByStaff")), "-", dr("ReleasedByStaff").ToString())
