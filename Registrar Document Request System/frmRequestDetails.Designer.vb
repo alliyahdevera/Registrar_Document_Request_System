@@ -51,7 +51,9 @@ Partial Class frmRequestDetails
         Me.Amount = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Subtotal = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.btnSave = New System.Windows.Forms.Button()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.txtReleasedBy = New System.Windows.Forms.TextBox()
+        Me.btnSavePayment = New System.Windows.Forms.Button()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Label5 = New System.Windows.Forms.Label()
@@ -66,12 +68,10 @@ Partial Class frmRequestDetails
         Me.Label23 = New System.Windows.Forms.Label()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.txtRequestID = New System.Windows.Forms.TextBox()
-        Me.btnupdatestat = New System.Windows.Forms.Button()
+        Me.btnUpdateStatus = New System.Windows.Forms.Button()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.Label10 = New System.Windows.Forms.Label()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.Panel11.SuspendLayout()
         Me.Panel8.SuspendLayout()
         Me.Panel15.SuspendLayout()
@@ -375,8 +375,8 @@ Partial Class frmRequestDetails
         Me.Panel1.BackColor = System.Drawing.Color.White
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel1.Controls.Add(Me.Label10)
-        Me.Panel1.Controls.Add(Me.TextBox1)
-        Me.Panel1.Controls.Add(Me.btnSave)
+        Me.Panel1.Controls.Add(Me.txtReleasedBy)
+        Me.Panel1.Controls.Add(Me.btnSavePayment)
         Me.Panel1.Controls.Add(Me.Label7)
         Me.Panel1.Controls.Add(Me.Panel2)
         Me.Panel1.Controls.Add(Me.txtAmountPaid)
@@ -391,18 +391,37 @@ Partial Class frmRequestDetails
         Me.Panel1.Size = New System.Drawing.Size(641, 183)
         Me.Panel1.TabIndex = 66
         '
-        'btnSave
+        'Label10
         '
-        Me.btnSave.BackColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
-        Me.btnSave.FlatAppearance.BorderSize = 0
-        Me.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnSave.ForeColor = System.Drawing.Color.White
-        Me.btnSave.Location = New System.Drawing.Point(452, 137)
-        Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(163, 27)
-        Me.btnSave.TabIndex = 80
-        Me.btnSave.Text = "Save Payment"
-        Me.btnSave.UseVisualStyleBackColor = False
+        Me.Label10.AutoSize = True
+        Me.Label10.Font = New System.Drawing.Font("Segoe UI Semibold", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label10.Location = New System.Drawing.Point(11, 140)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(90, 20)
+        Me.Label10.TabIndex = 82
+        Me.Label10.Text = "Released By"
+        '
+        'txtReleasedBy
+        '
+        Me.txtReleasedBy.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtReleasedBy.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtReleasedBy.Location = New System.Drawing.Point(110, 139)
+        Me.txtReleasedBy.Name = "txtReleasedBy"
+        Me.txtReleasedBy.Size = New System.Drawing.Size(209, 25)
+        Me.txtReleasedBy.TabIndex = 81
+        '
+        'btnSavePayment
+        '
+        Me.btnSavePayment.BackColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
+        Me.btnSavePayment.FlatAppearance.BorderSize = 0
+        Me.btnSavePayment.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSavePayment.ForeColor = System.Drawing.Color.White
+        Me.btnSavePayment.Location = New System.Drawing.Point(452, 137)
+        Me.btnSavePayment.Name = "btnSavePayment"
+        Me.btnSavePayment.Size = New System.Drawing.Size(163, 27)
+        Me.btnSavePayment.TabIndex = 80
+        Me.btnSavePayment.Text = "Save Payment"
+        Me.btnSavePayment.UseVisualStyleBackColor = False
         '
         'Label7
         '
@@ -526,7 +545,7 @@ Partial Class frmRequestDetails
         Me.Panel3.BackColor = System.Drawing.Color.White
         Me.Panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel3.Controls.Add(Me.txtRequestID)
-        Me.Panel3.Controls.Add(Me.btnupdatestat)
+        Me.Panel3.Controls.Add(Me.btnUpdateStatus)
         Me.Panel3.Controls.Add(Me.Label8)
         Me.Panel3.Controls.Add(Me.Panel4)
         Me.Panel3.Controls.Add(Me.cboStatus)
@@ -546,18 +565,18 @@ Partial Class frmRequestDetails
         Me.txtRequestID.Size = New System.Drawing.Size(229, 25)
         Me.txtRequestID.TabIndex = 79
         '
-        'btnupdatestat
+        'btnUpdateStatus
         '
-        Me.btnupdatestat.BackColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
-        Me.btnupdatestat.FlatAppearance.BorderSize = 0
-        Me.btnupdatestat.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnupdatestat.ForeColor = System.Drawing.Color.White
-        Me.btnupdatestat.Location = New System.Drawing.Point(136, 137)
-        Me.btnupdatestat.Name = "btnupdatestat"
-        Me.btnupdatestat.Size = New System.Drawing.Size(229, 27)
-        Me.btnupdatestat.TabIndex = 80
-        Me.btnupdatestat.Text = "Update Status"
-        Me.btnupdatestat.UseVisualStyleBackColor = False
+        Me.btnUpdateStatus.BackColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
+        Me.btnUpdateStatus.FlatAppearance.BorderSize = 0
+        Me.btnUpdateStatus.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnUpdateStatus.ForeColor = System.Drawing.Color.White
+        Me.btnUpdateStatus.Location = New System.Drawing.Point(136, 137)
+        Me.btnUpdateStatus.Name = "btnUpdateStatus"
+        Me.btnUpdateStatus.Size = New System.Drawing.Size(229, 27)
+        Me.btnUpdateStatus.TabIndex = 80
+        Me.btnUpdateStatus.Text = "Update Status"
+        Me.btnUpdateStatus.UseVisualStyleBackColor = False
         '
         'Label8
         '
@@ -588,25 +607,6 @@ Partial Class frmRequestDetails
         Me.Label9.Size = New System.Drawing.Size(143, 25)
         Me.Label9.TabIndex = 51
         Me.Label9.Text = "Request Status"
-        '
-        'Label10
-        '
-        Me.Label10.AutoSize = True
-        Me.Label10.Font = New System.Drawing.Font("Segoe UI Semibold", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(11, 140)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(90, 20)
-        Me.Label10.TabIndex = 82
-        Me.Label10.Text = "Released By"
-        '
-        'TextBox1
-        '
-        Me.TextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.TextBox1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(110, 139)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(209, 25)
-        Me.TextBox1.TabIndex = 81
         '
         'frmRequestDetails
         '
@@ -684,13 +684,13 @@ Partial Class frmRequestDetails
     Friend WithEvents Label23 As Label
     Friend WithEvents Label7 As Label
     Friend WithEvents txtAmountPaid As TextBox
-    Friend WithEvents btnSave As Button
+    Friend WithEvents btnSavePayment As Button
     Friend WithEvents Panel3 As Panel
-    Friend WithEvents btnupdatestat As Button
+    Friend WithEvents btnUpdateStatus As Button
     Friend WithEvents Panel4 As Panel
     Friend WithEvents Label9 As Label
     Friend WithEvents txtRequestID As TextBox
     Friend WithEvents Label8 As Label
     Friend WithEvents Label10 As Label
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents txtReleasedBy As TextBox
 End Class

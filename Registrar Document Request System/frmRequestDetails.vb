@@ -10,6 +10,10 @@ Public Class frmRequestDetails
         dgvReqDoc.SelectionMode = DataGridViewSelectionMode.FullRowSelect
         dgvReqDoc.MultiSelect = False
 
+        ' Set Released By field to currently logged-in user and make it read-only
+        txtReleasedBy.Text = CurrentUser.FullName
+        txtReleasedBy.ReadOnly = True
+
         If Not String.IsNullOrEmpty(SelectedRequestNo) Then
             LoadRequestDetailsInfo(SelectedRequestNo)
         End If
@@ -31,11 +35,12 @@ Public Class frmRequestDetails
             Call connection()
 
             sql = "SELECT r.RequestID, r.RequestNo, r.RequestDate, r.TotalAmount, r.Status, r.PaymentStatus, " &
-                  "r.ORNo, r.ORDate, r.AmountPaid, " &
+                  "r.ORNo, r.ORDate, r.AmountPaid, r.ReleasedBy, " &
                   "s.StudentID, CONCAT(s.FirstName, ' ', IFNULL(s.MiddleName, ''), ' ', s.LastName) AS StudentName, " &
-                  "s.Course, s.YearLevel " &
+                  "s.Course, s.YearLevel, u.FullName AS ReleasedByName " &
                   "FROM tblrequest r " &
                   "INNER JOIN tblstudents s ON r.StudentID = s.StudentID " &
+                  "LEFT JOIN tblusers u ON r.ReleasedBy = u.UserID " &
                   "WHERE r.RequestNo = @reqno"
 
             cmd = New MySqlCommand(sql, cn)
@@ -67,6 +72,13 @@ Public Class frmRequestDetails
                 End If
                 txtAmountPaid.Text = If(IsDBNull(dr("AmountPaid")), "0.00", Convert.ToDecimal(dr("AmountPaid")).ToString("N2"))
                 cboPaymentStatus.Text = If(IsDBNull(dr("PaymentStatus")) OrElse String.IsNullOrWhiteSpace(dr("PaymentStatus").ToString()), "Unpaid", dr("PaymentStatus").ToString())
+
+                ' Display assigned ReleasedBy staff if already saved; otherwise default to active user
+                If Not IsDBNull(dr("ReleasedByName")) AndAlso Not String.IsNullOrWhiteSpace(dr("ReleasedByName").ToString()) Then
+                    txtReleasedBy.Text = dr("ReleasedByName").ToString()
+                Else
+                    txtReleasedBy.Text = CurrentUser.FullName
+                End If
             End If
 
             dr.Close()
@@ -133,8 +145,119 @@ Public Class frmRequestDetails
         End Try
     End Sub
 
+    ''' <summary>
+    ''' Saves payment details and sets ReleasedBy to the currently logged-in user ID.
+    ''' </summary>
+    Private Sub btnSavePayment_Click(sender As Object, e As EventArgs) Handles btnSavePayment.Click
+        If currentRequestID = 0 Then
+            MsgBox("No active request loaded to save payment.", vbExclamation, "Error")
+            Return
+        End If
+
+        If String.IsNullOrWhiteSpace(txtORNo.Text) Then
+            MsgBox("Please enter an Official Receipt (OR) Number.", vbExclamation, "Validation Error")
+            txtORNo.Focus()
+            Return
+        End If
+
+        Dim amtPaid As Decimal = 0
+        If Not Decimal.TryParse(txtAmountPaid.Text.Trim(), amtPaid) OrElse amtPaid <= 0 Then
+            MsgBox("Please enter a valid Amount Paid.", vbExclamation, "Validation Error")
+            txtAmountPaid.Focus()
+            Return
+        End If
+
+        Try
+            Call connection()
+
+            ' Automatically advance Pending requests to Processing upon receiving payment
+            Dim newStatus As String = cboStatus.Text
+            If cboStatus.Text = "Pending" Then
+                newStatus = "Processing"
+            End If
+
+            Dim payStatus As String = If(String.IsNullOrWhiteSpace(cboPaymentStatus.Text), "Paid", cboPaymentStatus.Text)
+
+            sql = "UPDATE tblrequest " &
+                  "SET ORNo = @orno, " &
+                  "    ORDate = @ordate, " &
+                  "    AmountPaid = @amt, " &
+                  "    PaymentStatus = @paystatus, " &
+                  "    Status = @status, " &
+                  "    ReleasedBy = @releasedby " &
+                  "WHERE RequestID = @rid"
+
+            cmd = New MySqlCommand(sql, cn)
+            cmd.Parameters.AddWithValue("@orno", txtORNo.Text.Trim())
+            cmd.Parameters.AddWithValue("@ordate", dtpORDate.Value.ToString("yyyy-MM-dd"))
+            cmd.Parameters.AddWithValue("@amt", amtPaid)
+            cmd.Parameters.AddWithValue("@paystatus", payStatus)
+            cmd.Parameters.AddWithValue("@status", newStatus)
+            cmd.Parameters.AddWithValue("@releasedby", CurrentUser.UserID)
+            cmd.Parameters.AddWithValue("@rid", currentRequestID)
+
+            cmd.ExecuteNonQuery()
+            cn.Close()
+
+            MsgBox("Payment details saved successfully!", vbInformation, "Success")
+
+            ' Refresh form data
+            LoadRequestHeaderAndStudent()
+
+        Catch ex As Exception
+            If cn.State = ConnectionState.Open Then cn.Close()
+            MsgBox("Error saving payment details: " & ex.Message, vbCritical, "Error")
+        End Try
+    End Sub
+
+    ''' <summary>
+    ''' Updates request status directly from the cboStatus dropdown.
+    ''' </summary>
+    Private Sub btnUpdateStatus_Click(sender As Object, e As EventArgs) Handles btnUpdateStatus.Click
+        If currentRequestID = 0 Then
+            MsgBox("No active request loaded to update status.", vbExclamation, "Error")
+            Return
+        End If
+
+        If String.IsNullOrWhiteSpace(cboStatus.Text) Then
+            MsgBox("Please select a valid Request Status.", vbExclamation, "Validation Error")
+            Return
+        End If
+
+        Try
+            Call connection()
+
+            ' Update status and automatically log ReleasedBy user if releasing/completing document
+            Dim selectedStatus As String = cboStatus.Text.Trim()
+
+            If selectedStatus = "Released" OrElse selectedStatus = "Completed" Then
+                sql = "UPDATE tblrequest SET Status = @status, ReleasedBy = @releasedby WHERE RequestID = @rid"
+                cmd = New MySqlCommand(sql, cn)
+                cmd.Parameters.AddWithValue("@status", selectedStatus)
+                cmd.Parameters.AddWithValue("@releasedby", CurrentUser.UserID)
+                cmd.Parameters.AddWithValue("@rid", currentRequestID)
+            Else
+                sql = "UPDATE tblrequest SET Status = @status WHERE RequestID = @rid"
+                cmd = New MySqlCommand(sql, cn)
+                cmd.Parameters.AddWithValue("@status", selectedStatus)
+                cmd.Parameters.AddWithValue("@rid", currentRequestID)
+            End If
+
+            cmd.ExecuteNonQuery()
+            cn.Close()
+
+            MsgBox("Request status updated successfully!", vbInformation, "Success")
+            LoadRequestHeaderAndStudent()
+
+        Catch ex As Exception
+            If cn.State = ConnectionState.Open Then cn.Close()
+            MsgBox("Error updating status: " & ex.Message, vbCritical, "Error")
+        End Try
+    End Sub
+
     Private Sub btnBackToRequestList_Click(sender As Object, e As EventArgs) Handles btnBacktoRequestList.Click
         frmRequestList.Show()
         Me.Close()
     End Sub
+
 End Class

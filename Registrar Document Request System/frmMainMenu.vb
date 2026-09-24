@@ -10,9 +10,6 @@ Public Class frmMainMenu
         Timer1.Start()
         UpdateFooterDateTime()
 
-        ' Auto-cancel pending requests older than 7 days prior to dashboard refresh
-        AutoCancelPendingRequests()
-
         ' Load all dashboard counts and widgets
         RefreshDashboard()
 
@@ -24,25 +21,7 @@ Public Class frmMainMenu
     ' every time this form becomes visible again.
     Private Sub frmMainMenu_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
         RefreshUserSession()
-        AutoCancelPendingRequests()
         RefreshDashboard()
-    End Sub
-
-    Private Sub AutoCancelPendingRequests()
-        Try
-            Call connection()
-
-            sql = "UPDATE tblrequest " &
-                  "SET Status = 'Cancelled' " &
-                  "WHERE (Status = 'Pending' OR Status IS NULL OR Status = '') " &
-                  "AND RequestDate <= DATE_SUB(CURDATE(), INTERVAL 7 DAY)"
-
-            cmd = New MySqlCommand(sql, cn)
-            cmd.ExecuteNonQuery()
-            cn.Close()
-        Catch ex As Exception
-            If cn.State = ConnectionState.Open Then cn.Close()
-        End Try
     End Sub
 
     ''' <summary>
@@ -80,15 +59,11 @@ Public Class frmMainMenu
     Private Sub TotalStudents()
         Try
             Call connection()
-            sql = "SELECT COUNT(StudentID) FROM tblstudents"
-            cmd = New MySqlCommand(sql, cn)
-            dr = cmd.ExecuteReader()
-
-            If dr.Read() Then
-                lbltotalstudents.Text = dr(0).ToString()
-            End If
-
-            dr.Close()
+            Dim studentSql As String = "SELECT COUNT(StudentID) FROM tblstudents"
+            Using localCmd As New MySqlCommand(studentSql, cn)
+                Dim result As Object = localCmd.ExecuteScalar()
+                lbltotalstudents.Text = If(result IsNot Nothing, result.ToString(), "0")
+            End Using
             cn.Close()
         Catch ex As Exception
             If cn.State = ConnectionState.Open Then cn.Close()
@@ -99,15 +74,12 @@ Public Class frmMainMenu
     Private Sub TotalRequest()
         Try
             Call connection()
-            sql = "SELECT COUNT(RequestID) FROM tblrequest WHERE PaymentStatus = 'Paid'"
-            cmd = New MySqlCommand(sql, cn)
-            dr = cmd.ExecuteReader()
-
-            If dr.Read() Then
-                lbltotrequests.Text = dr(0).ToString()
-            End If
-
-            dr.Close()
+            ' Strictly counts header records in tblrequest directly
+            Dim reqSql As String = "SELECT COUNT(RequestID) FROM tblrequest"
+            Using localCmd As New MySqlCommand(reqSql, cn)
+                Dim result As Object = localCmd.ExecuteScalar()
+                lbltotrequests.Text = If(result IsNot Nothing, result.ToString(), "0")
+            End Using
             cn.Close()
         Catch ex As Exception
             If cn.State = ConnectionState.Open Then cn.Close()
@@ -118,15 +90,11 @@ Public Class frmMainMenu
     Private Sub PendingRequest()
         Try
             Call connection()
-            sql = "SELECT COUNT(RequestID) FROM tblrequest WHERE Status = 'Pending' AND PaymentStatus = 'Paid'"
-            cmd = New MySqlCommand(sql, cn)
-            dr = cmd.ExecuteReader()
-
-            If dr.Read() Then
-                lblpendingrequests.Text = dr(0).ToString()
-            End If
-
-            dr.Close()
+            Dim pendingSql As String = "SELECT COUNT(RequestID) FROM tblrequest WHERE Status = 'Pending'"
+            Using localCmd As New MySqlCommand(pendingSql, cn)
+                Dim result As Object = localCmd.ExecuteScalar()
+                lblpendingrequests.Text = If(result IsNot Nothing, result.ToString(), "0")
+            End Using
             cn.Close()
         Catch ex As Exception
             If cn.State = ConnectionState.Open Then cn.Close()
@@ -137,15 +105,11 @@ Public Class frmMainMenu
     Private Sub CompletedRequest()
         Try
             Call connection()
-            sql = "SELECT COUNT(RequestID) FROM tblrequest WHERE (Status = 'Released' OR Status = 'Completed') AND PaymentStatus = 'Paid'"
-            cmd = New MySqlCommand(sql, cn)
-            dr = cmd.ExecuteReader()
-
-            If dr.Read() Then
-                lblcompleted.Text = dr(0).ToString()
-            End If
-
-            dr.Close()
+            Dim completedSql As String = "SELECT COUNT(RequestID) FROM tblrequest WHERE Status IN ('Released', 'Completed')"
+            Using localCmd As New MySqlCommand(completedSql, cn)
+                Dim result As Object = localCmd.ExecuteScalar()
+                lblcompleted.Text = If(result IsNot Nothing, result.ToString(), "0")
+            End Using
             cn.Close()
         Catch ex As Exception
             If cn.State = ConnectionState.Open Then cn.Close()
@@ -154,44 +118,44 @@ Public Class frmMainMenu
     End Sub
 
     ''' <summary>
-    ''' Populates dgvRecentReqDoc with current requests while preserving their original status and excluding 2025 records.
+    ''' Populates dgvRecentReqDoc with active requests (excluding Released and 2025 records).
     ''' </summary>
     Public Sub LoadRecentRequests()
         Try
             Call connection()
 
-            sql = "SELECT r.RequestNo, " &
-              "CONCAT(s.FirstName, ' ', s.LastName) AS StudentName, " &
-              "GROUP_CONCAT(DISTINCT d.DocumentName SEPARATOR ', ') AS DocumentNames, " &
-              "r.Status, r.RequestDate " &
-              "FROM tblrequest r " &
-              "LEFT JOIN tblstudents s ON r.StudentID = s.StudentID " &
-              "LEFT JOIN tblrequestdetails rd ON r.RequestID = rd.RequestID " &
-              "LEFT JOIN tbldocuments d ON CAST(rd.DocumentID AS CHAR) = CAST(d.DocumentID AS CHAR) " &
-              "WHERE r.PaymentStatus = 'Paid' " &
-              "AND YEAR(r.RequestDate) <> 2025 " &
-              "AND r.Status IN ('Processing', 'Ready for Release', 'Released') " &
-              "GROUP BY r.RequestID, r.RequestNo, StudentName, r.Status, r.RequestDate " &
-              "ORDER BY r.RequestID DESC " &
-              "LIMIT 10"
+            Dim recentSql As String = "SELECT r.RequestNo, " &
+                                      "CONCAT(s.FirstName, ' ', s.LastName) AS StudentName, " &
+                                      "GROUP_CONCAT(DISTINCT d.DocumentName SEPARATOR ', ') AS DocumentNames, " &
+                                      "r.Status, r.RequestDate " &
+                                      "FROM tblrequest r " &
+                                      "LEFT JOIN tblstudents s ON r.StudentID = s.StudentID " &
+                                      "LEFT JOIN tblrequestdetails rd ON r.RequestID = rd.RequestID " &
+                                      "LEFT JOIN tbldocuments d ON CAST(rd.DocumentID AS CHAR) = CAST(d.DocumentID AS CHAR) " &
+                                      "WHERE r.PaymentStatus = 'Paid' " &
+                                      "AND YEAR(r.RequestDate) <> 2025 " &
+                                      "AND r.Status IN ('Processing', 'Ready for Release') " &
+                                      "GROUP BY r.RequestID, r.RequestNo, StudentName, r.Status, r.RequestDate " &
+                                      "ORDER BY r.RequestID DESC " &
+                                      "LIMIT 10"
 
-            cmd = New MySqlCommand(sql, cn)
-            dr = cmd.ExecuteReader()
+            Using localCmd As New MySqlCommand(recentSql, cn)
+                Using localDr As MySqlDataReader = localCmd.ExecuteReader()
+                    dgvrecentreqdoc.Rows.Clear()
+                    While localDr.Read()
+                        Dim reqDateStr As String = If(IsDBNull(localDr("RequestDate")), "-", Convert.ToDateTime(localDr("RequestDate")).ToString("yyyy-MM-dd"))
 
-            dgvrecentreqdoc.Rows.Clear()
-            While dr.Read()
-                Dim reqDateStr As String = If(IsDBNull(dr("RequestDate")), "-", Convert.ToDateTime(dr("RequestDate")).ToString("yyyy-MM-dd"))
+                        dgvrecentreqdoc.Rows.Add(
+                            localDr("RequestNo").ToString(),
+                            If(IsDBNull(localDr("StudentName")), "-", localDr("StudentName").ToString()),
+                            If(IsDBNull(localDr("DocumentNames")), "-", localDr("DocumentNames").ToString()),
+                            If(IsDBNull(localDr("Status")) OrElse String.IsNullOrWhiteSpace(localDr("Status").ToString()), "-", localDr("Status").ToString()),
+                            reqDateStr
+                        )
+                    End While
+                End Using
+            End Using
 
-                dgvrecentreqdoc.Rows.Add(
-                dr("RequestNo").ToString(),
-                If(IsDBNull(dr("StudentName")), "-", dr("StudentName").ToString()),
-                If(IsDBNull(dr("DocumentNames")), "-", dr("DocumentNames").ToString()),
-                If(IsDBNull(dr("Status")) OrElse String.IsNullOrWhiteSpace(dr("Status").ToString()), "-", dr("Status").ToString()),
-                reqDateStr
-            )
-            End While
-
-            dr.Close()
             cn.Close()
         Catch ex As Exception
             If cn.State = ConnectionState.Open Then cn.Close()
@@ -200,42 +164,42 @@ Public Class frmMainMenu
     End Sub
 
     ''' <summary>
-    ''' Populates the Overdue Request grid including Cancelled requests older than 7 days.
+    ''' Populates the Overdue Request grid including requests older than 7 days that are not completed/released.
     ''' </summary>
     Private Sub LoadOverdueRequests()
         Try
             Call connection()
 
-            sql = "SELECT r.RequestNo, " &
-                  "CONCAT(s.FirstName, ' ', s.LastName) AS StudentName, " &
-                  "GROUP_CONCAT(DISTINCT d.DocumentName SEPARATOR ', ') AS DocumentNames, " &
-                  "r.Status, r.RequestDate " &
-                  "FROM tblrequest r " &
-                  "LEFT JOIN tblstudents s ON r.StudentID = s.StudentID " &
-                  "LEFT JOIN tblrequestdetails rd ON r.RequestID = rd.RequestID " &
-                  "LEFT JOIN tbldocuments d ON CAST(rd.DocumentID AS CHAR) = CAST(d.DocumentID AS CHAR) " &
-                  "WHERE r.Status NOT IN ('Completed', 'Released') " &
-                  "AND r.RequestDate <= DATE_SUB(CURDATE(), INTERVAL 7 DAY) " &
-                  "GROUP BY r.RequestID, r.RequestNo, StudentName, r.Status, r.RequestDate " &
-                  "ORDER BY r.RequestDate ASC"
+            Dim overdueSql As String = "SELECT r.RequestNo, " &
+                                       "CONCAT(s.FirstName, ' ', s.LastName) AS StudentName, " &
+                                       "GROUP_CONCAT(DISTINCT d.DocumentName SEPARATOR ', ') AS DocumentNames, " &
+                                       "r.Status, r.RequestDate " &
+                                       "FROM tblrequest r " &
+                                       "LEFT JOIN tblstudents s ON r.StudentID = s.StudentID " &
+                                       "LEFT JOIN tblrequestdetails rd ON r.RequestID = rd.RequestID " &
+                                       "LEFT JOIN tbldocuments d ON CAST(rd.DocumentID AS CHAR) = CAST(d.DocumentID AS CHAR) " &
+                                       "WHERE r.Status NOT IN ('Completed', 'Released') " &
+                                       "AND r.RequestDate <= DATE_SUB(CURDATE(), INTERVAL 7 DAY) " &
+                                       "GROUP BY r.RequestID, r.RequestNo, StudentName, r.Status, r.RequestDate " &
+                                       "ORDER BY r.RequestDate ASC"
 
-            cmd = New MySqlCommand(sql, cn)
-            dr = cmd.ExecuteReader()
+            Using localCmd As New MySqlCommand(overdueSql, cn)
+                Using localDr As MySqlDataReader = localCmd.ExecuteReader()
+                    dgvOverdueReq.Rows.Clear()
+                    While localDr.Read()
+                        Dim reqDateStr As String = If(IsDBNull(localDr("RequestDate")), "-", Convert.ToDateTime(localDr("RequestDate")).ToString("yyyy-MM-dd"))
 
-            dgvOverdueReq.Rows.Clear()
-            While dr.Read()
-                Dim reqDateStr As String = If(IsDBNull(dr("RequestDate")), "-", Convert.ToDateTime(dr("RequestDate")).ToString("yyyy-MM-dd"))
+                        dgvOverdueReq.Rows.Add(
+                            localDr("RequestNo").ToString(),
+                            If(IsDBNull(localDr("StudentName")), "-", localDr("StudentName").ToString()),
+                            If(IsDBNull(localDr("DocumentNames")), "-", localDr("DocumentNames").ToString()),
+                            If(IsDBNull(localDr("Status")) OrElse String.IsNullOrWhiteSpace(localDr("Status").ToString()), "-", localDr("Status").ToString()),
+                            reqDateStr
+                        )
+                    End While
+                End Using
+            End Using
 
-                dgvOverdueReq.Rows.Add(
-                    dr("RequestNo").ToString(),
-                    If(IsDBNull(dr("StudentName")), "-", dr("StudentName").ToString()),
-                    If(IsDBNull(dr("DocumentNames")), "-", dr("DocumentNames").ToString()),
-                    If(IsDBNull(dr("Status")) OrElse String.IsNullOrWhiteSpace(dr("Status").ToString()), "-", dr("Status").ToString()),
-                    reqDateStr
-                )
-            End While
-
-            dr.Close()
             cn.Close()
         Catch ex As Exception
             If cn.State = ConnectionState.Open Then cn.Close()
@@ -244,27 +208,27 @@ Public Class frmMainMenu
     End Sub
 
     ''' <summary>
-    ''' Populates the Most Requested Documents chart.
+    ''' Populates the Most Requested Documents chart without modifying UI label controls.
     ''' </summary>
     Public Sub LoadMostRequestedDocuments()
         Try
             Call connection()
 
-            sql = "SELECT d.DocumentName, SUM(rd.Quantity) AS TotalQty " &
-                  "FROM tblrequestdetails rd " &
-                  "JOIN tbldocuments d ON CAST(rd.DocumentID AS CHAR) = CAST(d.DocumentID AS CHAR) " &
-                  "GROUP BY d.DocumentName " &
-                  "ORDER BY TotalQty DESC"
+            Dim chartSql As String = "SELECT d.DocumentName, SUM(rd.Quantity) AS TotalQty " &
+                                     "FROM tblrequestdetails rd " &
+                                     "JOIN tbldocuments d ON CAST(rd.DocumentID AS CHAR) = CAST(d.DocumentID AS CHAR) " &
+                                     "GROUP BY d.DocumentName " &
+                                     "ORDER BY TotalQty DESC"
 
-            cmd = New MySqlCommand(sql, cn)
-            dr = cmd.ExecuteReader()
+            Using localCmd As New MySqlCommand(chartSql, cn)
+                Using localDr As MySqlDataReader = localCmd.ExecuteReader()
+                    chtMostreqdoc.Series("Series1").Points.Clear()
+                    While localDr.Read()
+                        chtMostreqdoc.Series("Series1").Points.AddXY(localDr("DocumentName").ToString(), Convert.ToInt32(localDr("TotalQty")))
+                    End While
+                End Using
+            End Using
 
-            chtMostreqdoc.Series("Series1").Points.Clear()
-            While dr.Read()
-                chtMostreqdoc.Series("Series1").Points.AddXY(dr("DocumentName").ToString(), Convert.ToInt32(dr("TotalQty")))
-            End While
-
-            dr.Close()
             cn.Close()
         Catch ex As Exception
             If cn.State = ConnectionState.Open Then cn.Close()
@@ -282,23 +246,22 @@ Public Class frmMainMenu
             Call connection()
             chtdocreqpermonth.Series("Series1").Points.Clear()
 
-            ' Array to store total requests per month (1 = Jan, 12 = Dec)
             Dim counts(12) As Integer
 
-            sql = "SELECT MONTH(RequestDate) AS m, COUNT(*) AS cnt " &
-                  "FROM tblrequest WHERE YEAR(RequestDate) = @year " &
-                  "GROUP BY MONTH(RequestDate)"
-            cmd = New MySqlCommand(sql, cn)
-            cmd.Parameters.AddWithValue("@year", currentYear)
-            dr = cmd.ExecuteReader()
+            Dim monthSql As String = "SELECT MONTH(RequestDate) AS m, COUNT(*) AS cnt " &
+                                     "FROM tblrequest WHERE YEAR(RequestDate) = @year " &
+                                     "GROUP BY MONTH(RequestDate)"
 
-            While dr.Read()
-                Dim m As Integer = Convert.ToInt32(dr("m"))
-                counts(m) = Convert.ToInt32(dr("cnt"))
-            End While
-            dr.Close()
+            Using localCmd As New MySqlCommand(monthSql, cn)
+                localCmd.Parameters.AddWithValue("@year", currentYear)
+                Using localDr As MySqlDataReader = localCmd.ExecuteReader()
+                    While localDr.Read()
+                        Dim m As Integer = Convert.ToInt32(localDr("m"))
+                        counts(m) = Convert.ToInt32(localDr("cnt"))
+                    End While
+                End Using
+            End Using
 
-            ' Plot all 12 months onto the chart
             For m As Integer = 1 To 12
                 chtdocreqpermonth.Series("Series1").Points.AddXY(MonthName(m, True), counts(m))
             Next
@@ -355,4 +318,5 @@ Public Class frmMainMenu
         frmUserManagement.Show()
         Me.Hide()
     End Sub
+
 End Class
