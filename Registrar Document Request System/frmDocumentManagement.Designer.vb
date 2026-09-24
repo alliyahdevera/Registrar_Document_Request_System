@@ -73,6 +73,7 @@ Partial Class frmDocumentManagement
         Me.lblname = New System.Windows.Forms.Label()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.btnClear = New System.Windows.Forms.Button()
         Me.Panel5.SuspendLayout()
         CType(Me.dgvDocument, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel6.SuspendLayout()
@@ -636,11 +637,26 @@ Partial Class frmDocumentManagement
         'Timer1
         '
         '
+        'btnClear
+        '
+        Me.btnClear.BackColor = System.Drawing.Color.IndianRed
+        Me.btnClear.FlatAppearance.BorderSize = 0
+        Me.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnClear.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnClear.ForeColor = System.Drawing.Color.White
+        Me.btnClear.Location = New System.Drawing.Point(1166, 265)
+        Me.btnClear.Name = "btnClear"
+        Me.btnClear.Size = New System.Drawing.Size(167, 31)
+        Me.btnClear.TabIndex = 70
+        Me.btnClear.Text = "Clear"
+        Me.btnClear.UseVisualStyleBackColor = False
+        '
         'frmDocumentManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1424, 836)
+        Me.Controls.Add(Me.btnClear)
         Me.Controls.Add(Me.lbldatetime)
         Me.Controls.Add(Me.Label19)
         Me.Controls.Add(Me.lblposition)
@@ -724,4 +740,5 @@ Partial Class frmDocumentManagement
     Friend WithEvents lblname As Label
     Friend WithEvents Label15 As Label
     Friend WithEvents Timer1 As Timer
+    Friend WithEvents btnClear As Button
 End Class

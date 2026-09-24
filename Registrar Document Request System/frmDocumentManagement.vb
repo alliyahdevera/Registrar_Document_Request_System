@@ -5,9 +5,6 @@ Public Class frmDocumentManagement
     Private Sub frmDocumentManagement_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         RefreshUserSession()
 
-        ' Lock Document ID field so users cannot edit primary key values
-        txtDocumentID.ReadOnly = True
-
         ' Enable full-row selection for the DataGridView
         dgvDocument.SelectionMode = DataGridViewSelectionMode.FullRowSelect
         dgvDocument.MultiSelect = False
@@ -19,8 +16,7 @@ Public Class frmDocumentManagement
 
         LoadDocuments()
 
-        ' Keep Document ID clear on initial load
-        ClearFields()
+        SetAddMode()
     End Sub
 
     Private Sub frmDocumentManagement_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
@@ -42,6 +38,17 @@ Public Class frmDocumentManagement
 
     Private Sub UpdateFooterDateTime()
         lbldatetime.Text = DateTime.Now.ToString("dddd, MMMM d, yyyy h:mm:ss tt")
+    End Sub
+
+    ' Controls locking/unlocking and visual state for txtDocumentID
+    Private Sub SetAddMode()
+        txtDocumentID.ReadOnly = False
+        txtDocumentID.BackColor = Color.White
+    End Sub
+
+    Private Sub SetEditMode()
+        txtDocumentID.ReadOnly = True
+        txtDocumentID.BackColor = Color.Gainsboro
     End Sub
 
     ''' <summary>
@@ -97,7 +104,11 @@ Public Class frmDocumentManagement
     End Function
 
     Private Function IsValidInput(Optional isEditMode As Boolean = False) As Boolean
-        If String.IsNullOrWhiteSpace(txtName.Text) Then
+        If String.IsNullOrWhiteSpace(txtDocumentID.Text) Then
+            MsgBox("Fill in Document ID", vbExclamation, "Document Management")
+            txtDocumentID.Focus()
+            Return False
+        ElseIf String.IsNullOrWhiteSpace(txtName.Text) Then
             MsgBox("Fill in Document Name", vbExclamation, "Document Management")
             txtName.Focus()
             Return False
@@ -127,19 +138,34 @@ Public Class frmDocumentManagement
     End Function
 
     Private Sub dgvDocument_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvDocument.CellClick
-        If e.RowIndex >= 0 AndAlso e.RowIndex < dgvDocument.Rows.Count Then
-            Dim row As DataGridViewRow = dgvDocument.Rows(e.RowIndex)
+        ' Ignore header clicks or invalid row indexes
+        If e.RowIndex < 0 Then Exit Sub
 
-            txtDocumentID.Text = If(row.Cells(0).Value IsNot Nothing, row.Cells(0).Value.ToString(), "")
-            txtName.Text = If(row.Cells(1).Value IsNot Nothing, row.Cells(1).Value.ToString(), "")
-            txtDescription.Text = If(row.Cells(2).Value IsNot Nothing, row.Cells(2).Value.ToString(), "")
-            txtFee.Text = If(row.Cells(3).Value IsNot Nothing, row.Cells(3).Value.ToString(), "")
-            txtStatus.Text = If(row.Cells(4).Value IsNot Nothing, row.Cells(4).Value.ToString(), "")
+        ' If the user clicks the blank "New Row" (*) at the bottom, reset to Add Mode
+        If e.RowIndex = dgvDocument.NewRowIndex OrElse dgvDocument.Rows(e.RowIndex).IsNewRow Then
+            ClearFields()
+            SetAddMode()
+            Exit Sub
         End If
+
+        ' Populate fields and set to Edit Mode when a valid row is selected
+        Dim row As DataGridViewRow = dgvDocument.Rows(e.RowIndex)
+        txtDocumentID.Text = If(row.Cells(0).Value IsNot Nothing, row.Cells(0).Value.ToString(), "")
+        txtName.Text = If(row.Cells(1).Value IsNot Nothing, row.Cells(1).Value.ToString(), "")
+        txtDescription.Text = If(row.Cells(2).Value IsNot Nothing, row.Cells(2).Value.ToString(), "")
+        txtFee.Text = If(row.Cells(3).Value IsNot Nothing, row.Cells(3).Value.ToString(), "")
+        txtStatus.Text = If(row.Cells(4).Value IsNot Nothing, row.Cells(4).Value.ToString(), "")
+
+        SetEditMode()
     End Sub
 
     Private Sub btnAddDocument_Click(sender As Object, e As EventArgs) Handles btnAddDocument.Click
-        ' Generate next available Document ID right before insertion
+        If txtDocumentID.ReadOnly Then
+            MsgBox("Cannot add: a record is currently selected for editing. Clear the form first.", vbExclamation, "Document Management")
+            Exit Sub
+        End If
+
+        ' Generate next available Document ID if left blank
         If String.IsNullOrWhiteSpace(txtDocumentID.Text) Then
             SetNextDocumentID()
         End If
@@ -161,11 +187,12 @@ Public Class frmDocumentManagement
 
         ClearFields()
         LoadDocuments()
+        SetAddMode()
     End Sub
 
     Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
-        If String.IsNullOrWhiteSpace(txtDocumentID.Text) Then
-            MsgBox("Please select a Document to edit from the list.", vbExclamation, "Validation Error")
+        If Not txtDocumentID.ReadOnly Then
+            MsgBox("Please select a document from the list to edit.", vbExclamation, "Document Management")
             Exit Sub
         End If
 
@@ -189,6 +216,7 @@ Public Class frmDocumentManagement
 
         ClearFields()
         LoadDocuments()
+        SetAddMode()
     End Sub
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
@@ -215,6 +243,7 @@ Public Class frmDocumentManagement
 
         ClearFields()
         LoadDocuments()
+        SetAddMode()
     End Sub
 
     Private Sub ClearFields()
@@ -223,6 +252,12 @@ Public Class frmDocumentManagement
         txtDescription.Clear()
         txtFee.Clear()
         txtStatus.Clear()
+    End Sub
+
+    ' Clear Button handler (Resets form to Add Mode)
+    Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
+        ClearFields()
+        SetAddMode()
     End Sub
 
     Private Sub txtsearch_TextChanged(sender As Object, e As EventArgs) Handles txtsearch.TextChanged
@@ -286,5 +321,6 @@ Public Class frmDocumentManagement
         frmUserManagement.Show()
         Me.Hide()
     End Sub
+
 
 End Class
