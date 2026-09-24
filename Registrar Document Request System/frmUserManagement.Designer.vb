@@ -73,9 +73,6 @@ Partial Class frmUserManagement
         Me.Label2 = New System.Windows.Forms.Label()
         Me.btnEdit = New System.Windows.Forms.Button()
         Me.dgvUsers = New System.Windows.Forms.DataGridView()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.btnAdd = New System.Windows.Forms.Button()
-        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.UserID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Username = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Password = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -83,6 +80,9 @@ Partial Class frmUserManagement
         Me.LastName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Role = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Status = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.btnAdd = New System.Windows.Forms.Button()
+        Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         CType(Me.Logo, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -459,10 +459,10 @@ Partial Class frmUserManagement
         '
         'btnClear
         '
-        Me.btnClear.BackColor = System.Drawing.Color.Silver
+        Me.btnClear.BackColor = System.Drawing.Color.Gray
         Me.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnClear.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnClear.ForeColor = System.Drawing.Color.Black
+        Me.btnClear.ForeColor = System.Drawing.Color.White
         Me.btnClear.Location = New System.Drawing.Point(822, 137)
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Size = New System.Drawing.Size(274, 29)
@@ -678,34 +678,6 @@ Partial Class frmUserManagement
         Me.dgvUsers.Size = New System.Drawing.Size(1123, 471)
         Me.dgvUsers.TabIndex = 70
         '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.BackColor = System.Drawing.Color.Transparent
-        Me.Label1.Font = New System.Drawing.Font("Segoe UI", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
-        Me.Label1.Location = New System.Drawing.Point(270, 16)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(223, 32)
-        Me.Label1.TabIndex = 69
-        Me.Label1.Text = "User Management"
-        '
-        'btnAdd
-        '
-        Me.btnAdd.BackColor = System.Drawing.Color.Navy
-        Me.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnAdd.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAdd.ForeColor = System.Drawing.Color.White
-        Me.btnAdd.Location = New System.Drawing.Point(957, 273)
-        Me.btnAdd.Name = "btnAdd"
-        Me.btnAdd.Size = New System.Drawing.Size(143, 30)
-        Me.btnAdd.TabIndex = 71
-        Me.btnAdd.Text = "Add"
-        Me.btnAdd.UseVisualStyleBackColor = False
-        '
-        'Timer1
-        '
-        '
         'UserID
         '
         Me.UserID.HeaderText = "UserID"
@@ -753,6 +725,34 @@ Partial Class frmUserManagement
         Me.Status.MinimumWidth = 6
         Me.Status.Name = "Status"
         Me.Status.Width = 125
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.BackColor = System.Drawing.Color.Transparent
+        Me.Label1.Font = New System.Drawing.Font("Segoe UI", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
+        Me.Label1.Location = New System.Drawing.Point(270, 16)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(223, 32)
+        Me.Label1.TabIndex = 69
+        Me.Label1.Text = "User Management"
+        '
+        'btnAdd
+        '
+        Me.btnAdd.BackColor = System.Drawing.Color.Navy
+        Me.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnAdd.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAdd.ForeColor = System.Drawing.Color.White
+        Me.btnAdd.Location = New System.Drawing.Point(957, 273)
+        Me.btnAdd.Name = "btnAdd"
+        Me.btnAdd.Size = New System.Drawing.Size(143, 30)
+        Me.btnAdd.TabIndex = 71
+        Me.btnAdd.Text = "Add"
+        Me.btnAdd.UseVisualStyleBackColor = False
+        '
+        'Timer1
+        '
         '
         'frmUserManagement
         '

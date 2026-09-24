@@ -54,17 +54,6 @@ Partial Class frmReports
         Me.Panel16 = New System.Windows.Forms.Panel()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.dgvReqDoc = New System.Windows.Forms.DataGridView()
-        Me.RequestNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me._date = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.StudentID = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.FirstName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.LastName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Documents = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TotalAmount = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Status = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CreateReq = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ProcessedReq = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ReleasedBy = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.lbldatetime = New System.Windows.Forms.Label()
         Me.Label19 = New System.Windows.Forms.Label()
@@ -80,6 +69,19 @@ Partial Class frmReports
         Me.btnReleasedRequest = New System.Windows.Forms.Button()
         Me.lbltotalamount = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
+        Me.RequestNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me._date = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.StudentID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FirstName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.LastName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Documents = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TotalAmount = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Status = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.AmountPaid = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PaymentStatus = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CreateReq = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ProcessedReq = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ReleasedBy = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         CType(Me.Logo, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -448,74 +450,11 @@ Partial Class frmReports
         'dgvReqDoc
         '
         Me.dgvReqDoc.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvReqDoc.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.RequestNo, Me._date, Me.StudentID, Me.FirstName, Me.LastName, Me.Documents, Me.TotalAmount, Me.Status, Me.CreateReq, Me.ProcessedReq, Me.ReleasedBy})
+        Me.dgvReqDoc.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.RequestNo, Me._date, Me.StudentID, Me.FirstName, Me.LastName, Me.Documents, Me.TotalAmount, Me.Status, Me.AmountPaid, Me.PaymentStatus, Me.CreateReq, Me.ProcessedReq, Me.ReleasedBy})
         Me.dgvReqDoc.Location = New System.Drawing.Point(-1, 34)
         Me.dgvReqDoc.Name = "dgvReqDoc"
         Me.dgvReqDoc.Size = New System.Drawing.Size(1123, 538)
         Me.dgvReqDoc.TabIndex = 59
-        '
-        'RequestNo
-        '
-        Me.RequestNo.HeaderText = "Request Number"
-        Me.RequestNo.Name = "RequestNo"
-        '
-        '_date
-        '
-        Me._date.HeaderText = "Date"
-        Me._date.Name = "_date"
-        Me._date.Width = 130
-        '
-        'StudentID
-        '
-        Me.StudentID.HeaderText = "Student ID"
-        Me.StudentID.Name = "StudentID"
-        '
-        'FirstName
-        '
-        Me.FirstName.HeaderText = "First Name"
-        Me.FirstName.Name = "FirstName"
-        Me.FirstName.Width = 130
-        '
-        'LastName
-        '
-        Me.LastName.HeaderText = "Last Name"
-        Me.LastName.Name = "LastName"
-        Me.LastName.Width = 130
-        '
-        'Documents
-        '
-        Me.Documents.HeaderText = "Document(s)"
-        Me.Documents.Name = "Documents"
-        Me.Documents.Width = 200
-        '
-        'TotalAmount
-        '
-        Me.TotalAmount.HeaderText = "Total Amount"
-        Me.TotalAmount.Name = "TotalAmount"
-        '
-        'Status
-        '
-        Me.Status.HeaderText = "Status"
-        Me.Status.Name = "Status"
-        Me.Status.Width = 110
-        '
-        'CreateReq
-        '
-        Me.CreateReq.HeaderText = "Create Request"
-        Me.CreateReq.Name = "CreateReq"
-        Me.CreateReq.Width = 120
-        '
-        'ProcessedReq
-        '
-        Me.ProcessedReq.HeaderText = "Processed Request"
-        Me.ProcessedReq.Name = "ProcessedReq"
-        Me.ProcessedReq.Width = 120
-        '
-        'ReleasedBy
-        '
-        Me.ReleasedBy.HeaderText = "Released By"
-        Me.ReleasedBy.Name = "ReleasedBy"
-        Me.ReleasedBy.Width = 120
         '
         'Label7
         '
@@ -682,6 +621,79 @@ Partial Class frmReports
         Me.Label9.TabIndex = 93
         Me.Label9.Text = "Total Amount:"
         '
+        'RequestNo
+        '
+        Me.RequestNo.HeaderText = "Request Number"
+        Me.RequestNo.Name = "RequestNo"
+        '
+        '_date
+        '
+        Me._date.HeaderText = "Date"
+        Me._date.Name = "_date"
+        Me._date.Width = 130
+        '
+        'StudentID
+        '
+        Me.StudentID.HeaderText = "Student ID"
+        Me.StudentID.Name = "StudentID"
+        '
+        'FirstName
+        '
+        Me.FirstName.HeaderText = "First Name"
+        Me.FirstName.Name = "FirstName"
+        Me.FirstName.Width = 130
+        '
+        'LastName
+        '
+        Me.LastName.HeaderText = "Last Name"
+        Me.LastName.Name = "LastName"
+        Me.LastName.Width = 130
+        '
+        'Documents
+        '
+        Me.Documents.HeaderText = "Documents"
+        Me.Documents.Name = "Documents"
+        Me.Documents.Width = 200
+        '
+        'TotalAmount
+        '
+        Me.TotalAmount.HeaderText = "Total Amount"
+        Me.TotalAmount.Name = "TotalAmount"
+        '
+        'Status
+        '
+        Me.Status.HeaderText = "Request Status"
+        Me.Status.Name = "Status"
+        Me.Status.Width = 110
+        '
+        'AmountPaid
+        '
+        Me.AmountPaid.HeaderText = "Amount Paid"
+        Me.AmountPaid.Name = "AmountPaid"
+        '
+        'PaymentStatus
+        '
+        Me.PaymentStatus.HeaderText = "Payment Status"
+        Me.PaymentStatus.Name = "PaymentStatus"
+        '
+        'CreateReq
+        '
+        Me.CreateReq.HeaderText = "Create Request"
+        Me.CreateReq.Name = "CreateReq"
+        Me.CreateReq.Width = 120
+        '
+        'ProcessedReq
+        '
+        Me.ProcessedReq.HeaderText = "Processed Request"
+        Me.ProcessedReq.Name = "ProcessedReq"
+        Me.ProcessedReq.Width = 120
+        '
+        'ReleasedBy
+        '
+        Me.ReleasedBy.HeaderText = "Released By"
+        Me.ReleasedBy.Name = "ReleasedBy"
+        Me.ReleasedBy.Width = 120
+        '
         'frmReports
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -761,17 +773,6 @@ Partial Class frmReports
     Friend WithEvents Panel16 As Panel
     Friend WithEvents Label11 As Label
     Friend WithEvents dgvReqDoc As DataGridView
-    Friend WithEvents RequestNo As DataGridViewTextBoxColumn
-    Friend WithEvents _date As DataGridViewTextBoxColumn
-    Friend WithEvents StudentID As DataGridViewTextBoxColumn
-    Friend WithEvents FirstName As DataGridViewTextBoxColumn
-    Friend WithEvents LastName As DataGridViewTextBoxColumn
-    Friend WithEvents Documents As DataGridViewTextBoxColumn
-    Friend WithEvents TotalAmount As DataGridViewTextBoxColumn
-    Friend WithEvents Status As DataGridViewTextBoxColumn
-    Friend WithEvents CreateReq As DataGridViewTextBoxColumn
-    Friend WithEvents ProcessedReq As DataGridViewTextBoxColumn
-    Friend WithEvents ReleasedBy As DataGridViewTextBoxColumn
     Friend WithEvents Label7 As Label
     Friend WithEvents lbldatetime As Label
     Friend WithEvents Label19 As Label
@@ -787,4 +788,17 @@ Partial Class frmReports
     Friend WithEvents btnReleasedRequest As Button
     Friend WithEvents lbltotalamount As Label
     Friend WithEvents Label9 As Label
+    Friend WithEvents RequestNo As DataGridViewTextBoxColumn
+    Friend WithEvents _date As DataGridViewTextBoxColumn
+    Friend WithEvents StudentID As DataGridViewTextBoxColumn
+    Friend WithEvents FirstName As DataGridViewTextBoxColumn
+    Friend WithEvents LastName As DataGridViewTextBoxColumn
+    Friend WithEvents Documents As DataGridViewTextBoxColumn
+    Friend WithEvents TotalAmount As DataGridViewTextBoxColumn
+    Friend WithEvents Status As DataGridViewTextBoxColumn
+    Friend WithEvents AmountPaid As DataGridViewTextBoxColumn
+    Friend WithEvents PaymentStatus As DataGridViewTextBoxColumn
+    Friend WithEvents CreateReq As DataGridViewTextBoxColumn
+    Friend WithEvents ProcessedReq As DataGridViewTextBoxColumn
+    Friend WithEvents ReleasedBy As DataGridViewTextBoxColumn
 End Class

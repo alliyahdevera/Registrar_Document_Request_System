@@ -86,6 +86,7 @@ Partial Class frmStudentManagement
         Me.lblname = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.btnClear = New System.Windows.Forms.Button()
         CType(Me.dgvStudents, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel5.SuspendLayout()
         Me.Panel7.SuspendLayout()
@@ -196,7 +197,7 @@ Partial Class frmStudentManagement
         Me.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAdd.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnAdd.ForeColor = System.Drawing.Color.White
-        Me.btnAdd.Location = New System.Drawing.Point(957, 274)
+        Me.btnAdd.Location = New System.Drawing.Point(980, 274)
         Me.btnAdd.Name = "btnAdd"
         Me.btnAdd.Size = New System.Drawing.Size(143, 30)
         Me.btnAdd.TabIndex = 30
@@ -448,7 +449,7 @@ Partial Class frmStudentManagement
         Me.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnEdit.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnEdit.ForeColor = System.Drawing.Color.White
-        Me.btnEdit.Location = New System.Drawing.Point(1115, 274)
+        Me.btnEdit.Location = New System.Drawing.Point(1129, 274)
         Me.btnEdit.Name = "btnEdit"
         Me.btnEdit.Size = New System.Drawing.Size(136, 30)
         Me.btnEdit.TabIndex = 51
@@ -786,12 +787,26 @@ Partial Class frmStudentManagement
         'Timer1
         '
         '
+        'btnClear
+        '
+        Me.btnClear.BackColor = System.Drawing.Color.Gray
+        Me.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnClear.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnClear.ForeColor = System.Drawing.Color.White
+        Me.btnClear.Location = New System.Drawing.Point(864, 274)
+        Me.btnClear.Name = "btnClear"
+        Me.btnClear.Size = New System.Drawing.Size(110, 30)
+        Me.btnClear.TabIndex = 86
+        Me.btnClear.Text = "Clear"
+        Me.btnClear.UseVisualStyleBackColor = False
+        '
         'frmStudentManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.WhiteSmoke
         Me.ClientSize = New System.Drawing.Size(1424, 836)
+        Me.Controls.Add(Me.btnClear)
         Me.Controls.Add(Me.lbldatetime)
         Me.Controls.Add(Me.Label19)
         Me.Controls.Add(Me.lblposition)
@@ -890,4 +905,5 @@ Partial Class frmStudentManagement
     Friend WithEvents lblname As Label
     Friend WithEvents Label16 As Label
     Friend WithEvents Timer1 As Timer
+    Friend WithEvents btnClear As Button
 End Class

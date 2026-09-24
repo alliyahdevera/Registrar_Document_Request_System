@@ -24,12 +24,12 @@ Partial Class frmMainMenu
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMainMenu))
-        Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim ChartArea2 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend2 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series2 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea3 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend3 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series3 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea4 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend4 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series4 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.btnUserManagement = New System.Windows.Forms.Button()
@@ -122,9 +122,9 @@ Partial Class frmMainMenu
         Me.Label1.ForeColor = System.Drawing.Color.Navy
         Me.Label1.Location = New System.Drawing.Point(278, 22)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(145, 32)
+        Me.Label1.Size = New System.Drawing.Size(138, 32)
         Me.Label1.TabIndex = 25
-        Me.Label1.Text = "Main Menu"
+        Me.Label1.Text = "Dashboard"
         '
         'Panel1
         '
@@ -389,9 +389,9 @@ Partial Class frmMainMenu
         Me.Panel6.Controls.Add(Me.PictureBox2)
         Me.Panel6.Controls.Add(Me.lbltotrequests)
         Me.Panel6.Controls.Add(Me.Label6)
-        Me.Panel6.Location = New System.Drawing.Point(574, 73)
+        Me.Panel6.Location = New System.Drawing.Point(571, 73)
         Me.Panel6.Name = "Panel6"
-        Me.Panel6.Size = New System.Drawing.Size(246, 111)
+        Me.Panel6.Size = New System.Drawing.Size(249, 111)
         Me.Panel6.TabIndex = 32
         '
         'PictureBox2
@@ -481,16 +481,16 @@ Partial Class frmMainMenu
         Me.Panel8.Controls.Add(Me.PictureBox4)
         Me.Panel8.Controls.Add(Me.lblcompleted)
         Me.Panel8.Controls.Add(Me.Label9)
-        Me.Panel8.Location = New System.Drawing.Point(1145, 73)
+        Me.Panel8.Location = New System.Drawing.Point(1141, 73)
         Me.Panel8.Name = "Panel8"
-        Me.Panel8.Size = New System.Drawing.Size(246, 111)
+        Me.Panel8.Size = New System.Drawing.Size(250, 111)
         Me.Panel8.TabIndex = 34
         '
         'PictureBox4
         '
         Me.PictureBox4.BackgroundImage = CType(resources.GetObject("PictureBox4.BackgroundImage"), System.Drawing.Image)
         Me.PictureBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.PictureBox4.Location = New System.Drawing.Point(27, 28)
+        Me.PictureBox4.Location = New System.Drawing.Point(22, 28)
         Me.PictureBox4.Name = "PictureBox4"
         Me.PictureBox4.Size = New System.Drawing.Size(55, 55)
         Me.PictureBox4.TabIndex = 31
@@ -502,7 +502,7 @@ Partial Class frmMainMenu
         Me.lblcompleted.BackColor = System.Drawing.Color.Transparent
         Me.lblcompleted.Font = New System.Drawing.Font("Segoe UI", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblcompleted.ForeColor = System.Drawing.Color.Navy
-        Me.lblcompleted.Location = New System.Drawing.Point(98, 50)
+        Me.lblcompleted.Location = New System.Drawing.Point(93, 50)
         Me.lblcompleted.Name = "lblcompleted"
         Me.lblcompleted.Size = New System.Drawing.Size(24, 32)
         Me.lblcompleted.TabIndex = 30
@@ -514,25 +514,25 @@ Partial Class frmMainMenu
         Me.Label9.BackColor = System.Drawing.Color.Transparent
         Me.Label9.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label9.ForeColor = System.Drawing.Color.Navy
-        Me.Label9.Location = New System.Drawing.Point(94, 27)
+        Me.Label9.Location = New System.Drawing.Point(85, 27)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(92, 21)
+        Me.Label9.Size = New System.Drawing.Size(140, 21)
         Me.Label9.TabIndex = 29
-        Me.Label9.Text = "Completed"
+        Me.Label9.Text = "Released Request"
         '
         'chtdocreqpermonth
         '
-        ChartArea1.Name = "ChartArea1"
-        Me.chtdocreqpermonth.ChartAreas.Add(ChartArea1)
-        Legend1.Name = "Legend1"
-        Me.chtdocreqpermonth.Legends.Add(Legend1)
+        ChartArea3.Name = "ChartArea1"
+        Me.chtdocreqpermonth.ChartAreas.Add(ChartArea3)
+        Legend3.Name = "Legend1"
+        Me.chtdocreqpermonth.Legends.Add(Legend3)
         Me.chtdocreqpermonth.Location = New System.Drawing.Point(21, 62)
         Me.chtdocreqpermonth.Name = "chtdocreqpermonth"
-        Series1.ChartArea = "ChartArea1"
-        Series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
-        Series1.Legend = "Legend1"
-        Series1.Name = "Series1"
-        Me.chtdocreqpermonth.Series.Add(Series1)
+        Series3.ChartArea = "ChartArea1"
+        Series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
+        Series3.Legend = "Legend1"
+        Series3.Name = "Series1"
+        Me.chtdocreqpermonth.Series.Add(Series3)
         Me.chtdocreqpermonth.Size = New System.Drawing.Size(450, 198)
         Me.chtdocreqpermonth.TabIndex = 35
         Me.chtdocreqpermonth.Text = "Chart1"
@@ -639,17 +639,17 @@ Partial Class frmMainMenu
         '
         'chtMostreqdoc
         '
-        ChartArea2.Name = "ChartArea1"
-        Me.chtMostreqdoc.ChartAreas.Add(ChartArea2)
-        Legend2.Name = "Legend1"
-        Me.chtMostreqdoc.Legends.Add(Legend2)
+        ChartArea4.Name = "ChartArea1"
+        Me.chtMostreqdoc.ChartAreas.Add(ChartArea4)
+        Legend4.Name = "Legend1"
+        Me.chtMostreqdoc.Legends.Add(Legend4)
         Me.chtMostreqdoc.Location = New System.Drawing.Point(20, 62)
         Me.chtMostreqdoc.Name = "chtMostreqdoc"
-        Series2.ChartArea = "ChartArea1"
-        Series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Bar
-        Series2.Legend = "Legend1"
-        Series2.Name = "Series1"
-        Me.chtMostreqdoc.Series.Add(Series2)
+        Series4.ChartArea = "ChartArea1"
+        Series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Bar
+        Series4.Legend = "Legend1"
+        Series4.Name = "Series1"
+        Me.chtMostreqdoc.Series.Add(Series4)
         Me.chtMostreqdoc.Size = New System.Drawing.Size(499, 198)
         Me.chtMostreqdoc.TabIndex = 35
         Me.chtMostreqdoc.Text = "Chart3"

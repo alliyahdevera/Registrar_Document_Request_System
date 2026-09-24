@@ -22,6 +22,7 @@ Public Class frmLogin
                 CurrentUser.Role = dr("Role").ToString()
                 dr.Close()
                 cn.Close()
+                MsgBox("Welcome to Registrar Document Request System!", vbInformation, "Registrar Document Request System")
                 frmMainMenu.Show()
                 Me.Hide()
             Else

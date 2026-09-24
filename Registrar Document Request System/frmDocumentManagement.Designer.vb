@@ -102,7 +102,7 @@ Partial Class frmDocumentManagement
         Me.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnDelete.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDelete.ForeColor = System.Drawing.Color.White
-        Me.btnDelete.Location = New System.Drawing.Point(1166, 218)
+        Me.btnDelete.Location = New System.Drawing.Point(1165, 241)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(167, 31)
         Me.btnDelete.TabIndex = 59
@@ -116,7 +116,7 @@ Partial Class frmDocumentManagement
         Me.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnEdit.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnEdit.ForeColor = System.Drawing.Color.White
-        Me.btnEdit.Location = New System.Drawing.Point(1166, 167)
+        Me.btnEdit.Location = New System.Drawing.Point(1165, 190)
         Me.btnEdit.Name = "btnEdit"
         Me.btnEdit.Size = New System.Drawing.Size(167, 31)
         Me.btnEdit.TabIndex = 58
@@ -255,7 +255,7 @@ Partial Class frmDocumentManagement
         Me.btnAddDocument.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAddDocument.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnAddDocument.ForeColor = System.Drawing.Color.White
-        Me.btnAddDocument.Location = New System.Drawing.Point(1166, 115)
+        Me.btnAddDocument.Location = New System.Drawing.Point(1165, 138)
         Me.btnAddDocument.Name = "btnAddDocument"
         Me.btnAddDocument.Size = New System.Drawing.Size(167, 31)
         Me.btnAddDocument.TabIndex = 55
@@ -639,12 +639,11 @@ Partial Class frmDocumentManagement
         '
         'btnClear
         '
-        Me.btnClear.BackColor = System.Drawing.Color.IndianRed
-        Me.btnClear.FlatAppearance.BorderSize = 0
+        Me.btnClear.BackColor = System.Drawing.Color.Gray
         Me.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnClear.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnClear.ForeColor = System.Drawing.Color.White
-        Me.btnClear.Location = New System.Drawing.Point(1166, 265)
+        Me.btnClear.Location = New System.Drawing.Point(1165, 90)
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Size = New System.Drawing.Size(167, 31)
         Me.btnClear.TabIndex = 70

@@ -300,4 +300,12 @@ Public Class frmStudentManagement
         frmUserManagement.Show()
         Me.Hide()
     End Sub
+
+    Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
+        ClearFields()
+        txtStudentID.ReadOnly = False
+        txtStudentID.BackColor = Color.White
+        txtLRN.ReadOnly = False
+        txtLRN.BackColor = Color.White
+    End Sub
 End Class

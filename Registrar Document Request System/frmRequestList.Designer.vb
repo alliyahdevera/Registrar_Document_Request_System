@@ -29,19 +29,6 @@ Partial Class frmRequestList
         Me.Panel16 = New System.Windows.Forms.Panel()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.dgvReqDoc = New System.Windows.Forms.DataGridView()
-        Me.RequestNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me._date = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.StudentID = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.FirstName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.LastName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Documents = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TotalAmount = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Status = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ORNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ORDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CreateReq = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ProcessedReq = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ReleasedBy = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.Panel10 = New System.Windows.Forms.Panel()
         Me.txtSearch = New System.Windows.Forms.TextBox()
@@ -70,6 +57,21 @@ Partial Class frmRequestList
         Me.lblname = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.RequestNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me._date = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.StudentID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FirstName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.LastName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Documents = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TotalAmount = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PaymentStatus = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.AmountPaid = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ORNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ORDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Status = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CreateReq = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ProcessedReq = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ReleasedBy = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel7.SuspendLayout()
         Me.Panel16.SuspendLayout()
         CType(Me.dgvReqDoc, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -126,84 +128,11 @@ Partial Class frmRequestList
         'dgvReqDoc
         '
         Me.dgvReqDoc.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvReqDoc.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.RequestNo, Me._date, Me.StudentID, Me.FirstName, Me.LastName, Me.Documents, Me.TotalAmount, Me.Status, Me.ORNo, Me.ORDate, Me.CreateReq, Me.ProcessedReq, Me.ReleasedBy})
+        Me.dgvReqDoc.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.RequestNo, Me._date, Me.StudentID, Me.FirstName, Me.LastName, Me.Documents, Me.TotalAmount, Me.PaymentStatus, Me.AmountPaid, Me.ORNo, Me.ORDate, Me.Status, Me.CreateReq, Me.ProcessedReq, Me.ReleasedBy})
         Me.dgvReqDoc.Location = New System.Drawing.Point(-1, 34)
         Me.dgvReqDoc.Name = "dgvReqDoc"
         Me.dgvReqDoc.Size = New System.Drawing.Size(1123, 629)
         Me.dgvReqDoc.TabIndex = 59
-        '
-        'RequestNo
-        '
-        Me.RequestNo.HeaderText = "Request Number"
-        Me.RequestNo.Name = "RequestNo"
-        '
-        '_date
-        '
-        Me._date.HeaderText = "Date"
-        Me._date.Name = "_date"
-        Me._date.Width = 130
-        '
-        'StudentID
-        '
-        Me.StudentID.HeaderText = "Student ID"
-        Me.StudentID.Name = "StudentID"
-        '
-        'FirstName
-        '
-        Me.FirstName.HeaderText = "First Name"
-        Me.FirstName.Name = "FirstName"
-        Me.FirstName.Width = 130
-        '
-        'LastName
-        '
-        Me.LastName.HeaderText = "Last Name"
-        Me.LastName.Name = "LastName"
-        Me.LastName.Width = 130
-        '
-        'Documents
-        '
-        Me.Documents.HeaderText = "Documents"
-        Me.Documents.Name = "Documents"
-        Me.Documents.Width = 200
-        '
-        'TotalAmount
-        '
-        Me.TotalAmount.HeaderText = "Total Amount"
-        Me.TotalAmount.Name = "TotalAmount"
-        '
-        'Status
-        '
-        Me.Status.HeaderText = "Status"
-        Me.Status.Name = "Status"
-        Me.Status.Width = 110
-        '
-        'ORNo
-        '
-        Me.ORNo.HeaderText = "OR No."
-        Me.ORNo.Name = "ORNo"
-        '
-        'ORDate
-        '
-        Me.ORDate.HeaderText = "OR Date"
-        Me.ORDate.Name = "ORDate"
-        '
-        'CreateReq
-        '
-        Me.CreateReq.HeaderText = "Create Request"
-        Me.CreateReq.Name = "CreateReq"
-        Me.CreateReq.Width = 120
-        '
-        'ProcessedReq
-        '
-        Me.ProcessedReq.HeaderText = "Processed Request"
-        Me.ProcessedReq.Name = "ProcessedReq"
-        Me.ProcessedReq.Width = 120
-        '
-        'ReleasedBy
-        '
-        Me.ReleasedBy.HeaderText = "Released By"
-        Me.ReleasedBy.Name = "ReleasedBy"
-        Me.ReleasedBy.Width = 120
         '
         'Label15
         '
@@ -553,6 +482,90 @@ Partial Class frmRequestList
         'Timer1
         '
         '
+        'RequestNo
+        '
+        Me.RequestNo.HeaderText = "Request Number"
+        Me.RequestNo.Name = "RequestNo"
+        '
+        '_date
+        '
+        Me._date.HeaderText = "Date"
+        Me._date.Name = "_date"
+        Me._date.Width = 130
+        '
+        'StudentID
+        '
+        Me.StudentID.HeaderText = "Student ID"
+        Me.StudentID.Name = "StudentID"
+        '
+        'FirstName
+        '
+        Me.FirstName.HeaderText = "First Name"
+        Me.FirstName.Name = "FirstName"
+        Me.FirstName.Width = 130
+        '
+        'LastName
+        '
+        Me.LastName.HeaderText = "Last Name"
+        Me.LastName.Name = "LastName"
+        Me.LastName.Width = 130
+        '
+        'Documents
+        '
+        Me.Documents.HeaderText = "Documents"
+        Me.Documents.Name = "Documents"
+        Me.Documents.Width = 200
+        '
+        'TotalAmount
+        '
+        Me.TotalAmount.HeaderText = "Total Amount"
+        Me.TotalAmount.Name = "TotalAmount"
+        '
+        'PaymentStatus
+        '
+        Me.PaymentStatus.HeaderText = "Payment Status"
+        Me.PaymentStatus.Name = "PaymentStatus"
+        Me.PaymentStatus.Width = 150
+        '
+        'AmountPaid
+        '
+        Me.AmountPaid.HeaderText = "Amount Paid"
+        Me.AmountPaid.Name = "AmountPaid"
+        '
+        'ORNo
+        '
+        Me.ORNo.HeaderText = "OR No."
+        Me.ORNo.Name = "ORNo"
+        '
+        'ORDate
+        '
+        Me.ORDate.HeaderText = "OR Date"
+        Me.ORDate.Name = "ORDate"
+        '
+        'Status
+        '
+        Me.Status.HeaderText = "Status"
+        Me.Status.Name = "Status"
+        Me.Status.Width = 110
+        '
+        'CreateReq
+        '
+        Me.CreateReq.HeaderText = "Create Request"
+        Me.CreateReq.Name = "CreateReq"
+        Me.CreateReq.Width = 120
+        '
+        'ProcessedReq
+        '
+        Me.ProcessedReq.HeaderText = "Processed Request"
+        Me.ProcessedReq.Name = "ProcessedReq"
+        Me.ProcessedReq.Width = 120
+        '
+        'ReleasedBy
+        '
+        Me.ReleasedBy.HeaderText = "Released By"
+        Me.ReleasedBy.Name = "ReleasedBy"
+        Me.ReleasedBy.Width = 120
+        '
         'frmRequestList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -629,9 +642,11 @@ Partial Class frmRequestList
     Friend WithEvents LastName As DataGridViewTextBoxColumn
     Friend WithEvents Documents As DataGridViewTextBoxColumn
     Friend WithEvents TotalAmount As DataGridViewTextBoxColumn
-    Friend WithEvents Status As DataGridViewTextBoxColumn
+    Friend WithEvents PaymentStatus As DataGridViewTextBoxColumn
+    Friend WithEvents AmountPaid As DataGridViewTextBoxColumn
     Friend WithEvents ORNo As DataGridViewTextBoxColumn
     Friend WithEvents ORDate As DataGridViewTextBoxColumn
+    Friend WithEvents Status As DataGridViewTextBoxColumn
     Friend WithEvents CreateReq As DataGridViewTextBoxColumn
     Friend WithEvents ProcessedReq As DataGridViewTextBoxColumn
     Friend WithEvents ReleasedBy As DataGridViewTextBoxColumn

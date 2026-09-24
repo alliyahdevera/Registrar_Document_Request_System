@@ -74,7 +74,6 @@ Public Class frmMainMenu
     Private Sub TotalRequest()
         Try
             Call connection()
-            ' Strictly counts header records in tblrequest directly
             Dim reqSql As String = "SELECT COUNT(RequestID) FROM tblrequest"
             Using localCmd As New MySqlCommand(reqSql, cn)
                 Dim result As Object = localCmd.ExecuteScalar()
@@ -318,5 +317,4 @@ Public Class frmMainMenu
         frmUserManagement.Show()
         Me.Hide()
     End Sub
-
 End Class
