@@ -24,12 +24,12 @@ Partial Class frmMainMenu
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMainMenu))
-        Dim ChartArea3 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend3 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series3 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim ChartArea4 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend4 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series4 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea2 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend2 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series2 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.btnUserManagement = New System.Windows.Forms.Button()
@@ -522,17 +522,17 @@ Partial Class frmMainMenu
         '
         'chtdocreqpermonth
         '
-        ChartArea3.Name = "ChartArea1"
-        Me.chtdocreqpermonth.ChartAreas.Add(ChartArea3)
-        Legend3.Name = "Legend1"
-        Me.chtdocreqpermonth.Legends.Add(Legend3)
+        ChartArea1.Name = "ChartArea1"
+        Me.chtdocreqpermonth.ChartAreas.Add(ChartArea1)
+        Legend1.Name = "Legend1"
+        Me.chtdocreqpermonth.Legends.Add(Legend1)
         Me.chtdocreqpermonth.Location = New System.Drawing.Point(21, 62)
         Me.chtdocreqpermonth.Name = "chtdocreqpermonth"
-        Series3.ChartArea = "ChartArea1"
-        Series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
-        Series3.Legend = "Legend1"
-        Series3.Name = "Series1"
-        Me.chtdocreqpermonth.Series.Add(Series3)
+        Series1.ChartArea = "ChartArea1"
+        Series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
+        Series1.Legend = "Legend1"
+        Series1.Name = "Series1"
+        Me.chtdocreqpermonth.Series.Add(Series1)
         Me.chtdocreqpermonth.Size = New System.Drawing.Size(450, 198)
         Me.chtdocreqpermonth.TabIndex = 35
         Me.chtdocreqpermonth.Text = "Chart1"
@@ -639,17 +639,17 @@ Partial Class frmMainMenu
         '
         'chtMostreqdoc
         '
-        ChartArea4.Name = "ChartArea1"
-        Me.chtMostreqdoc.ChartAreas.Add(ChartArea4)
-        Legend4.Name = "Legend1"
-        Me.chtMostreqdoc.Legends.Add(Legend4)
+        ChartArea2.Name = "ChartArea1"
+        Me.chtMostreqdoc.ChartAreas.Add(ChartArea2)
+        Legend2.Name = "Legend1"
+        Me.chtMostreqdoc.Legends.Add(Legend2)
         Me.chtMostreqdoc.Location = New System.Drawing.Point(20, 62)
         Me.chtMostreqdoc.Name = "chtMostreqdoc"
-        Series4.ChartArea = "ChartArea1"
-        Series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Bar
-        Series4.Legend = "Legend1"
-        Series4.Name = "Series1"
-        Me.chtMostreqdoc.Series.Add(Series4)
+        Series2.ChartArea = "ChartArea1"
+        Series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Bar
+        Series2.Legend = "Legend1"
+        Series2.Name = "Series1"
+        Me.chtMostreqdoc.Series.Add(Series2)
         Me.chtMostreqdoc.Size = New System.Drawing.Size(499, 198)
         Me.chtMostreqdoc.TabIndex = 35
         Me.chtMostreqdoc.Text = "Chart3"

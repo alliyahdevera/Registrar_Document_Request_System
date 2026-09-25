@@ -28,9 +28,9 @@ Partial Class frmDocumentManagement
         Me.btnDelete = New System.Windows.Forms.Button()
         Me.btnEdit = New System.Windows.Forms.Button()
         Me.Panel5 = New System.Windows.Forms.Panel()
+        Me.cboStatus = New System.Windows.Forms.ComboBox()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.txtStatus = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.txtFee = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
@@ -127,9 +127,9 @@ Partial Class frmDocumentManagement
         '
         Me.Panel5.BackColor = System.Drawing.Color.White
         Me.Panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel5.Controls.Add(Me.cboStatus)
         Me.Panel5.Controls.Add(Me.Label14)
         Me.Panel5.Controls.Add(Me.Label9)
-        Me.Panel5.Controls.Add(Me.txtStatus)
         Me.Panel5.Controls.Add(Me.Label10)
         Me.Panel5.Controls.Add(Me.txtFee)
         Me.Panel5.Controls.Add(Me.Label7)
@@ -142,6 +142,15 @@ Partial Class frmDocumentManagement
         Me.Panel5.Name = "Panel5"
         Me.Panel5.Size = New System.Drawing.Size(802, 188)
         Me.Panel5.TabIndex = 57
+        '
+        'cboStatus
+        '
+        Me.cboStatus.FormattingEnabled = True
+        Me.cboStatus.Items.AddRange(New Object() {"Active", "Inactive"})
+        Me.cboStatus.Location = New System.Drawing.Point(541, 102)
+        Me.cboStatus.Name = "cboStatus"
+        Me.cboStatus.Size = New System.Drawing.Size(229, 21)
+        Me.cboStatus.TabIndex = 52
         '
         'Label14
         '
@@ -163,15 +172,6 @@ Partial Class frmDocumentManagement
         Me.Label9.Size = New System.Drawing.Size(50, 20)
         Me.Label9.TabIndex = 41
         Me.Label9.Text = "Status"
-        '
-        'txtStatus
-        '
-        Me.txtStatus.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtStatus.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtStatus.Location = New System.Drawing.Point(541, 96)
-        Me.txtStatus.Name = "txtStatus"
-        Me.txtStatus.Size = New System.Drawing.Size(229, 27)
-        Me.txtStatus.TabIndex = 40
         '
         'Label10
         '
@@ -696,7 +696,6 @@ Partial Class frmDocumentManagement
     Friend WithEvents Panel5 As Panel
     Friend WithEvents Label14 As Label
     Friend WithEvents Label9 As Label
-    Friend WithEvents txtStatus As TextBox
     Friend WithEvents Label10 As Label
     Friend WithEvents txtFee As TextBox
     Friend WithEvents Label7 As Label
@@ -740,4 +739,5 @@ Partial Class frmDocumentManagement
     Friend WithEvents Label15 As Label
     Friend WithEvents Timer1 As Timer
     Friend WithEvents btnClear As Button
+    Friend WithEvents cboStatus As ComboBox
 End Class

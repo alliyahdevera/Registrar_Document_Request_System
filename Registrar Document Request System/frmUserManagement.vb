@@ -14,6 +14,10 @@ Public Class frmUserManagement
         Timer1.Start()
         UpdateFooterDateTime()
 
+        ' Force both combo boxes to only accept items already in their dropdown list
+        cboRoles.DropDownStyle = ComboBoxStyle.DropDownList
+        cboStatus.DropDownStyle = ComboBoxStyle.DropDownList
+
         ' Mask password characters as they're typed
         txtPassword.UseSystemPasswordChar = True
         txtConfirmPassword.UseSystemPasswordChar = True
@@ -76,8 +80,8 @@ Public Class frmUserManagement
         txtConfirmPassword.Clear()
         txtFirstName.Clear()
         txtLastName.Clear()
-        cboRoles.Text = ""
-        cboStatus.Text = ""
+        cboRoles.SelectedIndex = -1
+        cboStatus.SelectedIndex = -1
         _originalPassword = ""
     End Sub
 
@@ -164,17 +168,17 @@ Public Class frmUserManagement
         ElseIf txtPassword.Text.Trim() <> txtConfirmPassword.Text.Trim() Then
             MsgBox("Password and Confirm Password do not match", vbExclamation, "User Management")
             Return False
-        ElseIf String.IsNullOrWhiteSpace(txtConfirmPassword.Text) Then
+        ElseIf String.IsNullOrWhiteSpace(txtFirstName.Text) Then
             MsgBox("Fill in First Name", vbExclamation, "User Management")
             Return False
         ElseIf String.IsNullOrWhiteSpace(txtLastName.Text) Then
             MsgBox("Fill in Last Name", vbExclamation, "User Management")
             Return False
-        ElseIf String.IsNullOrWhiteSpace(cboRole.Text) Then
-            MsgBox("Fill in Role", vbExclamation, "User Management")
+        ElseIf String.IsNullOrWhiteSpace(cboRoles.Text) Then
+            MsgBox("Select a Role", vbExclamation, "User Management")
             Return False
         ElseIf String.IsNullOrWhiteSpace(cboStatus.Text) Then
-            MsgBox("Fill in Status", vbExclamation, "User Management")
+            MsgBox("Select a Status", vbExclamation, "User Management")
             Return False
         End If
 
@@ -189,7 +193,7 @@ Public Class frmUserManagement
             txtConfirmPassword.Text = dgvUsers.Rows(e.RowIndex).Cells(2).Value.ToString()
             txtFirstName.Text = dgvUsers.Rows(e.RowIndex).Cells(3).Value.ToString()
             txtLastName.Text = dgvUsers.Rows(e.RowIndex).Cells(4).Value.ToString()
-            cboRole.Text = dgvUsers.Rows(e.RowIndex).Cells(5).Value.ToString()
+            cboRoles.Text = dgvUsers.Rows(e.RowIndex).Cells(5).Value.ToString()
             cboStatus.Text = dgvUsers.Rows(e.RowIndex).Cells(6).Value.ToString()
 
             ' Remember the real password behind the displayed hash, in case
@@ -224,7 +228,7 @@ Public Class frmUserManagement
         cmd.Parameters.AddWithValue("@uname", txtUsername.Text.Trim())
         cmd.Parameters.AddWithValue("@pass", txtPassword.Text.Trim())
         cmd.Parameters.AddWithValue("@fullname", BuildFullName())
-        cmd.Parameters.AddWithValue("@role", cboRole.Text.Trim())
+        cmd.Parameters.AddWithValue("@role", cboRoles.Text.Trim())
         cmd.Parameters.AddWithValue("@status", cboStatus.Text.Trim())
         cmd.ExecuteNonQuery()
         cn.Close()
@@ -261,7 +265,7 @@ Public Class frmUserManagement
         cmd.Parameters.AddWithValue("@uname", txtUsername.Text.Trim())
         cmd.Parameters.AddWithValue("@pass", passwordToSave)
         cmd.Parameters.AddWithValue("@fullname", BuildFullName())
-        cmd.Parameters.AddWithValue("@role", cboRole.Text.Trim())
+        cmd.Parameters.AddWithValue("@role", cboRoles.Text.Trim())
         cmd.Parameters.AddWithValue("@status", cboStatus.Text.Trim())
 
         If cmd.ExecuteNonQuery() = 0 Then

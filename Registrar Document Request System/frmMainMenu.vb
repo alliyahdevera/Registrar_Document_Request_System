@@ -170,17 +170,17 @@ Public Class frmMainMenu
             Call connection()
 
             Dim overdueSql As String = "SELECT r.RequestNo, " &
-                                       "CONCAT(s.FirstName, ' ', s.LastName) AS StudentName, " &
-                                       "GROUP_CONCAT(DISTINCT d.DocumentName SEPARATOR ', ') AS DocumentNames, " &
-                                       "r.Status, r.RequestDate " &
-                                       "FROM tblrequest r " &
-                                       "LEFT JOIN tblstudents s ON r.StudentID = s.StudentID " &
-                                       "LEFT JOIN tblrequestdetails rd ON r.RequestID = rd.RequestID " &
-                                       "LEFT JOIN tbldocuments d ON CAST(rd.DocumentID AS CHAR) = CAST(d.DocumentID AS CHAR) " &
-                                       "WHERE r.Status NOT IN ('Completed', 'Released') " &
-                                       "AND r.RequestDate <= DATE_SUB(CURDATE(), INTERVAL 7 DAY) " &
-                                       "GROUP BY r.RequestID, r.RequestNo, StudentName, r.Status, r.RequestDate " &
-                                       "ORDER BY r.RequestDate ASC"
+                           "CONCAT(s.FirstName, ' ', s.LastName) AS StudentName, " &
+                           "GROUP_CONCAT(DISTINCT d.DocumentName SEPARATOR ', ') AS DocumentNames, " &
+                           "r.Status, r.RequestDate " &
+                           "FROM tblrequest r " &
+                           "LEFT JOIN tblstudents s ON r.StudentID = s.StudentID " &
+                           "LEFT JOIN tblrequestdetails rd ON r.RequestID = rd.RequestID " &
+                           "LEFT JOIN tbldocuments d ON CAST(rd.DocumentID AS CHAR) = CAST(d.DocumentID AS CHAR) " &
+                           "WHERE r.Status NOT IN ('Completed', 'Released', 'Cancelled') " &
+                           "AND r.RequestDate <= DATE_SUB(CURDATE(), INTERVAL 7 DAY) " &
+                           "GROUP BY r.RequestID, r.RequestNo, StudentName, r.Status, r.RequestDate " &
+                           "ORDER BY r.RequestDate ASC"
 
             Using localCmd As New MySqlCommand(overdueSql, cn)
                 Using localDr As MySqlDataReader = localCmd.ExecuteReader()
@@ -317,4 +317,5 @@ Public Class frmMainMenu
         frmUserManagement.Show()
         Me.Hide()
     End Sub
+
 End Class

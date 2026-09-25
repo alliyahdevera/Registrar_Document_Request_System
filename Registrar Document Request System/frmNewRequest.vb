@@ -28,11 +28,14 @@ Public Class frmNewRequest
     ' visible again (also regenerates the Request No., as before). Navigation
     ' between screens uses Show()/Hide() rather than Close(), so a form that was
     ' already created keeps showing whoever was logged in when it first loaded
-    ' unless we also refresh here.
+    ' unless we also refresh here. Also re-loads the document list so any
+    ' document deactivated in Document Management since this form last loaded
+    ' no longer shows up as a requestable option.
     Private Sub frmNewRequest_Activated(sender As Object, e As EventArgs) Handles Me.Activated
         RefreshUserSession()
         txtCreatedBy.Text = CurrentUser.FullName
         GenerateRequestNo()
+        LoadDocumentsCombo()
     End Sub
 
     Private Sub RefreshUserSession()

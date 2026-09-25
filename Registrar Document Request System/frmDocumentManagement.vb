@@ -9,6 +9,9 @@ Public Class frmDocumentManagement
         dgvDocument.SelectionMode = DataGridViewSelectionMode.FullRowSelect
         dgvDocument.MultiSelect = False
 
+        ' Force the Status combo to only accept items from its own list
+        cboStatus.DropDownStyle = ComboBoxStyle.DropDownList
+
         ' Initialize and start real-time clock timer
         Timer1.Interval = 1000
         Timer1.Start()
@@ -40,15 +43,24 @@ Public Class frmDocumentManagement
         lbldatetime.Text = DateTime.Now.ToString("dddd, MMMM d, yyyy h:mm:ss tt")
     End Sub
 
-    ' Controls locking/unlocking and visual state for txtDocumentID
+    ' Controls locking/unlocking and visual state for Add mode
     Private Sub SetAddMode()
-        txtDocumentID.ReadOnly = False
-        txtDocumentID.BackColor = Color.White
+        ' Document ID is a primary key - always locked and auto-generated
+        txtDocumentID.ReadOnly = True
+        txtDocumentID.BackColor = Color.Gainsboro
+        SetNextDocumentID()
+
+        ' New documents are always Active - lock the combo so it can't be changed
+        cboStatus.Text = "Active"
+        cboStatus.Enabled = False
     End Sub
 
     Private Sub SetEditMode()
         txtDocumentID.ReadOnly = True
         txtDocumentID.BackColor = Color.Gainsboro
+
+        ' Only unlock Status when an existing record is loaded for editing
+        cboStatus.Enabled = True
     End Sub
 
     ''' <summary>
@@ -128,9 +140,13 @@ Public Class frmDocumentManagement
             MsgBox("Fee must be a valid numeric amount", vbExclamation, "Document Management")
             txtFee.Focus()
             Return False
-        ElseIf String.IsNullOrWhiteSpace(txtStatus.Text) Then
-            MsgBox("Fill in Status", vbExclamation, "Document Management")
-            txtStatus.Focus()
+        ElseIf CDec(txtFee.Text.Trim()) < 0 Then
+            MsgBox("Fee cannot be a negative number", vbExclamation, "Document Management")
+            txtFee.Focus()
+            Return False
+        ElseIf String.IsNullOrWhiteSpace(cboStatus.Text) Then
+            MsgBox("Select a Status", vbExclamation, "Document Management")
+            cboStatus.Focus()
             Return False
         End If
 
@@ -154,18 +170,19 @@ Public Class frmDocumentManagement
         txtName.Text = If(row.Cells(1).Value IsNot Nothing, row.Cells(1).Value.ToString(), "")
         txtDescription.Text = If(row.Cells(2).Value IsNot Nothing, row.Cells(2).Value.ToString(), "")
         txtFee.Text = If(row.Cells(3).Value IsNot Nothing, row.Cells(3).Value.ToString(), "")
-        txtStatus.Text = If(row.Cells(4).Value IsNot Nothing, row.Cells(4).Value.ToString(), "")
+        cboStatus.Text = If(row.Cells(4).Value IsNot Nothing, row.Cells(4).Value.ToString(), "")
 
         SetEditMode()
     End Sub
 
     Private Sub btnAddDocument_Click(sender As Object, e As EventArgs) Handles btnAddDocument.Click
-        If txtDocumentID.ReadOnly Then
+        If Not txtDocumentID.ReadOnly Then
+            ' Should never happen now since Add Mode always locks the ID, but kept as a safeguard
             MsgBox("Cannot add: a record is currently selected for editing. Clear the form first.", vbExclamation, "Document Management")
             Exit Sub
         End If
 
-        ' Generate next available Document ID if left blank
+        ' Safety net in case the ID field ever comes up blank
         If String.IsNullOrWhiteSpace(txtDocumentID.Text) Then
             SetNextDocumentID()
         End If
@@ -179,7 +196,7 @@ Public Class frmDocumentManagement
         cmd.Parameters.AddWithValue("@name", txtName.Text.Trim())
         cmd.Parameters.AddWithValue("@desc", txtDescription.Text.Trim())
         cmd.Parameters.AddWithValue("@fee", CDec(txtFee.Text.Trim()))
-        cmd.Parameters.AddWithValue("@status", txtStatus.Text.Trim())
+        cmd.Parameters.AddWithValue("@status", cboStatus.Text.Trim())
         cmd.ExecuteNonQuery()
         cn.Close()
 
@@ -191,7 +208,7 @@ Public Class frmDocumentManagement
     End Sub
 
     Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
-        If Not txtDocumentID.ReadOnly Then
+        If Not txtDocumentID.ReadOnly OrElse Not cboStatus.Enabled Then
             MsgBox("Please select a document from the list to edit.", vbExclamation, "Document Management")
             Exit Sub
         End If
@@ -205,7 +222,7 @@ Public Class frmDocumentManagement
         cmd.Parameters.AddWithValue("@name", txtName.Text.Trim())
         cmd.Parameters.AddWithValue("@desc", txtDescription.Text.Trim())
         cmd.Parameters.AddWithValue("@fee", CDec(txtFee.Text.Trim()))
-        cmd.Parameters.AddWithValue("@status", txtStatus.Text.Trim())
+        cmd.Parameters.AddWithValue("@status", cboStatus.Text.Trim())
 
         If cmd.ExecuteNonQuery() = 0 Then
             MsgBox("No document found with the specified Document ID.", vbExclamation, "Record Not Found")
@@ -251,7 +268,7 @@ Public Class frmDocumentManagement
         txtName.Clear()
         txtDescription.Clear()
         txtFee.Clear()
-        txtStatus.Clear()
+        cboStatus.SelectedIndex = -1
     End Sub
 
     ' Clear Button handler (Resets form to Add Mode)
@@ -279,6 +296,20 @@ Public Class frmDocumentManagement
 
         dr.Close()
         cn.Close()
+    End Sub
+
+    ' Blocks anything except digits and a single decimal point from being typed into Fee
+    Private Sub txtFee_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtFee.KeyPress
+        If Char.IsControl(e.KeyChar) Then Exit Sub
+
+        If Not Char.IsDigit(e.KeyChar) AndAlso e.KeyChar <> "."c Then
+            e.Handled = True
+            Exit Sub
+        End If
+
+        If e.KeyChar = "."c AndAlso txtFee.Text.Contains(".") Then
+            e.Handled = True
+        End If
     End Sub
 
     ' Navigation Handlers
@@ -321,6 +352,5 @@ Public Class frmDocumentManagement
         frmUserManagement.Show()
         Me.Hide()
     End Sub
-
 
 End Class
