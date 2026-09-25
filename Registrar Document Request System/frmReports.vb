@@ -53,7 +53,7 @@ Public Class frmReports
 
             sql = "SELECT r.RequestNo, r.RequestDate, r.StudentID, s.FirstName, s.LastName, " &
                   "GROUP_CONCAT(d.DocumentName SEPARATOR ', ') AS Documents, " &
-                  "r.TotalAmount, r.Status, " &
+                  "r.TotalAmount, r.Status, r.AmountPaid, r.PaymentStatus, " &
                   "uc.FullName AS CreatedByName, up.FullName AS ProcessedByName, ur.FullName AS ReleasedByName " &
                   "FROM tblrequest r " &
                   "JOIN tblstudents s ON r.StudentID = s.StudentID " &
@@ -73,7 +73,7 @@ Public Class frmReports
             End If
 
             sql &= "GROUP BY r.RequestID, r.RequestNo, r.RequestDate, r.StudentID, s.FirstName, s.LastName, " &
-                   "r.TotalAmount, r.Status, CreatedByName, ProcessedByName, ReleasedByName "
+                   "r.TotalAmount, r.Status, r.AmountPaid, r.PaymentStatus, CreatedByName, ProcessedByName, ReleasedByName "
 
             ' If sorting specifically for Request by Document Type
             If statusFilter = "ByDocType" Then
@@ -98,6 +98,11 @@ Public Class frmReports
                 End If
                 grandTotalAmount += amount
 
+                Dim amountPaid As Decimal = 0
+                If Not IsDBNull(dr("AmountPaid")) Then
+                    Decimal.TryParse(dr("AmountPaid").ToString(), amountPaid)
+                End If
+
                 dgvReqDoc.Rows.Add(
                     dr("RequestNo").ToString(),
                     Convert.ToDateTime(dr("RequestDate")).ToString("MMM d, yyyy"),
@@ -107,6 +112,8 @@ Public Class frmReports
                     If(IsDBNull(dr("Documents")), "", dr("Documents").ToString()),
                     amount.ToString("N2"),
                     dr("Status").ToString(),
+                    amountPaid.ToString("N2"),
+                    If(IsDBNull(dr("PaymentStatus")) OrElse String.IsNullOrWhiteSpace(dr("PaymentStatus").ToString()), "Unpaid", dr("PaymentStatus").ToString()),
                     If(IsDBNull(dr("CreatedByName")), "", dr("CreatedByName").ToString()),
                     If(IsDBNull(dr("ProcessedByName")), "", dr("ProcessedByName").ToString()),
                     If(IsDBNull(dr("ReleasedByName")), "", dr("ReleasedByName").ToString())
