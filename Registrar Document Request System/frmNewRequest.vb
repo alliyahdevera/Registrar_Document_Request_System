@@ -167,6 +167,33 @@ Public Class frmNewRequest
             txtSubtotal.Clear()
         End If
     End Sub
+    ''' <summary>
+    ''' Fix #1 - A student cannot have the same document requested in two different
+    ''' transactions at the same time. A document may be requested again only once the
+    ''' earlier transaction that included it has reached 'Released' or 'Cancelled'.
+    ''' Different documents (or the same document once the prior one is Released/Cancelled)
+    ''' are unaffected, and this never blocks two different documents in separate transactions.
+    ''' </summary>
+    Private Function IsDocumentAlreadyActiveForStudent(studentId As String, docId As String) As Boolean
+        Dim result As Boolean = False
+        Try
+            Call connection()
+            sql = "SELECT COUNT(*) FROM tblrequestdetails rd " &
+              "INNER JOIN tblrequest r ON rd.RequestID = r.RequestID " &
+              "WHERE r.StudentID = @sid AND rd.DocumentID = @docid " &
+              "AND r.Status NOT IN ('Released', 'Cancelled')"
+            cmd = New MySqlCommand(sql, cn)
+            cmd.Parameters.AddWithValue("@sid", studentId)
+            cmd.Parameters.AddWithValue("@docid", docId)
+            Dim cnt As Long = Convert.ToInt64(cmd.ExecuteScalar())
+            result = cnt > 0
+            cn.Close()
+        Catch ex As Exception
+            If cn.State = ConnectionState.Open Then cn.Close()
+            MsgBox("Error checking existing requests: " & ex.Message, vbCritical, "Error")
+        End Try
+        Return result
+    End Function
 
     Private Sub btnAddToList_Click(sender As Object, e As EventArgs) Handles Button1.Click
         If cboDocument.SelectedIndex = -1 Then
@@ -186,6 +213,26 @@ Public Class frmNewRequest
         Dim docName As String = docRow("DocumentName").ToString()
         Dim fee As Decimal = currentDocFee
         Dim subtotal As Decimal = fee * qty
+
+        ' Fix #1: block adding a document the student already has an active (not yet
+        ' Released/Cancelled) request for, in a different transaction. Rows already in
+        ' THIS unsaved grid are handled separately below (their quantities just merge).
+        If Not String.IsNullOrWhiteSpace(txtStudentID.Text) Then
+            Dim alreadyInThisGrid As Boolean = False
+            For Each row As DataGridViewRow In dgvReqDoc.Rows
+                If row.IsNewRow Then Continue For
+                If row.Cells("DocumentID").Value IsNot Nothing AndAlso row.Cells("DocumentID").Value.ToString() = docId Then
+                    alreadyInThisGrid = True
+                    Exit For
+                End If
+            Next
+
+            If Not alreadyInThisGrid AndAlso IsDocumentAlreadyActiveForStudent(txtStudentID.Text.Trim(), docId) Then
+                MsgBox("This student already has an active request for '" & docName & "' that hasn't been Released or Cancelled yet." & vbCrLf &
+                   "It must reach 'Released' or 'Cancelled' status before it can be requested again.", vbExclamation, "Duplicate Document Request")
+                Exit Sub
+            End If
+        End If
 
         For Each row As DataGridViewRow In dgvReqDoc.Rows
             If row.IsNewRow Then Continue For
@@ -256,7 +303,6 @@ Public Class frmNewRequest
         txtTotalAmount.Text = totalAmount.ToString("N2")
         txtTotalQuantity.Text = totalQty.ToString()
     End Sub
-
     Private Function IsValidRequest() As Boolean
         If String.IsNullOrWhiteSpace(txtStudentID.Text) Then
             MsgBox("Please search and select a student.", vbExclamation, "New Document Request")
@@ -267,7 +313,7 @@ Public Class frmNewRequest
             txtStudentID.Focus()
             Return False
         ElseIf dgvReqDoc.Rows.Count = 0 OrElse
-               (dgvReqDoc.Rows.Count = 1 AndAlso dgvReqDoc.Rows(0).IsNewRow) Then
+           (dgvReqDoc.Rows.Count = 1 AndAlso dgvReqDoc.Rows(0).IsNewRow) Then
             MsgBox("Please add at least one document to the request.", vbExclamation, "New Document Request")
             Return False
         ElseIf String.IsNullOrWhiteSpace(cboPaymentStatus.Text) Then
@@ -277,6 +323,22 @@ Public Class frmNewRequest
             MsgBox("Please select a Request Status.", vbExclamation, "New Document Request")
             Return False
         End If
+
+        ' Fix #1 (defense in depth): re-check for duplicate active document requests right
+        ' before saving, in case a document was added before the student was searched, or
+        ' another transaction for the same document was created by someone else meanwhile.
+        For Each row As DataGridViewRow In dgvReqDoc.Rows
+            If row.IsNewRow Then Continue For
+
+            Dim rowDocId As String = row.Cells("DocumentID").Value.ToString()
+            Dim rowDocName As String = row.Cells("DocumentName").Value.ToString()
+
+            If IsDocumentAlreadyActiveForStudent(txtStudentID.Text.Trim(), rowDocId) Then
+                MsgBox("This student already has an active request for '" & rowDocName & "' that hasn't been Released or Cancelled yet." & vbCrLf &
+                   "Please remove it from this request.", vbExclamation, "Duplicate Document Request")
+                Return False
+            End If
+        Next
 
         Return True
     End Function

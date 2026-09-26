@@ -5,28 +5,30 @@ Public Class frmRequestList
     Private Sub frmRequestList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         RefreshUserSession()
 
-        ' Initialize and start real-time clock timer
         Timer1.Interval = 1000
         Timer1.Start()
         UpdateFooterDateTime()
 
-        ' Enable Full Row Selection on DataGridView
         dgvReqDoc.SelectionMode = DataGridViewSelectionMode.FullRowSelect
         dgvReqDoc.MultiSelect = False
 
         ' Automatically cancel pending/blank requests past 7 days before loading grid
         AutoCancelUnpaidRequests()
 
-        ' Patch any existing missing ProcessedBy entries in DB for Processing/Ready for Release/Released records
+        ' Fix #3: automatically cancel requests left unclaimed in 'Ready for Release' for
+        ' over a month (paid or not - this is the one case a paid transaction is
+        ' cancelled, since the student never picked it up)
+        AutoCancelUnclaimedReadyForRelease()
+
         FixMissingProcessedByData()
 
-        ' Load request data
         LoadRequests()
     End Sub
 
     Private Sub frmRequestList_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
         RefreshUserSession()
         AutoCancelUnpaidRequests()
+        AutoCancelUnclaimedReadyForRelease()
         FixMissingProcessedByData()
         LoadRequests()
     End Sub
@@ -43,6 +45,30 @@ Public Class frmRequestList
 
     Private Sub UpdateFooterDateTime()
         lbldatetime.Text = DateTime.Now.ToString("dddd, MMMM d, yyyy h:mm:ss tt")
+    End Sub
+    ''' <summary>
+    ''' Fix #3: automatically cancels any request that has been sitting in
+    ''' 'Ready for Release' for more than a month without the student claiming it.
+    ''' ReadyForReleaseDate is stamped in frmRequestDetails whenever a request enters
+    ''' that status, and cleared whenever it leaves it, so this only ever affects
+    ''' requests that are *currently* Ready for Release and have been for 1+ month.
+    ''' </summary>
+    Private Sub AutoCancelUnclaimedReadyForRelease()
+        Try
+            Call connection()
+
+            sql = "UPDATE tblrequest " &
+              "SET Status = 'Cancelled', ReadyForReleaseDate = NULL " &
+              "WHERE Status = 'Ready for Release' " &
+              "AND ReadyForReleaseDate IS NOT NULL " &
+              "AND ReadyForReleaseDate <= DATE_SUB(NOW(), INTERVAL 1 MONTH)"
+
+            cmd = New MySqlCommand(sql, cn)
+            cmd.ExecuteNonQuery()
+            cn.Close()
+        Catch ex As Exception
+            If cn.State = ConnectionState.Open Then cn.Close()
+        End Try
     End Sub
 
     ''' <summary>
