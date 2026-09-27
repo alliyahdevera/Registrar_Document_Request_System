@@ -7,12 +7,10 @@ Public Class frmReports
     Private Sub frmReports_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         RefreshUserSession()
 
-        ' Initialize and start real-time timer
         Timer1.Interval = 1000
         Timer1.Start()
         UpdateFooterDateTime()
 
-        ' Default date range: today to today
         DateTimePicker1.Value = DateTime.Today
         DateTimePicker2.Value = DateTime.Today
 
@@ -26,16 +24,13 @@ Public Class frmReports
     End Sub
 
     Private Sub RefreshUserSession()
-        ' User Management and Document Management are Administrator-only.
         btnUserManagement.Visible = CurrentUser.IsAdmin
         btnDocumentManagement.Visible = CurrentUser.IsAdmin
 
-        ' Load footer details from CurrentUser global class
         lblname.Text = CurrentUser.FullName
         lblposition.Text = CurrentUser.Role
     End Sub
 
-    ' Real-time date/time clock event
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         UpdateFooterDateTime()
     End Sub
@@ -44,13 +39,6 @@ Public Class frmReports
         lbldatetime.Text = DateTime.Now.ToString("dddd, MMMM d, yyyy h:mm:ss tt")
     End Sub
 
-    ''' <summary>
-    ''' Centralized report loader supporting date range, search text, and optional status filtering.
-    ''' Restricted to searching strictly by StudentID or LastName.
-    ''' </summary>
-    ''' <param name="statusFilter">
-    ''' Pass empty string for All, or specific status like "Pending", "Released", or "ByDocType"
-    ''' </param>
     Private Sub LoadReports(Optional statusFilter As String = "")
         Try
             Call connection()
@@ -69,7 +57,6 @@ Public Class frmReports
                   "WHERE r.RequestDate >= @from AND r.RequestDate < @to " &
                   "AND (r.StudentID LIKE @search OR s.LastName LIKE @search) "
 
-            ' Apply status/filter condition dynamically
             If statusFilter = "Pending" Then
                 sql &= "AND r.Status = 'Pending' "
             ElseIf statusFilter = "Released" Then
@@ -79,7 +66,6 @@ Public Class frmReports
             sql &= "GROUP BY r.RequestID, r.RequestNo, r.RequestDate, r.StudentID, s.FirstName, s.LastName, " &
                    "r.TotalAmount, r.Status, r.AmountPaid, r.PaymentStatus, CreatedByName, ProcessedByName, ReleasedByName "
 
-            ' If sorting specifically for Request by Document Type
             If statusFilter = "ByDocType" Then
                 sql &= "ORDER BY Documents ASC, r.RequestDate DESC"
             Else
@@ -127,7 +113,6 @@ Public Class frmReports
             dr.Close()
             cn.Close()
 
-            ' Update footer totals accurately
             Dim totalRows As Integer = dgvReqDoc.Rows.Cast(Of DataGridViewRow)().Count(Function(r) Not r.IsNewRow)
             lbltotalrecords.Text = totalRows.ToString()
             lbltotalamount.Text = grandTotalAmount.ToString("N2")
@@ -142,7 +127,6 @@ Public Class frmReports
         LoadReports()
     End Sub
 
-    ' Main Generate Report button (Loads All Requests)
     Private Sub btnGenerateReport_Click(sender As Object, e As EventArgs) Handles btnGenerateReport.Click
         If DateTimePicker1.Value.Date > DateTimePicker2.Value.Date Then
             MsgBox("'Date From' cannot be later than 'Date To'.", vbExclamation, "Reports")
@@ -152,7 +136,6 @@ Public Class frmReports
         LoadReports()
     End Sub
 
-    ' Filter 1: Pending Requests
     Private Sub btnPendingRequests_Click(sender As Object, e As EventArgs) Handles btnPendingRequests.Click
         If DateTimePicker1.Value.Date > DateTimePicker2.Value.Date Then
             MsgBox("'Date From' cannot be later than 'Date To'.", vbExclamation, "Reports")
@@ -162,7 +145,6 @@ Public Class frmReports
         LoadReports("Pending")
     End Sub
 
-    ' Filter 2: Released Requests
     Private Sub btnReleasedRequests_Click(sender As Object, e As EventArgs) Handles btnReleasedRequest.Click
         If DateTimePicker1.Value.Date > DateTimePicker2.Value.Date Then
             MsgBox("'Date From' cannot be later than 'Date To'.", vbExclamation, "Reports")
@@ -172,7 +154,6 @@ Public Class frmReports
         LoadReports("Released")
     End Sub
 
-    ' Filter 3: Request by Document Type (Groups/Sorts by Document Name)
     Private Sub btnReqByDocType_Click(sender As Object, e As EventArgs) Handles btnReqByDocType.Click
         If DateTimePicker1.Value.Date > DateTimePicker2.Value.Date Then
             MsgBox("'Date From' cannot be later than 'Date To'.", vbExclamation, "Reports")
@@ -229,7 +210,6 @@ Public Class frmReports
         Return value
     End Function
 
-    ' Navigation Handlers
     Private Sub btnMainMenu_Click(sender As Object, e As EventArgs) Handles btnMainMenu.Click
         frmMainMenu.Show()
         Me.Hide()
