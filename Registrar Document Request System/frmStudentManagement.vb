@@ -18,14 +18,8 @@ Public Class frmStudentManagement
     End Sub
 
     Private Sub RefreshUserSession()
-        ' User Management and Document Management are Administrator-only.
         btnUserManagement.Visible = CurrentUser.IsAdmin
         btnDocumentManagement.Visible = CurrentUser.IsAdmin
-
-        ' Per the case study, Registrar Staff may only SEARCH students - adding,
-        ' editing, and deleting/deactivating student records is an Administrator
-        ' responsibility. Disabled (not hidden) so Staff can still see the
-        ' buttons exist without being able to use them.
         btnAdd.Enabled = CurrentUser.IsAdmin
         btnEdit.Enabled = CurrentUser.IsAdmin
         btnDelete.Enabled = CurrentUser.IsAdmin
