@@ -5,28 +5,21 @@ Public Class frmMainMenu
     Private Sub frmMainMenu_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         RefreshUserSession()
 
-        ' Initialize and start real-time clock timer
         Timer1.Interval = 1000
         Timer1.Start()
         UpdateFooterDateTime()
 
-        ' Load all dashboard counts and widgets
         RefreshDashboard()
 
         chtdocreqpermonth.Legends(0).Enabled = False
         chtMostreqdoc.Legends(0).Enabled = False
     End Sub
 
-    ' Re-applies the logged-in user's info AND refreshes the dashboard data
-    ' every time this form becomes visible again.
     Private Sub frmMainMenu_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
         RefreshUserSession()
         RefreshDashboard()
     End Sub
 
-    ''' <summary>
-    ''' Centralizes all dashboard data reloading methods into a single call.
-    ''' </summary>
     Private Sub RefreshDashboard()
         TotalStudents()
         TotalRequest()
@@ -40,20 +33,15 @@ Public Class frmMainMenu
     End Sub
 
     Private Sub RefreshUserSession()
-        ' Reports: both roles are allowed to view reports per the case study, so
-        ' this is no longer hidden from Registrar Staff.
         btnReport.Visible = True
 
-        ' User Management and Document Management are Administrator-only.
         btnUserManagement.Visible = CurrentUser.IsAdmin
         btnDocumentManagement.Visible = CurrentUser.IsAdmin
 
-        ' Set bottom footer values
         lblname.Text = CurrentUser.FullName
         lblposition.Text = CurrentUser.Role
     End Sub
 
-    ' Real-time date/time clock event
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         UpdateFooterDateTime()
     End Sub
@@ -122,9 +110,6 @@ Public Class frmMainMenu
         End Try
     End Sub
 
-    ''' <summary>
-    ''' Populates dgvRecentReqDoc with active requests (excluding Released and 2025 records).
-    ''' </summary>
     Public Sub LoadRecentRequests()
         Try
             Call connection()
@@ -168,9 +153,6 @@ Public Class frmMainMenu
         End Try
     End Sub
 
-    ''' <summary>
-    ''' Populates the Overdue Request grid including requests older than 7 days that are not completed/released.
-    ''' </summary>
     Private Sub LoadOverdueRequests()
         Try
             Call connection()
@@ -212,9 +194,6 @@ Public Class frmMainMenu
         End Try
     End Sub
 
-    ''' <summary>
-    ''' Populates the Most Requested Documents chart without modifying UI label controls.
-    ''' </summary>
     Public Sub LoadMostRequestedDocuments()
         Try
             Call connection()
@@ -241,9 +220,6 @@ Public Class frmMainMenu
         End Try
     End Sub
 
-    ''' <summary>
-    ''' Redraws the Document Request per Month chart for all 12 months of the current year.
-    ''' </summary>
     Private Sub LoadDocReqPerMonth()
         Dim currentYear As Integer = DateTime.Today.Year
 
@@ -278,7 +254,6 @@ Public Class frmMainMenu
         End Try
     End Sub
 
-    ' Navigation Handlers
     Private Sub btnStudentManagement_Click(sender As Object, e As EventArgs) Handles btnStudentManagement.Click
         frmStudentManagement.Show()
         Me.Hide()
