@@ -726,6 +726,7 @@ Partial Class frmNewRequest
         Me.dgvReqDoc.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DocumentID, Me.DocumentName, Me.Fee, Me.Quantity, Me.Subtotal, Me.Action})
         Me.dgvReqDoc.Location = New System.Drawing.Point(-1, 34)
         Me.dgvReqDoc.Name = "dgvReqDoc"
+        Me.dgvReqDoc.ReadOnly = True
         Me.dgvReqDoc.Size = New System.Drawing.Size(1123, 219)
         Me.dgvReqDoc.TabIndex = 59
         '
@@ -733,36 +734,42 @@ Partial Class frmNewRequest
         '
         Me.DocumentID.HeaderText = "Document ID"
         Me.DocumentID.Name = "DocumentID"
+        Me.DocumentID.ReadOnly = True
         Me.DocumentID.Width = 190
         '
         'DocumentName
         '
         Me.DocumentName.HeaderText = "Document Name"
         Me.DocumentName.Name = "DocumentName"
+        Me.DocumentName.ReadOnly = True
         Me.DocumentName.Width = 250
         '
         'Fee
         '
         Me.Fee.HeaderText = "Fee"
         Me.Fee.Name = "Fee"
+        Me.Fee.ReadOnly = True
         Me.Fee.Width = 150
         '
         'Quantity
         '
         Me.Quantity.HeaderText = "Quantity"
         Me.Quantity.Name = "Quantity"
+        Me.Quantity.ReadOnly = True
         Me.Quantity.Width = 180
         '
         'Subtotal
         '
         Me.Subtotal.HeaderText = "Subtotal"
         Me.Subtotal.Name = "Subtotal"
+        Me.Subtotal.ReadOnly = True
         Me.Subtotal.Width = 200
         '
         'Action
         '
         Me.Action.HeaderText = "Action"
         Me.Action.Name = "Action"
+        Me.Action.ReadOnly = True
         Me.Action.Width = 108
         '
         'Panel8

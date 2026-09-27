@@ -268,6 +268,7 @@ Partial Class frmDocumentManagement
         Me.dgvDocument.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DocumentID, Me.DocumentName, Me.Description, Me.Fee, Me.Status})
         Me.dgvDocument.Location = New System.Drawing.Point(281, 329)
         Me.dgvDocument.Name = "dgvDocument"
+        Me.dgvDocument.ReadOnly = True
         Me.dgvDocument.Size = New System.Drawing.Size(1118, 462)
         Me.dgvDocument.TabIndex = 60
         '
@@ -275,30 +276,35 @@ Partial Class frmDocumentManagement
         '
         Me.DocumentID.HeaderText = "DocumentID"
         Me.DocumentID.Name = "DocumentID"
+        Me.DocumentID.ReadOnly = True
         Me.DocumentID.Width = 180
         '
         'DocumentName
         '
         Me.DocumentName.HeaderText = "Document Name"
         Me.DocumentName.Name = "DocumentName"
+        Me.DocumentName.ReadOnly = True
         Me.DocumentName.Width = 250
         '
         'Description
         '
         Me.Description.HeaderText = "Description"
         Me.Description.Name = "Description"
+        Me.Description.ReadOnly = True
         Me.Description.Width = 350
         '
         'Fee
         '
         Me.Fee.HeaderText = "Fee"
         Me.Fee.Name = "Fee"
+        Me.Fee.ReadOnly = True
         Me.Fee.Width = 140
         '
         'Status
         '
         Me.Status.HeaderText = "Status"
         Me.Status.Name = "Status"
+        Me.Status.ReadOnly = True
         Me.Status.Width = 155
         '
         'Panel6

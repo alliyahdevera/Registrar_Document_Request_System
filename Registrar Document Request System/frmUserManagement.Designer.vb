@@ -674,6 +674,7 @@ Partial Class frmUserManagement
         Me.dgvUsers.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.UserID, Me.Username, Me.Password, Me.FirstName, Me.LastName, Me.Role, Me.Status})
         Me.dgvUsers.Location = New System.Drawing.Point(275, 317)
         Me.dgvUsers.Name = "dgvUsers"
+        Me.dgvUsers.ReadOnly = True
         Me.dgvUsers.RowHeadersWidth = 51
         Me.dgvUsers.Size = New System.Drawing.Size(1123, 471)
         Me.dgvUsers.TabIndex = 70
@@ -683,6 +684,7 @@ Partial Class frmUserManagement
         Me.UserID.HeaderText = "UserID"
         Me.UserID.MinimumWidth = 6
         Me.UserID.Name = "UserID"
+        Me.UserID.ReadOnly = True
         Me.UserID.Width = 130
         '
         'Username
@@ -690,12 +692,14 @@ Partial Class frmUserManagement
         Me.Username.HeaderText = "Username"
         Me.Username.MinimumWidth = 6
         Me.Username.Name = "Username"
+        Me.Username.ReadOnly = True
         Me.Username.Width = 150
         '
         'Password
         '
         Me.Password.HeaderText = "Password"
         Me.Password.Name = "Password"
+        Me.Password.ReadOnly = True
         Me.Password.Width = 150
         '
         'FirstName
@@ -703,6 +707,7 @@ Partial Class frmUserManagement
         Me.FirstName.HeaderText = "First Name"
         Me.FirstName.MinimumWidth = 6
         Me.FirstName.Name = "FirstName"
+        Me.FirstName.ReadOnly = True
         Me.FirstName.Width = 190
         '
         'LastName
@@ -710,6 +715,7 @@ Partial Class frmUserManagement
         Me.LastName.HeaderText = "Last Name"
         Me.LastName.MinimumWidth = 6
         Me.LastName.Name = "LastName"
+        Me.LastName.ReadOnly = True
         Me.LastName.Width = 190
         '
         'Role
@@ -717,6 +723,7 @@ Partial Class frmUserManagement
         Me.Role.HeaderText = "Role"
         Me.Role.MinimumWidth = 6
         Me.Role.Name = "Role"
+        Me.Role.ReadOnly = True
         Me.Role.Width = 135
         '
         'Status
@@ -724,6 +731,7 @@ Partial Class frmUserManagement
         Me.Status.HeaderText = "Status"
         Me.Status.MinimumWidth = 6
         Me.Status.Name = "Status"
+        Me.Status.ReadOnly = True
         Me.Status.Width = 125
         '
         'Label1

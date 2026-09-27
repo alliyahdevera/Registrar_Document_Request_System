@@ -124,6 +124,7 @@ Partial Class frmStudentManagement
         Me.dgvStudents.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.StudentID, Me.LRN, Me.LastName, Me.FirstName, Me.MiddleName, Me.Course, Me.YearLevel, Me.Section, Me.ContactNumber})
         Me.dgvStudents.Location = New System.Drawing.Point(275, 317)
         Me.dgvStudents.Name = "dgvStudents"
+        Me.dgvStudents.ReadOnly = True
         Me.dgvStudents.RowHeadersWidth = 51
         Me.dgvStudents.Size = New System.Drawing.Size(1123, 471)
         Me.dgvStudents.TabIndex = 29
@@ -133,6 +134,7 @@ Partial Class frmStudentManagement
         Me.StudentID.HeaderText = "StudentID"
         Me.StudentID.MinimumWidth = 6
         Me.StudentID.Name = "StudentID"
+        Me.StudentID.ReadOnly = True
         Me.StudentID.Width = 125
         '
         'LRN
@@ -140,6 +142,7 @@ Partial Class frmStudentManagement
         Me.LRN.HeaderText = "LRN"
         Me.LRN.MinimumWidth = 6
         Me.LRN.Name = "LRN"
+        Me.LRN.ReadOnly = True
         Me.LRN.Width = 125
         '
         'LastName
@@ -147,6 +150,7 @@ Partial Class frmStudentManagement
         Me.LastName.HeaderText = "Last Name"
         Me.LastName.MinimumWidth = 6
         Me.LastName.Name = "LastName"
+        Me.LastName.ReadOnly = True
         Me.LastName.Width = 140
         '
         'FirstName
@@ -154,6 +158,7 @@ Partial Class frmStudentManagement
         Me.FirstName.HeaderText = "First Name"
         Me.FirstName.MinimumWidth = 6
         Me.FirstName.Name = "FirstName"
+        Me.FirstName.ReadOnly = True
         Me.FirstName.Width = 140
         '
         'MiddleName
@@ -161,6 +166,7 @@ Partial Class frmStudentManagement
         Me.MiddleName.HeaderText = "Middle Name"
         Me.MiddleName.MinimumWidth = 6
         Me.MiddleName.Name = "MiddleName"
+        Me.MiddleName.ReadOnly = True
         Me.MiddleName.Width = 140
         '
         'Course
@@ -168,6 +174,7 @@ Partial Class frmStudentManagement
         Me.Course.HeaderText = "Course"
         Me.Course.MinimumWidth = 6
         Me.Course.Name = "Course"
+        Me.Course.ReadOnly = True
         Me.Course.Width = 140
         '
         'YearLevel
@@ -175,6 +182,7 @@ Partial Class frmStudentManagement
         Me.YearLevel.HeaderText = "Year Level"
         Me.YearLevel.MinimumWidth = 6
         Me.YearLevel.Name = "YearLevel"
+        Me.YearLevel.ReadOnly = True
         Me.YearLevel.Width = 125
         '
         'Section
@@ -182,6 +190,7 @@ Partial Class frmStudentManagement
         Me.Section.HeaderText = "Section"
         Me.Section.MinimumWidth = 6
         Me.Section.Name = "Section"
+        Me.Section.ReadOnly = True
         Me.Section.Width = 120
         '
         'ContactNumber
@@ -189,6 +198,7 @@ Partial Class frmStudentManagement
         Me.ContactNumber.HeaderText = "Contact Number"
         Me.ContactNumber.MinimumWidth = 6
         Me.ContactNumber.Name = "ContactNumber"
+        Me.ContactNumber.ReadOnly = True
         Me.ContactNumber.Width = 125
         '
         'btnAdd
