@@ -1,25 +1,7 @@
 ﻿Imports MySql.Data.MySqlClient
 
 Public Class frmUserManagement
-
-    ' Real (plain-text) password of the row currently loaded into the form,
-    ' captured when a grid row is clicked. Used so Edit can keep the password
-    ' unchanged when the admin didn't type a new one.
     Private _originalPassword As String = ""
-
-    ''' <summary>
-    ''' User Management is Administrator-only. This was previously the biggest
-    ''' gap in the system: the nav button was hidden from Staff on only one
-    ''' other screen, and nothing here stopped a Staff account from opening
-    ''' this form directly and managing accounts (including changing roles) if
-    ''' they ever reached it. This is the actual enforcement.
-    ''' Checked from BOTH Load and Activated: navigation in this app uses
-    ''' Show()/Hide() rather than Close(), so a form only fires Load the first
-    ''' time it's created. If an Admin opened this screen earlier and later
-    ''' logged out from a *different* screen (which only closes that screen,
-    ''' not this hidden one), then a Staff account logs in, this form would
-    ''' only fire Activated on its next Show() - Load alone wouldn't catch it.
-    ''' </summary>
     Private Function EnsureAdminAccess() As Boolean
         If Not CurrentUser.IsAdmin Then
             MsgBox("You don't have permission to access User Management.", vbExclamation, "Access Denied")
@@ -38,18 +20,11 @@ Public Class frmUserManagement
         Timer1.Interval = 1000
         Timer1.Start()
         UpdateFooterDateTime()
-
-        ' Force both combo boxes to only accept items already in their dropdown list
         cboRoles.DropDownStyle = ComboBoxStyle.DropDownList
         cboStatus.DropDownStyle = ComboBoxStyle.DropDownList
-
-        ' Mask password characters as they're typed
         txtPassword.UseSystemPasswordChar = True
         txtConfirmPassword.UseSystemPasswordChar = True
 
-        ' Hidden column that carries the real password so it can still be
-        ' looked up when saving an edit. Not shown to the user - the visible
-        ' "Password" column shows a display-only hash instead.
         If Not dgvUsers.Columns.Contains("colRealPassword") Then
             Dim hiddenCol As New DataGridViewTextBoxColumn()
             hiddenCol.Name = "colRealPassword"
@@ -69,7 +44,6 @@ Public Class frmUserManagement
     End Sub
 
     Private Sub RefreshUserSession()
-        ' Document Management is Administrator-only, same as this screen.
         btnDocumentManagement.Visible = CurrentUser.IsAdmin
 
         lblname.Text = CurrentUser.FullName
@@ -88,8 +62,6 @@ Public Class frmUserManagement
     Private Sub SetAddMode()
         txtUserID.ReadOnly = False
         txtUserID.BackColor = Color.White
-
-        ' New users are always created Active - lock the combo box so it can't be changed.
         cboStatus.Text = "Active"
         cboStatus.Enabled = False
     End Sub
@@ -98,8 +70,6 @@ Public Class frmUserManagement
     Private Sub SetEditMode()
         txtUserID.ReadOnly = True
         txtUserID.BackColor = Color.Gainsboro
-
-        ' Only when editing an existing user can the status be changed.
         cboStatus.Enabled = True
     End Sub
 
@@ -225,9 +195,6 @@ Public Class frmUserManagement
             txtLastName.Text = dgvUsers.Rows(e.RowIndex).Cells(4).Value.ToString()
             cboRoles.Text = dgvUsers.Rows(e.RowIndex).Cells(5).Value.ToString()
             cboStatus.Text = dgvUsers.Rows(e.RowIndex).Cells(6).Value.ToString()
-
-            ' Remember the real password behind the displayed hash, in case
-            ' the admin saves the edit without changing it.
             _originalPassword = dgvUsers.Rows(e.RowIndex).Cells("colRealPassword").Value.ToString()
 
             SetEditMode()
