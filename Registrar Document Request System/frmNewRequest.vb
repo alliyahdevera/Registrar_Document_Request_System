@@ -6,7 +6,6 @@ Public Class frmNewRequest
     Private Sub frmNewRequest_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         RefreshUserSession()
 
-        ' Start real-time clock timer
         Timer1.Interval = 1000
         Timer1.Start()
         UpdateFooterDateTime()
@@ -24,13 +23,6 @@ Public Class frmNewRequest
         RecalculateTotal()
     End Sub
 
-    ' Re-applies the logged-in user's info to this form every time it becomes
-    ' visible again (also regenerates the Request No., as before). Navigation
-    ' between screens uses Show()/Hide() rather than Close(), so a form that was
-    ' already created keeps showing whoever was logged in when it first loaded
-    ' unless we also refresh here. Also re-loads the document list so any
-    ' document deactivated in Document Management since this form last loaded
-    ' no longer shows up as a requestable option.
     Private Sub frmNewRequest_Activated(sender As Object, e As EventArgs) Handles Me.Activated
         RefreshUserSession()
         txtCreatedBy.Text = CurrentUser.FullName
@@ -39,20 +31,15 @@ Public Class frmNewRequest
     End Sub
 
     Private Sub RefreshUserSession()
-        ' Reports: both roles are allowed to view reports per the case study, so
-        ' this is no longer hidden from Registrar Staff.
         btnReports.Visible = True
 
-        ' User Management and Document Management are Administrator-only.
         btnUserManagement.Visible = CurrentUser.IsAdmin
         btnDocumentManagement.Visible = CurrentUser.IsAdmin
 
-        ' Set bottom footer values without repeating visual prefixes
         lblname.Text = CurrentUser.FullName
         lblposition.Text = CurrentUser.Role
     End Sub
 
-    ' Real-time date/time update event
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         UpdateFooterDateTime()
     End Sub
@@ -173,13 +160,7 @@ Public Class frmNewRequest
             txtSubtotal.Clear()
         End If
     End Sub
-    ''' <summary>
-    ''' Fix #1 - A student cannot have the same document requested in two different
-    ''' transactions at the same time. A document may be requested again only once the
-    ''' earlier transaction that included it has reached 'Released' or 'Cancelled'.
-    ''' Different documents (or the same document once the prior one is Released/Cancelled)
-    ''' are unaffected, and this never blocks two different documents in separate transactions.
-    ''' </summary>
+
     Private Function IsDocumentAlreadyActiveForStudent(studentId As String, docId As String) As Boolean
         Dim result As Boolean = False
         Try
@@ -220,9 +201,6 @@ Public Class frmNewRequest
         Dim fee As Decimal = currentDocFee
         Dim subtotal As Decimal = fee * qty
 
-        ' Fix #1: block adding a document the student already has an active (not yet
-        ' Released/Cancelled) request for, in a different transaction. Rows already in
-        ' THIS unsaved grid are handled separately below (their quantities just merge).
         If Not String.IsNullOrWhiteSpace(txtStudentID.Text) Then
             Dim alreadyInThisGrid As Boolean = False
             For Each row As DataGridViewRow In dgvReqDoc.Rows
@@ -330,9 +308,6 @@ Public Class frmNewRequest
             Return False
         End If
 
-        ' Fix #1 (defense in depth): re-check for duplicate active document requests right
-        ' before saving, in case a document was added before the student was searched, or
-        ' another transaction for the same document was created by someone else meanwhile.
         For Each row As DataGridViewRow In dgvReqDoc.Rows
             If row.IsNewRow Then Continue For
 
@@ -390,7 +365,6 @@ Public Class frmNewRequest
             MsgBox("Document request saved successfully!" & vbCrLf & "Request No: " & txtRequestNo.Text, vbInformation, "Success")
             ClearForm()
 
-            ' Automatically refresh and navigate to the Request List screen
             frmRequestList.LoadRequests()
             frmRequestList.Show()
             Me.Hide()
