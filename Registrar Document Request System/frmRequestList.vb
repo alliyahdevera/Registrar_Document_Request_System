@@ -12,12 +12,8 @@ Public Class frmRequestList
         dgvReqDoc.SelectionMode = DataGridViewSelectionMode.FullRowSelect
         dgvReqDoc.MultiSelect = False
 
-        ' Automatically cancel pending/blank requests past 7 days before loading grid
         AutoCancelUnpaidRequests()
 
-        ' Fix #3: automatically cancel requests left unclaimed in 'Ready for Release' for
-        ' over a month (paid or not - this is the one case a paid transaction is
-        ' cancelled, since the student never picked it up)
         AutoCancelUnclaimedReadyForRelease()
 
         FixMissingProcessedByData()
@@ -34,7 +30,6 @@ Public Class frmRequestList
     End Sub
 
     Private Sub RefreshUserSession()
-        ' User Management and Document Management are Administrator-only.
         btnUserManagement.Visible = CurrentUser.IsAdmin
         btnDocumentManagement.Visible = CurrentUser.IsAdmin
 
@@ -42,7 +37,6 @@ Public Class frmRequestList
         lblposition.Text = CurrentUser.Role
     End Sub
 
-    ' Real-time date/time clock event
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         UpdateFooterDateTime()
     End Sub
@@ -50,13 +44,6 @@ Public Class frmRequestList
     Private Sub UpdateFooterDateTime()
         lbldatetime.Text = DateTime.Now.ToString("dddd, MMMM d, yyyy h:mm:ss tt")
     End Sub
-    ''' <summary>
-    ''' Fix #3: automatically cancels any request that has been sitting in
-    ''' 'Ready for Release' for more than a month without the student claiming it.
-    ''' ReadyForReleaseDate is stamped in frmRequestDetails whenever a request enters
-    ''' that status, and cleared whenever it leaves it, so this only ever affects
-    ''' requests that are *currently* Ready for Release and have been for 1+ month.
-    ''' </summary>
     Private Sub AutoCancelUnclaimedReadyForRelease()
         Try
             Call connection()
@@ -74,11 +61,6 @@ Public Class frmRequestList
             If cn.State = ConnectionState.Open Then cn.Close()
         End Try
     End Sub
-
-    ''' <summary>
-    ''' Automatically updates status to 'Cancelled' for any requests 
-    ''' that are 'Pending' or blank after 7 days.
-    ''' </summary>
     Private Sub AutoCancelUnpaidRequests()
         Try
             Call connection()
@@ -95,11 +77,6 @@ Public Class frmRequestList
             If cn.State = ConnectionState.Open Then cn.Close()
         End Try
     End Sub
-
-    ''' <summary>
-    ''' Updates database records where ProcessedBy is NULL/0 for processed statuses
-    ''' by copying CreatedBy into ProcessedBy so data is never empty.
-    ''' </summary>
     Private Sub FixMissingProcessedByData()
         Try
             Call connection()
@@ -116,12 +93,6 @@ Public Class frmRequestList
             If cn.State = ConnectionState.Open Then cn.Close()
         End Try
     End Sub
-
-    ''' <summary>
-    ''' Fetches requests and maps them directly to the DataGridView columns.
-    ''' Shows ProcessedByStaff (or falls back to CreatedByStaff if missing)
-    ''' when status is Processing, Ready for Release, or Released.
-    ''' </summary>
     Public Sub LoadRequests()
         Try
             Call connection()
@@ -186,8 +157,6 @@ Public Class frmRequestList
             MsgBox("Error loading requests: " & ex.Message, vbCritical, "Error")
         End Try
     End Sub
-
-    ' Real-time search filter
     Private Sub txtSearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearch.TextChanged
         Try
             Call connection()
@@ -253,8 +222,6 @@ Public Class frmRequestList
             If cn.State = ConnectionState.Open Then cn.Close()
         End Try
     End Sub
-
-    ' Details View Handlers
     Private Sub btnViewDetails_Click(sender As Object, e As EventArgs) Handles btnViewDetails.Click
         OpenSelectedRequestDetails()
     End Sub
@@ -267,7 +234,6 @@ Public Class frmRequestList
 
     Private Sub OpenSelectedRequestDetails()
         If dgvReqDoc.SelectedRows.Count > 0 Then
-            ' Retrieve RequestNo from the first cell (Column 0) of selected row
             Dim selectedReqNo As String = dgvReqDoc.SelectedRows(0).Cells(0).Value.ToString()
 
             frmRequestDetails.SelectedRequestNo = selectedReqNo
@@ -278,8 +244,6 @@ Public Class frmRequestList
             MsgBox("Please select a request row from the list first.", vbInformation, "No Selection")
         End If
     End Sub
-
-    ' Navigation Handlers
     Private Sub btnMainMenu_Click(sender As Object, e As EventArgs) Handles btnMainMenu.Click
         frmMainMenu.Show()
         Me.Hide()
