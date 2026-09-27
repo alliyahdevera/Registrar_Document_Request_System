@@ -1,15 +1,6 @@
 ﻿Imports MySql.Data.MySqlClient
 
 Public Class frmDocumentManagement
-
-    ''' <summary>
-    ''' Document Management is Administrator-only. Checked from BOTH Load and
-    ''' Activated for the same reason as frmUserManagement.EnsureAdminAccess:
-    ''' this app navigates with Show()/Hide() rather than Close(), so Load only
-    ''' fires the first time this form is created - a stale hidden instance
-    ''' opened earlier under an Admin session would otherwise only hit
-    ''' Activated the next time it's shown.
-    ''' </summary>
     Private Function EnsureAdminAccess() As Boolean
         If Not CurrentUser.IsAdmin Then
             MsgBox("You don't have permission to access Document Management.", vbExclamation, "Access Denied")
@@ -25,14 +16,11 @@ Public Class frmDocumentManagement
 
         RefreshUserSession()
 
-        ' Enable full-row selection for the DataGridView
         dgvDocument.SelectionMode = DataGridViewSelectionMode.FullRowSelect
         dgvDocument.MultiSelect = False
 
-        ' Force the Status combo to only accept items from its own list
         cboStatus.DropDownStyle = ComboBoxStyle.DropDownList
 
-        ' Initialize and start real-time clock timer
         Timer1.Interval = 1000
         Timer1.Start()
         UpdateFooterDateTime()
@@ -51,12 +39,10 @@ Public Class frmDocumentManagement
     Private Sub RefreshUserSession()
         btnUserManagement.Visible = CurrentUser.IsAdmin
 
-        ' Set bottom footer values
         lblname.Text = CurrentUser.FullName
         lblposition.Text = CurrentUser.Role
     End Sub
 
-    ' Real-time date/time clock event
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         UpdateFooterDateTime()
     End Sub
@@ -65,14 +51,11 @@ Public Class frmDocumentManagement
         lbldatetime.Text = DateTime.Now.ToString("dddd, MMMM d, yyyy h:mm:ss tt")
     End Sub
 
-    ' Controls locking/unlocking and visual state for Add mode
     Private Sub SetAddMode()
-        ' Document ID is a primary key - always locked and auto-generated
         txtDocumentID.ReadOnly = True
         txtDocumentID.BackColor = Color.Gainsboro
         SetNextDocumentID()
 
-        ' New documents are always Active - lock the combo so it can't be changed
         cboStatus.Text = "Active"
         cboStatus.Enabled = False
     End Sub
@@ -81,13 +64,9 @@ Public Class frmDocumentManagement
         txtDocumentID.ReadOnly = True
         txtDocumentID.BackColor = Color.Gainsboro
 
-        ' Only unlock Status when an existing record is loaded for editing
         cboStatus.Enabled = True
     End Sub
 
-    ''' <summary>
-    ''' Automatically generates and sets the next available integer Document ID.
-    ''' </summary>
     Private Sub SetNextDocumentID()
         Try
             Call connection()
@@ -176,17 +155,14 @@ Public Class frmDocumentManagement
     End Function
 
     Private Sub dgvDocument_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvDocument.CellClick
-        ' Ignore header clicks or invalid row indexes
         If e.RowIndex < 0 Then Exit Sub
 
-        ' If the user clicks the blank "New Row" (*) at the bottom, reset to Add Mode
         If e.RowIndex = dgvDocument.NewRowIndex OrElse dgvDocument.Rows(e.RowIndex).IsNewRow Then
             ClearFields()
             SetAddMode()
             Exit Sub
         End If
 
-        ' Populate fields and set to Edit Mode when a valid row is selected
         Dim row As DataGridViewRow = dgvDocument.Rows(e.RowIndex)
         txtDocumentID.Text = If(row.Cells(0).Value IsNot Nothing, row.Cells(0).Value.ToString(), "")
         txtName.Text = If(row.Cells(1).Value IsNot Nothing, row.Cells(1).Value.ToString(), "")
@@ -199,12 +175,10 @@ Public Class frmDocumentManagement
 
     Private Sub btnAddDocument_Click(sender As Object, e As EventArgs) Handles btnAddDocument.Click
         If Not txtDocumentID.ReadOnly Then
-            ' Should never happen now since Add Mode always locks the ID, but kept as a safeguard
             MsgBox("Cannot add: a record is currently selected for editing. Clear the form first.", vbExclamation, "Document Management")
             Exit Sub
         End If
 
-        ' Safety net in case the ID field ever comes up blank
         If String.IsNullOrWhiteSpace(txtDocumentID.Text) Then
             SetNextDocumentID()
         End If
@@ -293,7 +267,6 @@ Public Class frmDocumentManagement
         cboStatus.SelectedIndex = -1
     End Sub
 
-    ' Clear Button handler (Resets form to Add Mode)
     Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
         ClearFields()
         SetAddMode()
@@ -320,7 +293,6 @@ Public Class frmDocumentManagement
         cn.Close()
     End Sub
 
-    ' Blocks anything except digits and a single decimal point from being typed into Fee
     Private Sub txtFee_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtFee.KeyPress
         If Char.IsControl(e.KeyChar) Then Exit Sub
 
@@ -334,7 +306,6 @@ Public Class frmDocumentManagement
         End If
     End Sub
 
-    ' Navigation Handlers
     Private Sub btnMainMenu_Click(sender As Object, e As EventArgs) Handles btnMainMenu.Click
         frmMainMenu.Show()
         Me.Hide()
