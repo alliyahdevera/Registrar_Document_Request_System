@@ -5,16 +5,12 @@ Public Class frmRequestDetails
     Public SelectedRequestNo As String = ""
     Private currentRequestID As Integer = 0
 
-    ' Tracks the status as it currently exists in the database (separate from
-    ' cboStatus.Text, which the user changes to select a *new* status).
     Private currentDbStatus As String = ""
 
     Private Sub frmRequestDetails_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ' Enable full row selection on the DataGridView
         dgvReqDoc.SelectionMode = DataGridViewSelectionMode.FullRowSelect
         dgvReqDoc.MultiSelect = False
 
-        ' Set Released By field to currently logged-in user and make it read-only
         txtReleasedBy.Text = CurrentUser.FullName
         txtReleasedBy.ReadOnly = True
 
@@ -22,18 +18,12 @@ Public Class frmRequestDetails
             LoadRequestDetailsInfo(SelectedRequestNo)
         End If
     End Sub
-
-    ''' <summary>
-    ''' Public method accessible from external forms (e.g., frmRequestList)
-    ''' to load request header details, student info, payment info, and document line items.
-    ''' </summary>
     Public Sub LoadRequestDetailsInfo(ByVal reqNo As String)
         SelectedRequestNo = reqNo
         LoadRequestHeaderAndStudent()
         LoadRequestedDocuments()
     End Sub
 
-    ' Loads student, request header, payment details, and request status
     Private Sub LoadRequestHeaderAndStudent()
         Try
             Call connection()
@@ -54,7 +44,6 @@ Public Class frmRequestDetails
             If dr.Read() Then
                 currentRequestID = Convert.ToInt32(dr("RequestID"))
 
-                ' Request Information
                 txtRequestNo.Text = dr("RequestNo").ToString()
                 txtRequestDate.Text = If(IsDBNull(dr("RequestDate")), "-", Convert.ToDateTime(dr("RequestDate")).ToString("yyyy-MM-dd"))
                 txtStudentID.Text = dr("StudentID").ToString()
@@ -63,12 +52,10 @@ Public Class frmRequestDetails
                 txtYearLevel.Text = If(IsDBNull(dr("YearLevel")), "-", dr("YearLevel").ToString())
                 txtTotalAmount.Text = If(IsDBNull(dr("TotalAmount")), "0.00", Convert.ToDecimal(dr("TotalAmount")).ToString("N2"))
 
-                ' Request Status Section
                 txtRequestID.Text = currentRequestID.ToString()
                 currentDbStatus = If(IsDBNull(dr("Status")) OrElse String.IsNullOrWhiteSpace(dr("Status").ToString()), "Pending", dr("Status").ToString())
                 cboStatus.Text = currentDbStatus
 
-                ' Payment Information Section
                 txtORNo.Text = If(IsDBNull(dr("ORNo")), "", dr("ORNo").ToString())
                 If Not IsDBNull(dr("ORDate")) Then
                     dtpORDate.Value = Convert.ToDateTime(dr("ORDate"))
@@ -78,7 +65,6 @@ Public Class frmRequestDetails
                 txtAmountPaid.Text = If(IsDBNull(dr("AmountPaid")), "0.00", Convert.ToDecimal(dr("AmountPaid")).ToString("N2"))
                 cboPaymentStatus.Text = If(IsDBNull(dr("PaymentStatus")) OrElse String.IsNullOrWhiteSpace(dr("PaymentStatus").ToString()), "Unpaid", dr("PaymentStatus").ToString())
 
-                ' Display assigned ReleasedBy staff if already saved; otherwise default to active user
                 If Not IsDBNull(dr("ReleasedByName")) AndAlso Not String.IsNullOrWhiteSpace(dr("ReleasedByName").ToString()) Then
                     txtReleasedBy.Text = dr("ReleasedByName").ToString()
                 Else
@@ -89,9 +75,6 @@ Public Class frmRequestDetails
             dr.Close()
             cn.Close()
 
-            ' Re-evaluate whether status changes are allowed, based on the just-reloaded,
-            ' actually-saved payment data (this is what makes the button open right after
-            ' a successful Save Payment, not while the user is merely typing).
             ApplyStatusLock()
         Catch ex As Exception
             If cn.State = ConnectionState.Open Then cn.Close()
@@ -99,7 +82,6 @@ Public Class frmRequestDetails
         End Try
     End Sub
 
-    ' Loads itemized document line items with fallbacks for legacy records
     Private Sub LoadRequestedDocuments()
         Try
             Call connection()
@@ -128,7 +110,6 @@ Public Class frmRequestDetails
 
             dr.Close()
 
-            ' Fallback lookup if no rows exist in tblrequestdetails
             If Not hasRows Then
                 Dim totalAmt As Decimal = 0
                 Decimal.TryParse(txtTotalAmount.Text, totalAmt)
@@ -154,32 +135,12 @@ Public Class frmRequestDetails
             MsgBox("Error loading requested documents: " & ex.Message, vbCritical, "Error")
         End Try
     End Sub
-
-#Region "Fix #2 / #4 - Lock status button until payment is fully verified"
-
-    ''' <summary>
-    ''' Payment is "verified" only when BOTH conditions are met:
-    '''   - Payment Status = Paid
-    '''   - An OR Number has been recorded
-    ''' Until both are true (as actually saved in the DB), the request must stay "Pending"
-    ''' and the Status button stays locked. This is only re-checked when data is (re)loaded
-    ''' from the database - i.e. on form load, and right after a successful Save Payment -
-    ''' not live while the user is just typing into the fields.
-    ''' </summary>
     Private Function IsPaymentVerified() As Boolean
         Dim payStatus As String = cboPaymentStatus.Text.Trim()
         Dim hasORNo As Boolean = Not String.IsNullOrWhiteSpace(txtORNo.Text)
 
         Return payStatus = "Paid" AndAlso hasORNo
     End Function
-
-    ''' <summary>
-    ''' Locks the Status combo/button from advancing past "Pending" until payment is
-    ''' verified (see IsPaymentVerified). Does not force-override a terminal "Cancelled"
-    ''' status. The controls stay enabled either way - even an unpaid request must still
-    ''' be cancellable - btnUpdateStatus_Click is what actually blocks any transition
-    ''' other than "Cancelled" while payment is unverified.
-    ''' </summary>
     Private Sub ApplyStatusLock()
         If Not IsPaymentVerified() Then
             If cboStatus.Text <> "Cancelled" Then
@@ -190,19 +151,6 @@ Public Class frmRequestDetails
         cboStatus.Enabled = True
         btnUpdateStatus.Enabled = True
     End Sub
-
-#End Region
-
-#Region "Fix #3 / #5 - Enforce sequential status flow, with reopening back to Processing"
-
-    ''' <summary>
-    ''' Defines the only allowed status transitions:
-    '''   Pending -> Processing -> Ready for Release -> Released   (forward, one step at a time)
-    '''   Ready for Release / Released / Cancelled -> Processing   (any of these may be reopened
-    '''                                                              back to Processing)
-    '''   Pending / Processing -> Cancelled                        (cancel before it's ready/released)
-    ''' Anything else (skipping a stage, other invalid backward moves) is rejected.
-    ''' </summary>
     Private Function IsValidStatusTransition(fromStatus As String, toStatus As String) As Boolean
         If fromStatus = toStatus Then Return True ' no-op, nothing to validate
 
@@ -221,8 +169,6 @@ Public Class frmRequestDetails
                 Return False
         End Select
     End Function
-
-#End Region
 
     Private Sub btnSavePayment_Click(sender As Object, e As EventArgs) Handles btnSavePayment.Click
         If currentRequestID = 0 Then
@@ -245,8 +191,6 @@ Public Class frmRequestDetails
 
         Dim payStatus As String = If(String.IsNullOrWhiteSpace(cboPaymentStatus.Text), "Paid", cboPaymentStatus.Text.Trim())
 
-        ' Fix #2: when Payment Status is 'Paid', Amount Paid must be exactly equal to the
-        ' Total Amount - no partial payments and no overpayments can be saved as 'Paid'.
         Dim totalAmt As Decimal = 0
         Decimal.TryParse(txtTotalAmount.Text.Trim(), totalAmt)
 
@@ -259,8 +203,6 @@ Public Class frmRequestDetails
 
         Try
             Call connection()
-
-            ' Automatically advance Pending requests to Processing upon receiving payment
             Dim newStatus As String = currentDbStatus
             Dim advancedToProcessing As Boolean = False
             If currentDbStatus = "Pending" Then
@@ -269,7 +211,6 @@ Public Class frmRequestDetails
             End If
 
             If advancedToProcessing Then
-                ' Record who processed the request now that payment came in
                 sql = "UPDATE tblrequest " &
                   "SET ORNo = @orno, " &
                   "    ORDate = @ordate, " &
@@ -309,10 +250,6 @@ Public Class frmRequestDetails
             cn.Close()
 
             MsgBox("Payment details saved successfully!", vbInformation, "Success")
-
-            ' Refresh form data from the DB - this is what unlocks the Status button
-            ' (Fix #4), since ApplyStatusLock() runs at the end of this call using the
-            ' freshly-saved OR No. / Payment Status.
             LoadRequestHeaderAndStudent()
 
         Catch ex As Exception
@@ -333,10 +270,6 @@ Public Class frmRequestDetails
 
         Dim selectedStatus As String = cboStatus.Text.Trim()
 
-        ' Fix #3: a transaction that has already been paid cannot be manually cancelled.
-        ' (It can still be auto-cancelled by the system if it sits unclaimed in
-        ' 'Ready for Release' for over a month - see AutoCancelUnclaimedReadyForRelease
-        ' in frmRequestList.)
         If selectedStatus = "Cancelled" AndAlso cboPaymentStatus.Text.Trim() = "Paid" Then
             MsgBox("This request has already been paid and cannot be cancelled." & vbCrLf &
                "Please continue processing it through to 'Released', or reopen it back to 'Processing' instead.",
@@ -345,8 +278,6 @@ Public Class frmRequestDetails
             Return
         End If
 
-        ' Guard: payment must be fully verified before the request can leave Pending -
-        ' except that an unpaid request can always be Cancelled.
         If Not IsPaymentVerified() AndAlso selectedStatus <> "Pending" AndAlso selectedStatus <> "Cancelled" Then
             MsgBox("This request cannot move past 'Pending' until Payment Status is 'Paid' AND an OR Number is recorded." & vbCrLf &
                "(You can still Cancel an unpaid request.)", vbExclamation, "Payment Not Verified")
@@ -354,7 +285,6 @@ Public Class frmRequestDetails
             Return
         End If
 
-        ' Guard: no skipping stages, only the allowed transitions
         If Not IsValidStatusTransition(currentDbStatus, selectedStatus) Then
             MsgBox("Invalid status change: '" & currentDbStatus & "' cannot move directly to '" & selectedStatus & "'." &
                vbCrLf & "Statuses must follow: Pending -> Processing -> Ready for Release -> Released" &
@@ -374,10 +304,6 @@ Public Class frmRequestDetails
 
             Select Case selectedStatus
                 Case "Processing"
-                    ' Covers Pending -> Processing (normal) as well as reopening from
-                    ' Ready for Release / Released / Cancelled. Reopening clears ReleasedBy
-                    ' since the request is no longer considered released, and clears
-                    ' ReadyForReleaseDate since it's no longer waiting to be claimed.
                     sql = "UPDATE tblrequest SET Status = @status, ProcessedBy = @processedby, ReleasedBy = NULL, ReadyForReleaseDate = NULL WHERE RequestID = @rid"
                     cmd = New MySqlCommand(sql, cn)
                     cmd.Parameters.AddWithValue("@status", selectedStatus)
@@ -385,8 +311,6 @@ Public Class frmRequestDetails
                     cmd.Parameters.AddWithValue("@rid", currentRequestID)
 
                 Case "Ready for Release"
-                    ' Fix #3: stamp the moment it became ready, so the system can
-                    ' auto-cancel it if the student hasn't claimed it within 1 month.
                     sql = "UPDATE tblrequest SET Status = @status, ProcessedBy = @processedby, ReadyForReleaseDate = NOW() WHERE RequestID = @rid"
                     cmd = New MySqlCommand(sql, cn)
                     cmd.Parameters.AddWithValue("@status", selectedStatus)
@@ -400,7 +324,7 @@ Public Class frmRequestDetails
                     cmd.Parameters.AddWithValue("@releasedby", CurrentUser.UserID)
                     cmd.Parameters.AddWithValue("@rid", currentRequestID)
 
-                Case Else ' Cancelled (or Pending, though that shouldn't be reachable here)
+                Case Else
                     sql = "UPDATE tblrequest SET Status = @status, ReadyForReleaseDate = NULL WHERE RequestID = @rid"
                     cmd = New MySqlCommand(sql, cn)
                     cmd.Parameters.AddWithValue("@status", selectedStatus)
