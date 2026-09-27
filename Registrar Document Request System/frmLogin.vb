@@ -7,8 +7,6 @@ Public Class frmLogin
         txtPassword.PasswordChar = ControlChars.NullChar
     End Sub
 
-    ' Fires every time the login screen becomes visible again - including
-    ' right after a logout (since the form is reused via Show(), not recreated).
     Private Sub frmLogin_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
         txtUsername.Clear()
         txtPassword.Clear()
