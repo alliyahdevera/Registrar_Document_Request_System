@@ -26,6 +26,10 @@ Public Class frmReports
     End Sub
 
     Private Sub RefreshUserSession()
+        ' User Management and Document Management are Administrator-only.
+        btnUserManagement.Visible = CurrentUser.IsAdmin
+        btnDocumentManagement.Visible = CurrentUser.IsAdmin
+
         ' Load footer details from CurrentUser global class
         lblname.Text = CurrentUser.FullName
         lblposition.Text = CurrentUser.Role

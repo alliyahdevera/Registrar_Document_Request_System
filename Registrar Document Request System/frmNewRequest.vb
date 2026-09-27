@@ -39,7 +39,13 @@ Public Class frmNewRequest
     End Sub
 
     Private Sub RefreshUserSession()
-        btnReports.Visible = (CurrentUser.Role = "Administrator")
+        ' Reports: both roles are allowed to view reports per the case study, so
+        ' this is no longer hidden from Registrar Staff.
+        btnReports.Visible = True
+
+        ' User Management and Document Management are Administrator-only.
+        btnUserManagement.Visible = CurrentUser.IsAdmin
+        btnDocumentManagement.Visible = CurrentUser.IsAdmin
 
         ' Set bottom footer values without repeating visual prefixes
         lblname.Text = CurrentUser.FullName

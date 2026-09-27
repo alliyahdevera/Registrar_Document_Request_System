@@ -34,6 +34,10 @@ Public Class frmRequestList
     End Sub
 
     Private Sub RefreshUserSession()
+        ' User Management and Document Management are Administrator-only.
+        btnUserManagement.Visible = CurrentUser.IsAdmin
+        btnDocumentManagement.Visible = CurrentUser.IsAdmin
+
         lblname.Text = CurrentUser.FullName
         lblposition.Text = CurrentUser.Role
     End Sub

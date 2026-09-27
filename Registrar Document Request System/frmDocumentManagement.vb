@@ -2,7 +2,27 @@
 
 Public Class frmDocumentManagement
 
+    ''' <summary>
+    ''' Document Management is Administrator-only. Checked from BOTH Load and
+    ''' Activated for the same reason as frmUserManagement.EnsureAdminAccess:
+    ''' this app navigates with Show()/Hide() rather than Close(), so Load only
+    ''' fires the first time this form is created - a stale hidden instance
+    ''' opened earlier under an Admin session would otherwise only hit
+    ''' Activated the next time it's shown.
+    ''' </summary>
+    Private Function EnsureAdminAccess() As Boolean
+        If Not CurrentUser.IsAdmin Then
+            MsgBox("You don't have permission to access Document Management.", vbExclamation, "Access Denied")
+            frmMainMenu.Show()
+            Me.Hide()
+            Return False
+        End If
+        Return True
+    End Function
+
     Private Sub frmDocumentManagement_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If Not EnsureAdminAccess() Then Exit Sub
+
         RefreshUserSession()
 
         ' Enable full-row selection for the DataGridView
@@ -23,11 +43,13 @@ Public Class frmDocumentManagement
     End Sub
 
     Private Sub frmDocumentManagement_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
+        If Not EnsureAdminAccess() Then Exit Sub
+
         RefreshUserSession()
     End Sub
 
     Private Sub RefreshUserSession()
-        btnUserManagement.Visible = (CurrentUser.Role = "Administrator")
+        btnUserManagement.Visible = CurrentUser.IsAdmin
 
         ' Set bottom footer values
         lblname.Text = CurrentUser.FullName

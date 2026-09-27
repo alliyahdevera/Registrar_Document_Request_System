@@ -7,7 +7,32 @@ Public Class frmUserManagement
     ' unchanged when the admin didn't type a new one.
     Private _originalPassword As String = ""
 
+    ''' <summary>
+    ''' User Management is Administrator-only. This was previously the biggest
+    ''' gap in the system: the nav button was hidden from Staff on only one
+    ''' other screen, and nothing here stopped a Staff account from opening
+    ''' this form directly and managing accounts (including changing roles) if
+    ''' they ever reached it. This is the actual enforcement.
+    ''' Checked from BOTH Load and Activated: navigation in this app uses
+    ''' Show()/Hide() rather than Close(), so a form only fires Load the first
+    ''' time it's created. If an Admin opened this screen earlier and later
+    ''' logged out from a *different* screen (which only closes that screen,
+    ''' not this hidden one), then a Staff account logs in, this form would
+    ''' only fire Activated on its next Show() - Load alone wouldn't catch it.
+    ''' </summary>
+    Private Function EnsureAdminAccess() As Boolean
+        If Not CurrentUser.IsAdmin Then
+            MsgBox("You don't have permission to access User Management.", vbExclamation, "Access Denied")
+            frmMainMenu.Show()
+            Me.Hide()
+            Return False
+        End If
+        Return True
+    End Function
+
     Private Sub frmUserManagement_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If Not EnsureAdminAccess() Then Exit Sub
+
         RefreshUserSession()
 
         Timer1.Interval = 1000
@@ -38,10 +63,15 @@ Public Class frmUserManagement
     End Sub
 
     Private Sub frmUserManagement_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
+        If Not EnsureAdminAccess() Then Exit Sub
+
         RefreshUserSession()
     End Sub
 
     Private Sub RefreshUserSession()
+        ' Document Management is Administrator-only, same as this screen.
+        btnDocumentManagement.Visible = CurrentUser.IsAdmin
+
         lblname.Text = CurrentUser.FullName
         lblposition.Text = CurrentUser.Role
     End Sub
