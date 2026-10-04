@@ -5,14 +5,12 @@ Public Class frmMainMenu
     Private Sub frmMainMenu_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         RefreshUserSession()
 
-        Timer1.Interval = 1000
-        Timer1.Start()
+        tmrDateTime.Start()
         UpdateFooterDateTime()
 
         RefreshDashboard()
 
         chtdocreqpermonth.Legends(0).Enabled = False
-        chtMostreqdoc.Legends(0).Enabled = False
     End Sub
 
     Private Sub frmMainMenu_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
@@ -42,7 +40,7 @@ Public Class frmMainMenu
         lblposition.Text = CurrentUser.Role
     End Sub
 
-    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+    Private Sub tmrDateTime_Tick(sender As Object, e As EventArgs)
         UpdateFooterDateTime()
     End Sub
 
@@ -274,7 +272,7 @@ Public Class frmMainMenu
         Me.Hide()
     End Sub
 
-    Private Sub btnViewReq_Click(sender As Object, e As EventArgs) Handles btnViewReq.Click
+    Private Sub btnViewReq_Click(sender As Object, e As EventArgs)
         frmRequestList.Show()
         Me.Hide()
     End Sub

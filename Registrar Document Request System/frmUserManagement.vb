@@ -44,7 +44,6 @@ Public Class frmUserManagement
     End Sub
 
     Private Sub RefreshUserSession()
-        btnDocumentManagement.Visible = CurrentUser.IsAdmin
 
         lblname.Text = CurrentUser.FullName
         lblposition.Text = CurrentUser.Role
@@ -341,44 +340,4 @@ Public Class frmUserManagement
         ClearFields()
         SetAddMode()
     End Sub
-    Private Sub btnMainMenu_Click(sender As Object, e As EventArgs) Handles btnMainMenu.Click
-        frmMainMenu.Show()
-        Me.Hide()
-    End Sub
-
-    Private Sub btnStudentManagement_Click(sender As Object, e As EventArgs) Handles btnStudentManagement.Click
-        frmStudentManagement.Show()
-        Me.Hide()
-    End Sub
-
-    Private Sub btnDocumentManagement_Click(sender As Object, e As EventArgs) Handles btnDocumentManagement.Click
-        frmDocumentManagement.Show()
-        Me.Hide()
-    End Sub
-
-    Private Sub btnDocumentRequests_Click(sender As Object, e As EventArgs) Handles btnDocumentRequests.Click
-        frmNewRequest.Show()
-        Me.Hide()
-    End Sub
-
-    Private Sub btnReqList_Click(sender As Object, e As EventArgs) Handles btnReqList.Click
-        frmRequestList.Show()
-        Me.Hide()
-    End Sub
-
-    Private Sub btnReports_Click(sender As Object, e As EventArgs) Handles cboRole.Click
-        frmReports.Show()
-        Me.Hide()
-    End Sub
-
-    Private Sub btnLogout_Click(sender As Object, e As EventArgs) Handles btnLogout.Click
-        If MsgBox("Are you sure you want to logout?", vbYesNo + vbQuestion, "Confirm Logout") = MsgBoxResult.Yes Then
-            CurrentUser.UserID = 0
-            CurrentUser.FullName = ""
-            CurrentUser.Role = ""
-            frmLogin.Show()
-            Me.Close()
-        End If
-    End Sub
-
 End Class

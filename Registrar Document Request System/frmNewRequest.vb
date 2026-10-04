@@ -31,11 +31,6 @@ Public Class frmNewRequest
     End Sub
 
     Private Sub RefreshUserSession()
-        btnReports.Visible = True
-
-        btnUserManagement.Visible = CurrentUser.IsAdmin
-        btnDocumentManagement.Visible = CurrentUser.IsAdmin
-
         lblname.Text = CurrentUser.FullName
         lblposition.Text = CurrentUser.Role
     End Sub
@@ -182,7 +177,7 @@ Public Class frmNewRequest
         Return result
     End Function
 
-    Private Sub btnAddToList_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Private Sub btnAddToList_Click(sender As Object, e As EventArgs) Handles btnaddtolist.Click
         If cboDocument.SelectedIndex = -1 Then
             MsgBox("Please select a document.", vbExclamation, "New Document Request")
             Exit Sub
@@ -324,7 +319,7 @@ Public Class frmNewRequest
         Return True
     End Function
 
-    Private Sub btnSaveRequest_Click(sender As Object, e As EventArgs) Handles Button2.Click
+    Private Sub btnSaveRequest_Click(sender As Object, e As EventArgs) Handles btnsavereq.Click
         If Not IsValidRequest() Then Exit Sub
 
         If MsgBox("Save this document request?", vbYesNo + vbQuestion, "Confirm Save") <> MsgBoxResult.Yes Then
@@ -376,7 +371,7 @@ Public Class frmNewRequest
         End Try
     End Sub
 
-    Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles Button3.Click
+    Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnclear.Click
         If MsgBox("Clear all fields?", vbYesNo + vbQuestion, "Confirm Clear") = MsgBoxResult.Yes Then
             ClearForm()
         End If
@@ -396,49 +391,11 @@ Public Class frmNewRequest
         GenerateRequestNo()
     End Sub
 
-    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles Button4.Click
+    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btncancel.Click
         If MsgBox("Discard this request and go back?", vbYesNo + vbQuestion, "Confirm Cancel") = MsgBoxResult.Yes Then
             frmMainMenu.Show()
             Me.Hide()
         End If
     End Sub
 
-    Private Sub btnMainMenu_Click(sender As Object, e As EventArgs) Handles btnMainMenu.Click
-        frmMainMenu.Show()
-        Me.Hide()
-    End Sub
-
-    Private Sub btnStudentManagement_Click(sender As Object, e As EventArgs) Handles btnStudentManagement.Click
-        frmStudentManagement.Show()
-        Me.Hide()
-    End Sub
-
-    Private Sub btnDocumentManagement_Click(sender As Object, e As EventArgs) Handles btnDocumentManagement.Click
-        frmDocumentManagement.Show()
-        Me.Hide()
-    End Sub
-
-    Private Sub btnLogout_Click(sender As Object, e As EventArgs) Handles btnLogout.Click
-        If MsgBox("Are you sure you want to logout?", vbYesNo + vbQuestion, "Confirm Logout") = MsgBoxResult.Yes Then
-            CurrentUser.UserID = 0
-            CurrentUser.FullName = ""
-            CurrentUser.Role = ""
-            frmLogin.Show()
-            Me.Close()
-        End If
-    End Sub
-
-    Private Sub btnReqList_Click(sender As Object, e As EventArgs) Handles btnReqList.Click
-        frmRequestList.Show()
-        Me.Hide()
-    End Sub
-
-    Private Sub btnReports_Click(sender As Object, e As EventArgs) Handles btnReports.Click
-        frmReports.Show()
-        Me.Hide()
-    End Sub
-    Private Sub btnUserManagement_Click(sender As Object, e As EventArgs) Handles btnUserManagement.Click
-        frmUserManagement.Show()
-        Me.Hide()
-    End Sub
 End Class
