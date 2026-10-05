@@ -4,8 +4,7 @@ Public Class frmDocumentManagement
     Private Function EnsureAdminAccess() As Boolean
         If Not CurrentUser.IsAdmin Then
             MsgBox("You don't have permission to access Document Management.", vbExclamation, "Access Denied")
-            frmMainMenu.Show()
-            Me.Hide()
+            Me.BeginInvoke(New MethodInvoker(Sub() frmMainMenu.OpenDashboard()))
             Return False
         End If
         Return True

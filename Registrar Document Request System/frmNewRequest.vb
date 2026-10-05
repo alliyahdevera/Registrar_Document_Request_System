@@ -21,13 +21,10 @@ Public Class frmNewRequest
 
         ClearDocumentEntryFields()
         RecalculateTotal()
-    End Sub
 
-    Private Sub frmNewRequest_Activated(sender As Object, e As EventArgs) Handles Me.Activated
-        RefreshUserSession()
-        txtCreatedBy.Text = CurrentUser.FullName
+        ' Moved here from the old Activated event: embedded pages never get
+        ' Activated, and every visit creates a fresh page, so Load is enough.
         GenerateRequestNo()
-        LoadDocumentsCombo()
     End Sub
 
     Private Sub RefreshUserSession()
@@ -360,9 +357,7 @@ Public Class frmNewRequest
             MsgBox("Document request saved successfully!" & vbCrLf & "Request No: " & txtRequestNo.Text, vbInformation, "Success")
             ClearForm()
 
-            frmRequestList.LoadRequests()
-            frmRequestList.Show()
-            Me.Hide()
+            frmMainMenu.OpenRequestList()
 
         Catch ex As Exception
             MsgBox("Failed to save request: " & ex.Message, vbCritical, "Error")
@@ -393,8 +388,7 @@ Public Class frmNewRequest
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btncancel.Click
         If MsgBox("Discard this request and go back?", vbYesNo + vbQuestion, "Confirm Cancel") = MsgBoxResult.Yes Then
-            frmMainMenu.Show()
-            Me.Hide()
+            frmMainMenu.OpenDashboard()
         End If
     End Sub
 

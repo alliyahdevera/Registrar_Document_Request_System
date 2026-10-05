@@ -21,14 +21,6 @@ Public Class frmRequestList
         LoadRequests()
     End Sub
 
-    Private Sub frmRequestList_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
-        RefreshUserSession()
-        AutoCancelUnpaidRequests()
-        AutoCancelUnclaimedReadyForRelease()
-        FixMissingProcessedByData()
-        LoadRequests()
-    End Sub
-
     Private Sub RefreshUserSession()
         lblname.Text = CurrentUser.FullName
         lblposition.Text = CurrentUser.Role
@@ -233,10 +225,7 @@ Public Class frmRequestList
         If dgvReqDoc.SelectedRows.Count > 0 Then
             Dim selectedReqNo As String = dgvReqDoc.SelectedRows(0).Cells(0).Value.ToString()
 
-            frmRequestDetails.SelectedRequestNo = selectedReqNo
-            frmRequestDetails.LoadRequestDetailsInfo(selectedReqNo)
-            frmRequestDetails.Show()
-            Me.Hide()
+            frmMainMenu.OpenRequestDetails(selectedReqNo)
         Else
             MsgBox("Please select a request row from the list first.", vbInformation, "No Selection")
         End If

@@ -1,284 +1,141 @@
 ﻿Imports MySql.Data.MySqlClient
 
+' ============================================================================
+'  frmMainMenu  =  the application SHELL
+'  - Left sidebar (Panel1) with the navigation buttons
+'  - pnlmain (Dock = Fill) hosts ONE page (child form) at a time
+'  Every other form (frmDashboard, frmStudentManagement, ...) is loaded INTO
+'  pnlmain through ShowPage(). No page is ever shown as a separate window.
+' ============================================================================
 Public Class frmMainMenu
 
+    Private _currentPage As Form = Nothing
+    Private _loggingOut As Boolean = False
+    Private _navButtons As Button()
+
+    Private ReadOnly NavNormalColor As Color = Color.FromArgb(1, 21, 78)
+    Private ReadOnly NavActiveColor As Color = Color.FromArgb(38, 70, 160)
+
+#Region "Form lifecycle"
+
     Private Sub frmMainMenu_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        _navButtons = New Button() {btnMainMenu, btnStudentManagement, btnDocumentManagement,
+                                    btnDocumentRequests, btnReqList, btnReport, btnUserManagement}
         RefreshUserSession()
-
-        tmrDateTime.Start()
-        UpdateFooterDateTime()
-
-        RefreshDashboard()
-
-        chtdocreqpermonth.Legends(0).Enabled = False
+        OpenDashboard()
     End Sub
 
-    Private Sub frmMainMenu_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
-        RefreshUserSession()
-        RefreshDashboard()
-    End Sub
-
-    Private Sub RefreshDashboard()
-        TotalStudents()
-        TotalRequest()
-        PendingRequest()
-        CompletedRequest()
-
-        LoadRecentRequests()
-        LoadOverdueRequests()
-        LoadMostRequestedDocuments()
-        LoadDocReqPerMonth()
-    End Sub
-
+    ' Admin-only buttons are hidden for Registrar Staff.
     Private Sub RefreshUserSession()
-        btnReport.Visible = True
-
         btnUserManagement.Visible = CurrentUser.IsAdmin
         btnDocumentManagement.Visible = CurrentUser.IsAdmin
-
-        lblname.Text = CurrentUser.FullName
-        lblposition.Text = CurrentUser.Role
     End Sub
 
-    Private Sub tmrDateTime_Tick(sender As Object, e As EventArgs)
-        UpdateFooterDateTime()
+    ' Clicking the window "X" = leave the system (frmLogin is only hidden,
+    ' so without this the program would keep running invisibly).
+    Private Sub frmMainMenu_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        If _loggingOut Then Exit Sub
+        If e.CloseReason = CloseReason.UserClosing Then
+            If MsgBox("Are you sure you want to exit system?", vbQuestion + vbYesNo, "Registrar Document Request System") <> vbYes Then
+                e.Cancel = True
+            End If
+        End If
     End Sub
 
-    Private Sub UpdateFooterDateTime()
-        lbldatetime.Text = DateTime.Now.ToString("dddd, MMMM d, yyyy h:mm:ss tt")
+    Private Sub frmMainMenu_FormClosed(sender As Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
+        If Not _loggingOut Then System.Windows.Forms.Application.Exit()
     End Sub
 
-    Private Sub TotalStudents()
-        Try
-            Call connection()
-            Dim studentSql As String = "SELECT COUNT(StudentID) FROM tblstudents"
-            Using localCmd As New MySqlCommand(studentSql, cn)
-                Dim result As Object = localCmd.ExecuteScalar()
-                lbltotalstudents.Text = If(result IsNot Nothing, result.ToString(), "0")
-            End Using
-            cn.Close()
-        Catch ex As Exception
-            If cn.State = ConnectionState.Open Then cn.Close()
-            MsgBox("Error loading total students: " & ex.Message, vbCritical, "Error")
-        End Try
+#End Region
+
+#Region "Page hosting (the heart of the one-panel design)"
+
+    ' Loads any form into pnlmain, replacing the page that is currently shown.
+    Private Sub ShowPage(page As Form, activeButton As Button)
+        If page Is Nothing Then Exit Sub
+
+        Dim oldPage As Form = _currentPage
+
+        pnlmain.SuspendLayout()
+
+        page.TopLevel = False                         ' MUST be False to live inside a panel
+        page.FormBorderStyle = FormBorderStyle.None
+        page.Dock = DockStyle.Fill
+        page.AutoScroll = True
+        pnlmain.Controls.Add(page)
+        _currentPage = page
+        page.Show()                                   ' fires the page's Load event
+        page.BringToFront()
+
+        pnlmain.ResumeLayout(True)
+
+        SetActiveButton(activeButton)
+
+        ' Dispose the old page AFTER the current event handler finishes
+        ' (a page may be asking us to replace it from inside its own button click).
+        If oldPage IsNot Nothing Then
+            pnlmain.Controls.Remove(oldPage)
+            Me.BeginInvoke(New MethodInvoker(Sub() oldPage.Dispose()))
+        End If
     End Sub
 
-    Private Sub TotalRequest()
-        Try
-            Call connection()
-            Dim reqSql As String = "SELECT COUNT(RequestID) FROM tblrequest"
-            Using localCmd As New MySqlCommand(reqSql, cn)
-                Dim result As Object = localCmd.ExecuteScalar()
-                lbltotrequests.Text = If(result IsNot Nothing, result.ToString(), "0")
-            End Using
-            cn.Close()
-        Catch ex As Exception
-            If cn.State = ConnectionState.Open Then cn.Close()
-            MsgBox("Error loading total requests: " & ex.Message, vbCritical, "Error")
-        End Try
+    Private Sub SetActiveButton(activeButton As Button)
+        If _navButtons Is Nothing Then Exit Sub
+        For Each b As Button In _navButtons
+            b.BackColor = If(b Is activeButton, NavActiveColor, NavNormalColor)
+        Next
     End Sub
 
-    Private Sub PendingRequest()
-        Try
-            Call connection()
-            Dim pendingSql As String = "SELECT COUNT(RequestID) FROM tblrequest WHERE Status = 'Pending'"
-            Using localCmd As New MySqlCommand(pendingSql, cn)
-                Dim result As Object = localCmd.ExecuteScalar()
-                lblpendingrequests.Text = If(result IsNot Nothing, result.ToString(), "0")
-            End Using
-            cn.Close()
-        Catch ex As Exception
-            If cn.State = ConnectionState.Open Then cn.Close()
-            MsgBox("Error loading pending requests: " & ex.Message, vbCritical, "Error")
-        End Try
+    ' ---- Public entry points that the pages call --------------------------
+    Public Sub OpenDashboard()
+        ShowPage(New frmDashboard(), btnMainMenu)
     End Sub
 
-    Private Sub CompletedRequest()
-        Try
-            Call connection()
-            Dim completedSql As String = "SELECT COUNT(RequestID) FROM tblrequest WHERE Status IN ('Released', 'Completed')"
-            Using localCmd As New MySqlCommand(completedSql, cn)
-                Dim result As Object = localCmd.ExecuteScalar()
-                lblcompleted.Text = If(result IsNot Nothing, result.ToString(), "0")
-            End Using
-            cn.Close()
-        Catch ex As Exception
-            If cn.State = ConnectionState.Open Then cn.Close()
-            MsgBox("Error loading completed requests: " & ex.Message, vbCritical, "Error")
-        End Try
+    Public Sub OpenRequestList()
+        ShowPage(New frmRequestList(), btnReqList)
     End Sub
 
-    Public Sub LoadRecentRequests()
-        Try
-            Call connection()
-
-            Dim recentSql As String = "SELECT r.RequestNo, " &
-                                      "CONCAT(s.FirstName, ' ', s.LastName) AS StudentName, " &
-                                      "GROUP_CONCAT(DISTINCT d.DocumentName SEPARATOR ', ') AS DocumentNames, " &
-                                      "r.Status, r.RequestDate " &
-                                      "FROM tblrequest r " &
-                                      "LEFT JOIN tblstudents s ON r.StudentID = s.StudentID " &
-                                      "LEFT JOIN tblrequestdetails rd ON r.RequestID = rd.RequestID " &
-                                      "LEFT JOIN tbldocuments d ON CAST(rd.DocumentID AS CHAR) = CAST(d.DocumentID AS CHAR) " &
-                                      "WHERE r.PaymentStatus = 'Paid' " &
-                                      "AND YEAR(r.RequestDate) <> 2025 " &
-                                      "AND r.Status IN ('Processing', 'Ready for Release') " &
-                                      "GROUP BY r.RequestID, r.RequestNo, StudentName, r.Status, r.RequestDate " &
-                                      "ORDER BY r.RequestID DESC " &
-                                      "LIMIT 10"
-
-            Using localCmd As New MySqlCommand(recentSql, cn)
-                Using localDr As MySqlDataReader = localCmd.ExecuteReader()
-                    dgvrecentreqdoc.Rows.Clear()
-                    While localDr.Read()
-                        Dim reqDateStr As String = If(IsDBNull(localDr("RequestDate")), "-", Convert.ToDateTime(localDr("RequestDate")).ToString("yyyy-MM-dd"))
-
-                        dgvrecentreqdoc.Rows.Add(
-                            localDr("RequestNo").ToString(),
-                            If(IsDBNull(localDr("StudentName")), "-", localDr("StudentName").ToString()),
-                            If(IsDBNull(localDr("DocumentNames")), "-", localDr("DocumentNames").ToString()),
-                            If(IsDBNull(localDr("Status")) OrElse String.IsNullOrWhiteSpace(localDr("Status").ToString()), "-", localDr("Status").ToString()),
-                            reqDateStr
-                        )
-                    End While
-                End Using
-            End Using
-
-            cn.Close()
-        Catch ex As Exception
-            If cn.State = ConnectionState.Open Then cn.Close()
-            MsgBox("Error loading dashboard requests: " & ex.Message, vbCritical, "Error")
-        End Try
+    Public Sub OpenRequestDetails(requestNo As String)
+        Dim page As New frmRequestDetails()
+        page.SelectedRequestNo = requestNo            ' the page loads it in its own Load event
+        ShowPage(page, btnReqList)
     End Sub
 
-    Private Sub LoadOverdueRequests()
-        Try
-            Call connection()
+#End Region
 
-            Dim overdueSql As String = "SELECT r.RequestNo, " &
-                           "CONCAT(s.FirstName, ' ', s.LastName) AS StudentName, " &
-                           "GROUP_CONCAT(DISTINCT d.DocumentName SEPARATOR ', ') AS DocumentNames, " &
-                           "r.Status, r.RequestDate " &
-                           "FROM tblrequest r " &
-                           "LEFT JOIN tblstudents s ON r.StudentID = s.StudentID " &
-                           "LEFT JOIN tblrequestdetails rd ON r.RequestID = rd.RequestID " &
-                           "LEFT JOIN tbldocuments d ON CAST(rd.DocumentID AS CHAR) = CAST(d.DocumentID AS CHAR) " &
-                           "WHERE r.Status NOT IN ('Completed', 'Released', 'Cancelled') " &
-                           "AND r.RequestDate <= DATE_SUB(CURDATE(), INTERVAL 7 DAY) " &
-                           "GROUP BY r.RequestID, r.RequestNo, StudentName, r.Status, r.RequestDate " &
-                           "ORDER BY r.RequestDate ASC"
+#Region "Sidebar buttons"
 
-            Using localCmd As New MySqlCommand(overdueSql, cn)
-                Using localDr As MySqlDataReader = localCmd.ExecuteReader()
-                    dgvOverdueReq.Rows.Clear()
-                    While localDr.Read()
-                        Dim reqDateStr As String = If(IsDBNull(localDr("RequestDate")), "-", Convert.ToDateTime(localDr("RequestDate")).ToString("yyyy-MM-dd"))
-
-                        dgvOverdueReq.Rows.Add(
-                            localDr("RequestNo").ToString(),
-                            If(IsDBNull(localDr("StudentName")), "-", localDr("StudentName").ToString()),
-                            If(IsDBNull(localDr("DocumentNames")), "-", localDr("DocumentNames").ToString()),
-                            If(IsDBNull(localDr("Status")) OrElse String.IsNullOrWhiteSpace(localDr("Status").ToString()), "-", localDr("Status").ToString()),
-                            reqDateStr
-                        )
-                    End While
-                End Using
-            End Using
-
-            cn.Close()
-        Catch ex As Exception
-            If cn.State = ConnectionState.Open Then cn.Close()
-            MsgBox("Error loading overdue requests: " & ex.Message, vbCritical, "Error")
-        End Try
-    End Sub
-
-    Public Sub LoadMostRequestedDocuments()
-        Try
-            Call connection()
-
-            Dim chartSql As String = "SELECT d.DocumentName, SUM(rd.Quantity) AS TotalQty " &
-                                     "FROM tblrequestdetails rd " &
-                                     "JOIN tbldocuments d ON CAST(rd.DocumentID AS CHAR) = CAST(d.DocumentID AS CHAR) " &
-                                     "GROUP BY d.DocumentName " &
-                                     "ORDER BY TotalQty DESC"
-
-            Using localCmd As New MySqlCommand(chartSql, cn)
-                Using localDr As MySqlDataReader = localCmd.ExecuteReader()
-                    chtMostreqdoc.Series("Series1").Points.Clear()
-                    While localDr.Read()
-                        chtMostreqdoc.Series("Series1").Points.AddXY(localDr("DocumentName").ToString(), Convert.ToInt32(localDr("TotalQty")))
-                    End While
-                End Using
-            End Using
-
-            cn.Close()
-        Catch ex As Exception
-            If cn.State = ConnectionState.Open Then cn.Close()
-            MsgBox("Error loading most requested documents chart: " & ex.Message, vbCritical, "Error")
-        End Try
-    End Sub
-
-    Private Sub LoadDocReqPerMonth()
-        Dim currentYear As Integer = DateTime.Today.Year
-
-        Try
-            Call connection()
-            chtdocreqpermonth.Series("Series1").Points.Clear()
-
-            Dim counts(12) As Integer
-
-            Dim monthSql As String = "SELECT MONTH(RequestDate) AS m, COUNT(*) AS cnt " &
-                                     "FROM tblrequest WHERE YEAR(RequestDate) = @year " &
-                                     "GROUP BY MONTH(RequestDate)"
-
-            Using localCmd As New MySqlCommand(monthSql, cn)
-                localCmd.Parameters.AddWithValue("@year", currentYear)
-                Using localDr As MySqlDataReader = localCmd.ExecuteReader()
-                    While localDr.Read()
-                        Dim m As Integer = Convert.ToInt32(localDr("m"))
-                        counts(m) = Convert.ToInt32(localDr("cnt"))
-                    End While
-                End Using
-            End Using
-
-            For m As Integer = 1 To 12
-                chtdocreqpermonth.Series("Series1").Points.AddXY(MonthName(m, True), counts(m))
-            Next
-
-            cn.Close()
-        Catch ex As Exception
-            If cn.State = ConnectionState.Open Then cn.Close()
-            MsgBox("Error loading Document Request per Month chart: " & ex.Message, vbCritical, "Error")
-        End Try
+    Private Sub btnMainMenu_Click(sender As Object, e As EventArgs) Handles btnMainMenu.Click
+        OpenDashboard()
     End Sub
 
     Private Sub btnStudentManagement_Click(sender As Object, e As EventArgs) Handles btnStudentManagement.Click
-        frmStudentManagement.Show()
-        Me.Hide()
+        ShowPage(New frmStudentManagement(), btnStudentManagement)
     End Sub
 
     Private Sub btnDocumentManagement_Click(sender As Object, e As EventArgs) Handles btnDocumentManagement.Click
-        frmDocumentManagement.Show()
-        Me.Hide()
+        ShowPage(New frmDocumentManagement(), btnDocumentManagement)
     End Sub
 
     Private Sub btnDocumentRequests_Click(sender As Object, e As EventArgs) Handles btnDocumentRequests.Click
-        frmNewRequest.Show()
-        Me.Hide()
+        ShowPage(New frmNewRequest(), btnDocumentRequests)
     End Sub
 
     Private Sub btnReqList_Click(sender As Object, e As EventArgs) Handles btnReqList.Click
-        frmRequestList.Show()
-        Me.Hide()
+        OpenRequestList()
     End Sub
 
-    Private Sub btnViewReq_Click(sender As Object, e As EventArgs)
-        frmRequestList.Show()
-        Me.Hide()
+    Private Sub btnReport_Click(sender As Object, e As EventArgs) Handles btnReport.Click
+        ShowPage(New frmReports(), btnReport)
+    End Sub
+
+    Private Sub btnUserManagement_Click(sender As Object, e As EventArgs) Handles btnUserManagement.Click
+        ShowPage(New frmUserManagement(), btnUserManagement)
     End Sub
 
     Private Sub btnLogout_Click(sender As Object, e As EventArgs) Handles btnLogout.Click
         If MsgBox("Are you sure you want to logout?", vbYesNo + vbQuestion, "Confirm Logout") = MsgBoxResult.Yes Then
+            _loggingOut = True
             CurrentUser.UserID = 0
             CurrentUser.FullName = ""
             CurrentUser.Role = ""
@@ -287,14 +144,6 @@ Public Class frmMainMenu
         End If
     End Sub
 
-    Private Sub btnReport_Click(sender As Object, e As EventArgs) Handles btnReport.Click
-        frmReports.Show()
-        Me.Hide()
-    End Sub
-
-    Private Sub btnUserManagement_Click(sender As Object, e As EventArgs) Handles btnUserManagement.Click
-        frmUserManagement.Show()
-        Me.Hide()
-    End Sub
+#End Region
 
 End Class

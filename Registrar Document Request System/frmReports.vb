@@ -207,14 +207,4 @@ Public Class frmReports
         Return value
     End Function
 
-    Private Sub btnLogout_Click(sender As Object, e As EventArgs) 
-        If MsgBox("Are you sure you want to logout?", vbYesNo + vbQuestion, "Confirm Logout") = MsgBoxResult.Yes Then
-            CurrentUser.UserID = 0
-            CurrentUser.FullName = ""
-            CurrentUser.Role = ""
-            frmLogin.Show()
-            Me.Close()
-        End If
-    End Sub
-
 End Class
