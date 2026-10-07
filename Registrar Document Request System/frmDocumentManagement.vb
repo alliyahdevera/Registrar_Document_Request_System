@@ -36,7 +36,6 @@ Public Class frmDocumentManagement
     End Sub
 
     Private Sub RefreshUserSession()
-
         lblname.Text = CurrentUser.FullName
         lblposition.Text = CurrentUser.Role
     End Sub
@@ -183,6 +182,8 @@ Public Class frmDocumentManagement
 
         If Not IsValidInput(isEditMode:=False) Then Exit Sub
 
+        If Not ConfirmAction("Add this document record?", "Confirm Add") Then Exit Sub
+
         Call connection()
         sql = "INSERT INTO tbldocuments (DocumentID, DocumentName, Description, Fee, Status) VALUES (@id, @name, @desc, @fee, @status)"
         cmd = New MySqlCommand(sql, cn)
@@ -208,6 +209,8 @@ Public Class frmDocumentManagement
         End If
 
         If Not IsValidInput(isEditMode:=True) Then Exit Sub
+
+        If Not ConfirmAction("Save changes to this document record?", "Confirm Edit") Then Exit Sub
 
         Call connection()
         sql = "UPDATE tbldocuments SET DocumentName=@name, Description=@desc, Fee=@fee, Status=@status WHERE DocumentID=@id"
@@ -266,6 +269,10 @@ Public Class frmDocumentManagement
     End Sub
 
     Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
+        If Not String.IsNullOrWhiteSpace(txtName.Text & txtDescription.Text & txtFee.Text) Then
+            If Not ConfirmAction("Clear all fields?", "Confirm Clear") Then Exit Sub
+        End If
+
         ClearFields()
         SetAddMode()
     End Sub
@@ -303,6 +310,5 @@ Public Class frmDocumentManagement
             e.Handled = True
         End If
     End Sub
-
 
 End Class

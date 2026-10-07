@@ -28,6 +28,7 @@ Partial Class frmNewRequest
         Me.txtYearLevel = New System.Windows.Forms.TextBox()
         Me.txtCourse = New System.Windows.Forms.TextBox()
         Me.Panel10 = New System.Windows.Forms.Panel()
+        Me.btnsearch = New System.Windows.Forms.Button()
         Me.txtStudentID = New System.Windows.Forms.TextBox()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
@@ -65,6 +66,7 @@ Partial Class frmNewRequest
         Me.Subtotal = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Action = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel8 = New System.Windows.Forms.Panel()
+        Me.txtreqdate = New System.Windows.Forms.TextBox()
         Me.Panel15 = New System.Windows.Forms.Panel()
         Me.Label19 = New System.Windows.Forms.Label()
         Me.cboStatus = New System.Windows.Forms.ComboBox()
@@ -99,8 +101,6 @@ Partial Class frmNewRequest
         Me.lblname = New System.Windows.Forms.Label()
         Me.Label33 = New System.Windows.Forms.Label()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.btnsearch = New System.Windows.Forms.Button()
-        Me.txtreqdate = New System.Windows.Forms.TextBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Panel5.SuspendLayout()
         Me.Panel10.SuspendLayout()
@@ -180,12 +180,25 @@ Partial Class frmNewRequest
         Me.Panel10.Size = New System.Drawing.Size(238, 28)
         Me.Panel10.TabIndex = 61
         '
+        'btnsearch
+        '
+        Me.btnsearch.BackColor = System.Drawing.Color.Navy
+        Me.btnsearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnsearch.ForeColor = System.Drawing.Color.White
+        Me.btnsearch.Location = New System.Drawing.Point(150, -1)
+        Me.btnsearch.Name = "btnsearch"
+        Me.btnsearch.Size = New System.Drawing.Size(87, 28)
+        Me.btnsearch.TabIndex = 64
+        Me.btnsearch.Text = "[Search]"
+        Me.btnsearch.UseVisualStyleBackColor = False
+        '
         'txtStudentID
         '
         Me.txtStudentID.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtStudentID.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtStudentID.Location = New System.Drawing.Point(5, 4)
         Me.txtStudentID.Name = "txtStudentID"
+        Me.txtStudentID.ReadOnly = True
         Me.txtStudentID.Size = New System.Drawing.Size(146, 18)
         Me.txtStudentID.TabIndex = 32
         '
@@ -552,6 +565,16 @@ Partial Class frmNewRequest
         Me.Panel8.Size = New System.Drawing.Size(642, 180)
         Me.Panel8.TabIndex = 62
         '
+        'txtreqdate
+        '
+        Me.txtreqdate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtreqdate.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtreqdate.Location = New System.Drawing.Point(439, 65)
+        Me.txtreqdate.Name = "txtreqdate"
+        Me.txtreqdate.ReadOnly = True
+        Me.txtreqdate.Size = New System.Drawing.Size(180, 25)
+        Me.txtreqdate.TabIndex = 68
+        '
         'Panel15
         '
         Me.Panel15.BackColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
@@ -907,28 +930,6 @@ Partial Class frmNewRequest
         '
         Me.Timer1.Enabled = True
         Me.Timer1.Interval = 1000
-        '
-        'btnsearch
-        '
-        Me.btnsearch.BackColor = System.Drawing.Color.Navy
-        Me.btnsearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnsearch.ForeColor = System.Drawing.Color.White
-        Me.btnsearch.Location = New System.Drawing.Point(150, -1)
-        Me.btnsearch.Name = "btnsearch"
-        Me.btnsearch.Size = New System.Drawing.Size(87, 28)
-        Me.btnsearch.TabIndex = 64
-        Me.btnsearch.Text = "[Search]"
-        Me.btnsearch.UseVisualStyleBackColor = False
-        '
-        'txtreqdate
-        '
-        Me.txtreqdate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtreqdate.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtreqdate.Location = New System.Drawing.Point(439, 65)
-        Me.txtreqdate.Name = "txtreqdate"
-        Me.txtreqdate.ReadOnly = True
-        Me.txtreqdate.Size = New System.Drawing.Size(180, 25)
-        Me.txtreqdate.TabIndex = 68
         '
         'Panel1
         '

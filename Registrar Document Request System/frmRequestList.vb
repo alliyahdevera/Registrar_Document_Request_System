@@ -12,9 +12,7 @@ Public Class frmRequestList
         dgvReqDoc.SelectionMode = DataGridViewSelectionMode.FullRowSelect
         dgvReqDoc.MultiSelect = False
 
-        AutoCancelUnpaidRequests()
-
-        AutoCancelUnclaimedReadyForRelease()
+        ApplyAutoRules()
 
         FixMissingProcessedByData()
 

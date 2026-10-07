@@ -25,9 +25,10 @@ Public Class frmMainMenu
         OpenDashboard()
     End Sub
 
-    ' Admin-only buttons are hidden for Registrar Staff.
     Private Sub RefreshUserSession()
-        btnUserManagement.Visible = CurrentUser.IsAdmin
+        ' Everyone can open this page. Staff only get a self-service "My Account" view.
+        btnUserManagement.Visible = True
+        btnUserManagement.Text = If(CurrentUser.IsAdmin, "      User Management", "      My Account")
         btnDocumentManagement.Visible = CurrentUser.IsAdmin
     End Sub
 
@@ -86,8 +87,8 @@ Public Class frmMainMenu
         Next
     End Sub
 
-    ' ---- Public entry points that the pages call --------------------------
     Public Sub OpenDashboard()
+        ApplyAutoRules()
         ShowPage(New frmDashboard(), btnMainMenu)
     End Sub
 

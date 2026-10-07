@@ -4,6 +4,8 @@ Imports System.Text
 
 Public Class frmReports
 
+    Private _loadingFilter As Boolean = False
+
     Private Sub frmReports_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         RefreshUserSession()
 
@@ -13,6 +15,12 @@ Public Class frmReports
 
         DateTimePicker1.Value = DateTime.Today
         DateTimePicker2.Value = DateTime.Today
+
+        _loadingFilter = True
+        cbofilter.DropDownStyle = ComboBoxStyle.DropDownList
+        If Not cbofilter.Items.Contains("All Requests") Then cbofilter.Items.Insert(0, "All Requests")
+        cbofilter.SelectedIndex = 0
+        _loadingFilter = False
 
         dgvReqDoc.Rows.Clear()
         lbltotalrecords.Text = "0"
@@ -36,7 +44,9 @@ Public Class frmReports
         lbldatetime.Text = DateTime.Now.ToString("dddd, MMMM d, yyyy h:mm:ss tt")
     End Sub
 
-    Private Sub LoadReports(Optional statusFilter As String = "")
+    Private Sub LoadReports()
+        Dim statusFilter As String = GetSelectedFilter()
+
         Try
             Call connection()
 
@@ -124,40 +134,32 @@ Public Class frmReports
         LoadReports()
     End Sub
 
-    Private Sub btnGenerateReport_Click(sender As Object, e As EventArgs) Handles btnGenerateReport.Click
+    Private Function GetSelectedFilter() As String
+        Select Case cbofilter.Text
+            Case "Pending Request" : Return "Pending"
+            Case "Released Request" : Return "Released"
+            Case "Request By Document Type" : Return "ByDocType"
+            Case Else : Return ""
+        End Select
+    End Function
+
+    Private Function DatesAreValid() As Boolean
         If DateTimePicker1.Value.Date > DateTimePicker2.Value.Date Then
             MsgBox("'Date From' cannot be later than 'Date To'.", vbExclamation, "Reports")
-            Exit Sub
+            Return False
         End If
+        Return True
+    End Function
 
+    Private Sub cbofilter_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbofilter.SelectedIndexChanged
+        If _loadingFilter Then Exit Sub
+        If Not DatesAreValid() Then Exit Sub
         LoadReports()
     End Sub
 
-    Private Sub btnPendingRequests_Click(sender As Object, e As EventArgs) 
-        If DateTimePicker1.Value.Date > DateTimePicker2.Value.Date Then
-            MsgBox("'Date From' cannot be later than 'Date To'.", vbExclamation, "Reports")
-            Exit Sub
-        End If
-
-        LoadReports("Pending")
-    End Sub
-
-    Private Sub btnReleasedRequests_Click(sender As Object, e As EventArgs) 
-        If DateTimePicker1.Value.Date > DateTimePicker2.Value.Date Then
-            MsgBox("'Date From' cannot be later than 'Date To'.", vbExclamation, "Reports")
-            Exit Sub
-        End If
-
-        LoadReports("Released")
-    End Sub
-
-    Private Sub btnReqByDocType_Click(sender As Object, e As EventArgs) 
-        If DateTimePicker1.Value.Date > DateTimePicker2.Value.Date Then
-            MsgBox("'Date From' cannot be later than 'Date To'.", vbExclamation, "Reports")
-            Exit Sub
-        End If
-
-        LoadReports("ByDocType")
+    Private Sub btnGenerateReport_Click(sender As Object, e As EventArgs) Handles btnGenerateReport.Click
+        If Not DatesAreValid() Then Exit Sub
+        LoadReports()
     End Sub
 
     Private Sub btnExportExcel_Click(sender As Object, e As EventArgs) Handles btnExportExcel.Click

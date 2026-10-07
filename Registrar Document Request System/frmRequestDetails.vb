@@ -13,6 +13,8 @@ Public Class frmRequestDetails
 
         txtReleasedBy.Text = CurrentUser.FullName
         txtReleasedBy.ReadOnly = True
+        txtRequestDate.ReadOnly = True
+        txtRequestDate.TabStop = False
 
         If Not String.IsNullOrEmpty(SelectedRequestNo) Then
             LoadRequestDetailsInfo(SelectedRequestNo)
@@ -201,6 +203,8 @@ Public Class frmRequestDetails
             Return
         End If
 
+        If Not ConfirmAction("Save these payment details?", "Confirm Payment") Then Exit Sub
+
         Try
             Call connection()
             Dim newStatus As String = currentDbStatus
@@ -297,6 +301,11 @@ Public Class frmRequestDetails
         If selectedStatus = currentDbStatus Then
             MsgBox("Status is unchanged.", vbInformation, "No Changes")
             Return
+        End If
+
+        If Not ConfirmAction("Change status from '" & currentDbStatus & "' to '" & selectedStatus & "'?", "Confirm Status Change") Then
+            cboStatus.Text = currentDbStatus
+            Exit Sub
         End If
 
         Try

@@ -1,4 +1,5 @@
 ﻿Imports MySql.Data.MySqlClient
+
 Public Class frmStudentManagement
 
     Private Sub frmStudentManagement_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -25,9 +26,11 @@ Public Class frmStudentManagement
         lblname.Text = CurrentUser.FullName
         lblposition.Text = CurrentUser.Role
     End Sub
+
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         UpdateFooterDateTime()
     End Sub
+
     Private Sub UpdateFooterDateTime()
         lbldatetime.Text = DateTime.Now.ToString("dddd, MMMM d, yyyy h:mm:ss tt")
     End Sub
@@ -38,12 +41,14 @@ Public Class frmStudentManagement
         txtStudentID.BackColor = Color.White
         txtLRN.BackColor = Color.White
     End Sub
+
     Private Sub SetEditMode()
         txtStudentID.ReadOnly = True
         txtLRN.ReadOnly = True
         txtStudentID.BackColor = Color.Gainsboro
         txtLRN.BackColor = Color.Gainsboro
     End Sub
+
     Private Sub ClearFields()
         txtStudentID.Clear()
         txtLRN.Clear()
@@ -140,7 +145,6 @@ Public Class frmStudentManagement
             txtSection.Text = dgvStudents.Rows(e.RowIndex).Cells(7).Value.ToString()
             txtContactNo.Text = dgvStudents.Rows(e.RowIndex).Cells(8).Value.ToString()
 
-
             SetEditMode()
         End If
     End Sub
@@ -156,6 +160,8 @@ Public Class frmStudentManagement
             MsgBox("A student with that Student ID already exists.", vbExclamation, "Student Management")
             Exit Sub
         End If
+
+        If Not ConfirmAction("Add this student record?", "Confirm Add") Then Exit Sub
 
         Call connection()
         sql = "INSERT INTO tblstudents (StudentID, LRN, LastName, FirstName, MiddleName, Course, YearLevel, Section, ContactNo) " &
@@ -187,6 +193,8 @@ Public Class frmStudentManagement
         End If
 
         If Not IsValidInput() Then Exit Sub
+
+        If Not ConfirmAction("Save changes to this student record?", "Confirm Edit") Then Exit Sub
 
         Call connection()
         sql = "UPDATE tblstudents SET LRN=@lrn, LastName=@ln, FirstName=@fn, MiddleName=@mn, " &
@@ -267,10 +275,17 @@ Public Class frmStudentManagement
     End Sub
 
     Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
+        If Not String.IsNullOrWhiteSpace(txtStudentID.Text & txtLRN.Text & txtLastName.Text & txtFirstName.Text &
+                                        txtMiddleName.Text & cboCourse.Text & cboYearLevel.Text &
+                                        txtSection.Text & txtContactNo.Text) Then
+            If Not ConfirmAction("Clear all fields?", "Confirm Clear") Then Exit Sub
+        End If
+
         ClearFields()
         txtStudentID.ReadOnly = False
         txtStudentID.BackColor = Color.White
         txtLRN.ReadOnly = False
         txtLRN.BackColor = Color.White
     End Sub
+
 End Class

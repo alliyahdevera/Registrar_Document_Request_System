@@ -12,7 +12,9 @@ Public Class frmNewRequest
 
         LoadDocumentsCombo()
 
-        dtpRequestDate.Value = Today
+        txtreqdate.ReadOnly = True
+        txtreqdate.TabStop = False
+        txtreqdate.Text = Date.Today.ToString("yyyy-MM-dd")
         txtCreatedBy.Text = CurrentUser.FullName
 
         ' Set default status choices
@@ -34,6 +36,7 @@ Public Class frmNewRequest
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         UpdateFooterDateTime()
+        txtreqdate.Text = Date.Today.ToString("yyyy-MM-dd")
     End Sub
 
     Private Sub UpdateFooterDateTime()
@@ -75,8 +78,13 @@ Public Class frmNewRequest
         txtRequestNo.ReadOnly = True
     End Sub
 
-    Private Sub picSearchStudent_Click(sender As Object, e As EventArgs)
-        SearchStudent()
+    Private Sub btnsearch_Click(sender As Object, e As EventArgs) Handles btnsearch.Click
+        Using frm As New frmStudentList()
+            If frm.ShowDialog(frmMainMenu) = DialogResult.OK Then
+                txtStudentID.Text = frm.SelectedStudentID
+                SearchStudent()   ' reuses your existing code to fill name, course, year level
+            End If
+        End Using
     End Sub
 
     Private Sub txtStudentID_KeyDown(sender As Object, e As KeyEventArgs) Handles txtStudentID.KeyDown
@@ -331,7 +339,7 @@ Public Class frmNewRequest
             cmd = New MySqlCommand(sql, cn)
             cmd.Parameters.AddWithValue("@reqno", txtRequestNo.Text.Trim())
             cmd.Parameters.AddWithValue("@studid", txtStudentID.Text.Trim())
-            cmd.Parameters.AddWithValue("@reqdate", dtpRequestDate.Value.Date)
+            cmd.Parameters.AddWithValue("@reqdate", Date.Today)
             cmd.Parameters.AddWithValue("@total", CDec(txtTotalAmount.Text))
             cmd.Parameters.AddWithValue("@paystat", cboPaymentStatus.Text)
             cmd.Parameters.AddWithValue("@status", cboStatus.Text)
@@ -381,7 +389,7 @@ Public Class frmNewRequest
         cboPaymentStatus.Text = "Unpaid"
         cboStatus.Text = "Pending"
 
-        dtpRequestDate.Value = Today
+        txtreqdate.Text = Date.Today.ToString("yyyy-MM-dd")
         RecalculateTotal()
         GenerateRequestNo()
     End Sub
@@ -391,5 +399,6 @@ Public Class frmNewRequest
             frmMainMenu.OpenDashboard()
         End If
     End Sub
+
 
 End Class
