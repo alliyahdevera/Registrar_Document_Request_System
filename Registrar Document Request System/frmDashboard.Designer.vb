@@ -22,12 +22,12 @@ Partial Class frmDashboard
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim ChartArea2 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend2 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series2 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea3 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend3 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series3 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea4 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend4 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series4 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmDashboard))
         Me.lbldatetime = New System.Windows.Forms.Label()
         Me.Label19 = New System.Windows.Forms.Label()
@@ -75,6 +75,8 @@ Partial Class frmDashboard
         Me.lbltotalstudents = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.cbomonth = New System.Windows.Forms.ComboBox()
+        Me.Panel1 = New System.Windows.Forms.Panel()
         Me.pnlrecentreqdoc.SuspendLayout()
         CType(Me.dgvrecentreqdoc, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlmostreqdoc.SuspendLayout()
@@ -91,6 +93,7 @@ Partial Class frmDashboard
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel5.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'lbldatetime
@@ -99,7 +102,7 @@ Partial Class frmDashboard
         Me.lbldatetime.BackColor = System.Drawing.Color.Transparent
         Me.lbldatetime.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbldatetime.ForeColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
-        Me.lbldatetime.Location = New System.Drawing.Point(604, 802)
+        Me.lbldatetime.Location = New System.Drawing.Point(579, 6)
         Me.lbldatetime.Name = "lbldatetime"
         Me.lbldatetime.Size = New System.Drawing.Size(16, 21)
         Me.lbldatetime.TabIndex = 77
@@ -111,7 +114,7 @@ Partial Class frmDashboard
         Me.Label19.BackColor = System.Drawing.Color.Transparent
         Me.Label19.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label19.ForeColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
-        Me.Label19.Location = New System.Drawing.Point(532, 802)
+        Me.Label19.Location = New System.Drawing.Point(507, 6)
         Me.Label19.Name = "Label19"
         Me.Label19.Size = New System.Drawing.Size(65, 21)
         Me.Label19.TabIndex = 76
@@ -123,7 +126,7 @@ Partial Class frmDashboard
         Me.lblposition.BackColor = System.Drawing.Color.Transparent
         Me.lblposition.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblposition.ForeColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
-        Me.lblposition.Location = New System.Drawing.Point(343, 802)
+        Me.lblposition.Location = New System.Drawing.Point(318, 6)
         Me.lblposition.Name = "lblposition"
         Me.lblposition.Size = New System.Drawing.Size(82, 21)
         Me.lblposition.TabIndex = 75
@@ -135,7 +138,7 @@ Partial Class frmDashboard
         Me.Label17.BackColor = System.Drawing.Color.Transparent
         Me.Label17.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label17.ForeColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
-        Me.Label17.Location = New System.Drawing.Point(277, 802)
+        Me.Label17.Location = New System.Drawing.Point(252, 6)
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(68, 21)
         Me.Label17.TabIndex = 74
@@ -147,7 +150,7 @@ Partial Class frmDashboard
         Me.lblname.BackColor = System.Drawing.Color.Transparent
         Me.lblname.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblname.ForeColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
-        Me.lblname.Location = New System.Drawing.Point(82, 802)
+        Me.lblname.Location = New System.Drawing.Point(57, 6)
         Me.lblname.Name = "lblname"
         Me.lblname.Size = New System.Drawing.Size(53, 21)
         Me.lblname.TabIndex = 73
@@ -159,7 +162,7 @@ Partial Class frmDashboard
         Me.Label15.BackColor = System.Drawing.Color.Transparent
         Me.Label15.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label15.ForeColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
-        Me.Label15.Location = New System.Drawing.Point(32, 802)
+        Me.Label15.Location = New System.Drawing.Point(7, 6)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(55, 21)
         Me.Label15.TabIndex = 72
@@ -172,7 +175,7 @@ Partial Class frmDashboard
         Me.pnlrecentreqdoc.Controls.Add(Me.btnViewReq)
         Me.pnlrecentreqdoc.Controls.Add(Me.dgvrecentreqdoc)
         Me.pnlrecentreqdoc.Controls.Add(Me.Label11)
-        Me.pnlrecentreqdoc.Location = New System.Drawing.Point(35, 197)
+        Me.pnlrecentreqdoc.Location = New System.Drawing.Point(40, 197)
         Me.pnlrecentreqdoc.Name = "pnlrecentreqdoc"
         Me.pnlrecentreqdoc.Size = New System.Drawing.Size(536, 282)
         Me.pnlrecentreqdoc.TabIndex = 71
@@ -248,7 +251,7 @@ Partial Class frmDashboard
         Me.pnlmostreqdoc.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.pnlmostreqdoc.Controls.Add(Me.Label10)
         Me.pnlmostreqdoc.Controls.Add(Me.chtMostreqdoc)
-        Me.pnlmostreqdoc.Location = New System.Drawing.Point(35, 500)
+        Me.pnlmostreqdoc.Location = New System.Drawing.Point(40, 500)
         Me.pnlmostreqdoc.Name = "pnlmostreqdoc"
         Me.pnlmostreqdoc.Size = New System.Drawing.Size(536, 282)
         Me.pnlmostreqdoc.TabIndex = 69
@@ -265,17 +268,17 @@ Partial Class frmDashboard
         '
         'chtMostreqdoc
         '
-        ChartArea1.Name = "ChartArea1"
-        Me.chtMostreqdoc.ChartAreas.Add(ChartArea1)
-        Legend1.Name = "Legend1"
-        Me.chtMostreqdoc.Legends.Add(Legend1)
+        ChartArea3.Name = "ChartArea1"
+        Me.chtMostreqdoc.ChartAreas.Add(ChartArea3)
+        Legend3.Name = "Legend1"
+        Me.chtMostreqdoc.Legends.Add(Legend3)
         Me.chtMostreqdoc.Location = New System.Drawing.Point(20, 62)
         Me.chtMostreqdoc.Name = "chtMostreqdoc"
-        Series1.ChartArea = "ChartArea1"
-        Series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut
-        Series1.Legend = "Legend1"
-        Series1.Name = "Series1"
-        Me.chtMostreqdoc.Series.Add(Series1)
+        Series3.ChartArea = "ChartArea1"
+        Series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Bar
+        Series3.Legend = "Legend1"
+        Series3.Name = "Series1"
+        Me.chtMostreqdoc.Series.Add(Series3)
         Me.chtMostreqdoc.Size = New System.Drawing.Size(499, 198)
         Me.chtMostreqdoc.TabIndex = 35
         Me.chtMostreqdoc.Text = "Chart3"
@@ -286,7 +289,7 @@ Partial Class frmDashboard
         Me.pnlreqstatus.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.pnlreqstatus.Controls.Add(Me.dgvOverdueReq)
         Me.pnlreqstatus.Controls.Add(Me.Label8)
-        Me.pnlreqstatus.Location = New System.Drawing.Point(611, 196)
+        Me.pnlreqstatus.Location = New System.Drawing.Point(606, 196)
         Me.pnlreqstatus.Name = "pnlreqstatus"
         Me.pnlreqstatus.Size = New System.Drawing.Size(533, 282)
         Me.pnlreqstatus.TabIndex = 70
@@ -348,9 +351,10 @@ Partial Class frmDashboard
         '
         Me.pnlDocreqpermonth.BackColor = System.Drawing.Color.White
         Me.pnlDocreqpermonth.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.pnlDocreqpermonth.Controls.Add(Me.cbomonth)
         Me.pnlDocreqpermonth.Controls.Add(Me.Label3)
         Me.pnlDocreqpermonth.Controls.Add(Me.chtdocreqpermonth)
-        Me.pnlDocreqpermonth.Location = New System.Drawing.Point(611, 500)
+        Me.pnlDocreqpermonth.Location = New System.Drawing.Point(606, 500)
         Me.pnlDocreqpermonth.Name = "pnlDocreqpermonth"
         Me.pnlDocreqpermonth.Size = New System.Drawing.Size(534, 282)
         Me.pnlDocreqpermonth.TabIndex = 68
@@ -367,17 +371,17 @@ Partial Class frmDashboard
         '
         'chtdocreqpermonth
         '
-        ChartArea2.Name = "ChartArea1"
-        Me.chtdocreqpermonth.ChartAreas.Add(ChartArea2)
-        Legend2.Name = "Legend1"
-        Me.chtdocreqpermonth.Legends.Add(Legend2)
+        ChartArea4.Name = "ChartArea1"
+        Me.chtdocreqpermonth.ChartAreas.Add(ChartArea4)
+        Legend4.Name = "Legend1"
+        Me.chtdocreqpermonth.Legends.Add(Legend4)
         Me.chtdocreqpermonth.Location = New System.Drawing.Point(21, 62)
         Me.chtdocreqpermonth.Name = "chtdocreqpermonth"
-        Series2.ChartArea = "ChartArea1"
-        Series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
-        Series2.Legend = "Legend1"
-        Series2.Name = "Series1"
-        Me.chtdocreqpermonth.Series.Add(Series2)
+        Series4.ChartArea = "ChartArea1"
+        Series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
+        Series4.Legend = "Legend1"
+        Series4.Name = "Series1"
+        Me.chtdocreqpermonth.Series.Add(Series4)
         Me.chtdocreqpermonth.Size = New System.Drawing.Size(450, 198)
         Me.chtdocreqpermonth.TabIndex = 35
         Me.chtdocreqpermonth.Text = "Chart1"
@@ -389,7 +393,7 @@ Partial Class frmDashboard
         Me.Panel8.Controls.Add(Me.PictureBox4)
         Me.Panel8.Controls.Add(Me.lblcompleted)
         Me.Panel8.Controls.Add(Me.Label9)
-        Me.Panel8.Location = New System.Drawing.Point(892, 65)
+        Me.Panel8.Location = New System.Drawing.Point(887, 65)
         Me.Panel8.Name = "Panel8"
         Me.Panel8.Size = New System.Drawing.Size(250, 111)
         Me.Panel8.TabIndex = 67
@@ -435,7 +439,7 @@ Partial Class frmDashboard
         Me.Panel7.Controls.Add(Me.PictureBox3)
         Me.Panel7.Controls.Add(Me.lblpendingrequests)
         Me.Panel7.Controls.Add(Me.Label7)
-        Me.Panel7.Location = New System.Drawing.Point(611, 65)
+        Me.Panel7.Location = New System.Drawing.Point(606, 65)
         Me.Panel7.Name = "Panel7"
         Me.Panel7.Size = New System.Drawing.Size(246, 111)
         Me.Panel7.TabIndex = 66
@@ -481,7 +485,7 @@ Partial Class frmDashboard
         Me.Panel6.Controls.Add(Me.PictureBox2)
         Me.Panel6.Controls.Add(Me.lbltotrequests)
         Me.Panel6.Controls.Add(Me.Label6)
-        Me.Panel6.Location = New System.Drawing.Point(322, 65)
+        Me.Panel6.Location = New System.Drawing.Point(327, 65)
         Me.Panel6.Name = "Panel6"
         Me.Panel6.Size = New System.Drawing.Size(249, 111)
         Me.Panel6.TabIndex = 65
@@ -527,7 +531,7 @@ Partial Class frmDashboard
         Me.Panel5.Controls.Add(Me.PictureBox1)
         Me.Panel5.Controls.Add(Me.lbltotalstudents)
         Me.Panel5.Controls.Add(Me.Label2)
-        Me.Panel5.Location = New System.Drawing.Point(35, 65)
+        Me.Panel5.Location = New System.Drawing.Point(40, 65)
         Me.Panel5.Name = "Panel5"
         Me.Panel5.Size = New System.Drawing.Size(246, 111)
         Me.Panel5.TabIndex = 64
@@ -572,23 +576,42 @@ Partial Class frmDashboard
         Me.Label1.BackColor = System.Drawing.Color.Transparent
         Me.Label1.Font = New System.Drawing.Font("Segoe UI", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.Color.Navy
-        Me.Label1.Location = New System.Drawing.Point(29, 14)
+        Me.Label1.Location = New System.Drawing.Point(34, 14)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(138, 32)
         Me.Label1.TabIndex = 63
         Me.Label1.Text = "Dashboard"
+        '
+        'cbomonth
+        '
+        Me.cbomonth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbomonth.DropDownWidth = 300
+        Me.cbomonth.FormattingEnabled = True
+        Me.cbomonth.Location = New System.Drawing.Point(408, 17)
+        Me.cbomonth.Name = "cbomonth"
+        Me.cbomonth.Size = New System.Drawing.Size(109, 21)
+        Me.cbomonth.TabIndex = 37
+        '
+        'Panel1
+        '
+        Me.Panel1.Controls.Add(Me.Label19)
+        Me.Panel1.Controls.Add(Me.lbldatetime)
+        Me.Panel1.Controls.Add(Me.Label15)
+        Me.Panel1.Controls.Add(Me.lblname)
+        Me.Panel1.Controls.Add(Me.lblposition)
+        Me.Panel1.Controls.Add(Me.Label17)
+        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Panel1.Location = New System.Drawing.Point(0, 805)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(1174, 31)
+        Me.Panel1.TabIndex = 78
         '
         'frmDashboard
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1174, 836)
-        Me.Controls.Add(Me.lbldatetime)
-        Me.Controls.Add(Me.Label19)
-        Me.Controls.Add(Me.lblposition)
-        Me.Controls.Add(Me.Label17)
-        Me.Controls.Add(Me.lblname)
-        Me.Controls.Add(Me.Label15)
+        Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.pnlrecentreqdoc)
         Me.Controls.Add(Me.pnlmostreqdoc)
         Me.Controls.Add(Me.pnlreqstatus)
@@ -625,6 +648,8 @@ Partial Class frmDashboard
         Me.Panel5.ResumeLayout(False)
         Me.Panel5.PerformLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel1.ResumeLayout(False)
+        Me.Panel1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -676,4 +701,6 @@ Partial Class frmDashboard
     Friend WithEvents lbltotalstudents As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents Label1 As Label
+    Friend WithEvents cbomonth As ComboBox
+    Friend WithEvents Panel1 As Panel
 End Class

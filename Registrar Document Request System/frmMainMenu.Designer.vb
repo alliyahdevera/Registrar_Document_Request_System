@@ -25,6 +25,8 @@ Partial Class frmMainMenu
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMainMenu))
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.btnchangepassword = New System.Windows.Forms.Button()
+        Me.btnsettings = New System.Windows.Forms.Button()
         Me.btnUserManagement = New System.Windows.Forms.Button()
         Me.btnReport = New System.Windows.Forms.Button()
         Me.btnLogout = New System.Windows.Forms.Button()
@@ -49,6 +51,8 @@ Partial Class frmMainMenu
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
+        Me.Panel1.Controls.Add(Me.btnchangepassword)
+        Me.Panel1.Controls.Add(Me.btnsettings)
         Me.Panel1.Controls.Add(Me.btnUserManagement)
         Me.Panel1.Controls.Add(Me.btnReport)
         Me.Panel1.Controls.Add(Me.btnLogout)
@@ -65,6 +69,44 @@ Partial Class frmMainMenu
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(250, 836)
         Me.Panel1.TabIndex = 27
+        '
+        'btnchangepassword
+        '
+        Me.btnchangepassword.BackColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
+        Me.btnchangepassword.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnchangepassword.FlatAppearance.BorderSize = 0
+        Me.btnchangepassword.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnchangepassword.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnchangepassword.ForeColor = System.Drawing.Color.White
+        Me.btnchangepassword.Image = CType(resources.GetObject("btnchangepassword.Image"), System.Drawing.Image)
+        Me.btnchangepassword.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnchangepassword.Location = New System.Drawing.Point(15, 492)
+        Me.btnchangepassword.Name = "btnchangepassword"
+        Me.btnchangepassword.Size = New System.Drawing.Size(220, 49)
+        Me.btnchangepassword.TabIndex = 14
+        Me.btnchangepassword.Text = "      Change Password"
+        Me.btnchangepassword.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnchangepassword.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnchangepassword.UseVisualStyleBackColor = False
+        '
+        'btnsettings
+        '
+        Me.btnsettings.BackColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
+        Me.btnsettings.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnsettings.FlatAppearance.BorderSize = 0
+        Me.btnsettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnsettings.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnsettings.ForeColor = System.Drawing.Color.White
+        Me.btnsettings.Image = CType(resources.GetObject("btnsettings.Image"), System.Drawing.Image)
+        Me.btnsettings.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnsettings.Location = New System.Drawing.Point(15, 443)
+        Me.btnsettings.Name = "btnsettings"
+        Me.btnsettings.Size = New System.Drawing.Size(220, 49)
+        Me.btnsettings.TabIndex = 13
+        Me.btnsettings.Text = "      Settings"
+        Me.btnsettings.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnsettings.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnsettings.UseVisualStyleBackColor = False
         '
         'btnUserManagement
         '
@@ -327,4 +369,6 @@ Partial Class frmMainMenu
     Friend WithEvents btnUserManagement As Button
     Friend WithEvents tmrDateTime As Timer
     Friend WithEvents pnlmain As Panel
+    Friend WithEvents btnchangepassword As Button
+    Friend WithEvents btnsettings As Button
 End Class

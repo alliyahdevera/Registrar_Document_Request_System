@@ -68,11 +68,13 @@ Partial Class frmUserManagement
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnAdd = New System.Windows.Forms.Button()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Panel6.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel5.SuspendLayout()
         Me.Panel7.SuspendLayout()
         CType(Me.dgvUsers, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'lbldatetime
@@ -81,7 +83,7 @@ Partial Class frmUserManagement
         Me.lbldatetime.BackColor = System.Drawing.Color.Transparent
         Me.lbldatetime.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbldatetime.ForeColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
-        Me.lbldatetime.Location = New System.Drawing.Point(590, 806)
+        Me.lbldatetime.Location = New System.Drawing.Point(578, 5)
         Me.lbldatetime.Name = "lbldatetime"
         Me.lbldatetime.Size = New System.Drawing.Size(16, 21)
         Me.lbldatetime.TabIndex = 84
@@ -93,7 +95,7 @@ Partial Class frmUserManagement
         Me.Label19.BackColor = System.Drawing.Color.Transparent
         Me.Label19.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label19.ForeColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
-        Me.Label19.Location = New System.Drawing.Point(518, 806)
+        Me.Label19.Location = New System.Drawing.Point(506, 5)
         Me.Label19.Name = "Label19"
         Me.Label19.Size = New System.Drawing.Size(65, 21)
         Me.Label19.TabIndex = 83
@@ -105,7 +107,7 @@ Partial Class frmUserManagement
         Me.lblposition.BackColor = System.Drawing.Color.Transparent
         Me.lblposition.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblposition.ForeColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
-        Me.lblposition.Location = New System.Drawing.Point(329, 806)
+        Me.lblposition.Location = New System.Drawing.Point(317, 5)
         Me.lblposition.Name = "lblposition"
         Me.lblposition.Size = New System.Drawing.Size(82, 21)
         Me.lblposition.TabIndex = 82
@@ -117,7 +119,7 @@ Partial Class frmUserManagement
         Me.Label17.BackColor = System.Drawing.Color.Transparent
         Me.Label17.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label17.ForeColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
-        Me.Label17.Location = New System.Drawing.Point(263, 806)
+        Me.Label17.Location = New System.Drawing.Point(251, 5)
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(68, 21)
         Me.Label17.TabIndex = 81
@@ -129,7 +131,7 @@ Partial Class frmUserManagement
         Me.lblname.BackColor = System.Drawing.Color.Transparent
         Me.lblname.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblname.ForeColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
-        Me.lblname.Location = New System.Drawing.Point(68, 806)
+        Me.lblname.Location = New System.Drawing.Point(56, 5)
         Me.lblname.Name = "lblname"
         Me.lblname.Size = New System.Drawing.Size(53, 21)
         Me.lblname.TabIndex = 80
@@ -141,7 +143,7 @@ Partial Class frmUserManagement
         Me.Label16.BackColor = System.Drawing.Color.Transparent
         Me.Label16.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label16.ForeColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
-        Me.Label16.Location = New System.Drawing.Point(18, 806)
+        Me.Label16.Location = New System.Drawing.Point(6, 5)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(55, 21)
         Me.Label16.TabIndex = 79
@@ -534,17 +536,26 @@ Partial Class frmUserManagement
         'Timer1
         '
         '
+        'Panel1
+        '
+        Me.Panel1.Controls.Add(Me.lbldatetime)
+        Me.Panel1.Controls.Add(Me.Label19)
+        Me.Panel1.Controls.Add(Me.lblposition)
+        Me.Panel1.Controls.Add(Me.Label17)
+        Me.Panel1.Controls.Add(Me.lblname)
+        Me.Panel1.Controls.Add(Me.Label16)
+        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Panel1.Location = New System.Drawing.Point(0, 805)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(1174, 31)
+        Me.Panel1.TabIndex = 85
+        '
         'frmUserManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1174, 836)
-        Me.Controls.Add(Me.lbldatetime)
-        Me.Controls.Add(Me.Label19)
-        Me.Controls.Add(Me.lblposition)
-        Me.Controls.Add(Me.Label17)
-        Me.Controls.Add(Me.lblname)
-        Me.Controls.Add(Me.Label16)
+        Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.Label15)
         Me.Controls.Add(Me.Panel6)
         Me.Controls.Add(Me.btnDelete)
@@ -566,6 +577,8 @@ Partial Class frmUserManagement
         Me.Panel7.ResumeLayout(False)
         Me.Panel7.PerformLayout()
         CType(Me.dgvUsers, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel1.ResumeLayout(False)
+        Me.Panel1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -615,4 +628,5 @@ Partial Class frmUserManagement
     Friend WithEvents LastName As DataGridViewTextBoxColumn
     Friend WithEvents Role As DataGridViewTextBoxColumn
     Friend WithEvents Status As DataGridViewTextBoxColumn
+    Friend WithEvents Panel1 As Panel
 End Class

@@ -75,7 +75,7 @@ Public Class frmNewRequest
         txtRequestNo.ReadOnly = True
     End Sub
 
-    Private Sub picSearchStudent_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
+    Private Sub picSearchStudent_Click(sender As Object, e As EventArgs)
         SearchStudent()
     End Sub
 

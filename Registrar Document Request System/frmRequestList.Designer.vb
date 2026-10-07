@@ -23,6 +23,7 @@ Partial Class frmRequestList
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmRequestList))
         Me.btnViewDetails = New System.Windows.Forms.Button()
         Me.Panel7 = New System.Windows.Forms.Panel()
@@ -57,11 +58,13 @@ Partial Class frmRequestList
         Me.lblname = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Panel7.SuspendLayout()
         Me.Panel16.SuspendLayout()
         CType(Me.dgvReqDoc, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel10.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnViewDetails
@@ -111,6 +114,14 @@ Partial Class frmRequestList
         '
         Me.dgvReqDoc.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvReqDoc.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.RequestNo, Me._date, Me.StudentID, Me.FirstName, Me.LastName, Me.Documents, Me.TotalAmount, Me.PaymentStatus, Me.AmountPaid, Me.ORNo, Me.ORDate, Me.Status, Me.CreateReq, Me.ProcessedReq, Me.ReleasedBy})
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvReqDoc.DefaultCellStyle = DataGridViewCellStyle2
         Me.dgvReqDoc.Location = New System.Drawing.Point(-1, 34)
         Me.dgvReqDoc.Name = "dgvReqDoc"
         Me.dgvReqDoc.ReadOnly = True
@@ -285,7 +296,7 @@ Partial Class frmRequestList
         Me.lbldatetime.BackColor = System.Drawing.Color.Transparent
         Me.lbldatetime.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbldatetime.ForeColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
-        Me.lbldatetime.Location = New System.Drawing.Point(593, 809)
+        Me.lbldatetime.Location = New System.Drawing.Point(578, 6)
         Me.lbldatetime.Name = "lbldatetime"
         Me.lbldatetime.Size = New System.Drawing.Size(16, 21)
         Me.lbldatetime.TabIndex = 81
@@ -297,7 +308,7 @@ Partial Class frmRequestList
         Me.Label19.BackColor = System.Drawing.Color.Transparent
         Me.Label19.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label19.ForeColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
-        Me.Label19.Location = New System.Drawing.Point(521, 809)
+        Me.Label19.Location = New System.Drawing.Point(506, 6)
         Me.Label19.Name = "Label19"
         Me.Label19.Size = New System.Drawing.Size(65, 21)
         Me.Label19.TabIndex = 80
@@ -309,7 +320,7 @@ Partial Class frmRequestList
         Me.lblposition.BackColor = System.Drawing.Color.Transparent
         Me.lblposition.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblposition.ForeColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
-        Me.lblposition.Location = New System.Drawing.Point(332, 809)
+        Me.lblposition.Location = New System.Drawing.Point(317, 6)
         Me.lblposition.Name = "lblposition"
         Me.lblposition.Size = New System.Drawing.Size(82, 21)
         Me.lblposition.TabIndex = 79
@@ -321,7 +332,7 @@ Partial Class frmRequestList
         Me.Label17.BackColor = System.Drawing.Color.Transparent
         Me.Label17.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label17.ForeColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
-        Me.Label17.Location = New System.Drawing.Point(266, 809)
+        Me.Label17.Location = New System.Drawing.Point(251, 6)
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(68, 21)
         Me.Label17.TabIndex = 78
@@ -333,7 +344,7 @@ Partial Class frmRequestList
         Me.lblname.BackColor = System.Drawing.Color.Transparent
         Me.lblname.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblname.ForeColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
-        Me.lblname.Location = New System.Drawing.Point(71, 809)
+        Me.lblname.Location = New System.Drawing.Point(56, 6)
         Me.lblname.Name = "lblname"
         Me.lblname.Size = New System.Drawing.Size(53, 21)
         Me.lblname.TabIndex = 77
@@ -345,7 +356,7 @@ Partial Class frmRequestList
         Me.Label2.BackColor = System.Drawing.Color.Transparent
         Me.Label2.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
-        Me.Label2.Location = New System.Drawing.Point(21, 809)
+        Me.Label2.Location = New System.Drawing.Point(6, 6)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(55, 21)
         Me.Label2.TabIndex = 76
@@ -354,17 +365,26 @@ Partial Class frmRequestList
         'Timer1
         '
         '
+        'Panel1
+        '
+        Me.Panel1.Controls.Add(Me.lbldatetime)
+        Me.Panel1.Controls.Add(Me.Label19)
+        Me.Panel1.Controls.Add(Me.lblposition)
+        Me.Panel1.Controls.Add(Me.Label17)
+        Me.Panel1.Controls.Add(Me.lblname)
+        Me.Panel1.Controls.Add(Me.Label2)
+        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Panel1.Location = New System.Drawing.Point(0, 801)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(1174, 35)
+        Me.Panel1.TabIndex = 82
+        '
         'frmRequestList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1174, 836)
-        Me.Controls.Add(Me.lbldatetime)
-        Me.Controls.Add(Me.Label19)
-        Me.Controls.Add(Me.lblposition)
-        Me.Controls.Add(Me.Label17)
-        Me.Controls.Add(Me.lblname)
-        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.btnViewDetails)
         Me.Controls.Add(Me.Panel7)
         Me.Controls.Add(Me.Label15)
@@ -382,6 +402,8 @@ Partial Class frmRequestList
         Me.Panel10.ResumeLayout(False)
         Me.Panel10.PerformLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel1.ResumeLayout(False)
+        Me.Panel1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -419,4 +441,5 @@ Partial Class frmRequestList
     Friend WithEvents CreateReq As DataGridViewTextBoxColumn
     Friend WithEvents ProcessedReq As DataGridViewTextBoxColumn
     Friend WithEvents ReleasedBy As DataGridViewTextBoxColumn
+    Friend WithEvents Panel1 As Panel
 End Class

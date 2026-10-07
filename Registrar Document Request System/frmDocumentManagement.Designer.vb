@@ -59,10 +59,14 @@ Partial Class frmDocumentManagement
         Me.Label15 = New System.Windows.Forms.Label()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.btnClear = New System.Windows.Forms.Button()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Panel5.SuspendLayout()
         CType(Me.dgvDocument, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel6.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel1.SuspendLayout()
+        Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
         '
         'Label1
@@ -109,8 +113,8 @@ Partial Class frmDocumentManagement
         '
         Me.Panel5.BackColor = System.Drawing.Color.White
         Me.Panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel5.Controls.Add(Me.Panel2)
         Me.Panel5.Controls.Add(Me.cboStatus)
-        Me.Panel5.Controls.Add(Me.Label14)
         Me.Panel5.Controls.Add(Me.Label9)
         Me.Panel5.Controls.Add(Me.Label10)
         Me.Panel5.Controls.Add(Me.txtFee)
@@ -138,8 +142,8 @@ Partial Class frmDocumentManagement
         '
         Me.Label14.AutoSize = True
         Me.Label14.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label14.ForeColor = System.Drawing.Color.Navy
-        Me.Label14.Location = New System.Drawing.Point(24, 17)
+        Me.Label14.ForeColor = System.Drawing.Color.White
+        Me.Label14.Location = New System.Drawing.Point(7, 6)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(218, 25)
         Me.Label14.TabIndex = 51
@@ -346,7 +350,7 @@ Partial Class frmDocumentManagement
         Me.lbldatetime.BackColor = System.Drawing.Color.Transparent
         Me.lbldatetime.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbldatetime.ForeColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
-        Me.lbldatetime.Location = New System.Drawing.Point(596, 805)
+        Me.lbldatetime.Location = New System.Drawing.Point(577, 4)
         Me.lbldatetime.Name = "lbldatetime"
         Me.lbldatetime.Size = New System.Drawing.Size(16, 21)
         Me.lbldatetime.TabIndex = 69
@@ -358,7 +362,7 @@ Partial Class frmDocumentManagement
         Me.Label19.BackColor = System.Drawing.Color.Transparent
         Me.Label19.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label19.ForeColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
-        Me.Label19.Location = New System.Drawing.Point(524, 805)
+        Me.Label19.Location = New System.Drawing.Point(505, 4)
         Me.Label19.Name = "Label19"
         Me.Label19.Size = New System.Drawing.Size(65, 21)
         Me.Label19.TabIndex = 68
@@ -370,7 +374,7 @@ Partial Class frmDocumentManagement
         Me.lblposition.BackColor = System.Drawing.Color.Transparent
         Me.lblposition.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblposition.ForeColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
-        Me.lblposition.Location = New System.Drawing.Point(335, 805)
+        Me.lblposition.Location = New System.Drawing.Point(316, 4)
         Me.lblposition.Name = "lblposition"
         Me.lblposition.Size = New System.Drawing.Size(82, 21)
         Me.lblposition.TabIndex = 67
@@ -382,7 +386,7 @@ Partial Class frmDocumentManagement
         Me.Label17.BackColor = System.Drawing.Color.Transparent
         Me.Label17.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label17.ForeColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
-        Me.Label17.Location = New System.Drawing.Point(269, 805)
+        Me.Label17.Location = New System.Drawing.Point(250, 4)
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(68, 21)
         Me.Label17.TabIndex = 66
@@ -394,7 +398,7 @@ Partial Class frmDocumentManagement
         Me.lblname.BackColor = System.Drawing.Color.Transparent
         Me.lblname.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblname.ForeColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
-        Me.lblname.Location = New System.Drawing.Point(74, 805)
+        Me.lblname.Location = New System.Drawing.Point(55, 4)
         Me.lblname.Name = "lblname"
         Me.lblname.Size = New System.Drawing.Size(53, 21)
         Me.lblname.TabIndex = 65
@@ -406,7 +410,7 @@ Partial Class frmDocumentManagement
         Me.Label15.BackColor = System.Drawing.Color.Transparent
         Me.Label15.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label15.ForeColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
-        Me.Label15.Location = New System.Drawing.Point(24, 805)
+        Me.Label15.Location = New System.Drawing.Point(5, 4)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(55, 21)
         Me.Label15.TabIndex = 64
@@ -428,18 +432,37 @@ Partial Class frmDocumentManagement
         Me.btnClear.Text = "Clear"
         Me.btnClear.UseVisualStyleBackColor = False
         '
+        'Panel1
+        '
+        Me.Panel1.Controls.Add(Me.lbldatetime)
+        Me.Panel1.Controls.Add(Me.Label19)
+        Me.Panel1.Controls.Add(Me.lblposition)
+        Me.Panel1.Controls.Add(Me.Label17)
+        Me.Panel1.Controls.Add(Me.lblname)
+        Me.Panel1.Controls.Add(Me.Label15)
+        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Panel1.Location = New System.Drawing.Point(0, 808)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(1174, 28)
+        Me.Panel1.TabIndex = 71
+        '
+        'Panel2
+        '
+        Me.Panel2.BackColor = System.Drawing.Color.Navy
+        Me.Panel2.Controls.Add(Me.Label14)
+        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Panel2.Location = New System.Drawing.Point(0, 0)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(800, 36)
+        Me.Panel2.TabIndex = 53
+        '
         'frmDocumentManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1174, 836)
+        Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.btnClear)
-        Me.Controls.Add(Me.lbldatetime)
-        Me.Controls.Add(Me.Label19)
-        Me.Controls.Add(Me.lblposition)
-        Me.Controls.Add(Me.Label17)
-        Me.Controls.Add(Me.lblname)
-        Me.Controls.Add(Me.Label15)
         Me.Controls.Add(Me.Label8)
         Me.Controls.Add(Me.Panel6)
         Me.Controls.Add(Me.Label2)
@@ -459,6 +482,10 @@ Partial Class frmDocumentManagement
         Me.Panel6.ResumeLayout(False)
         Me.Panel6.PerformLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel1.ResumeLayout(False)
+        Me.Panel1.PerformLayout()
+        Me.Panel2.ResumeLayout(False)
+        Me.Panel2.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -499,4 +526,6 @@ Partial Class frmDocumentManagement
     Friend WithEvents Timer1 As Timer
     Friend WithEvents btnClear As Button
     Friend WithEvents cboStatus As ComboBox
+    Friend WithEvents Panel1 As Panel
+    Friend WithEvents Panel2 As Panel
 End Class

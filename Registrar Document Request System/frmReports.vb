@@ -133,7 +133,7 @@ Public Class frmReports
         LoadReports()
     End Sub
 
-    Private Sub btnPendingRequests_Click(sender As Object, e As EventArgs) Handles btnPendingRequests.Click
+    Private Sub btnPendingRequests_Click(sender As Object, e As EventArgs) 
         If DateTimePicker1.Value.Date > DateTimePicker2.Value.Date Then
             MsgBox("'Date From' cannot be later than 'Date To'.", vbExclamation, "Reports")
             Exit Sub
@@ -142,7 +142,7 @@ Public Class frmReports
         LoadReports("Pending")
     End Sub
 
-    Private Sub btnReleasedRequests_Click(sender As Object, e As EventArgs) Handles btnReleasedRequest.Click
+    Private Sub btnReleasedRequests_Click(sender As Object, e As EventArgs) 
         If DateTimePicker1.Value.Date > DateTimePicker2.Value.Date Then
             MsgBox("'Date From' cannot be later than 'Date To'.", vbExclamation, "Reports")
             Exit Sub
@@ -151,7 +151,7 @@ Public Class frmReports
         LoadReports("Released")
     End Sub
 
-    Private Sub btnReqByDocType_Click(sender As Object, e As EventArgs) Handles btnReqByDocType.Click
+    Private Sub btnReqByDocType_Click(sender As Object, e As EventArgs) 
         If DateTimePicker1.Value.Date > DateTimePicker2.Value.Date Then
             MsgBox("'Date From' cannot be later than 'Date To'.", vbExclamation, "Reports")
             Exit Sub
