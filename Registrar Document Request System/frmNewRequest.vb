@@ -399,6 +399,4 @@ Public Class frmNewRequest
             frmMainMenu.OpenDashboard()
         End If
     End Sub
-
-
 End Class

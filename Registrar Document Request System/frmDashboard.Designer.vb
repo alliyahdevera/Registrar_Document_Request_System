@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmDashboard
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,15 +20,18 @@ Partial Class frmDashboard
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim ChartArea3 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
         Dim Legend3 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
         Dim Series3 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim ChartArea4 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
         Dim Legend4 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
         Dim Series4 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmDashboard))
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.lbldatetime = New System.Windows.Forms.Label()
         Me.Label19 = New System.Windows.Forms.Label()
         Me.lblposition = New System.Windows.Forms.Label()
@@ -56,6 +59,7 @@ Partial Class frmDashboard
         Me.DataGridViewTextBoxColumn5 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.pnlDocreqpermonth = New System.Windows.Forms.Panel()
+        Me.cbomonth = New System.Windows.Forms.ComboBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.chtdocreqpermonth = New System.Windows.Forms.DataVisualization.Charting.Chart()
         Me.Panel8 = New System.Windows.Forms.Panel()
@@ -75,8 +79,20 @@ Partial Class frmDashboard
         Me.lbltotalstudents = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.cbomonth = New System.Windows.Forms.ComboBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.DataGridView2 = New System.Windows.Forms.DataGridView()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.Staffname = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Pending = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Created = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Processed = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Released = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Totdocreq = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.pnlrecentreqdoc.SuspendLayout()
         CType(Me.dgvrecentreqdoc, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlmostreqdoc.SuspendLayout()
@@ -94,6 +110,10 @@ Partial Class frmDashboard
         Me.Panel5.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
+        Me.Panel2.SuspendLayout()
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel3.SuspendLayout()
+        CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'lbldatetime
@@ -102,7 +122,7 @@ Partial Class frmDashboard
         Me.lbldatetime.BackColor = System.Drawing.Color.Transparent
         Me.lbldatetime.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbldatetime.ForeColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
-        Me.lbldatetime.Location = New System.Drawing.Point(579, 6)
+        Me.lbldatetime.Location = New System.Drawing.Point(576, 3)
         Me.lbldatetime.Name = "lbldatetime"
         Me.lbldatetime.Size = New System.Drawing.Size(16, 21)
         Me.lbldatetime.TabIndex = 77
@@ -114,7 +134,7 @@ Partial Class frmDashboard
         Me.Label19.BackColor = System.Drawing.Color.Transparent
         Me.Label19.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label19.ForeColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
-        Me.Label19.Location = New System.Drawing.Point(507, 6)
+        Me.Label19.Location = New System.Drawing.Point(504, 3)
         Me.Label19.Name = "Label19"
         Me.Label19.Size = New System.Drawing.Size(65, 21)
         Me.Label19.TabIndex = 76
@@ -126,7 +146,7 @@ Partial Class frmDashboard
         Me.lblposition.BackColor = System.Drawing.Color.Transparent
         Me.lblposition.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblposition.ForeColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
-        Me.lblposition.Location = New System.Drawing.Point(318, 6)
+        Me.lblposition.Location = New System.Drawing.Point(315, 3)
         Me.lblposition.Name = "lblposition"
         Me.lblposition.Size = New System.Drawing.Size(82, 21)
         Me.lblposition.TabIndex = 75
@@ -138,7 +158,7 @@ Partial Class frmDashboard
         Me.Label17.BackColor = System.Drawing.Color.Transparent
         Me.Label17.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label17.ForeColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
-        Me.Label17.Location = New System.Drawing.Point(252, 6)
+        Me.Label17.Location = New System.Drawing.Point(249, 3)
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(68, 21)
         Me.Label17.TabIndex = 74
@@ -150,7 +170,7 @@ Partial Class frmDashboard
         Me.lblname.BackColor = System.Drawing.Color.Transparent
         Me.lblname.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Italic), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblname.ForeColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
-        Me.lblname.Location = New System.Drawing.Point(57, 6)
+        Me.lblname.Location = New System.Drawing.Point(54, 3)
         Me.lblname.Name = "lblname"
         Me.lblname.Size = New System.Drawing.Size(53, 21)
         Me.lblname.TabIndex = 73
@@ -162,7 +182,7 @@ Partial Class frmDashboard
         Me.Label15.BackColor = System.Drawing.Color.Transparent
         Me.Label15.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label15.ForeColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
-        Me.Label15.Location = New System.Drawing.Point(7, 6)
+        Me.Label15.Location = New System.Drawing.Point(4, 3)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(55, 21)
         Me.Label15.TabIndex = 72
@@ -175,7 +195,7 @@ Partial Class frmDashboard
         Me.pnlrecentreqdoc.Controls.Add(Me.btnViewReq)
         Me.pnlrecentreqdoc.Controls.Add(Me.dgvrecentreqdoc)
         Me.pnlrecentreqdoc.Controls.Add(Me.Label11)
-        Me.pnlrecentreqdoc.Location = New System.Drawing.Point(40, 197)
+        Me.pnlrecentreqdoc.Location = New System.Drawing.Point(40, 498)
         Me.pnlrecentreqdoc.Name = "pnlrecentreqdoc"
         Me.pnlrecentreqdoc.Size = New System.Drawing.Size(536, 282)
         Me.pnlrecentreqdoc.TabIndex = 71
@@ -194,8 +214,18 @@ Partial Class frmDashboard
         '
         'dgvrecentreqdoc
         '
+        Me.dgvrecentreqdoc.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.dgvrecentreqdoc.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.dgvrecentreqdoc.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvrecentreqdoc.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.RequestNo, Me.StudentName, Me.Document, Me.Status, Me.DateRequested})
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvrecentreqdoc.DefaultCellStyle = DataGridViewCellStyle4
         Me.dgvrecentreqdoc.Location = New System.Drawing.Point(0, 52)
         Me.dgvrecentreqdoc.Name = "dgvrecentreqdoc"
         Me.dgvrecentreqdoc.ReadOnly = True
@@ -213,14 +243,12 @@ Partial Class frmDashboard
         Me.StudentName.HeaderText = "Student Name"
         Me.StudentName.Name = "StudentName"
         Me.StudentName.ReadOnly = True
-        Me.StudentName.Width = 150
         '
         'Document
         '
         Me.Document.HeaderText = "Document"
         Me.Document.Name = "Document"
         Me.Document.ReadOnly = True
-        Me.Document.Width = 150
         '
         'Status
         '
@@ -233,7 +261,6 @@ Partial Class frmDashboard
         Me.DateRequested.HeaderText = "Date Requested"
         Me.DateRequested.Name = "DateRequested"
         Me.DateRequested.ReadOnly = True
-        Me.DateRequested.Width = 105
         '
         'Label11
         '
@@ -251,7 +278,7 @@ Partial Class frmDashboard
         Me.pnlmostreqdoc.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.pnlmostreqdoc.Controls.Add(Me.Label10)
         Me.pnlmostreqdoc.Controls.Add(Me.chtMostreqdoc)
-        Me.pnlmostreqdoc.Location = New System.Drawing.Point(40, 500)
+        Me.pnlmostreqdoc.Location = New System.Drawing.Point(40, 195)
         Me.pnlmostreqdoc.Name = "pnlmostreqdoc"
         Me.pnlmostreqdoc.Size = New System.Drawing.Size(536, 282)
         Me.pnlmostreqdoc.TabIndex = 69
@@ -262,9 +289,9 @@ Partial Class frmDashboard
         Me.Label10.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label10.Location = New System.Drawing.Point(23, 17)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(246, 21)
+        Me.Label10.Size = New System.Drawing.Size(243, 21)
         Me.Label10.TabIndex = 36
-        Me.Label10.Text = "MOST REQUESTED DOCUMENTS"
+        Me.Label10.Text = "TOP 5 REQUESTED DOCUMENTS"
         '
         'chtMostreqdoc
         '
@@ -289,15 +316,25 @@ Partial Class frmDashboard
         Me.pnlreqstatus.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.pnlreqstatus.Controls.Add(Me.dgvOverdueReq)
         Me.pnlreqstatus.Controls.Add(Me.Label8)
-        Me.pnlreqstatus.Location = New System.Drawing.Point(606, 196)
+        Me.pnlreqstatus.Location = New System.Drawing.Point(600, 497)
         Me.pnlreqstatus.Name = "pnlreqstatus"
         Me.pnlreqstatus.Size = New System.Drawing.Size(533, 282)
         Me.pnlreqstatus.TabIndex = 70
         '
         'dgvOverdueReq
         '
+        Me.dgvOverdueReq.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.dgvOverdueReq.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.dgvOverdueReq.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvOverdueReq.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn5})
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvOverdueReq.DefaultCellStyle = DataGridViewCellStyle5
         Me.dgvOverdueReq.Location = New System.Drawing.Point(0, 52)
         Me.dgvOverdueReq.Name = "dgvOverdueReq"
         Me.dgvOverdueReq.ReadOnly = True
@@ -315,14 +352,12 @@ Partial Class frmDashboard
         Me.DataGridViewTextBoxColumn2.HeaderText = "Student Name"
         Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
         Me.DataGridViewTextBoxColumn2.ReadOnly = True
-        Me.DataGridViewTextBoxColumn2.Width = 150
         '
         'DataGridViewTextBoxColumn3
         '
         Me.DataGridViewTextBoxColumn3.HeaderText = "Document"
         Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
         Me.DataGridViewTextBoxColumn3.ReadOnly = True
-        Me.DataGridViewTextBoxColumn3.Width = 150
         '
         'DataGridViewTextBoxColumn4
         '
@@ -335,7 +370,6 @@ Partial Class frmDashboard
         Me.DataGridViewTextBoxColumn5.HeaderText = "Date Requested"
         Me.DataGridViewTextBoxColumn5.Name = "DataGridViewTextBoxColumn5"
         Me.DataGridViewTextBoxColumn5.ReadOnly = True
-        Me.DataGridViewTextBoxColumn5.Width = 105
         '
         'Label8
         '
@@ -354,10 +388,20 @@ Partial Class frmDashboard
         Me.pnlDocreqpermonth.Controls.Add(Me.cbomonth)
         Me.pnlDocreqpermonth.Controls.Add(Me.Label3)
         Me.pnlDocreqpermonth.Controls.Add(Me.chtdocreqpermonth)
-        Me.pnlDocreqpermonth.Location = New System.Drawing.Point(606, 500)
+        Me.pnlDocreqpermonth.Location = New System.Drawing.Point(600, 195)
         Me.pnlDocreqpermonth.Name = "pnlDocreqpermonth"
         Me.pnlDocreqpermonth.Size = New System.Drawing.Size(534, 282)
         Me.pnlDocreqpermonth.TabIndex = 68
+        '
+        'cbomonth
+        '
+        Me.cbomonth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbomonth.DropDownWidth = 300
+        Me.cbomonth.FormattingEnabled = True
+        Me.cbomonth.Location = New System.Drawing.Point(408, 17)
+        Me.cbomonth.Name = "cbomonth"
+        Me.cbomonth.Size = New System.Drawing.Size(109, 21)
+        Me.cbomonth.TabIndex = 37
         '
         'Label3
         '
@@ -393,7 +437,7 @@ Partial Class frmDashboard
         Me.Panel8.Controls.Add(Me.PictureBox4)
         Me.Panel8.Controls.Add(Me.lblcompleted)
         Me.Panel8.Controls.Add(Me.Label9)
-        Me.Panel8.Location = New System.Drawing.Point(887, 65)
+        Me.Panel8.Location = New System.Drawing.Point(601, 64)
         Me.Panel8.Name = "Panel8"
         Me.Panel8.Size = New System.Drawing.Size(250, 111)
         Me.Panel8.TabIndex = 67
@@ -439,7 +483,7 @@ Partial Class frmDashboard
         Me.Panel7.Controls.Add(Me.PictureBox3)
         Me.Panel7.Controls.Add(Me.lblpendingrequests)
         Me.Panel7.Controls.Add(Me.Label7)
-        Me.Panel7.Location = New System.Drawing.Point(606, 65)
+        Me.Panel7.Location = New System.Drawing.Point(331, 64)
         Me.Panel7.Name = "Panel7"
         Me.Panel7.Size = New System.Drawing.Size(246, 111)
         Me.Panel7.TabIndex = 66
@@ -485,7 +529,7 @@ Partial Class frmDashboard
         Me.Panel6.Controls.Add(Me.PictureBox2)
         Me.Panel6.Controls.Add(Me.lbltotrequests)
         Me.Panel6.Controls.Add(Me.Label6)
-        Me.Panel6.Location = New System.Drawing.Point(327, 65)
+        Me.Panel6.Location = New System.Drawing.Point(41, 64)
         Me.Panel6.Name = "Panel6"
         Me.Panel6.Size = New System.Drawing.Size(249, 111)
         Me.Panel6.TabIndex = 65
@@ -531,7 +575,7 @@ Partial Class frmDashboard
         Me.Panel5.Controls.Add(Me.PictureBox1)
         Me.Panel5.Controls.Add(Me.lbltotalstudents)
         Me.Panel5.Controls.Add(Me.Label2)
-        Me.Panel5.Location = New System.Drawing.Point(40, 65)
+        Me.Panel5.Location = New System.Drawing.Point(887, 64)
         Me.Panel5.Name = "Panel5"
         Me.Panel5.Size = New System.Drawing.Size(246, 111)
         Me.Panel5.TabIndex = 64
@@ -566,9 +610,9 @@ Partial Class frmDashboard
         Me.Label2.ForeColor = System.Drawing.Color.Navy
         Me.Label2.Location = New System.Drawing.Point(94, 27)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(114, 21)
+        Me.Label2.Size = New System.Drawing.Size(137, 21)
         Me.Label2.TabIndex = 29
-        Me.Label2.Text = "Total Students"
+        Me.Label2.Text = "Overdue Request"
         '
         'Label1
         '
@@ -582,16 +626,6 @@ Partial Class frmDashboard
         Me.Label1.TabIndex = 63
         Me.Label1.Text = "Dashboard"
         '
-        'cbomonth
-        '
-        Me.cbomonth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbomonth.DropDownWidth = 300
-        Me.cbomonth.FormattingEnabled = True
-        Me.cbomonth.Location = New System.Drawing.Point(408, 17)
-        Me.cbomonth.Name = "cbomonth"
-        Me.cbomonth.Size = New System.Drawing.Size(109, 21)
-        Me.cbomonth.TabIndex = 37
-        '
         'Panel1
         '
         Me.Panel1.Controls.Add(Me.Label19)
@@ -601,17 +635,136 @@ Partial Class frmDashboard
         Me.Panel1.Controls.Add(Me.lblposition)
         Me.Panel1.Controls.Add(Me.Label17)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel1.Location = New System.Drawing.Point(0, 805)
+        Me.Panel1.Location = New System.Drawing.Point(0, 1109)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(1174, 31)
+        Me.Panel1.Size = New System.Drawing.Size(1157, 25)
         Me.Panel1.TabIndex = 78
+        '
+        'Panel2
+        '
+        Me.Panel2.BackColor = System.Drawing.Color.White
+        Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel2.Controls.Add(Me.DataGridView1)
+        Me.Panel2.Controls.Add(Me.Label4)
+        Me.Panel2.Location = New System.Drawing.Point(40, 801)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(536, 282)
+        Me.Panel2.TabIndex = 73
+        '
+        'DataGridView1
+        '
+        Me.DataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.DataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
+        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Staffname, Me.Pending, Me.Created, Me.Processed, Me.Released, Me.Totdocreq})
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.DataGridView1.DefaultCellStyle = DataGridViewCellStyle6
+        Me.DataGridView1.Location = New System.Drawing.Point(0, 52)
+        Me.DataGridView1.Name = "DataGridView1"
+        Me.DataGridView1.ReadOnly = True
+        Me.DataGridView1.Size = New System.Drawing.Size(536, 229)
+        Me.DataGridView1.TabIndex = 37
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.Location = New System.Drawing.Point(16, 15)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(171, 21)
+        Me.Label4.TabIndex = 36
+        Me.Label4.Text = "STAFF PERFORMANCE"
+        '
+        'Panel3
+        '
+        Me.Panel3.BackColor = System.Drawing.Color.White
+        Me.Panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel3.Controls.Add(Me.DataGridView2)
+        Me.Panel3.Controls.Add(Me.Label5)
+        Me.Panel3.Location = New System.Drawing.Point(600, 800)
+        Me.Panel3.Name = "Panel3"
+        Me.Panel3.Size = New System.Drawing.Size(533, 282)
+        Me.Panel3.TabIndex = 72
+        '
+        'DataGridView2
+        '
+        Me.DataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView2.Location = New System.Drawing.Point(0, 52)
+        Me.DataGridView2.Name = "DataGridView2"
+        Me.DataGridView2.ReadOnly = True
+        Me.DataGridView2.Size = New System.Drawing.Size(536, 229)
+        Me.DataGridView2.TabIndex = 38
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.Location = New System.Drawing.Point(12, 15)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(24, 21)
+        Me.Label5.TabIndex = 36
+        Me.Label5.Text = "??"
+        '
+        'Panel4
+        '
+        Me.Panel4.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Panel4.Location = New System.Drawing.Point(0, 1083)
+        Me.Panel4.Name = "Panel4"
+        Me.Panel4.Size = New System.Drawing.Size(1157, 26)
+        Me.Panel4.TabIndex = 79
+        '
+        'Staffname
+        '
+        Me.Staffname.HeaderText = "Staffname"
+        Me.Staffname.Name = "Staffname"
+        Me.Staffname.ReadOnly = True
+        '
+        'Pending
+        '
+        Me.Pending.HeaderText = "Pending"
+        Me.Pending.Name = "Pending"
+        Me.Pending.ReadOnly = True
+        '
+        'Created
+        '
+        Me.Created.HeaderText = "Created"
+        Me.Created.Name = "Created"
+        Me.Created.ReadOnly = True
+        '
+        'Processed
+        '
+        Me.Processed.HeaderText = "Processed"
+        Me.Processed.Name = "Processed"
+        Me.Processed.ReadOnly = True
+        '
+        'Released
+        '
+        Me.Released.HeaderText = "Released"
+        Me.Released.Name = "Released"
+        Me.Released.ReadOnly = True
+        '
+        'Totdocreq
+        '
+        Me.Totdocreq.HeaderText = "Total Request"
+        Me.Totdocreq.Name = "Totdocreq"
+        Me.Totdocreq.ReadOnly = True
         '
         'frmDashboard
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1174, 836)
+        Me.AutoScroll = True
+        Me.ClientSize = New System.Drawing.Size(1174, 654)
+        Me.Controls.Add(Me.Panel4)
+        Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel1)
+        Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.pnlrecentreqdoc)
         Me.Controls.Add(Me.pnlmostreqdoc)
         Me.Controls.Add(Me.pnlreqstatus)
@@ -650,6 +803,12 @@ Partial Class frmDashboard
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
+        Me.Panel2.ResumeLayout(False)
+        Me.Panel2.PerformLayout()
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel3.ResumeLayout(False)
+        Me.Panel3.PerformLayout()
+        CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -703,4 +862,17 @@ Partial Class frmDashboard
     Friend WithEvents Label1 As Label
     Friend WithEvents cbomonth As ComboBox
     Friend WithEvents Panel1 As Panel
+    Friend WithEvents Panel2 As Panel
+    Friend WithEvents DataGridView1 As DataGridView
+    Friend WithEvents Staffname As DataGridViewTextBoxColumn
+    Friend WithEvents Pending As DataGridViewTextBoxColumn
+    Friend WithEvents Created As DataGridViewTextBoxColumn
+    Friend WithEvents Processed As DataGridViewTextBoxColumn
+    Friend WithEvents Released As DataGridViewTextBoxColumn
+    Friend WithEvents Totdocreq As DataGridViewTextBoxColumn
+    Friend WithEvents Label4 As Label
+    Friend WithEvents Panel3 As Panel
+    Friend WithEvents DataGridView2 As DataGridView
+    Friend WithEvents Label5 As Label
+    Friend WithEvents Panel4 As Panel
 End Class

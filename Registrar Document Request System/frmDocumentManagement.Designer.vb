@@ -28,8 +28,9 @@ Partial Class frmDocumentManagement
         Me.btnDelete = New System.Windows.Forms.Button()
         Me.btnEdit = New System.Windows.Forms.Button()
         Me.Panel5 = New System.Windows.Forms.Panel()
-        Me.cboStatus = New System.Windows.Forms.ComboBox()
+        Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Label14 = New System.Windows.Forms.Label()
+        Me.cboStatus = New System.Windows.Forms.ComboBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.txtFee = New System.Windows.Forms.TextBox()
@@ -60,13 +61,12 @@ Partial Class frmDocumentManagement
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.btnClear = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Panel5.SuspendLayout()
+        Me.Panel2.SuspendLayout()
         CType(Me.dgvDocument, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel6.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
-        Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
         '
         'Label1
@@ -88,11 +88,14 @@ Partial Class frmDocumentManagement
         Me.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnDelete.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDelete.ForeColor = System.Drawing.Color.White
+        Me.btnDelete.Image = CType(resources.GetObject("btnDelete.Image"), System.Drawing.Image)
+        Me.btnDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnDelete.Location = New System.Drawing.Point(913, 241)
         Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(167, 31)
+        Me.btnDelete.Size = New System.Drawing.Size(176, 33)
         Me.btnDelete.TabIndex = 59
-        Me.btnDelete.Text = "Delete"
+        Me.btnDelete.Text = "     Delete"
+        Me.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnDelete.UseVisualStyleBackColor = False
         '
         'btnEdit
@@ -102,11 +105,14 @@ Partial Class frmDocumentManagement
         Me.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnEdit.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnEdit.ForeColor = System.Drawing.Color.White
-        Me.btnEdit.Location = New System.Drawing.Point(913, 190)
+        Me.btnEdit.Image = CType(resources.GetObject("btnEdit.Image"), System.Drawing.Image)
+        Me.btnEdit.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnEdit.Location = New System.Drawing.Point(913, 187)
         Me.btnEdit.Name = "btnEdit"
-        Me.btnEdit.Size = New System.Drawing.Size(167, 31)
+        Me.btnEdit.Size = New System.Drawing.Size(176, 33)
         Me.btnEdit.TabIndex = 58
-        Me.btnEdit.Text = "Edit"
+        Me.btnEdit.Text = "     Edit"
+        Me.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnEdit.UseVisualStyleBackColor = False
         '
         'Panel5
@@ -126,17 +132,18 @@ Partial Class frmDocumentManagement
         Me.Panel5.Controls.Add(Me.txtDocumentID)
         Me.Panel5.Location = New System.Drawing.Point(27, 86)
         Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(802, 188)
+        Me.Panel5.Size = New System.Drawing.Size(838, 188)
         Me.Panel5.TabIndex = 57
         '
-        'cboStatus
+        'Panel2
         '
-        Me.cboStatus.FormattingEnabled = True
-        Me.cboStatus.Items.AddRange(New Object() {"Active", "Inactive"})
-        Me.cboStatus.Location = New System.Drawing.Point(541, 102)
-        Me.cboStatus.Name = "cboStatus"
-        Me.cboStatus.Size = New System.Drawing.Size(229, 21)
-        Me.cboStatus.TabIndex = 52
+        Me.Panel2.BackColor = System.Drawing.Color.Navy
+        Me.Panel2.Controls.Add(Me.Label14)
+        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Panel2.Location = New System.Drawing.Point(0, 0)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(836, 36)
+        Me.Panel2.TabIndex = 53
         '
         'Label14
         '
@@ -148,6 +155,15 @@ Partial Class frmDocumentManagement
         Me.Label14.Size = New System.Drawing.Size(218, 25)
         Me.Label14.TabIndex = 51
         Me.Label14.Text = "Document Information"
+        '
+        'cboStatus
+        '
+        Me.cboStatus.FormattingEnabled = True
+        Me.cboStatus.Items.AddRange(New Object() {"Active", "Inactive"})
+        Me.cboStatus.Location = New System.Drawing.Point(541, 102)
+        Me.cboStatus.Name = "cboStatus"
+        Me.cboStatus.Size = New System.Drawing.Size(229, 21)
+        Me.cboStatus.TabIndex = 52
         '
         'Label9
         '
@@ -241,11 +257,14 @@ Partial Class frmDocumentManagement
         Me.btnAddDocument.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAddDocument.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnAddDocument.ForeColor = System.Drawing.Color.White
-        Me.btnAddDocument.Location = New System.Drawing.Point(913, 138)
+        Me.btnAddDocument.Image = CType(resources.GetObject("btnAddDocument.Image"), System.Drawing.Image)
+        Me.btnAddDocument.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnAddDocument.Location = New System.Drawing.Point(913, 135)
         Me.btnAddDocument.Name = "btnAddDocument"
-        Me.btnAddDocument.Size = New System.Drawing.Size(167, 31)
+        Me.btnAddDocument.Size = New System.Drawing.Size(176, 33)
         Me.btnAddDocument.TabIndex = 55
-        Me.btnAddDocument.Text = "Add"
+        Me.btnAddDocument.Text = "     Add"
+        Me.btnAddDocument.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnAddDocument.UseVisualStyleBackColor = False
         '
         'dgvDocument
@@ -425,11 +444,14 @@ Partial Class frmDocumentManagement
         Me.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnClear.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnClear.ForeColor = System.Drawing.Color.White
-        Me.btnClear.Location = New System.Drawing.Point(913, 90)
+        Me.btnClear.Image = CType(resources.GetObject("btnClear.Image"), System.Drawing.Image)
+        Me.btnClear.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnClear.Location = New System.Drawing.Point(913, 85)
         Me.btnClear.Name = "btnClear"
-        Me.btnClear.Size = New System.Drawing.Size(167, 31)
+        Me.btnClear.Size = New System.Drawing.Size(176, 33)
         Me.btnClear.TabIndex = 70
-        Me.btnClear.Text = "Clear"
+        Me.btnClear.Text = "     Clear"
+        Me.btnClear.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnClear.UseVisualStyleBackColor = False
         '
         'Panel1
@@ -445,16 +467,6 @@ Partial Class frmDocumentManagement
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(1174, 28)
         Me.Panel1.TabIndex = 71
-        '
-        'Panel2
-        '
-        Me.Panel2.BackColor = System.Drawing.Color.Navy
-        Me.Panel2.Controls.Add(Me.Label14)
-        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Panel2.Location = New System.Drawing.Point(0, 0)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(800, 36)
-        Me.Panel2.TabIndex = 53
         '
         'frmDocumentManagement
         '
@@ -478,14 +490,14 @@ Partial Class frmDocumentManagement
         Me.Text = "frmDocumentManagement"
         Me.Panel5.ResumeLayout(False)
         Me.Panel5.PerformLayout()
+        Me.Panel2.ResumeLayout(False)
+        Me.Panel2.PerformLayout()
         CType(Me.dgvDocument, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel6.ResumeLayout(False)
         Me.Panel6.PerformLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
-        Me.Panel2.ResumeLayout(False)
-        Me.Panel2.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
