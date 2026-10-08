@@ -60,3 +60,40 @@ Module RequestRules
         End Try
     End Sub
 End Module
+Module SchoolYear
+    ' The school year currently chosen in Settings (shared by Dashboard, Request List, Reports)
+    Public IsAllTime As Boolean = True
+    Public SchoolYearID As Integer = 0
+    Public SchoolYearName As String = "All Time"
+    Public StartDate As Date
+    Public EndDate As Date
+
+    Public ReadOnly Property DisplayName As String
+        Get
+            Return If(IsAllTime, "All Time", SchoolYearName)
+        End Get
+    End Property
+
+    Public Sub SelectAllTime()
+        IsAllTime = True
+        SchoolYearID = 0
+        SchoolYearName = "All Time"
+    End Sub
+
+    Public Sub SelectYear(id As Integer, name As String, startD As Date, endD As Date)
+        IsAllTime = False
+        SchoolYearID = id
+        SchoolYearName = name
+        StartDate = startD.Date
+        EndDate = endD.Date
+    End Sub
+
+    ' Returns " AND r.RequestDate >= '...' AND r.RequestDate < '...' " or "" for All Time.
+    ' Append it to any WHERE clause. The dates come from the database, not from typed text.
+    Public Function AndRequestDate(Optional col As String = "r.RequestDate") As String
+        If IsAllTime Then Return ""
+        Dim ci As System.Globalization.CultureInfo = System.Globalization.CultureInfo.InvariantCulture
+        Return " AND " & col & " >= '" & StartDate.ToString("yyyy-MM-dd", ci) & "'" &
+               " AND " & col & " < '" & EndDate.AddDays(1).ToString("yyyy-MM-dd", ci) & "' "
+    End Function
+End Module

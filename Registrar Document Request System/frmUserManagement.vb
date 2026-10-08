@@ -1,13 +1,24 @@
 ﻿Imports MySql.Data.MySqlClient
 
 Public Class frmUserManagement
+
+    ' --- TASK 17: GRID PAGER INITIALIZATION ---
+    Private pager As GridPager
     Private _originalPassword As String = ""
 
     Private Function EnsureAdminAccess() As Boolean
-        Return True   ' Registrar Staff may open this form (self-service mode)
+        If Not CurrentUser.IsAdmin Then
+            MsgBox("You don't have permission to access User Management.", vbExclamation, "Access Denied")
+            Me.BeginInvoke(New MethodInvoker(Sub() frmMainMenu.OpenDashboard()))
+            Return False
+        End If
+        Return True
     End Function
 
     Private Sub frmUserManagement_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ' --- TASK 17: Hook pager to dgvUsers ---
+        pager = New GridPager(dgvUsers)
+
         If Not EnsureAdminAccess() Then Exit Sub
 
         RefreshUserSession()
@@ -30,7 +41,6 @@ Public Class frmUserManagement
         LoadUsers()
 
         SetAddMode()
-        If Not CurrentUser.IsAdmin Then ApplyStaffMode()
     End Sub
 
     Private Sub frmUserManagement_Activated(sender As Object, e As EventArgs) Handles MyBase.Activated
@@ -80,9 +90,7 @@ Public Class frmUserManagement
     Private Sub LoadUsers()
         Call connection()
         sql = "SELECT * FROM tblusers"
-        If Not CurrentUser.IsAdmin Then sql &= " WHERE UserID = @me"
         cmd = New MySqlCommand(sql, cn)
-        If Not CurrentUser.IsAdmin Then cmd.Parameters.AddWithValue("@me", CurrentUser.UserID)
         dr = cmd.ExecuteReader()
 
         dgvUsers.Rows.Clear()
@@ -190,7 +198,6 @@ Public Class frmUserManagement
             _originalPassword = dgvUsers.Rows(e.RowIndex).Cells("colRealPassword").Value.ToString()
 
             SetEditMode()
-            If Not CurrentUser.IsAdmin Then LockForStaff()
         End If
     End Sub
 
@@ -233,11 +240,6 @@ Public Class frmUserManagement
     End Sub
 
     Private Sub btnEdit_Click(sender As Object, e As EventArgs) Handles btnEdit.Click
-        If Not CurrentUser.IsAdmin Then
-            ChangeOwnPassword()
-            Exit Sub
-        End If
-
         If Not txtUserID.ReadOnly Then
             MsgBox("Please select a user from the list to edit.", vbExclamation, "User Management")
             Exit Sub
@@ -312,7 +314,8 @@ Public Class frmUserManagement
     End Sub
 
     Private Sub txtSearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearch.TextChanged
-        If Not CurrentUser.IsAdmin Then Exit Sub
+        ' --- TASK 17: Reset pager to Page 1 on search ---
+        pager.FirstPage()
 
         Call connection()
         sql = "SELECT * FROM tblusers WHERE UserID LIKE @search OR Username LIKE @search"
@@ -351,85 +354,6 @@ Public Class frmUserManagement
 
         ClearFields()
         SetAddMode()
-    End Sub
-
-    Private Sub ApplyStaffMode()
-        ' Select the staff member's own row (it is the only one loaded)
-        If dgvUsers.Rows.Count > 0 Then
-            dgvUsers_CellClick(dgvUsers, New DataGridViewCellEventArgs(0, 0))
-        End If
-        LockForStaff()
-    End Sub
-
-    Private Sub LockForStaff()
-        txtSearch.Enabled = False
-        btnAdd.Enabled = False
-        btnDelete.Enabled = False
-        btnClear.Enabled = False
-        btnEdit.Text = "Change Password"   ' widen the button in the designer if the text is cut off
-        txtUserID.ReadOnly = True
-        txtUsername.ReadOnly = True
-        txtFirstName.ReadOnly = True
-        txtLastName.ReadOnly = True
-        cboRoles.Enabled = False
-        cboStatus.Enabled = False
-        ' Start empty so the staff member types a NEW password
-        txtPassword.Clear()
-        txtConfirmPassword.Clear()
-    End Sub
-
-    Private Sub ChangeOwnPassword()
-        Dim newPass As String = txtPassword.Text.Trim()
-        If String.IsNullOrWhiteSpace(newPass) Then
-            MsgBox("Enter your new password.", vbExclamation, "Change Password")
-            txtPassword.Focus()
-            Exit Sub
-        End If
-        If newPass.Length < 6 Then
-            MsgBox("Password must be at least 6 characters.", vbExclamation, "Change Password")
-            txtPassword.Focus()
-            Exit Sub
-        End If
-        If newPass <> txtConfirmPassword.Text.Trim() Then
-            MsgBox("New Password and Confirm Password do not match.", vbExclamation, "Change Password")
-            txtConfirmPassword.Focus()
-            Exit Sub
-        End If
-        ' Ask for the current password first
-        Dim currentPass As String = InputBox("Enter your CURRENT password to continue:", "Verify Identity")
-        If String.IsNullOrEmpty(currentPass) Then Exit Sub
-        Try
-            Call connection()
-            sql = "SELECT COUNT(*) FROM tblusers WHERE UserID = @id AND Password = @p"
-            cmd = New MySqlCommand(sql, cn)
-            cmd.Parameters.AddWithValue("@id", CurrentUser.UserID)
-            cmd.Parameters.AddWithValue("@p", currentPass.Trim())
-            Dim ok As Boolean = Convert.ToInt32(cmd.ExecuteScalar()) > 0
-            cn.Close()
-            If Not ok Then
-                MsgBox("Current password is incorrect.", vbExclamation, "Change Password")
-                Exit Sub
-            End If
-            If currentPass.Trim() = newPass Then
-                MsgBox("New password must be different from the current password.", vbExclamation, "Change Password")
-                Exit Sub
-            End If
-            If Not ConfirmAction("Change your password?", "Confirm Password Change") Then Exit Sub
-            Call connection()
-            ' Always uses the LOGGED-IN user's ID, never the textbox, so only their own password can change
-            sql = "UPDATE tblusers SET Password = @p WHERE UserID = @id"
-            cmd = New MySqlCommand(sql, cn)
-            cmd.Parameters.AddWithValue("@p", newPass)
-            cmd.Parameters.AddWithValue("@id", CurrentUser.UserID)
-            cmd.ExecuteNonQuery()
-            cn.Close()
-            MsgBox("Your password was changed successfully!", vbInformation, "Success")
-            LoadUsers()
-            ApplyStaffMode()
-        Catch ex As Exception
-            If cn.State = ConnectionState.Open Then cn.Close()
-            MsgBox("Error changing password: " & ex.Message, vbCritical, "Error")
-        End Try
     End Sub
 
 End Class

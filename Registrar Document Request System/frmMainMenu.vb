@@ -26,10 +26,10 @@ Public Class frmMainMenu
     End Sub
 
     Private Sub RefreshUserSession()
-        ' Everyone can open this page. Staff only get a self-service "My Account" view.
-        btnUserManagement.Visible = True
-        btnUserManagement.Text = If(CurrentUser.IsAdmin, "      User Management", "      My Account")
+        btnUserManagement.Visible = CurrentUser.IsAdmin
         btnDocumentManagement.Visible = CurrentUser.IsAdmin
+        btnStudentManagement.Visible = CurrentUser.IsAdmin        ' Task 14
+        btnchangepassword.Visible = Not CurrentUser.IsAdmin       ' Task 12: staff only
     End Sub
 
     ' Clicking the window "X" = leave the system (frmLogin is only hidden,
@@ -111,6 +111,10 @@ Public Class frmMainMenu
     End Sub
 
     Private Sub btnStudentManagement_Click(sender As Object, e As EventArgs) Handles btnStudentManagement.Click
+        If Not CurrentUser.IsAdmin Then
+            MsgBox("Only the Administrator can access Student Management.", vbExclamation, "Access Denied")
+            Exit Sub
+        End If
         ShowPage(New frmStudentManagement(), btnStudentManagement)
     End Sub
 
@@ -132,6 +136,19 @@ Public Class frmMainMenu
 
     Private Sub btnUserManagement_Click(sender As Object, e As EventArgs) Handles btnUserManagement.Click
         ShowPage(New frmUserManagement(), btnUserManagement)
+    End Sub
+
+    Private Sub btnchangepassword_Click(sender As Object, e As EventArgs) Handles btnchangepassword.Click
+        If CurrentUser.IsAdmin Then
+            MsgBox("Administrators cannot change their password here.", vbExclamation, "Access Denied")
+            Exit Sub
+        End If
+        Using frm As New frmChangePass()
+            frm.ShowDialog(Me)
+        End Using
+    End Sub
+    Private Sub btnsettings_Click(sender As Object, e As EventArgs) Handles btnsettings.Click
+        ShowPage(New frmSettings(), btnsettings)
     End Sub
 
     Private Sub btnLogout_Click(sender As Object, e As EventArgs) Handles btnLogout.Click

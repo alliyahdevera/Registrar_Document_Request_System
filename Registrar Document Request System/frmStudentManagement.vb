@@ -2,7 +2,13 @@
 
 Public Class frmStudentManagement
 
+    ' --- TASK 17: GRID PAGER INITIALIZATION ---
+    Private pager As GridPager
+
     Private Sub frmStudentManagement_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ' --- TASK 17: Hook pager to dgvStudents ---
+        pager = New GridPager(dgvStudents)
+
         RefreshUserSession()
 
         Timer1.Interval = 1000
@@ -250,6 +256,9 @@ Public Class frmStudentManagement
     End Sub
 
     Private Sub txtSearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearch.TextChanged
+        ' --- TASK 17: Reset pager to Page 1 on search ---
+        pager.FirstPage()
+
         Call connection()
         sql = "SELECT * FROM tblstudents WHERE Status = 'Active' AND (StudentID LIKE @search OR LastName LIKE @search)"
         cmd = New MySqlCommand(sql, cn)

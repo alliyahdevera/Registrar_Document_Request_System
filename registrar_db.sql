@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 07, 2026 at 07:54 PM
+-- Generation Time: Oct 08, 2026 at 11:19 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -44,7 +44,11 @@ INSERT INTO `tbldocuments` (`DocumentID`, `DocumentName`, `Description`, `Fee`, 
 (2, 'Certificate of Enrollment', 'Proof of enrollment', 50.00, 'Active'),
 (3, 'Certificate of Good Moral', 'Character certificate', 100.00, 'Active'),
 (4, 'Certification', 'General certification', 50.00, 'Active'),
-(5, 'Honorable Dismissal', 'Transfer clearance', 100.00, 'Active');
+(5, 'Honorable Dismissal', 'Transfer clearance', 100.00, 'Active'),
+(6, 'Certificate of Registration', 'Proof of registration', 50.00, 'Active'),
+(7, 'Certificate of Grades', 'Official grades certificate', 50.00, 'Active'),
+(8, 'Diploma', 'Copy of diploma', 300.00, 'Active'),
+(9, 'Form 137', 'Permanent student record', 100.00, 'Active');
 
 -- --------------------------------------------------------
 
@@ -175,6 +179,29 @@ INSERT INTO `tblrequestdetails` (`RequestDetailID`, `RequestID`, `DocumentID`, `
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tblschoolyear`
+--
+
+CREATE TABLE `tblschoolyear` (
+  `SchoolYearID` int(11) NOT NULL,
+  `SchoolYearName` varchar(30) NOT NULL,
+  `StartDate` date NOT NULL,
+  `EndDate` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tblschoolyear`
+--
+
+INSERT INTO `tblschoolyear` (`SchoolYearID`, `SchoolYearName`, `StartDate`, `EndDate`) VALUES
+(1, 'SY 2023-2024', '2023-06-01', '2024-05-31'),
+(2, 'SY 2024-2025', '2024-06-01', '2025-05-31'),
+(3, 'SY 2025-2026', '2025-06-01', '2026-05-31'),
+(4, 'SY 2026-2027', '2026-06-01', '2027-05-31');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tblstudents`
 --
 
@@ -265,6 +292,13 @@ ALTER TABLE `tblrequestdetails`
   ADD KEY `DocumentID` (`DocumentID`);
 
 --
+-- Indexes for table `tblschoolyear`
+--
+ALTER TABLE `tblschoolyear`
+  ADD PRIMARY KEY (`SchoolYearID`),
+  ADD UNIQUE KEY `SchoolYearName` (`SchoolYearName`);
+
+--
 -- Indexes for table `tblstudents`
 --
 ALTER TABLE `tblstudents`
@@ -285,7 +319,7 @@ ALTER TABLE `tblusers`
 -- AUTO_INCREMENT for table `tbldocuments`
 --
 ALTER TABLE `tbldocuments`
-  MODIFY `DocumentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `DocumentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `tblrequest`
@@ -298,6 +332,12 @@ ALTER TABLE `tblrequest`
 --
 ALTER TABLE `tblrequestdetails`
   MODIFY `RequestDetailID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+
+--
+-- AUTO_INCREMENT for table `tblschoolyear`
+--
+ALTER TABLE `tblschoolyear`
+  MODIFY `SchoolYearID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tblusers`

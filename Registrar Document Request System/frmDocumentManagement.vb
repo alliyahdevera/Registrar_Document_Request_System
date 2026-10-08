@@ -1,6 +1,10 @@
 ﻿Imports MySql.Data.MySqlClient
 
 Public Class frmDocumentManagement
+
+    ' --- TASK 17: GRID PAGER INITIALIZATION ---
+    Private pager As GridPager
+
     Private Function EnsureAdminAccess() As Boolean
         If Not CurrentUser.IsAdmin Then
             MsgBox("You don't have permission to access Document Management.", vbExclamation, "Access Denied")
@@ -11,6 +15,9 @@ Public Class frmDocumentManagement
     End Function
 
     Private Sub frmDocumentManagement_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ' --- TASK 17: Hook pager to dgvDocument ---
+        pager = New GridPager(dgvDocument)
+
         If Not EnsureAdminAccess() Then Exit Sub
 
         RefreshUserSession()
@@ -278,6 +285,9 @@ Public Class frmDocumentManagement
     End Sub
 
     Private Sub txtsearch_TextChanged(sender As Object, e As EventArgs) Handles txtsearch.TextChanged
+        ' --- TASK 17: Reset pager to Page 1 on search ---
+        pager.FirstPage()
+
         Call connection()
         sql = "SELECT * FROM tbldocuments WHERE DocumentID LIKE @search OR DocumentName LIKE @search"
         cmd = New MySqlCommand(sql, cn)

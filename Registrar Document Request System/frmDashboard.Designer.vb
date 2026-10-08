@@ -81,18 +81,19 @@ Partial Class frmDashboard
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.cbostaffperfdates = New System.Windows.Forms.ComboBox()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.DataGridView2 = New System.Windows.Forms.DataGridView()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.Panel4 = New System.Windows.Forms.Panel()
         Me.Staffname = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Pending = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Created = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Processed = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Released = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Totdocreq = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.DataGridView2 = New System.Windows.Forms.DataGridView()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Panel4 = New System.Windows.Forms.Panel()
         Me.pnlrecentreqdoc.SuspendLayout()
         CType(Me.dgvrecentreqdoc, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlmostreqdoc.SuspendLayout()
@@ -644,12 +645,23 @@ Partial Class frmDashboard
         '
         Me.Panel2.BackColor = System.Drawing.Color.White
         Me.Panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel2.Controls.Add(Me.cbostaffperfdates)
         Me.Panel2.Controls.Add(Me.DataGridView1)
         Me.Panel2.Controls.Add(Me.Label4)
         Me.Panel2.Location = New System.Drawing.Point(40, 801)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(536, 282)
         Me.Panel2.TabIndex = 73
+        '
+        'cbostaffperfdates
+        '
+        Me.cbostaffperfdates.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbostaffperfdates.DropDownWidth = 300
+        Me.cbostaffperfdates.FormattingEnabled = True
+        Me.cbostaffperfdates.Location = New System.Drawing.Point(409, 18)
+        Me.cbostaffperfdates.Name = "cbostaffperfdates"
+        Me.cbostaffperfdates.Size = New System.Drawing.Size(109, 21)
+        Me.cbostaffperfdates.TabIndex = 38
         '
         'DataGridView1
         '
@@ -670,6 +682,42 @@ Partial Class frmDashboard
         Me.DataGridView1.ReadOnly = True
         Me.DataGridView1.Size = New System.Drawing.Size(536, 229)
         Me.DataGridView1.TabIndex = 37
+        '
+        'Staffname
+        '
+        Me.Staffname.HeaderText = "Staffname"
+        Me.Staffname.Name = "Staffname"
+        Me.Staffname.ReadOnly = True
+        '
+        'Pending
+        '
+        Me.Pending.HeaderText = "Pending"
+        Me.Pending.Name = "Pending"
+        Me.Pending.ReadOnly = True
+        '
+        'Created
+        '
+        Me.Created.HeaderText = "Created"
+        Me.Created.Name = "Created"
+        Me.Created.ReadOnly = True
+        '
+        'Processed
+        '
+        Me.Processed.HeaderText = "Processed"
+        Me.Processed.Name = "Processed"
+        Me.Processed.ReadOnly = True
+        '
+        'Released
+        '
+        Me.Released.HeaderText = "Released"
+        Me.Released.Name = "Released"
+        Me.Released.ReadOnly = True
+        '
+        'Totdocreq
+        '
+        Me.Totdocreq.HeaderText = "Total Request"
+        Me.Totdocreq.Name = "Totdocreq"
+        Me.Totdocreq.ReadOnly = True
         '
         'Label4
         '
@@ -718,42 +766,6 @@ Partial Class frmDashboard
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(1157, 26)
         Me.Panel4.TabIndex = 79
-        '
-        'Staffname
-        '
-        Me.Staffname.HeaderText = "Staffname"
-        Me.Staffname.Name = "Staffname"
-        Me.Staffname.ReadOnly = True
-        '
-        'Pending
-        '
-        Me.Pending.HeaderText = "Pending"
-        Me.Pending.Name = "Pending"
-        Me.Pending.ReadOnly = True
-        '
-        'Created
-        '
-        Me.Created.HeaderText = "Created"
-        Me.Created.Name = "Created"
-        Me.Created.ReadOnly = True
-        '
-        'Processed
-        '
-        Me.Processed.HeaderText = "Processed"
-        Me.Processed.Name = "Processed"
-        Me.Processed.ReadOnly = True
-        '
-        'Released
-        '
-        Me.Released.HeaderText = "Released"
-        Me.Released.Name = "Released"
-        Me.Released.ReadOnly = True
-        '
-        'Totdocreq
-        '
-        Me.Totdocreq.HeaderText = "Total Request"
-        Me.Totdocreq.Name = "Totdocreq"
-        Me.Totdocreq.ReadOnly = True
         '
         'frmDashboard
         '
@@ -875,4 +887,5 @@ Partial Class frmDashboard
     Friend WithEvents DataGridView2 As DataGridView
     Friend WithEvents Label5 As Label
     Friend WithEvents Panel4 As Panel
+    Friend WithEvents cbostaffperfdates As ComboBox
 End Class

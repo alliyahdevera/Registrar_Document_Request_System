@@ -2,12 +2,18 @@
 
 Public Class frmStudentList
 
+    ' --- TASK 17: GRID PAGER INITIALIZATION ---
+    Private pager As GridPager
+
     ' The student the registrar picked (read by frmNewRequest after the form closes)
     Public Property SelectedStudentID As String = ""
 
     Private _loading As Boolean = False
 
     Private Sub frmStudentList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ' --- TASK 17: Hook pager to dgvStudents ---
+        pager = New GridPager(dgvStudents)
+
         Me.StartPosition = FormStartPosition.CenterParent
         Me.KeyPreview = True
 
@@ -29,7 +35,6 @@ Public Class frmStudentList
     End Sub
 
     ' Fills the filter combo with the year levels that really exist in tblstudents
-    ' (the old hard-coded "Grade 1..12" items did not match your data, e.g. "3rd Year").
     Private Sub LoadYearLevels()
         _loading = True
         cboGradeLevel.Items.Clear()
@@ -92,14 +97,20 @@ Public Class frmStudentList
     End Sub
 
     Private Sub txtSearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearch.TextChanged
+        ' --- TASK 17: Reset pager to Page 1 on search ---
+        pager.FirstPage()
         LoadStudents()
     End Sub
 
     Private Sub cboGradeLevel_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboGradeLevel.SelectedIndexChanged
+        ' --- TASK 17: Reset pager to Page 1 on filter change ---
+        pager.FirstPage()
         LoadStudents()
     End Sub
 
     Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
+        ' --- TASK 17: Reset pager to Page 1 on refresh click ---
+        pager.FirstPage()
         LoadStudents()
     End Sub
 

@@ -155,6 +155,9 @@
     <Compile Include="frmMainMenu.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmManageSchoolYear.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmNewRequest.Designer.vb">
       <DependentUpon>frmNewRequest.vb</DependentUpon>
     </Compile>
@@ -203,6 +206,7 @@
     <Compile Include="frmUserManagement.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="GridPager.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>

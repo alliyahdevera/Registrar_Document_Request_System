@@ -2,8 +2,15 @@
 
 Public Class frmRequestList
 
+    ' --- TASK 17: GRID PAGER INITIALIZATION ---
+    Private pager As GridPager
+
     Private Sub frmRequestList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ' --- TASK 17: Hook pager to dgvReqDoc ---
+        pager = New GridPager(dgvReqDoc)
+
         RefreshUserSession()
+        Label1.Text = "Request List  -  " & SchoolYear.DisplayName
 
         Timer1.Interval = 1000
         Timer1.Start()
@@ -31,15 +38,16 @@ Public Class frmRequestList
     Private Sub UpdateFooterDateTime()
         lbldatetime.Text = DateTime.Now.ToString("dddd, MMMM d, yyyy h:mm:ss tt")
     End Sub
+
     Private Sub AutoCancelUnclaimedReadyForRelease()
         Try
             Call connection()
 
             sql = "UPDATE tblrequest " &
-              "SET Status = 'Cancelled', ReadyForReleaseDate = NULL " &
-              "WHERE Status = 'Ready for Release' " &
-              "AND ReadyForReleaseDate IS NOT NULL " &
-              "AND ReadyForReleaseDate <= DATE_SUB(NOW(), INTERVAL 1 MONTH)"
+                  "SET Status = 'Cancelled', ReadyForReleaseDate = NULL " &
+                  "WHERE Status = 'Ready for Release' " &
+                  "AND ReadyForReleaseDate IS NOT NULL " &
+                  "AND ReadyForReleaseDate <= DATE_SUB(NOW(), INTERVAL 1 MONTH)"
 
             cmd = New MySqlCommand(sql, cn)
             cmd.ExecuteNonQuery()
@@ -48,6 +56,7 @@ Public Class frmRequestList
             If cn.State = ConnectionState.Open Then cn.Close()
         End Try
     End Sub
+
     Private Sub AutoCancelUnpaidRequests()
         Try
             Call connection()
@@ -64,6 +73,7 @@ Public Class frmRequestList
             If cn.State = ConnectionState.Open Then cn.Close()
         End Try
     End Sub
+
     Private Sub FixMissingProcessedByData()
         Try
             Call connection()
@@ -80,6 +90,7 @@ Public Class frmRequestList
             If cn.State = ConnectionState.Open Then cn.Close()
         End Try
     End Sub
+
     Public Sub LoadRequests()
         Try
             Call connection()
@@ -102,6 +113,7 @@ Public Class frmRequestList
                   "LEFT JOIN tblusers u1 ON r.CreatedBy = u1.UserID " &
                   "LEFT JOIN tblusers u2 ON r.ProcessedBy = u2.UserID " &
                   "LEFT JOIN tblusers u3 ON r.ReleasedBy = u3.UserID " &
+                  "WHERE 1=1 " & SchoolYear.AndRequestDate() &
                   "GROUP BY r.RequestID, r.RequestNo, r.StudentID, s.FirstName, s.LastName, " &
                   "r.RequestDate, r.TotalAmount, r.PaymentStatus, r.AmountPaid, " &
                   "r.ORNo, r.ORDate, r.Status, " &
@@ -144,7 +156,11 @@ Public Class frmRequestList
             MsgBox("Error loading requests: " & ex.Message, vbCritical, "Error")
         End Try
     End Sub
+
     Private Sub txtSearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearch.TextChanged
+        ' --- TASK 17: Reset pager to Page 1 on search ---
+        pager.FirstPage()
+
         Try
             Call connection()
 
@@ -166,7 +182,7 @@ Public Class frmRequestList
                   "LEFT JOIN tblusers u1 ON r.CreatedBy = u1.UserID " &
                   "LEFT JOIN tblusers u2 ON r.ProcessedBy = u2.UserID " &
                   "LEFT JOIN tblusers u3 ON r.ReleasedBy = u3.UserID " &
-                  "WHERE r.RequestNo LIKE @search OR r.StudentID LIKE @search OR s.LastName LIKE @search OR s.FirstName LIKE @search " &
+                  "WHERE (r.RequestNo LIKE @search OR r.StudentID LIKE @search OR s.LastName LIKE @search OR s.FirstName LIKE @search) " & SchoolYear.AndRequestDate() &
                   "GROUP BY r.RequestID, r.RequestNo, r.StudentID, s.FirstName, s.LastName, " &
                   "r.RequestDate, r.TotalAmount, r.PaymentStatus, r.AmountPaid, " &
                   "r.ORNo, r.ORDate, r.Status, " &
@@ -209,6 +225,7 @@ Public Class frmRequestList
             If cn.State = ConnectionState.Open Then cn.Close()
         End Try
     End Sub
+
     Private Sub btnViewDetails_Click(sender As Object, e As EventArgs) Handles btnViewDetails.Click
         OpenSelectedRequestDetails()
     End Sub
@@ -228,4 +245,5 @@ Public Class frmRequestList
             MsgBox("Please select a request row from the list first.", vbInformation, "No Selection")
         End If
     End Sub
+
 End Class

@@ -4,17 +4,23 @@ Imports System.Text
 
 Public Class frmReports
 
+    ' --- TASK 17: GRID PAGER INITIALIZATION ---
+    Private pager As GridPager
+
     Private _loadingFilter As Boolean = False
 
     Private Sub frmReports_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        ' --- TASK 17: Hook pager to dgvReqDoc ---
+        pager = New GridPager(dgvReqDoc)
+
         RefreshUserSession()
 
         Timer1.Interval = 1000
         Timer1.Start()
         UpdateFooterDateTime()
 
-        DateTimePicker1.Value = DateTime.Today
-        DateTimePicker2.Value = DateTime.Today
+        Label1.Text = "Reports  -  " & SchoolYear.DisplayName
+        SetDefaultDateRange()
 
         _loadingFilter = True
         cbofilter.DropDownStyle = ComboBoxStyle.DropDownList
@@ -44,6 +50,35 @@ Public Class frmReports
         lbldatetime.Text = DateTime.Now.ToString("dddd, MMMM d, yyyy h:mm:ss tt")
     End Sub
 
+    Private Sub SetDefaultDateRange()
+        Dim fromD As Date = DateTime.Today
+        Dim toD As Date = DateTime.Today
+        Try
+            If SchoolYear.IsAllTime Then
+                Call connection()
+                sql = "SELECT MIN(RequestDate), MAX(RequestDate) FROM tblrequest"
+                cmd = New MySqlCommand(sql, cn)
+                dr = cmd.ExecuteReader()
+                If dr.Read() AndAlso Not IsDBNull(dr(0)) Then
+                    fromD = Convert.ToDateTime(dr(0))
+                    Dim lastD As Date = Convert.ToDateTime(dr(1))
+                    toD = If(lastD > DateTime.Today, lastD, DateTime.Today)
+                End If
+                dr.Close()
+                cn.Close()
+            Else
+                fromD = SchoolYear.StartDate
+                toD = SchoolYear.EndDate
+            End If
+            DateTimePicker1.Value = fromD
+            DateTimePicker2.Value = toD
+        Catch ex As Exception
+            If cn.State = ConnectionState.Open Then cn.Close()
+            DateTimePicker1.Value = DateTime.Today
+            DateTimePicker2.Value = DateTime.Today
+        End Try
+    End Sub
+
     Private Sub LoadReports()
         Dim statusFilter As String = GetSelectedFilter()
 
@@ -62,7 +97,7 @@ Public Class frmReports
                   "LEFT JOIN tblusers up ON up.UserID = r.ProcessedBy " &
                   "LEFT JOIN tblusers ur ON ur.UserID = r.ReleasedBy " &
                   "WHERE r.RequestDate >= @from AND r.RequestDate < @to " &
-                  "AND (r.StudentID LIKE @search OR s.LastName LIKE @search) "
+                  "AND (r.StudentID LIKE @search OR s.LastName LIKE @search) " & SchoolYear.AndRequestDate()
 
             If statusFilter = "Pending" Then
                 sql &= "AND r.Status = 'Pending' "
@@ -131,6 +166,8 @@ Public Class frmReports
     End Sub
 
     Private Sub txtSearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearch.TextChanged
+        ' --- TASK 17: Reset pager to Page 1 on search ---
+        pager.FirstPage()
         LoadReports()
     End Sub
 
@@ -154,11 +191,15 @@ Public Class frmReports
     Private Sub cbofilter_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbofilter.SelectedIndexChanged
         If _loadingFilter Then Exit Sub
         If Not DatesAreValid() Then Exit Sub
+        ' --- TASK 17: Reset pager to Page 1 on filter change ---
+        pager.FirstPage()
         LoadReports()
     End Sub
 
     Private Sub btnGenerateReport_Click(sender As Object, e As EventArgs) Handles btnGenerateReport.Click
         If Not DatesAreValid() Then Exit Sub
+        ' --- TASK 17: Reset pager to Page 1 on manual report generation ---
+        pager.FirstPage()
         LoadReports()
     End Sub
 
