@@ -24,6 +24,7 @@ Partial Class frmUserManagement
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmUserManagement))
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.lbldatetime = New System.Windows.Forms.Label()
         Me.Label19 = New System.Windows.Forms.Label()
         Me.lblposition = New System.Windows.Forms.Label()
@@ -444,11 +445,23 @@ Partial Class frmUserManagement
         '
         'dgvUsers
         '
+        Me.dgvUsers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.dgvUsers.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
+        Me.dgvUsers.BackgroundColor = System.Drawing.Color.White
         Me.dgvUsers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvUsers.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.UserID, Me.Username, Me.Password, Me.FirstName, Me.LastName, Me.Role, Me.Status})
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvUsers.DefaultCellStyle = DataGridViewCellStyle1
         Me.dgvUsers.Location = New System.Drawing.Point(22, 314)
         Me.dgvUsers.Name = "dgvUsers"
         Me.dgvUsers.ReadOnly = True
+        Me.dgvUsers.RowHeadersVisible = False
         Me.dgvUsers.RowHeadersWidth = 51
         Me.dgvUsers.Size = New System.Drawing.Size(1123, 471)
         Me.dgvUsers.TabIndex = 70
@@ -459,7 +472,6 @@ Partial Class frmUserManagement
         Me.UserID.MinimumWidth = 6
         Me.UserID.Name = "UserID"
         Me.UserID.ReadOnly = True
-        Me.UserID.Width = 130
         '
         'Username
         '
@@ -467,14 +479,12 @@ Partial Class frmUserManagement
         Me.Username.MinimumWidth = 6
         Me.Username.Name = "Username"
         Me.Username.ReadOnly = True
-        Me.Username.Width = 150
         '
         'Password
         '
         Me.Password.HeaderText = "Password"
         Me.Password.Name = "Password"
         Me.Password.ReadOnly = True
-        Me.Password.Width = 150
         '
         'FirstName
         '
@@ -482,7 +492,6 @@ Partial Class frmUserManagement
         Me.FirstName.MinimumWidth = 6
         Me.FirstName.Name = "FirstName"
         Me.FirstName.ReadOnly = True
-        Me.FirstName.Width = 190
         '
         'LastName
         '
@@ -490,7 +499,6 @@ Partial Class frmUserManagement
         Me.LastName.MinimumWidth = 6
         Me.LastName.Name = "LastName"
         Me.LastName.ReadOnly = True
-        Me.LastName.Width = 190
         '
         'Role
         '
@@ -498,7 +506,6 @@ Partial Class frmUserManagement
         Me.Role.MinimumWidth = 6
         Me.Role.Name = "Role"
         Me.Role.ReadOnly = True
-        Me.Role.Width = 135
         '
         'Status
         '
@@ -506,7 +513,6 @@ Partial Class frmUserManagement
         Me.Status.MinimumWidth = 6
         Me.Status.Name = "Status"
         Me.Status.ReadOnly = True
-        Me.Status.Width = 125
         '
         'Label1
         '

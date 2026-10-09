@@ -24,6 +24,7 @@ Partial Class frmReports
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmReports))
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.Panel10 = New System.Windows.Forms.Panel()
         Me.txtSearch = New System.Windows.Forms.TextBox()
@@ -163,7 +164,7 @@ Partial Class frmReports
         Me.DateTimePicker2.CalendarFont = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.DateTimePicker2.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.DateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.DateTimePicker2.Location = New System.Drawing.Point(697, 86)
+        Me.DateTimePicker2.Location = New System.Drawing.Point(695, 86)
         Me.DateTimePicker2.Name = "DateTimePicker2"
         Me.DateTimePicker2.Size = New System.Drawing.Size(109, 25)
         Me.DateTimePicker2.TabIndex = 78
@@ -172,7 +173,7 @@ Partial Class frmReports
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Segoe UI Semibold", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(667, 88)
+        Me.Label6.Location = New System.Drawing.Point(665, 88)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(25, 20)
         Me.Label6.TabIndex = 77
@@ -184,9 +185,9 @@ Partial Class frmReports
         Me.btnGenerateReport.FlatAppearance.BorderSize = 0
         Me.btnGenerateReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnGenerateReport.ForeColor = System.Drawing.Color.White
-        Me.btnGenerateReport.Location = New System.Drawing.Point(812, 85)
+        Me.btnGenerateReport.Location = New System.Drawing.Point(812, 86)
         Me.btnGenerateReport.Name = "btnGenerateReport"
-        Me.btnGenerateReport.Size = New System.Drawing.Size(115, 27)
+        Me.btnGenerateReport.Size = New System.Drawing.Size(115, 25)
         Me.btnGenerateReport.TabIndex = 79
         Me.btnGenerateReport.Text = "Generate Report"
         Me.btnGenerateReport.UseVisualStyleBackColor = False
@@ -225,12 +226,22 @@ Partial Class frmReports
         '
         'dgvReqDoc
         '
+        Me.dgvReqDoc.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.dgvReqDoc.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvReqDoc.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.RequestNo, Me._date, Me.StudentID, Me.FirstName, Me.LastName, Me.Documents, Me.TotalAmount, Me.Status, Me.AmountPaid, Me.PaymentStatus, Me.CreateReq, Me.ProcessedReq, Me.ReleasedBy})
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvReqDoc.DefaultCellStyle = DataGridViewCellStyle1
         Me.dgvReqDoc.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.dgvReqDoc.Location = New System.Drawing.Point(0, 33)
         Me.dgvReqDoc.Name = "dgvReqDoc"
         Me.dgvReqDoc.ReadOnly = True
+        Me.dgvReqDoc.RowHeadersVisible = False
         Me.dgvReqDoc.Size = New System.Drawing.Size(1120, 592)
         Me.dgvReqDoc.TabIndex = 59
         '

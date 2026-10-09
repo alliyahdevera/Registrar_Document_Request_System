@@ -49,6 +49,7 @@ Partial Class frmStudentList
         '
         'dgvStudents
         '
+        Me.dgvStudents.BackgroundColor = System.Drawing.Color.White
         Me.dgvStudents.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvStudents.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.StudentID, Me.LRN, Me.LastName, Me.FirstName, Me.MiddleName, Me.Course, Me.YearLevel, Me.Section, Me.ContactNumber})
         DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
@@ -62,6 +63,7 @@ Partial Class frmStudentList
         Me.dgvStudents.Location = New System.Drawing.Point(19, 122)
         Me.dgvStudents.Name = "dgvStudents"
         Me.dgvStudents.ReadOnly = True
+        Me.dgvStudents.RowHeadersVisible = False
         Me.dgvStudents.RowHeadersWidth = 51
         Me.dgvStudents.Size = New System.Drawing.Size(1056, 586)
         Me.dgvStudents.TabIndex = 30
@@ -145,9 +147,9 @@ Partial Class frmStudentList
         Me.Label1.ForeColor = System.Drawing.SystemColors.ControlDarkDark
         Me.Label1.Location = New System.Drawing.Point(15, 48)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(257, 15)
+        Me.Label1.Size = New System.Drawing.Size(175, 15)
         Me.Label1.TabIndex = 126
-        Me.Label1.Text = "View list of all students and filter by Grade Level"
+        Me.Label1.Text = "Double Click to Select a Student" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10)
         '
         'Label6
         '
@@ -233,6 +235,7 @@ Partial Class frmStudentList
         Me.Controls.Add(Me.Label14)
         Me.Controls.Add(Me.dgvStudents)
         Me.Name = "frmStudentList"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "frmStudentList"
         CType(Me.dgvStudents, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)

@@ -124,6 +124,12 @@
   <ItemGroup>
     <Compile Include="CurrentUser.vb" />
     <Compile Include="dbConnect.vb" />
+    <Compile Include="frmActivityLogs.Designer.vb">
+      <DependentUpon>frmActivityLogs.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmActivityLogs.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmChangePass.Designer.vb">
       <DependentUpon>frmChangePass.vb</DependentUpon>
     </Compile>
@@ -155,7 +161,10 @@
     <Compile Include="frmMainMenu.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmManageSchoolYear.vb">
+    <Compile Include="frmManageSY.Designer.vb">
+      <DependentUpon>frmManageSY.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmManageSY.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmNewRequest.Designer.vb">
@@ -226,6 +235,9 @@
     <Compile Include="PasswordHelper.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="frmActivityLogs.resx">
+      <DependentUpon>frmActivityLogs.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmChangePass.resx">
       <DependentUpon>frmChangePass.vb</DependentUpon>
     </EmbeddedResource>
@@ -240,6 +252,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMainMenu.resx">
       <DependentUpon>frmMainMenu.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmManageSY.resx">
+      <DependentUpon>frmManageSY.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmNewRequest.resx">
       <DependentUpon>frmNewRequest.vb</DependentUpon>

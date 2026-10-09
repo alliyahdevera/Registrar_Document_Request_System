@@ -153,11 +153,5 @@ Public Class frmSettings
         lblCurrent.Text = "Currently viewing:  " & SchoolYear.DisplayName
     End Sub
 
-    Private Sub btnmanagesy_Click(sender As Object, e As EventArgs) Handles btnmanagesy.Click
-        Using frm As New frmManageSchoolYear()
-            frm.ShowDialog(frmMainMenu)
-        End Using
-        LoadYears()
-    End Sub
 
 End Class

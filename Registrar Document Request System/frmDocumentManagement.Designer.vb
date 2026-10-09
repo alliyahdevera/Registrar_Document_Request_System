@@ -24,6 +24,7 @@ Partial Class frmDocumentManagement
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmDocumentManagement))
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnDelete = New System.Windows.Forms.Button()
         Me.btnEdit = New System.Windows.Forms.Button()
@@ -90,7 +91,7 @@ Partial Class frmDocumentManagement
         Me.btnDelete.ForeColor = System.Drawing.Color.White
         Me.btnDelete.Image = CType(resources.GetObject("btnDelete.Image"), System.Drawing.Image)
         Me.btnDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnDelete.Location = New System.Drawing.Point(913, 241)
+        Me.btnDelete.Location = New System.Drawing.Point(934, 240)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(176, 33)
         Me.btnDelete.TabIndex = 59
@@ -107,7 +108,7 @@ Partial Class frmDocumentManagement
         Me.btnEdit.ForeColor = System.Drawing.Color.White
         Me.btnEdit.Image = CType(resources.GetObject("btnEdit.Image"), System.Drawing.Image)
         Me.btnEdit.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnEdit.Location = New System.Drawing.Point(913, 187)
+        Me.btnEdit.Location = New System.Drawing.Point(934, 138)
         Me.btnEdit.Name = "btnEdit"
         Me.btnEdit.Size = New System.Drawing.Size(176, 33)
         Me.btnEdit.TabIndex = 58
@@ -132,7 +133,7 @@ Partial Class frmDocumentManagement
         Me.Panel5.Controls.Add(Me.txtDocumentID)
         Me.Panel5.Location = New System.Drawing.Point(27, 86)
         Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(838, 188)
+        Me.Panel5.Size = New System.Drawing.Size(857, 188)
         Me.Panel5.TabIndex = 57
         '
         'Panel2
@@ -142,7 +143,7 @@ Partial Class frmDocumentManagement
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel2.Location = New System.Drawing.Point(0, 0)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(836, 36)
+        Me.Panel2.Size = New System.Drawing.Size(855, 36)
         Me.Panel2.TabIndex = 53
         '
         'Label14
@@ -158,18 +159,19 @@ Partial Class frmDocumentManagement
         '
         'cboStatus
         '
+        Me.cboStatus.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cboStatus.FormattingEnabled = True
         Me.cboStatus.Items.AddRange(New Object() {"Active", "Inactive"})
-        Me.cboStatus.Location = New System.Drawing.Point(541, 102)
+        Me.cboStatus.Location = New System.Drawing.Point(713, 122)
         Me.cboStatus.Name = "cboStatus"
-        Me.cboStatus.Size = New System.Drawing.Size(229, 21)
+        Me.cboStatus.Size = New System.Drawing.Size(114, 28)
         Me.cboStatus.TabIndex = 52
         '
         'Label9
         '
         Me.Label9.AutoSize = True
         Me.Label9.Font = New System.Drawing.Font("Segoe UI Semibold", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(451, 99)
+        Me.Label9.Location = New System.Drawing.Point(655, 125)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(50, 20)
         Me.Label9.TabIndex = 41
@@ -179,7 +181,7 @@ Partial Class frmDocumentManagement
         '
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("Segoe UI Semibold", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(451, 58)
+        Me.Label10.Location = New System.Drawing.Point(418, 127)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(33, 20)
         Me.Label10.TabIndex = 39
@@ -189,16 +191,16 @@ Partial Class frmDocumentManagement
         '
         Me.txtFee.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtFee.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtFee.Location = New System.Drawing.Point(541, 55)
+        Me.txtFee.Location = New System.Drawing.Point(517, 122)
         Me.txtFee.Name = "txtFee"
-        Me.txtFee.Size = New System.Drawing.Size(229, 27)
+        Me.txtFee.Size = New System.Drawing.Size(119, 27)
         Me.txtFee.TabIndex = 38
         '
         'Label7
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Segoe UI Semibold", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(25, 141)
+        Me.Label7.Location = New System.Drawing.Point(418, 65)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(87, 20)
         Me.Label7.TabIndex = 37
@@ -208,16 +210,17 @@ Partial Class frmDocumentManagement
         '
         Me.txtDescription.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtDescription.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtDescription.Location = New System.Drawing.Point(140, 138)
+        Me.txtDescription.Location = New System.Drawing.Point(517, 63)
+        Me.txtDescription.Multiline = True
         Me.txtDescription.Name = "txtDescription"
-        Me.txtDescription.Size = New System.Drawing.Size(284, 27)
+        Me.txtDescription.Size = New System.Drawing.Size(310, 40)
         Me.txtDescription.TabIndex = 36
         '
         'Label6
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Segoe UI Semibold", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(25, 99)
+        Me.Label6.Location = New System.Drawing.Point(26, 126)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(50, 20)
         Me.Label6.TabIndex = 35
@@ -227,16 +230,16 @@ Partial Class frmDocumentManagement
         '
         Me.txtName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtName.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtName.Location = New System.Drawing.Point(140, 96)
+        Me.txtName.Location = New System.Drawing.Point(141, 123)
         Me.txtName.Name = "txtName"
-        Me.txtName.Size = New System.Drawing.Size(284, 27)
+        Me.txtName.Size = New System.Drawing.Size(258, 27)
         Me.txtName.TabIndex = 34
         '
         'Label3
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Segoe UI Semibold", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(25, 57)
+        Me.Label3.Location = New System.Drawing.Point(26, 66)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(99, 20)
         Me.Label3.TabIndex = 33
@@ -246,9 +249,9 @@ Partial Class frmDocumentManagement
         '
         Me.txtDocumentID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtDocumentID.Font = New System.Drawing.Font("Segoe UI", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtDocumentID.Location = New System.Drawing.Point(140, 54)
+        Me.txtDocumentID.Location = New System.Drawing.Point(141, 63)
         Me.txtDocumentID.Name = "txtDocumentID"
-        Me.txtDocumentID.Size = New System.Drawing.Size(284, 27)
+        Me.txtDocumentID.Size = New System.Drawing.Size(258, 27)
         Me.txtDocumentID.TabIndex = 32
         '
         'btnAddDocument
@@ -259,7 +262,7 @@ Partial Class frmDocumentManagement
         Me.btnAddDocument.ForeColor = System.Drawing.Color.White
         Me.btnAddDocument.Image = CType(resources.GetObject("btnAddDocument.Image"), System.Drawing.Image)
         Me.btnAddDocument.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnAddDocument.Location = New System.Drawing.Point(913, 135)
+        Me.btnAddDocument.Location = New System.Drawing.Point(934, 86)
         Me.btnAddDocument.Name = "btnAddDocument"
         Me.btnAddDocument.Size = New System.Drawing.Size(176, 33)
         Me.btnAddDocument.TabIndex = 55
@@ -269,11 +272,23 @@ Partial Class frmDocumentManagement
         '
         'dgvDocument
         '
+        Me.dgvDocument.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.dgvDocument.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
+        Me.dgvDocument.BackgroundColor = System.Drawing.Color.White
         Me.dgvDocument.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvDocument.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DocumentID, Me.DocumentName, Me.Description, Me.Fee, Me.Status})
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvDocument.DefaultCellStyle = DataGridViewCellStyle1
         Me.dgvDocument.Location = New System.Drawing.Point(29, 329)
         Me.dgvDocument.Name = "dgvDocument"
         Me.dgvDocument.ReadOnly = True
+        Me.dgvDocument.RowHeadersVisible = False
         Me.dgvDocument.Size = New System.Drawing.Size(1118, 462)
         Me.dgvDocument.TabIndex = 60
         '
@@ -282,35 +297,30 @@ Partial Class frmDocumentManagement
         Me.DocumentID.HeaderText = "DocumentID"
         Me.DocumentID.Name = "DocumentID"
         Me.DocumentID.ReadOnly = True
-        Me.DocumentID.Width = 180
         '
         'DocumentName
         '
         Me.DocumentName.HeaderText = "Document Name"
         Me.DocumentName.Name = "DocumentName"
         Me.DocumentName.ReadOnly = True
-        Me.DocumentName.Width = 250
         '
         'Description
         '
         Me.Description.HeaderText = "Description"
         Me.Description.Name = "Description"
         Me.Description.ReadOnly = True
-        Me.Description.Width = 350
         '
         'Fee
         '
         Me.Fee.HeaderText = "Fee"
         Me.Fee.Name = "Fee"
         Me.Fee.ReadOnly = True
-        Me.Fee.Width = 140
         '
         'Status
         '
         Me.Status.HeaderText = "Status"
         Me.Status.Name = "Status"
         Me.Status.ReadOnly = True
-        Me.Status.Width = 155
         '
         'Panel6
         '
@@ -446,7 +456,7 @@ Partial Class frmDocumentManagement
         Me.btnClear.ForeColor = System.Drawing.Color.White
         Me.btnClear.Image = CType(resources.GetObject("btnClear.Image"), System.Drawing.Image)
         Me.btnClear.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnClear.Location = New System.Drawing.Point(913, 85)
+        Me.btnClear.Location = New System.Drawing.Point(934, 189)
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Size = New System.Drawing.Size(176, 33)
         Me.btnClear.TabIndex = 70

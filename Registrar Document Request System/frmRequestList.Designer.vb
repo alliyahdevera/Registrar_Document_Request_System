@@ -23,7 +23,7 @@ Partial Class frmRequestList
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmRequestList))
         Me.btnViewDetails = New System.Windows.Forms.Button()
         Me.Panel7 = New System.Windows.Forms.Panel()
@@ -87,7 +87,7 @@ Partial Class frmRequestList
         Me.Panel7.Controls.Add(Me.dgvReqDoc)
         Me.Panel7.Location = New System.Drawing.Point(21, 131)
         Me.Panel7.Name = "Panel7"
-        Me.Panel7.Size = New System.Drawing.Size(1122, 664)
+        Me.Panel7.Size = New System.Drawing.Size(1122, 645)
         Me.Panel7.TabIndex = 73
         '
         'Panel16
@@ -112,20 +112,22 @@ Partial Class frmRequestList
         '
         'dgvReqDoc
         '
+        Me.dgvReqDoc.BackgroundColor = System.Drawing.Color.White
         Me.dgvReqDoc.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvReqDoc.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.RequestNo, Me._date, Me.StudentID, Me.FirstName, Me.LastName, Me.Documents, Me.TotalAmount, Me.PaymentStatus, Me.AmountPaid, Me.ORNo, Me.ORDate, Me.Status, Me.CreateReq, Me.ProcessedReq, Me.ReleasedBy})
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvReqDoc.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvReqDoc.DefaultCellStyle = DataGridViewCellStyle1
         Me.dgvReqDoc.Location = New System.Drawing.Point(-1, 34)
         Me.dgvReqDoc.Name = "dgvReqDoc"
         Me.dgvReqDoc.ReadOnly = True
-        Me.dgvReqDoc.Size = New System.Drawing.Size(1123, 629)
+        Me.dgvReqDoc.RowHeadersVisible = False
+        Me.dgvReqDoc.Size = New System.Drawing.Size(1123, 609)
         Me.dgvReqDoc.TabIndex = 59
         '
         'RequestNo

@@ -334,11 +334,15 @@ Partial Class frmRequestDetails
         '
         'dgvReqDoc
         '
+        Me.dgvReqDoc.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.dgvReqDoc.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
+        Me.dgvReqDoc.BackgroundColor = System.Drawing.Color.White
         Me.dgvReqDoc.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvReqDoc.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DocumentName, Me.Quantity, Me.Amount, Me.Subtotal})
         Me.dgvReqDoc.Location = New System.Drawing.Point(-1, 32)
         Me.dgvReqDoc.Name = "dgvReqDoc"
         Me.dgvReqDoc.ReadOnly = True
+        Me.dgvReqDoc.RowHeadersVisible = False
         Me.dgvReqDoc.Size = New System.Drawing.Size(1069, 232)
         Me.dgvReqDoc.TabIndex = 59
         '
@@ -347,28 +351,24 @@ Partial Class frmRequestDetails
         Me.DocumentName.HeaderText = "Document Name"
         Me.DocumentName.Name = "DocumentName"
         Me.DocumentName.ReadOnly = True
-        Me.DocumentName.Width = 330
         '
         'Quantity
         '
         Me.Quantity.HeaderText = "Quantity"
         Me.Quantity.Name = "Quantity"
         Me.Quantity.ReadOnly = True
-        Me.Quantity.Width = 220
         '
         'Amount
         '
         Me.Amount.HeaderText = "Amount"
         Me.Amount.Name = "Amount"
         Me.Amount.ReadOnly = True
-        Me.Amount.Width = 235
         '
         'Subtotal
         '
         Me.Subtotal.HeaderText = "Subtotal"
         Me.Subtotal.Name = "Subtotal"
         Me.Subtotal.ReadOnly = True
-        Me.Subtotal.Width = 240
         '
         'Panel1
         '
@@ -407,6 +407,7 @@ Partial Class frmRequestDetails
         Me.txtReleasedBy.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtReleasedBy.Location = New System.Drawing.Point(110, 139)
         Me.txtReleasedBy.Name = "txtReleasedBy"
+        Me.txtReleasedBy.ReadOnly = True
         Me.txtReleasedBy.Size = New System.Drawing.Size(209, 25)
         Me.txtReleasedBy.TabIndex = 81
         '
@@ -459,6 +460,7 @@ Partial Class frmRequestDetails
         Me.txtAmountPaid.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtAmountPaid.Location = New System.Drawing.Point(452, 55)
         Me.txtAmountPaid.Name = "txtAmountPaid"
+        Me.txtAmountPaid.ReadOnly = True
         Me.txtAmountPaid.Size = New System.Drawing.Size(163, 25)
         Me.txtAmountPaid.TabIndex = 68
         '
@@ -466,6 +468,7 @@ Partial Class frmRequestDetails
         '
         Me.dtpORDate.CalendarFont = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtpORDate.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dtpORDate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
         Me.dtpORDate.Location = New System.Drawing.Point(110, 95)
         Me.dtpORDate.Name = "dtpORDate"
         Me.dtpORDate.Size = New System.Drawing.Size(209, 25)

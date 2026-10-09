@@ -24,7 +24,7 @@ Partial Class frmNewRequest
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmNewRequest))
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.txtYearLevel = New System.Windows.Forms.TextBox()
@@ -75,7 +75,6 @@ Partial Class frmNewRequest
         Me.Label23 = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.txtCreatedBy = New System.Windows.Forms.TextBox()
-        Me.cboPaymentStatus = New System.Windows.Forms.ComboBox()
         Me.Label20 = New System.Windows.Forms.Label()
         Me.Label21 = New System.Windows.Forms.Label()
         Me.txtRequestNo = New System.Windows.Forms.TextBox()
@@ -104,6 +103,8 @@ Partial Class frmNewRequest
         Me.Label33 = New System.Windows.Forms.Label()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.cboPaymentStatus = New System.Windows.Forms.ComboBox()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.Panel5.SuspendLayout()
         Me.Panel10.SuspendLayout()
         Me.Panel11.SuspendLayout()
@@ -166,10 +167,11 @@ Partial Class frmNewRequest
         '
         Me.txtCourse.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtCourse.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCourse.Location = New System.Drawing.Point(472, 109)
+        Me.txtCourse.Location = New System.Drawing.Point(472, 99)
+        Me.txtCourse.Multiline = True
         Me.txtCourse.Name = "txtCourse"
         Me.txtCourse.ReadOnly = True
-        Me.txtCourse.Size = New System.Drawing.Size(195, 25)
+        Me.txtCourse.Size = New System.Drawing.Size(195, 45)
         Me.txtCourse.TabIndex = 63
         '
         'Panel10
@@ -512,20 +514,22 @@ Partial Class frmNewRequest
         '
         Me.dgvReqDoc.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvReqDoc.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
+        Me.dgvReqDoc.BackgroundColor = System.Drawing.Color.White
         Me.dgvReqDoc.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvReqDoc.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DocumentID, Me.DocumentName, Me.Fee, Me.Quantity, Me.Subtotal, Me.Action})
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvReqDoc.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvReqDoc.DefaultCellStyle = DataGridViewCellStyle1
         Me.dgvReqDoc.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.dgvReqDoc.Location = New System.Drawing.Point(0, 33)
         Me.dgvReqDoc.Name = "dgvReqDoc"
         Me.dgvReqDoc.ReadOnly = True
+        Me.dgvReqDoc.RowHeadersVisible = False
         Me.dgvReqDoc.Size = New System.Drawing.Size(1120, 230)
         Me.dgvReqDoc.TabIndex = 59
         '
@@ -569,6 +573,7 @@ Partial Class frmNewRequest
         '
         Me.Panel8.BackColor = System.Drawing.Color.White
         Me.Panel8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel8.Controls.Add(Me.TextBox1)
         Me.Panel8.Controls.Add(Me.txtreqdate)
         Me.Panel8.Controls.Add(Me.Panel15)
         Me.Panel8.Controls.Add(Me.cboStatus)
@@ -652,16 +657,6 @@ Partial Class frmNewRequest
         Me.txtCreatedBy.ReadOnly = True
         Me.txtCreatedBy.Size = New System.Drawing.Size(180, 25)
         Me.txtCreatedBy.TabIndex = 54
-        '
-        'cboPaymentStatus
-        '
-        Me.cboPaymentStatus.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cboPaymentStatus.FormattingEnabled = True
-        Me.cboPaymentStatus.Items.AddRange(New Object() {"Unpaid", "Paid"})
-        Me.cboPaymentStatus.Location = New System.Drawing.Point(136, 65)
-        Me.cboPaymentStatus.Name = "cboPaymentStatus"
-        Me.cboPaymentStatus.Size = New System.Drawing.Size(180, 25)
-        Me.cboPaymentStatus.TabIndex = 53
         '
         'Label20
         '
@@ -972,6 +967,26 @@ Partial Class frmNewRequest
         Me.Panel1.Size = New System.Drawing.Size(1174, 33)
         Me.Panel1.TabIndex = 73
         '
+        'cboPaymentStatus
+        '
+        Me.cboPaymentStatus.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cboPaymentStatus.FormattingEnabled = True
+        Me.cboPaymentStatus.Items.AddRange(New Object() {"Unpaid", "Paid"})
+        Me.cboPaymentStatus.Location = New System.Drawing.Point(136, 65)
+        Me.cboPaymentStatus.Name = "cboPaymentStatus"
+        Me.cboPaymentStatus.Size = New System.Drawing.Size(180, 25)
+        Me.cboPaymentStatus.TabIndex = 53
+        '
+        'TextBox1
+        '
+        Me.TextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TextBox1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox1.Location = New System.Drawing.Point(136, 42)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.ReadOnly = True
+        Me.TextBox1.Size = New System.Drawing.Size(180, 25)
+        Me.TextBox1.TabIndex = 69
+        '
         'frmNewRequest
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1054,7 +1069,6 @@ Partial Class frmNewRequest
     Friend WithEvents Label23 As Label
     Friend WithEvents Label16 As Label
     Friend WithEvents txtCreatedBy As TextBox
-    Friend WithEvents cboPaymentStatus As ComboBox
     Friend WithEvents Label19 As Label
     Friend WithEvents Label20 As Label
     Friend WithEvents Label21 As Label
@@ -1101,4 +1115,6 @@ Partial Class frmNewRequest
     Friend WithEvents btnsearch As Button
     Friend WithEvents txtreqdate As TextBox
     Friend WithEvents Panel1 As Panel
+    Friend WithEvents cboPaymentStatus As ComboBox
+    Friend WithEvents TextBox1 As TextBox
 End Class

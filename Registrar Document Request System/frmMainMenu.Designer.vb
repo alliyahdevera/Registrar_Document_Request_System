@@ -43,6 +43,7 @@ Partial Class frmMainMenu
         Me.Label5 = New System.Windows.Forms.Label()
         Me.tmrDateTime = New System.Windows.Forms.Timer(Me.components)
         Me.pnlmain = New System.Windows.Forms.Panel()
+        Me.btnactLogs = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         CType(Me.Logo, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -51,6 +52,7 @@ Partial Class frmMainMenu
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
+        Me.Panel1.Controls.Add(Me.btnactLogs)
         Me.Panel1.Controls.Add(Me.btnchangepassword)
         Me.Panel1.Controls.Add(Me.btnsettings)
         Me.Panel1.Controls.Add(Me.btnUserManagement)
@@ -255,7 +257,7 @@ Partial Class frmMainMenu
         Me.btnMainMenu.Name = "btnMainMenu"
         Me.btnMainMenu.Size = New System.Drawing.Size(220, 49)
         Me.btnMainMenu.TabIndex = 4
-        Me.btnMainMenu.Text = "     Main Menu"
+        Me.btnMainMenu.Text = "     Dashboard"
         Me.btnMainMenu.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnMainMenu.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnMainMenu.UseVisualStyleBackColor = False
@@ -335,6 +337,25 @@ Partial Class frmMainMenu
         Me.pnlmain.Size = New System.Drawing.Size(1174, 836)
         Me.pnlmain.TabIndex = 28
         '
+        'btnactLogs
+        '
+        Me.btnactLogs.BackColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
+        Me.btnactLogs.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnactLogs.FlatAppearance.BorderSize = 0
+        Me.btnactLogs.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnactLogs.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnactLogs.ForeColor = System.Drawing.Color.White
+        Me.btnactLogs.Image = CType(resources.GetObject("btnactLogs.Image"), System.Drawing.Image)
+        Me.btnactLogs.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnactLogs.Location = New System.Drawing.Point(15, 541)
+        Me.btnactLogs.Name = "btnactLogs"
+        Me.btnactLogs.Size = New System.Drawing.Size(220, 49)
+        Me.btnactLogs.TabIndex = 15
+        Me.btnactLogs.Text = "      Activity Logs"
+        Me.btnactLogs.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnactLogs.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnactLogs.UseVisualStyleBackColor = False
+        '
         'frmMainMenu
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -371,4 +392,5 @@ Partial Class frmMainMenu
     Friend WithEvents pnlmain As Panel
     Friend WithEvents btnchangepassword As Button
     Friend WithEvents btnsettings As Button
+    Friend WithEvents btnactLogs As Button
 End Class
