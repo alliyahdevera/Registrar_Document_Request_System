@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 09, 2026 at 03:14 PM
+-- Generation Time: Oct 09, 2026 at 08:13 PM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,23 @@ SET time_zone = "+00:00";
 --
 -- Database: `registrar_db`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tblactivitylogs`
+--
+
+CREATE TABLE `tblactivitylogs` (
+  `LogID` int(11) NOT NULL,
+  `UserID` int(11) DEFAULT NULL,
+  `Username` varchar(50) DEFAULT NULL,
+  `FullName` varchar(100) DEFAULT NULL,
+  `Role` varchar(30) DEFAULT NULL,
+  `ActionType` varchar(50) NOT NULL,
+  `Details` varchar(500) DEFAULT NULL,
+  `LogDate` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -274,6 +291,13 @@ INSERT INTO `tblusers` (`UserID`, `Username`, `Password`, `FullName`, `Role`, `S
 --
 
 --
+-- Indexes for table `tblactivitylogs`
+--
+ALTER TABLE `tblactivitylogs`
+  ADD PRIMARY KEY (`LogID`),
+  ADD KEY `LogDate` (`LogDate`);
+
+--
 -- Indexes for table `tbldocuments`
 --
 ALTER TABLE `tbldocuments`
@@ -321,6 +345,12 @@ ALTER TABLE `tblusers`
 --
 
 --
+-- AUTO_INCREMENT for table `tblactivitylogs`
+--
+ALTER TABLE `tblactivitylogs`
+  MODIFY `LogID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `tbldocuments`
 --
 ALTER TABLE `tbldocuments`
@@ -342,7 +372,7 @@ ALTER TABLE `tblrequestdetails`
 -- AUTO_INCREMENT for table `tblschoolyear`
 --
 ALTER TABLE `tblschoolyear`
-  MODIFY `SchoolYearID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `SchoolYearID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tblusers`
