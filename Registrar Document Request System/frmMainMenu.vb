@@ -20,16 +20,40 @@ Public Class frmMainMenu
 
     Private Sub frmMainMenu_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         _navButtons = New Button() {btnMainMenu, btnStudentManagement, btnDocumentManagement,
-                                    btnDocumentRequests, btnReqList, btnReport, btnUserManagement}
+                                    btnDocumentRequests, btnReqList, btnReport, btnUserManagement,
+                                    btnsettings, btnactLogs}
         RefreshUserSession()
-        OpenDashboard()
+        ApplyAutoRules()
+        If CurrentUser.IsAdmin Then
+            OpenDashboard()
+        Else
+            ShowPage(New frmNewRequest(), btnDocumentRequests)   ' staff never see the dashboard
+        End If
     End Sub
 
     Private Sub RefreshUserSession()
-        btnUserManagement.Visible = CurrentUser.IsAdmin
-        btnDocumentManagement.Visible = CurrentUser.IsAdmin
-        btnStudentManagement.Visible = CurrentUser.IsAdmin        ' Task 14
-        btnchangepassword.Visible = Not CurrentUser.IsAdmin       ' Task 12: staff only
+        Dim isAdmin As Boolean = CurrentUser.IsAdmin
+        btnMainMenu.Visible = isAdmin               ' Dashboard: admin only
+        btnactLogs.Visible = isAdmin                ' Activity Logs: admin only
+        btnUserManagement.Visible = isAdmin
+        btnDocumentManagement.Visible = isAdmin
+        btnStudentManagement.Visible = isAdmin
+        btnchangepassword.Visible = Not isAdmin     ' Change Password: staff only
+        ArrangeNavButtons()
+    End Sub
+
+    ' Re-stacks the visible sidebar buttons so hidden ones leave no gaps
+    Private Sub ArrangeNavButtons()
+        Dim ordered As Button() = {btnMainMenu, btnStudentManagement, btnDocumentManagement,
+                                   btnDocumentRequests, btnReqList, btnReport, btnUserManagement,
+                                   btnsettings, btnchangepassword, btnactLogs}
+        Dim y As Integer = 100
+        For Each b As Button In ordered
+            If b.Visible Then
+                b.Top = y
+                y += 49
+            End If
+        Next
     End Sub
 
     ' Clicking the window "X" = leave the system (frmLogin is only hidden,
@@ -88,6 +112,10 @@ Public Class frmMainMenu
     End Sub
 
     Public Sub OpenDashboard()
+        If Not CurrentUser.IsAdmin Then
+            OpenRequestList()
+            Exit Sub
+        End If
         ApplyAutoRules()
         ShowPage(New frmDashboard(), btnMainMenu)
     End Sub
@@ -108,6 +136,13 @@ Public Class frmMainMenu
 
     Private Sub btnMainMenu_Click(sender As Object, e As EventArgs) Handles btnMainMenu.Click
         OpenDashboard()
+    End Sub
+    Private Sub btnactLogs_Click(sender As Object, e As EventArgs) Handles btnactLogs.Click
+        If Not CurrentUser.IsAdmin Then
+            MsgBox("Only the Administrator can view Activity Logs.", vbExclamation, "Access Denied")
+            Exit Sub
+        End If
+        ShowPage(New frmActivityLogs(), btnactLogs)
     End Sub
 
     Private Sub btnStudentManagement_Click(sender As Object, e As EventArgs) Handles btnStudentManagement.Click
@@ -154,6 +189,7 @@ Public Class frmMainMenu
     Private Sub btnLogout_Click(sender As Object, e As EventArgs) Handles btnLogout.Click
         If MsgBox("Are you sure you want to logout?", vbYesNo + vbQuestion, "Confirm Logout") = MsgBoxResult.Yes Then
             _loggingOut = True
+            LogActivity("Logout", "Logged out of the system")
             CurrentUser.UserID = 0
             CurrentUser.FullName = ""
             CurrentUser.Role = ""
@@ -161,7 +197,6 @@ Public Class frmMainMenu
             Me.Close()
         End If
     End Sub
-
 #End Region
 
 End Class

@@ -68,6 +68,7 @@ Partial Class frmNewRequest
         Me.Subtotal = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Action = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel8 = New System.Windows.Forms.Panel()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.txtreqdate = New System.Windows.Forms.TextBox()
         Me.Panel15 = New System.Windows.Forms.Panel()
         Me.Label19 = New System.Windows.Forms.Label()
@@ -75,6 +76,7 @@ Partial Class frmNewRequest
         Me.Label23 = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.txtCreatedBy = New System.Windows.Forms.TextBox()
+        Me.cboPaymentStatus = New System.Windows.Forms.ComboBox()
         Me.Label20 = New System.Windows.Forms.Label()
         Me.Label21 = New System.Windows.Forms.Label()
         Me.txtRequestNo = New System.Windows.Forms.TextBox()
@@ -103,8 +105,8 @@ Partial Class frmNewRequest
         Me.Label33 = New System.Windows.Forms.Label()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.cboPaymentStatus = New System.Windows.Forms.ComboBox()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.TextBox3 = New System.Windows.Forms.TextBox()
         Me.Panel5.SuspendLayout()
         Me.Panel10.SuspendLayout()
         Me.Panel11.SuspendLayout()
@@ -573,6 +575,7 @@ Partial Class frmNewRequest
         '
         Me.Panel8.BackColor = System.Drawing.Color.White
         Me.Panel8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel8.Controls.Add(Me.TextBox3)
         Me.Panel8.Controls.Add(Me.TextBox1)
         Me.Panel8.Controls.Add(Me.txtreqdate)
         Me.Panel8.Controls.Add(Me.Panel15)
@@ -587,6 +590,16 @@ Partial Class frmNewRequest
         Me.Panel8.Name = "Panel8"
         Me.Panel8.Size = New System.Drawing.Size(642, 180)
         Me.Panel8.TabIndex = 62
+        '
+        'TextBox1
+        '
+        Me.TextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TextBox1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox1.Location = New System.Drawing.Point(136, 42)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.ReadOnly = True
+        Me.TextBox1.Size = New System.Drawing.Size(180, 25)
+        Me.TextBox1.TabIndex = 69
         '
         'txtreqdate
         '
@@ -657,6 +670,16 @@ Partial Class frmNewRequest
         Me.txtCreatedBy.ReadOnly = True
         Me.txtCreatedBy.Size = New System.Drawing.Size(180, 25)
         Me.txtCreatedBy.TabIndex = 54
+        '
+        'cboPaymentStatus
+        '
+        Me.cboPaymentStatus.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cboPaymentStatus.FormattingEnabled = True
+        Me.cboPaymentStatus.Items.AddRange(New Object() {"Unpaid", "Paid"})
+        Me.cboPaymentStatus.Location = New System.Drawing.Point(136, 65)
+        Me.cboPaymentStatus.Name = "cboPaymentStatus"
+        Me.cboPaymentStatus.Size = New System.Drawing.Size(180, 25)
+        Me.cboPaymentStatus.TabIndex = 53
         '
         'Label20
         '
@@ -967,31 +990,26 @@ Partial Class frmNewRequest
         Me.Panel1.Size = New System.Drawing.Size(1174, 33)
         Me.Panel1.TabIndex = 73
         '
-        'cboPaymentStatus
+        'TextBox2
         '
-        Me.cboPaymentStatus.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cboPaymentStatus.FormattingEnabled = True
-        Me.cboPaymentStatus.Items.AddRange(New Object() {"Unpaid", "Paid"})
-        Me.cboPaymentStatus.Location = New System.Drawing.Point(136, 65)
-        Me.cboPaymentStatus.Name = "cboPaymentStatus"
-        Me.cboPaymentStatus.Size = New System.Drawing.Size(180, 25)
-        Me.cboPaymentStatus.TabIndex = 53
+        Me.TextBox2.Location = New System.Drawing.Point(0, 0)
+        Me.TextBox2.Name = "TextBox2"
+        Me.TextBox2.Size = New System.Drawing.Size(100, 20)
+        Me.TextBox2.TabIndex = 74
         '
-        'TextBox1
+        'TextBox3
         '
-        Me.TextBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.TextBox1.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(136, 42)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.ReadOnly = True
-        Me.TextBox1.Size = New System.Drawing.Size(180, 25)
-        Me.TextBox1.TabIndex = 69
+        Me.TextBox3.Location = New System.Drawing.Point(438, 151)
+        Me.TextBox3.Name = "TextBox3"
+        Me.TextBox3.Size = New System.Drawing.Size(181, 20)
+        Me.TextBox3.TabIndex = 70
         '
         'frmNewRequest
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1174, 836)
+        Me.Controls.Add(Me.TextBox2)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.btncancel)
         Me.Controls.Add(Me.btnclear)
@@ -1117,4 +1135,6 @@ Partial Class frmNewRequest
     Friend WithEvents Panel1 As Panel
     Friend WithEvents cboPaymentStatus As ComboBox
     Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents TextBox3 As TextBox
+    Friend WithEvents TextBox2 As TextBox
 End Class

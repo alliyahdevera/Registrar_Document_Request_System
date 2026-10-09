@@ -6,6 +6,8 @@ Public Class frmRequestDetails
     Private currentRequestID As Integer = 0
 
     Private currentDbStatus As String = ""
+    Private _loading As Boolean = False
+    Private dbPaymentVerified As Boolean = False
 
     Private Sub frmRequestDetails_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         dgvReqDoc.SelectionMode = DataGridViewSelectionMode.FullRowSelect
@@ -15,6 +17,10 @@ Public Class frmRequestDetails
         txtReleasedBy.ReadOnly = True
         txtRequestDate.ReadOnly = True
         txtRequestDate.TabStop = False
+        txtORNo.MaxLength = 6
+        txtAmountPaid.ReadOnly = True        ' automatic = Total Amount
+        txtAmountPaid.TabStop = False
+        cboPaymentStatus.Enabled = False     ' automatic (Paid when OR is complete)
 
         If Not String.IsNullOrEmpty(SelectedRequestNo) Then
             LoadRequestDetailsInfo(SelectedRequestNo)
@@ -28,16 +34,18 @@ Public Class frmRequestDetails
 
     Private Sub LoadRequestHeaderAndStudent()
         Try
+            _loading = True
+
             Call connection()
 
             sql = "SELECT r.RequestID, r.RequestNo, r.RequestDate, r.TotalAmount, r.Status, r.PaymentStatus, " &
-                  "r.ORNo, r.ORDate, r.AmountPaid, r.ReleasedBy, " &
-                  "s.StudentID, CONCAT(s.FirstName, ' ', IFNULL(s.MiddleName, ''), ' ', s.LastName) AS StudentName, " &
-                  "s.Course, s.YearLevel, u.FullName AS ReleasedByName " &
-                  "FROM tblrequest r " &
-                  "INNER JOIN tblstudents s ON r.StudentID = s.StudentID " &
-                  "LEFT JOIN tblusers u ON r.ReleasedBy = u.UserID " &
-                  "WHERE r.RequestNo = @reqno"
+              "r.ORNo, r.ORDate, r.AmountPaid, r.ReleasedBy, " &
+              "s.StudentID, CONCAT(s.FirstName, ' ', IFNULL(s.MiddleName, ''), ' ', s.LastName) AS StudentName, " &
+              "s.Course, s.YearLevel, u.FullName AS ReleasedByName " &
+              "FROM tblrequest r " &
+              "INNER JOIN tblstudents s ON r.StudentID = s.StudentID " &
+              "LEFT JOIN tblusers u ON r.ReleasedBy = u.UserID " &
+              "WHERE r.RequestNo = @reqno"
 
             cmd = New MySqlCommand(sql, cn)
             cmd.Parameters.AddWithValue("@reqno", SelectedRequestNo)
@@ -66,6 +74,7 @@ Public Class frmRequestDetails
                 End If
                 txtAmountPaid.Text = If(IsDBNull(dr("AmountPaid")), "0.00", Convert.ToDecimal(dr("AmountPaid")).ToString("N2"))
                 cboPaymentStatus.Text = If(IsDBNull(dr("PaymentStatus")) OrElse String.IsNullOrWhiteSpace(dr("PaymentStatus").ToString()), "Unpaid", dr("PaymentStatus").ToString())
+                dbPaymentVerified = (cboPaymentStatus.Text = "Paid" AndAlso txtORNo.Text.Trim() <> "")
 
                 If Not IsDBNull(dr("ReleasedByName")) AndAlso Not String.IsNullOrWhiteSpace(dr("ReleasedByName").ToString()) Then
                     txtReleasedBy.Text = dr("ReleasedByName").ToString()
@@ -77,8 +86,10 @@ Public Class frmRequestDetails
             dr.Close()
             cn.Close()
 
+            _loading = False
             ApplyStatusLock()
         Catch ex As Exception
+            _loading = False
             If cn.State = ConnectionState.Open Then cn.Close()
             MsgBox("Error loading request details: " & ex.Message, vbCritical, "Error")
         End Try
@@ -138,10 +149,7 @@ Public Class frmRequestDetails
         End Try
     End Sub
     Private Function IsPaymentVerified() As Boolean
-        Dim payStatus As String = cboPaymentStatus.Text.Trim()
-        Dim hasORNo As Boolean = Not String.IsNullOrWhiteSpace(txtORNo.Text)
-
-        Return payStatus = "Paid" AndAlso hasORNo
+        Return dbPaymentVerified
     End Function
     Private Sub ApplyStatusLock()
         If Not IsPaymentVerified() Then
@@ -178,84 +186,39 @@ Public Class frmRequestDetails
             Return
         End If
 
-        If String.IsNullOrWhiteSpace(txtORNo.Text) Then
-            MsgBox("Please enter an Official Receipt (OR) Number.", vbExclamation, "Validation Error")
+        Dim orNo As String = txtORNo.Text.Trim()
+        If Not System.Text.RegularExpressions.Regex.IsMatch(orNo, "^\d{6}$") Then
+            MsgBox("OR Number must be exactly 6 digits (example: 123456).", vbExclamation, "Validation Error")
             txtORNo.Focus()
             Return
         End If
 
-        Dim amtPaid As Decimal = 0
-        If Not Decimal.TryParse(txtAmountPaid.Text.Trim(), amtPaid) OrElse amtPaid <= 0 Then
-            MsgBox("Please enter a valid Amount Paid.", vbExclamation, "Validation Error")
-            txtAmountPaid.Focus()
-            Return
-        End If
-
-        Dim payStatus As String = If(String.IsNullOrWhiteSpace(cboPaymentStatus.Text), "Paid", cboPaymentStatus.Text.Trim())
-
         Dim totalAmt As Decimal = 0
         Decimal.TryParse(txtTotalAmount.Text.Trim(), totalAmt)
-
-        If payStatus = "Paid" AndAlso amtPaid <> totalAmt Then
-            MsgBox("Amount Paid must be exactly " & totalAmt.ToString("N2") & " (the Total Amount) when Payment Status is 'Paid'." & vbCrLf &
-               "Partial or excess amounts cannot be saved as Paid.", vbExclamation, "Validation Error")
-            txtAmountPaid.Focus()
+        If totalAmt <= 0 Then
+            MsgBox("This request has no total amount.", vbExclamation, "Validation Error")
             Return
         End If
 
-        If Not ConfirmAction("Save these payment details?", "Confirm Payment") Then Exit Sub
+        If Not ConfirmAction("Save payment of " & totalAmt.ToString("N2") & " with OR No. " & orNo & "?", "Confirm Payment") Then Exit Sub
 
         Try
             Call connection()
-            Dim newStatus As String = currentDbStatus
-            Dim advancedToProcessing As Boolean = False
-            If currentDbStatus = "Pending" Then
-                newStatus = "Processing"
-                advancedToProcessing = True
-            End If
-
-            If advancedToProcessing Then
-                sql = "UPDATE tblrequest " &
-                  "SET ORNo = @orno, " &
-                  "    ORDate = @ordate, " &
-                  "    AmountPaid = @amt, " &
-                  "    PaymentStatus = @paystatus, " &
-                  "    Status = @status, " &
-                  "    ProcessedBy = @processedby " &
-                  "WHERE RequestID = @rid"
-
-                cmd = New MySqlCommand(sql, cn)
-                cmd.Parameters.AddWithValue("@orno", txtORNo.Text.Trim())
-                cmd.Parameters.AddWithValue("@ordate", dtpORDate.Value.ToString("yyyy-MM-dd"))
-                cmd.Parameters.AddWithValue("@amt", amtPaid)
-                cmd.Parameters.AddWithValue("@paystatus", payStatus)
-                cmd.Parameters.AddWithValue("@status", newStatus)
-                cmd.Parameters.AddWithValue("@processedby", CurrentUser.UserID)
-                cmd.Parameters.AddWithValue("@rid", currentRequestID)
-            Else
-                sql = "UPDATE tblrequest " &
-                  "SET ORNo = @orno, " &
-                  "    ORDate = @ordate, " &
-                  "    AmountPaid = @amt, " &
-                  "    PaymentStatus = @paystatus, " &
-                  "    Status = @status " &
-                  "WHERE RequestID = @rid"
-
-                cmd = New MySqlCommand(sql, cn)
-                cmd.Parameters.AddWithValue("@orno", txtORNo.Text.Trim())
-                cmd.Parameters.AddWithValue("@ordate", dtpORDate.Value.ToString("yyyy-MM-dd"))
-                cmd.Parameters.AddWithValue("@amt", amtPaid)
-                cmd.Parameters.AddWithValue("@paystatus", payStatus)
-                cmd.Parameters.AddWithValue("@status", newStatus)
-                cmd.Parameters.AddWithValue("@rid", currentRequestID)
-            End If
-
+            ' Amount Paid = Total Amount, PaymentStatus = Paid. Status is NOT changed (stays Pending).
+            sql = "UPDATE tblrequest SET ORNo = @orno, ORDate = @ordate, AmountPaid = @amt, " &
+                  "PaymentStatus = 'Paid' WHERE RequestID = @rid"
+            cmd = New MySqlCommand(sql, cn)
+            cmd.Parameters.AddWithValue("@orno", orNo)
+            cmd.Parameters.AddWithValue("@ordate", dtpORDate.Value.ToString("yyyy-MM-dd"))
+            cmd.Parameters.AddWithValue("@amt", totalAmt)
+            cmd.Parameters.AddWithValue("@rid", currentRequestID)
             cmd.ExecuteNonQuery()
             cn.Close()
 
-            MsgBox("Payment details saved successfully!", vbInformation, "Success")
+            LogActivity("Save Payment", txtRequestNo.Text & " - OR " & orNo & " - " & totalAmt.ToString("N2"))
+            MsgBox("Payment saved. The request stays '" & currentDbStatus & "'." & vbCrLf &
+                   "Use Update Status to move it to Processing.", vbInformation, "Success")
             LoadRequestHeaderAndStudent()
-
         Catch ex As Exception
             If cn.State = ConnectionState.Open Then cn.Close()
             MsgBox("Error saving payment details: " & ex.Message, vbCritical, "Error")
@@ -276,24 +239,24 @@ Public Class frmRequestDetails
 
         If selectedStatus = "Cancelled" AndAlso cboPaymentStatus.Text.Trim() = "Paid" Then
             MsgBox("This request has already been paid and cannot be cancelled." & vbCrLf &
-               "Please continue processing it through to 'Released', or reopen it back to 'Processing' instead.",
-               vbExclamation, "Cannot Cancel Paid Request")
+           "Please continue processing it through to 'Released', or reopen it back to 'Processing' instead.",
+           vbExclamation, "Cannot Cancel Paid Request")
             cboStatus.Text = currentDbStatus
             Return
         End If
 
         If Not IsPaymentVerified() AndAlso selectedStatus <> "Pending" AndAlso selectedStatus <> "Cancelled" Then
             MsgBox("This request cannot move past 'Pending' until Payment Status is 'Paid' AND an OR Number is recorded." & vbCrLf &
-               "(You can still Cancel an unpaid request.)", vbExclamation, "Payment Not Verified")
+           "(You can still Cancel an unpaid request.)", vbExclamation, "Payment Not Verified")
             cboStatus.Text = currentDbStatus
             Return
         End If
 
         If Not IsValidStatusTransition(currentDbStatus, selectedStatus) Then
             MsgBox("Invalid status change: '" & currentDbStatus & "' cannot move directly to '" & selectedStatus & "'." &
-               vbCrLf & "Statuses must follow: Pending -> Processing -> Ready for Release -> Released" &
-               vbCrLf & "(Ready for Release, Released, or Cancelled requests may only be reopened back to Processing.)",
-               vbExclamation, "Invalid Status Transition")
+           vbCrLf & "Statuses must follow: Pending -> Processing -> Ready for Release -> Released" &
+           vbCrLf & "(Ready for Release, Released, or Cancelled requests may only be reopened back to Processing.)",
+           vbExclamation, "Invalid Status Transition")
             cboStatus.Text = currentDbStatus
             Return
         End If
@@ -343,6 +306,7 @@ Public Class frmRequestDetails
             cmd.ExecuteNonQuery()
             cn.Close()
 
+            LogActivity("Update Status", txtRequestNo.Text & ": " & currentDbStatus & " -> " & selectedStatus)
             MsgBox("Request status updated successfully!", vbInformation, "Success")
             LoadRequestHeaderAndStudent()
 
@@ -350,6 +314,20 @@ Public Class frmRequestDetails
             If cn.State = ConnectionState.Open Then cn.Close()
             MsgBox("Error updating status: " & ex.Message, vbCritical, "Error")
         End Try
+    End Sub
+    Private Sub txtORNo_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtORNo.KeyPress
+        If Not Char.IsControl(e.KeyChar) AndAlso Not Char.IsDigit(e.KeyChar) Then e.Handled = True
+    End Sub
+
+    Private Sub txtORNo_TextChanged(sender As Object, e As EventArgs) Handles txtORNo.TextChanged
+        If _loading Then Exit Sub       ' don't fire while loading old records (e.g. "OR-10001")
+        If System.Text.RegularExpressions.Regex.IsMatch(txtORNo.Text.Trim(), "^\d{6}$") Then
+            txtAmountPaid.Text = txtTotalAmount.Text
+            cboPaymentStatus.Text = "Paid"
+        Else
+            txtAmountPaid.Text = "0.00"
+            cboPaymentStatus.Text = "Unpaid"
+        End If
     End Sub
 
     Private Sub btnBackToRequestList_Click(sender As Object, e As EventArgs) Handles btnBacktoRequestList.Click

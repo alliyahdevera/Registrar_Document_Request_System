@@ -1,5 +1,6 @@
 ﻿Module CurrentUser
     Public UserID As Integer
+    Public Username As String
     Public FullName As String
     Public Role As String
 

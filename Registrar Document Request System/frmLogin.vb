@@ -24,10 +24,12 @@ Public Class frmLogin
 
             If dr.Read() Then
                 CurrentUser.UserID = Convert.ToInt32(dr("UserID"))
+                CurrentUser.Username = dr("Username").ToString()          ' <-- ADD
                 CurrentUser.FullName = dr("FullName").ToString()
                 CurrentUser.Role = dr("Role").ToString()
                 dr.Close()
                 cn.Close()
+                LogActivity("Login", "Logged in to the system")            ' <-- ADD
                 MsgBox("Welcome to Registrar Document Request System!", vbInformation, "Registrar Document Request System")
                 frmMainMenu.Show()
                 Me.Hide()
