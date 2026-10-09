@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 08, 2026 at 11:19 AM
+-- Generation Time: Oct 09, 2026 at 03:14 PM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.0.30
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -115,7 +115,9 @@ INSERT INTO `tblrequest` (`RequestID`, `RequestNo`, `StudentID`, `RequestDate`, 
 (35, 'REQ-2026-025', '1808-23', '2026-09-16', 200.00, 'Paid', 200.00, 'OR-10019', '2026-09-16', 'Ready for Release', 3, 2, 4, '2026-09-23 09:00:00'),
 (36, 'REQ-2026-026', '2055-24', '2026-09-20', 100.00, 'Paid', 100.00, 'OR-10020', '2026-09-20', 'Processing', 4, 3, 2, NULL),
 (37, 'REQ-2026-027', '2786-24', '2026-09-26', 50.00, 'Paid', 50.00, 'OR-12345', '2026-09-26', 'Processing', 1, 1, NULL, NULL),
-(38, 'REQ-2026-028', '2786-24', '2026-09-26', 100.00, 'Paid', 100.00, 'OR-09876', '2026-09-26', 'Processing', 1, 1, NULL, NULL);
+(38, 'REQ-2026-028', '2786-24', '2026-09-26', 100.00, 'Paid', 100.00, 'OR-09876', '2026-09-26', 'Processing', 1, 1, NULL, NULL),
+(39, 'REQ-2026-029', '2208-24', '2026-10-09', 300.00, 'Unpaid', 0.00, NULL, NULL, 'Pending', 1, NULL, NULL, NULL),
+(40, 'REQ-2026-030', '1396-24', '2026-10-09', 50.00, 'Unpaid', 0.00, NULL, NULL, 'Pending', 1, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -174,7 +176,9 @@ INSERT INTO `tblrequestdetails` (`RequestDetailID`, `RequestID`, `DocumentID`, `
 (40, 35, 1, 1, 200.00, 200.00),
 (41, 36, 2, 1, 100.00, 100.00),
 (42, 37, 2, 1, 50.00, 50.00),
-(43, 38, 3, 1, 100.00, 100.00);
+(43, 38, 3, 1, 100.00, 100.00),
+(44, 39, 8, 1, 300.00, 300.00),
+(45, 40, 6, 1, 50.00, 50.00);
 
 -- --------------------------------------------------------
 
@@ -236,6 +240,7 @@ INSERT INTO `tblstudents` (`StudentID`, `LRN`, `LastName`, `FirstName`, `MiddleN
 ('2096-24', '123456789019', 'Ramones', 'Leisbeth', 'Bering', 'Bachelor of Science in Information Technology', '3rd Year', '31E1', '09123456789', 'Active'),
 ('2194-24', '123456789014', 'Sabesaje', 'Sho Uno', '', 'Bachelor of Science in Information Technology', '3rd Year', '31E1', '09123456789', 'Active'),
 ('2208-24', '123456789017', 'Eullo', 'John Raven', 'Jandoc', 'Bachelor of Science in Information Technology', '3rd Year', '31E1', '09123456789', 'Active'),
+('2343-23', '136788443234', 'Mikhai', 'Alyah', '', 'Bachelor of Science in Computer Science', '2nd Year', '31E2', '09625632432', 'Active'),
 ('2786-24', '424515150094', 'Roque', 'Kevin Clerck', 'Alora', 'Bachelor of Science in Information Technology', '3rd Year', '31E1', '09626728466', 'Active'),
 ('2789-24', '136899110095', 'De Vera', 'Alliyah', 'Garcia', 'Bachelor of Science in Information Technology', '3rd Year', '31E1', '09625632435', 'Active');
 
@@ -260,7 +265,7 @@ CREATE TABLE `tblusers` (
 
 INSERT INTO `tblusers` (`UserID`, `Username`, `Password`, `FullName`, `Role`, `Status`) VALUES
 (1, 'admin', 'admin123', 'System Administrator', 'Administrator', 'Active'),
-(2, 'staff1', 'staff123', 'Registrar Staff One', 'Registrar Staff', 'Active'),
+(2, 'staff1', 'staff1', 'Registrar Staff One', 'Registrar Staff', 'Active'),
 (3, 'staff2', 'staff456', 'Registrar Staff Two', 'Registrar Staff', 'Active'),
 (4, 'encoder1', 'encoder123', 'Data Encoder One', 'Registrar Staff', 'Active');
 
@@ -325,13 +330,13 @@ ALTER TABLE `tbldocuments`
 -- AUTO_INCREMENT for table `tblrequest`
 --
 ALTER TABLE `tblrequest`
-  MODIFY `RequestID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `RequestID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `tblrequestdetails`
 --
 ALTER TABLE `tblrequestdetails`
-  MODIFY `RequestDetailID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `RequestDetailID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `tblschoolyear`
