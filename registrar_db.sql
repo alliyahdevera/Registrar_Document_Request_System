@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 10, 2026 at 04:24 AM
+-- Generation Time: Oct 10, 2026 at 10:24 AM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.0.30
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -58,7 +58,36 @@ INSERT INTO `tblactivitylogs` (`LogID`, `UserID`, `Username`, `FullName`, `Role`
 (13, 2, 'staff1', 'Registrar Staff One', 'Registrar Staff', 'Update Status', 'REQ-2026-030: Pending -> Processing', '2026-10-10 10:22:06'),
 (14, 2, 'staff1', 'Registrar Staff One', 'Registrar Staff', 'Logout', 'Logged out of the system', '2026-10-10 10:22:14'),
 (15, 1, 'admin', 'System Administrator', 'Administrator', 'Login', 'Logged in to the system', '2026-10-10 10:22:20'),
-(16, 1, 'admin', 'System Administrator', 'Administrator', 'Logout', 'Logged out of the system', '2026-10-10 10:24:11');
+(16, 1, 'admin', 'System Administrator', 'Administrator', 'Logout', 'Logged out of the system', '2026-10-10 10:24:11'),
+(17, 1, 'admin', 'System Administrator', 'Administrator', 'Login', 'Logged in to the system', '2026-10-10 14:44:03'),
+(18, 1, 'admin', 'System Administrator', 'Administrator', 'Logout', 'Logged out of the system', '2026-10-10 14:46:30'),
+(19, 1, 'admin', 'System Administrator', 'Administrator', 'Login', 'Logged in to the system', '2026-10-10 14:51:31'),
+(20, 1, 'admin', 'System Administrator', 'Administrator', 'Logout', 'Logged out of the system', '2026-10-10 15:03:22'),
+(21, 1, 'admin', 'System Administrator', 'Administrator', 'Login', 'Logged in to the system', '2026-10-10 15:05:41'),
+(22, 1, 'admin', 'System Administrator', 'Administrator', 'Logout', 'Logged out of the system', '2026-10-10 15:07:50'),
+(23, 1, 'admin', 'System Administrator', 'Administrator', 'Login', 'Logged in to the system', '2026-10-10 15:08:22'),
+(24, 1, 'admin', 'System Administrator', 'Administrator', 'Logout', 'Logged out of the system', '2026-10-10 15:09:05'),
+(25, 1, 'admin', 'System Administrator', 'Administrator', 'Login', 'Logged in to the system', '2026-10-10 15:16:44'),
+(26, 1, 'admin', 'System Administrator', 'Administrator', 'Logout', 'Logged out of the system', '2026-10-10 15:16:58'),
+(27, 1, 'admin', 'System Administrator', 'Administrator', 'Login', 'Logged in to the system', '2026-10-10 15:17:22'),
+(28, 1, 'admin', 'System Administrator', 'Administrator', 'Logout', 'Logged out of the system', '2026-10-10 15:18:17'),
+(29, 1, 'admin', 'System Administrator', 'Administrator', 'Login', 'Logged in to the system', '2026-10-10 15:18:41'),
+(30, 1, 'admin', 'System Administrator', 'Administrator', 'Logout', 'Logged out of the system', '2026-10-10 15:21:14'),
+(31, 1, 'admin', 'System Administrator', 'Administrator', 'Login', 'Logged in to the system', '2026-10-10 15:21:30'),
+(32, 1, 'admin', 'System Administrator', 'Administrator', 'Logout', 'Logged out of the system', '2026-10-10 15:27:32'),
+(33, 1, 'admin', 'System Administrator', 'Administrator', 'Login', 'Logged in to the system', '2026-10-10 15:39:28'),
+(34, 1, 'admin', 'System Administrator', 'Administrator', 'Logout', 'Logged out of the system', '2026-10-10 15:41:31'),
+(35, 1, 'admin', 'System Administrator', 'Administrator', 'Login', 'Logged in to the system', '2026-10-10 15:57:10'),
+(36, 1, 'admin', 'System Administrator', 'Administrator', 'Logout', 'Logged out of the system', '2026-10-10 15:58:42'),
+(37, 1, 'admin', 'System Administrator', 'Administrator', 'Login', 'Logged in to the system', '2026-10-10 15:59:02'),
+(38, 1, 'admin', 'System Administrator', 'Administrator', 'Logout', 'Logged out of the system', '2026-10-10 15:59:26'),
+(39, 1, 'admin', 'System Administrator', 'Administrator', 'Login', 'Logged in to the system', '2026-10-10 16:05:00'),
+(40, 1, 'admin', 'System Administrator', 'Administrator', 'Logout', 'Logged out of the system', '2026-10-10 16:12:51'),
+(41, 1, 'admin', 'System Administrator', 'Administrator', 'Login', 'Logged in to the system', '2026-10-10 16:16:14'),
+(42, 1, 'admin', 'System Administrator', 'Administrator', 'Save Payment', 'REQ-2025-005 - OR OR-56587 - 100.00', '2026-10-10 16:17:10'),
+(43, 1, 'admin', 'System Administrator', 'Administrator', 'Logout', 'Logged out of the system', '2026-10-10 16:18:27'),
+(44, 1, 'admin', 'System Administrator', 'Administrator', 'Login', 'Logged in to the system', '2026-10-10 16:23:44'),
+(45, 1, 'admin', 'System Administrator', 'Administrator', 'Logout', 'Logged out of the system', '2026-10-10 16:24:01');
 
 -- --------------------------------------------------------
 
@@ -142,7 +171,7 @@ INSERT INTO `tblrequest` (`RequestID`, `RequestNo`, `StudentID`, `RequestDate`, 
 (23, 'REQ-2025-002', '1396-24', '2025-03-22', 150.00, 'Paid', 150.00, NULL, NULL, 'Released', 2, 2, 2, NULL),
 (24, 'REQ-2025-003', '1522-24', '2025-06-18', 50.00, 'Paid', 50.00, 'OR-10021', '2025-06-18', 'Cancelled', 4, 2, NULL, NULL),
 (25, 'REQ-2025-004', '1808-23', '2025-09-02', 200.00, 'Paid', 200.00, NULL, NULL, 'Cancelled', 2, NULL, NULL, NULL),
-(26, 'REQ-2025-005', '2055-24', '2025-11-10', 100.00, 'Unpaid', 0.00, NULL, NULL, 'Cancelled', 4, NULL, NULL, NULL),
+(26, 'REQ-2025-005', '2055-24', '2025-11-10', 100.00, 'Paid', 100.00, 'OR-56587', '2026-10-10', 'Cancelled', 4, NULL, NULL, NULL),
 (27, 'REQ-2026-017', '1123-24', '2026-08-05', 150.00, 'Paid', 150.00, 'OR-10011', '2026-08-05', 'Released', 4, 2, 3, NULL),
 (28, 'REQ-2026-018', '1127-24', '2026-08-12', 50.00, 'Paid', 50.00, 'OR-10012', '2026-08-12', 'Released', 2, 3, 4, NULL),
 (29, 'REQ-2026-019', '1208-24', '2026-08-18', 200.00, 'Paid', 200.00, 'OR-10013', '2026-08-18', 'Cancelled', 3, 4, 2, NULL),
@@ -254,7 +283,7 @@ CREATE TABLE `tblstudents` (
   `LastName` varchar(50) NOT NULL,
   `FirstName` varchar(50) NOT NULL,
   `MiddleName` varchar(50) DEFAULT NULL,
-  `Course` varchar(50) DEFAULT NULL,
+  `Course` varchar(150) DEFAULT NULL,
   `YearLevel` varchar(20) DEFAULT NULL,
   `Section` varchar(20) DEFAULT NULL,
   `ContactNo` varchar(20) DEFAULT NULL,
@@ -269,12 +298,20 @@ INSERT INTO `tblstudents` (`StudentID`, `LRN`, `LastName`, `FirstName`, `MiddleN
 ('1123-24', '098760987612', 'Fernandez', 'Gio', 'Natividad', 'Bachelor of Science in Information Technology', '3rd Year', '31E1', '09609829478', 'Active'),
 ('1127-24', '123456789016', 'Enclona', 'Paul Benedict', '', 'Bachelor of Science in Information Technology', '3rd Year', '31E1', '09123456789', 'Active'),
 ('1208-24', '123456789018', 'Para', 'Andrea', '', 'Bachelor of Science in Information Technology', '3rd Year', '31E1', '09123456789', 'Active'),
+('1289-23', '123758433456', 'Talipan', 'Christianne Joyce', '', 'Bachelor of Science in Customs Administration', '4th year', '41E1', '09783465861', 'Active'),
 ('1314-24', '253435623456', 'Batoy', 'Nicholo John', 'Lopez', 'Bachelor of Science in Information Technology', '3rd Year', '31E1', '09676781233', 'Active'),
 ('1327-24', '123456789015', 'Reales', 'Jonnidel', 'Paradero', 'Bachelor of Science in Information Technology', '3rd Year', '31E1', '09123456789', 'Active'),
+('1364-23', '175846375843', 'Esmenda', 'Lowell', '', 'Bachelor of Science in Real Estate Management', '4th year', '41E2', '09455647391', 'Active'),
 ('1395-24', '407321150214', 'Solis', 'Sophia Cassandra', 'Villacorte', 'Bachelor of Science in Information Technology', '3rd Year', '31E1', '09690141523', 'Active'),
 ('1396-24', '123456123412', 'Mendoza', 'Stephanie', 'Pobar', 'Bachelor of Science in Information Technology', '3rd Year', '31E1', '09612564233', 'Active'),
+('1434-22', '165748354312', 'Dimzon', 'Christine', '', 'Bachelor of Science in Tourism Management', '3rd Year', '31E3', '09764845634', 'Active'),
+('1462-24', '175869475835', 'Falcon', 'Anthony James', '', 'Bachelor of Science in Criminology', '4th year', '41E1', '09634537584', 'Active'),
 ('1522-24', '234567345678', 'Barcinas', 'Marc Denize', 'Babon', 'Bachelor of Science in Information Technology', '3rd Year', '31E1', '09612564765', 'Active'),
+('1657-26', '132647843832', 'Gonzales', 'Ivy', '', 'Juris Doctor Program', '1st Year', '11M1', '09432643261', 'Active'),
+('1755-23', '436274637534', 'Abenoza', 'Thaljie', '', 'Bachelor of Science in Computer Engineering', '4th year', '41E2', '09463758472', 'Active'),
 ('1808-23', '123456789013', 'Villacorte', 'Joshua', 'Joseph', 'Bachelor of Science in Information Technology', '3rd Year', '31E1', '09123456789', 'Active'),
+('1825-23', '123529486752', 'Torio', 'Aeriel', '', 'Bachelor of Science in Hospitality Management', '2nd Year', '21E2', '09326743641', 'Active'),
+('1987-26', '173762437621', 'Ace', 'Jilwin', '', 'Bachelor of Secondary Education - Major in Mathematics', '1st Year', '11M2', '09312643523', 'Active'),
 ('2055-24', '123456789012', 'Canua', 'Carl James', 'Prado', 'Bachelor of Science in Information Technology', '3rd Year', '31E3', '09764743381', 'Active'),
 ('2096-24', '123456789019', 'Ramones', 'Leisbeth', 'Bering', 'Bachelor of Science in Information Technology', '3rd Year', '31E1', '09123456789', 'Active'),
 ('2194-24', '123456789014', 'Sabesaje', 'Sho Uno', '', 'Bachelor of Science in Information Technology', '3rd Year', '31E1', '09123456789', 'Active'),
@@ -370,7 +407,7 @@ ALTER TABLE `tblusers`
 -- AUTO_INCREMENT for table `tblactivitylogs`
 --
 ALTER TABLE `tblactivitylogs`
-  MODIFY `LogID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `LogID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `tbldocuments`

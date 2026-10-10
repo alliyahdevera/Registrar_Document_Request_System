@@ -9,7 +9,7 @@ Public Class frmRequestDetails
     Private _loading As Boolean = False
     Private dbPaymentVerified As Boolean = False
 
-    Private Const OR_DIGITS As Integer = 5          ' OR-10001 -> 5 digits (change to 6 if needed)
+    Private Const OR_DIGITS As Integer = 5
     Private _fixing As Boolean = False
     Private Function IsValidOR(s As String) As Boolean
         Return System.Text.RegularExpressions.Regex.IsMatch(s.Trim(), "^OR-\d{" & OR_DIGITS & "}$")
@@ -216,7 +216,6 @@ Public Class frmRequestDetails
 
         Try
             Call connection()
-            ' Amount Paid = Total Amount, PaymentStatus = Paid. Status is NOT changed (stays Pending).
             sql = "UPDATE tblrequest SET ORNo = @orno, ORDate = @ordate, AmountPaid = @amt, " &
                   "PaymentStatus = 'Paid' WHERE RequestID = @rid"
             cmd = New MySqlCommand(sql, cn)
