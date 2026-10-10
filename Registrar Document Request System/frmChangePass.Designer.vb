@@ -254,6 +254,7 @@ Partial Class frmChangePass
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.Panel1)
         Me.Name = "frmChangePass"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "frmChangePass"
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()

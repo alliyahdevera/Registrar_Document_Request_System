@@ -1,12 +1,4 @@
 ﻿Imports MySql.Data.MySqlClient
-
-' ============================================================================
-'  frmMainMenu  =  the application SHELL
-'  - Left sidebar (Panel1) with the navigation buttons
-'  - pnlmain (Dock = Fill) hosts ONE page (child form) at a time
-'  Every other form (frmDashboard, frmStudentManagement, ...) is loaded INTO
-'  pnlmain through ShowPage(). No page is ever shown as a separate window.
-' ============================================================================
 Public Class frmMainMenu
 
     Private _currentPage As Form = Nothing
@@ -16,7 +8,6 @@ Public Class frmMainMenu
     Private ReadOnly NavNormalColor As Color = Color.FromArgb(1, 21, 78)
     Private ReadOnly NavActiveColor As Color = Color.FromArgb(38, 70, 160)
 
-#Region "Form lifecycle"
 
     Private Sub frmMainMenu_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         _navButtons = New Button() {btnMainMenu, btnStudentManagement, btnDocumentManagement,
@@ -38,11 +29,11 @@ Public Class frmMainMenu
         btnUserManagement.Visible = isAdmin
         btnDocumentManagement.Visible = isAdmin
         btnStudentManagement.Visible = isAdmin
+        btnsettings.Visible = isAdmin
         btnchangepassword.Visible = Not isAdmin     ' Change Password: staff only
         ArrangeNavButtons()
     End Sub
 
-    ' Re-stacks the visible sidebar buttons so hidden ones leave no gaps
     Private Sub ArrangeNavButtons()
         Dim ordered As Button() = {btnMainMenu, btnStudentManagement, btnDocumentManagement,
                                    btnDocumentRequests, btnReqList, btnReport, btnUserManagement,
@@ -56,8 +47,6 @@ Public Class frmMainMenu
         Next
     End Sub
 
-    ' Clicking the window "X" = leave the system (frmLogin is only hidden,
-    ' so without this the program would keep running invisibly).
     Private Sub frmMainMenu_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
         If _loggingOut Then Exit Sub
         If e.CloseReason = CloseReason.UserClosing Then
@@ -71,11 +60,6 @@ Public Class frmMainMenu
         If Not _loggingOut Then System.Windows.Forms.Application.Exit()
     End Sub
 
-#End Region
-
-#Region "Page hosting (the heart of the one-panel design)"
-
-    ' Loads any form into pnlmain, replacing the page that is currently shown.
     Private Sub ShowPage(page As Form, activeButton As Button)
         If page Is Nothing Then Exit Sub
 
@@ -96,8 +80,6 @@ Public Class frmMainMenu
 
         SetActiveButton(activeButton)
 
-        ' Dispose the old page AFTER the current event handler finishes
-        ' (a page may be asking us to replace it from inside its own button click).
         If oldPage IsNot Nothing Then
             pnlmain.Controls.Remove(oldPage)
             Me.BeginInvoke(New MethodInvoker(Sub() oldPage.Dispose()))
@@ -129,10 +111,6 @@ Public Class frmMainMenu
         page.SelectedRequestNo = requestNo            ' the page loads it in its own Load event
         ShowPage(page, btnReqList)
     End Sub
-
-#End Region
-
-#Region "Sidebar buttons"
 
     Private Sub btnMainMenu_Click(sender As Object, e As EventArgs) Handles btnMainMenu.Click
         OpenDashboard()
@@ -183,6 +161,10 @@ Public Class frmMainMenu
         End Using
     End Sub
     Private Sub btnsettings_Click(sender As Object, e As EventArgs) Handles btnsettings.Click
+        If Not CurrentUser.IsAdmin Then
+            MsgBox("Only the Administrator can access Settings.", vbExclamation, "Access Denied")
+            Exit Sub
+        End If
         ShowPage(New frmSettings(), btnsettings)
     End Sub
 
@@ -197,6 +179,5 @@ Public Class frmMainMenu
             Me.Close()
         End If
     End Sub
-#End Region
 
 End Class
