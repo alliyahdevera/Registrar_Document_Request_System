@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 09, 2026 at 08:13 PM
+-- Generation Time: Oct 10, 2026 at 04:24 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.0.30
 
@@ -37,6 +37,28 @@ CREATE TABLE `tblactivitylogs` (
   `Details` varchar(500) DEFAULT NULL,
   `LogDate` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tblactivitylogs`
+--
+
+INSERT INTO `tblactivitylogs` (`LogID`, `UserID`, `Username`, `FullName`, `Role`, `ActionType`, `Details`, `LogDate`) VALUES
+(1, 1, 'admin', 'System Administrator', 'Administrator', 'Login', 'Logged in to the system', '2026-10-10 10:10:23'),
+(2, 1, 'admin', 'System Administrator', 'Administrator', 'Logout', 'Logged out of the system', '2026-10-10 10:10:46'),
+(3, 2, 'staff1', 'Registrar Staff One', 'Registrar Staff', 'Login', 'Logged in to the system', '2026-10-10 10:11:24'),
+(4, 2, 'staff1', 'Registrar Staff One', 'Registrar Staff', 'Logout', 'Logged out of the system', '2026-10-10 10:13:37'),
+(5, 1, 'admin', 'System Administrator', 'Administrator', 'Login', 'Logged in to the system', '2026-10-10 10:13:43'),
+(6, 1, 'admin', 'System Administrator', 'Administrator', 'Logout', 'Logged out of the system', '2026-10-10 10:13:50'),
+(7, 2, 'staff1', 'Registrar Staff One', 'Registrar Staff', 'Login', 'Logged in to the system', '2026-10-10 10:13:58'),
+(8, 2, 'staff1', 'Registrar Staff One', 'Registrar Staff', 'Login', 'Logged in to the system', '2026-10-10 10:17:19'),
+(9, 2, 'staff1', 'Registrar Staff One', 'Registrar Staff', 'Save Payment', 'REQ-2026-030 - OR OR-68345 - 50.00', '2026-10-10 10:19:41'),
+(10, 2, 'staff1', 'Registrar Staff One', 'Registrar Staff', 'Save Payment', 'REQ-2026-030 - OR OR-68345 - 50.00', '2026-10-10 10:19:52'),
+(11, 2, 'staff1', 'Registrar Staff One', 'Registrar Staff', 'Login', 'Logged in to the system', '2026-10-10 10:21:39'),
+(12, 2, 'staff1', 'Registrar Staff One', 'Registrar Staff', 'Save Payment', 'REQ-2026-030 - OR OR-68345 - 50.00', '2026-10-10 10:21:55'),
+(13, 2, 'staff1', 'Registrar Staff One', 'Registrar Staff', 'Update Status', 'REQ-2026-030: Pending -> Processing', '2026-10-10 10:22:06'),
+(14, 2, 'staff1', 'Registrar Staff One', 'Registrar Staff', 'Logout', 'Logged out of the system', '2026-10-10 10:22:14'),
+(15, 1, 'admin', 'System Administrator', 'Administrator', 'Login', 'Logged in to the system', '2026-10-10 10:22:20'),
+(16, 1, 'admin', 'System Administrator', 'Administrator', 'Logout', 'Logged out of the system', '2026-10-10 10:24:11');
 
 -- --------------------------------------------------------
 
@@ -134,7 +156,7 @@ INSERT INTO `tblrequest` (`RequestID`, `RequestNo`, `StudentID`, `RequestDate`, 
 (37, 'REQ-2026-027', '2786-24', '2026-09-26', 50.00, 'Paid', 50.00, 'OR-12345', '2026-09-26', 'Processing', 1, 1, NULL, NULL),
 (38, 'REQ-2026-028', '2786-24', '2026-09-26', 100.00, 'Paid', 100.00, 'OR-09876', '2026-09-26', 'Processing', 1, 1, NULL, NULL),
 (39, 'REQ-2026-029', '2208-24', '2026-10-09', 300.00, 'Unpaid', 0.00, NULL, NULL, 'Pending', 1, NULL, NULL, NULL),
-(40, 'REQ-2026-030', '1396-24', '2026-10-09', 50.00, 'Unpaid', 0.00, NULL, NULL, 'Pending', 1, NULL, NULL, NULL);
+(40, 'REQ-2026-030', '1396-24', '2026-10-09', 50.00, 'Paid', 50.00, 'OR-68345', '2026-10-10', 'Processing', 1, 2, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -348,7 +370,7 @@ ALTER TABLE `tblusers`
 -- AUTO_INCREMENT for table `tblactivitylogs`
 --
 ALTER TABLE `tblactivitylogs`
-  MODIFY `LogID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `LogID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `tbldocuments`
