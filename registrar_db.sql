@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 10, 2026 at 10:24 AM
+-- Generation Time: Oct 10, 2026 at 06:21 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -87,7 +87,76 @@ INSERT INTO `tblactivitylogs` (`LogID`, `UserID`, `Username`, `FullName`, `Role`
 (42, 1, 'admin', 'System Administrator', 'Administrator', 'Save Payment', 'REQ-2025-005 - OR OR-56587 - 100.00', '2026-10-10 16:17:10'),
 (43, 1, 'admin', 'System Administrator', 'Administrator', 'Logout', 'Logged out of the system', '2026-10-10 16:18:27'),
 (44, 1, 'admin', 'System Administrator', 'Administrator', 'Login', 'Logged in to the system', '2026-10-10 16:23:44'),
-(45, 1, 'admin', 'System Administrator', 'Administrator', 'Logout', 'Logged out of the system', '2026-10-10 16:24:01');
+(45, 1, 'admin', 'System Administrator', 'Administrator', 'Logout', 'Logged out of the system', '2026-10-10 16:24:01'),
+(46, 1, 'admin', 'System Administrator', 'Administrator', 'Login', 'Logged in to the system', '2026-10-10 17:22:37'),
+(47, 1, 'admin', 'System Administrator', 'Administrator', 'Update Status', 'REQ-2026-021: Cancelled -> Processing', '2026-10-10 17:35:26'),
+(48, 1, 'admin', 'System Administrator', 'Administrator', 'Update Status', 'REQ-2026-019: Cancelled -> Processing', '2026-10-10 17:35:42'),
+(49, 1, 'admin', 'System Administrator', 'Administrator', 'Update Status', 'REQ-2025-005: Cancelled -> Processing', '2026-10-10 17:35:54'),
+(50, 1, 'admin', 'System Administrator', 'Administrator', 'Logout', 'Logged out of the system', '2026-10-10 17:36:05'),
+(51, 3, 'staff2', 'Registrar Staff Two', 'Registrar Staff', 'Login', 'Logged in to the system', '2026-10-10 17:36:12'),
+(52, 3, 'staff2', 'Registrar Staff Two', 'Registrar Staff', 'Update Status', 'REQ-2025-003: Cancelled -> Processing', '2026-10-10 17:36:44'),
+(53, 3, 'staff2', 'Registrar Staff Two', 'Registrar Staff', 'Logout', 'Logged out of the system', '2026-10-10 17:37:06'),
+(54, 1, 'admin', 'System Administrator', 'Administrator', 'Login', 'Logged in to the system', '2026-10-10 17:37:09'),
+(55, 1, 'admin', 'System Administrator', 'Administrator', 'Update Status', 'REQ-2026-014: Cancelled -> Processing', '2026-10-10 17:38:08'),
+(56, 1, 'admin', 'System Administrator', 'Administrator', 'Update Status', 'REQ-2026-014: Processing -> Ready for Release', '2026-10-10 17:38:11'),
+(57, 1, 'admin', 'System Administrator', 'Administrator', 'Logout', 'Logged out of the system', '2026-10-10 17:39:39'),
+(58, 1, 'admin', 'System Administrator', 'Administrator', 'Login', 'Logged in to the system', '2026-10-10 17:39:49'),
+(59, 2, 'staff1', 'Registrar Staff One', 'Registrar Staff', 'Login', 'Logged in to the system', '2026-10-10 17:42:46'),
+(60, 2, 'staff1', 'Registrar Staff One', 'Registrar Staff', 'Logout', 'Logged out of the system', '2026-10-10 17:42:56'),
+(61, 3, 'staff2', 'Registrar Staff Two', 'Registrar Staff', 'Login', 'Logged in to the system', '2026-10-10 17:43:02'),
+(62, 3, 'staff2', 'Registrar Staff Two', 'Registrar Staff', 'Logout', 'Logged out of the system', '2026-10-10 17:43:14'),
+(63, 4, 'encoder1', 'Data Encoder One', 'Registrar Staff', 'Login', 'Logged in to the system', '2026-10-10 17:43:24'),
+(64, 4, 'encoder1', 'Data Encoder One', 'Registrar Staff', 'New Request', 'REQ-2026-031 - 1657-26 - Total 200.00', '2026-10-10 17:44:44'),
+(65, 4, 'encoder1', 'Data Encoder One', 'Registrar Staff', 'New Request', 'REQ-2026-032 - 1825-23 - Total 150.00', '2026-10-10 17:46:16'),
+(66, 4, 'encoder1', 'Data Encoder One', 'Registrar Staff', 'Save Payment', 'REQ-2026-032 - OR OR-43543 - 150.00', '2026-10-10 17:46:29'),
+(67, 4, 'encoder1', 'Data Encoder One', 'Registrar Staff', 'Update Status', 'REQ-2026-032: Pending -> Processing', '2026-10-10 17:46:38'),
+(68, 4, 'encoder1', 'Data Encoder One', 'Registrar Staff', 'Update Status', 'REQ-2026-032: Processing -> Ready for Release', '2026-10-10 17:46:53'),
+(69, 4, 'encoder1', 'Data Encoder One', 'Registrar Staff', 'New Request', 'REQ-2026-033 - 1396-24 - Total 100.00', '2026-10-10 17:47:17'),
+(70, 4, 'encoder1', 'Data Encoder One', 'Registrar Staff', 'Logout', 'Logged out of the system', '2026-10-10 17:47:25'),
+(71, 1, 'admin', 'System Administrator', 'Administrator', 'Login', 'Logged in to the system', '2026-10-10 18:19:46'),
+(72, 1, 'admin', 'System Administrator', 'Administrator', 'Logout', 'Logged out of the system', '2026-10-10 18:22:57'),
+(73, 1, 'admin', 'System Administrator', 'Administrator', 'Login', 'Logged in to the system', '2026-10-10 18:23:19'),
+(74, 1, 'admin', 'System Administrator', 'Administrator', 'Login', 'Logged in to the system', '2026-10-10 18:24:35'),
+(75, 1, 'admin', 'System Administrator', 'Administrator', 'New Request', 'REQ-2026-034 - 1289-23 - Total 50.00', '2026-10-10 18:26:20'),
+(76, 1, 'admin', 'System Administrator', 'Administrator', 'New Request', 'REQ-2026-035 - 1289-23 - Total 300.00', '2026-10-10 18:27:35'),
+(77, 1, 'admin', 'System Administrator', 'Administrator', 'Save Payment', 'REQ-2026-035 - OR OR-54354 - 300.00', '2026-10-10 18:28:33'),
+(78, 1, 'admin', 'System Administrator', 'Administrator', 'Update Status', 'REQ-2026-035: Pending -> Processing', '2026-10-10 18:30:26'),
+(79, 1, 'admin', 'System Administrator', 'Administrator', 'Logout', 'Logged out of the system', '2026-10-10 18:31:23'),
+(80, 2, 'staff1', 'Registrar Staff One', 'Registrar Staff', 'Login', 'Logged in to the system', '2026-10-10 18:35:28'),
+(81, 2, 'staff1', 'Registrar Staff One', 'Registrar Staff', 'New Request', 'REQ-2026-036 - 1289-23 - Total 150.00', '2026-10-10 18:38:35'),
+(82, 2, 'staff1', 'Registrar Staff One', 'Registrar Staff', 'Save Payment', 'REQ-2026-036 - OR OR-43435 - 150.00', '2026-10-10 18:39:42'),
+(83, 2, 'staff1', 'Registrar Staff One', 'Registrar Staff', 'Update Status', 'REQ-2026-036: Pending -> Processing', '2026-10-10 18:42:02'),
+(84, 2, 'staff1', 'Registrar Staff One', 'Registrar Staff', 'Update Status', 'REQ-2026-036: Processing -> Ready for Release', '2026-10-10 18:42:19'),
+(85, 2, 'staff1', 'Registrar Staff One', 'Registrar Staff', 'Update Status', 'REQ-2026-036: Ready for Release -> Processing', '2026-10-10 18:42:35'),
+(86, 2, 'staff1', 'Registrar Staff One', 'Registrar Staff', 'Update Status', 'REQ-2026-032: Ready for Release -> Released', '2026-10-10 18:43:20'),
+(87, 2, 'staff1', 'Registrar Staff One', 'Registrar Staff', 'Logout', 'Logged out of the system', '2026-10-10 18:45:30'),
+(88, 1, 'admin', 'System Administrator', 'Administrator', 'Login', 'Logged in to the system', '2026-10-10 18:45:42'),
+(89, 1, 'admin', 'System Administrator', 'Administrator', 'Logout', 'Logged out of the system', '2026-10-10 18:45:59'),
+(90, 1, 'admin', 'System Administrator', 'Administrator', 'Login', 'Logged in to the system', '2026-10-10 18:46:17'),
+(91, 1, 'admin', 'System Administrator', 'Administrator', 'Logout', 'Logged out of the system', '2026-10-10 18:46:22'),
+(92, 1, 'admin', 'System Administrator', 'Administrator', 'Login', 'Logged in to the system', '2026-10-10 18:46:33'),
+(93, 1, 'admin', 'System Administrator', 'Administrator', 'Login', 'Logged in to the system', '2026-10-10 19:25:34'),
+(94, 2, 'staff1', 'Registrar Staff One', 'Registrar Staff', 'Login', 'Logged in to the system', '2026-10-10 19:51:11'),
+(95, 2, 'staff1', 'Registrar Staff One', 'Registrar Staff', 'Logout', 'Logged out of the system', '2026-10-10 19:51:22'),
+(96, 2, 'staff1', 'Registrar Staff One', 'Registrar Staff', 'Login', 'Logged in to the system', '2026-10-10 19:51:37'),
+(97, 2, 'staff1', 'Registrar Staff One', 'Registrar Staff', 'Logout', 'Logged out of the system', '2026-10-10 19:51:53'),
+(98, 1, 'admin', 'System Administrator', 'Administrator', 'Login', 'Logged in to the system', '2026-10-10 19:51:57'),
+(99, 1, 'admin', 'System Administrator', 'Administrator', 'Logout', 'Logged out of the system', '2026-10-10 19:52:18'),
+(100, 2, 'staff1', 'Registrar Staff One', 'Registrar Staff', 'Login', 'Logged in to the system', '2026-10-10 19:52:38'),
+(101, 2, 'staff1', 'Registrar Staff One', 'Registrar Staff', 'Login', 'Logged in to the system', '2026-10-10 20:34:41'),
+(102, 2, 'staff1', 'Registrar Staff One', 'Registrar Staff', 'New Request', 'REQ-2026-037 - 1434-22 - Total 50.00', '2026-10-10 20:35:17'),
+(103, 2, 'staff1', 'Registrar Staff One', 'Registrar Staff', 'New Request', 'REQ-2026-038 - 1434-22 - Total 150.00', '2026-10-10 21:02:41'),
+(104, 2, 'staff1', 'Registrar Staff One', 'Registrar Staff', 'Save Payment', 'REQ-2026-038 - OR OR-43241 - 150.00', '2026-10-10 21:03:28'),
+(105, 2, 'staff1', 'Registrar Staff One', 'Registrar Staff', 'Update Status', 'REQ-2026-038: Pending -> Processing', '2026-10-10 21:04:22'),
+(106, 2, 'staff1', 'Registrar Staff One', 'Registrar Staff', 'Update Status', 'REQ-2026-038: Processing -> Ready for Release', '2026-10-10 21:04:38'),
+(107, 2, 'staff1', 'Registrar Staff One', 'Registrar Staff', 'Update Status', 'REQ-2026-037: Pending -> Cancelled', '2026-10-10 21:04:49'),
+(108, 2, 'staff1', 'Registrar Staff One', 'Registrar Staff', 'Update Status', 'REQ-2026-038: Ready for Release -> Released', '2026-10-10 21:05:02'),
+(109, 2, 'staff1', 'Registrar Staff One', 'Registrar Staff', 'Logout', 'Logged out of the system', '2026-10-10 21:05:42'),
+(110, 1, 'admin', 'System Administrator', 'Administrator', 'Login', 'Logged in to the system', '2026-10-10 21:32:58'),
+(111, 1, 'admin', 'System Administrator', 'Administrator', 'Update Status', 'REQ-2026-025: Ready for Release -> Processing', '2026-10-10 21:33:54'),
+(112, 2, 'staff1', 'Registrar Staff One', 'Registrar Staff', 'Login', 'Logged in to the system', '2026-10-10 21:40:12'),
+(113, 2, 'staff1', 'Registrar Staff One', 'Registrar Staff', 'Logout', 'Logged out of the system', '2026-10-10 21:40:45'),
+(114, 1, 'admin', 'System Administrator', 'Administrator', 'Login', 'Logged in to the system', '2026-10-11 00:04:47');
 
 -- --------------------------------------------------------
 
@@ -146,20 +215,20 @@ CREATE TABLE `tblrequest` (
 --
 
 INSERT INTO `tblrequest` (`RequestID`, `RequestNo`, `StudentID`, `RequestDate`, `TotalAmount`, `PaymentStatus`, `AmountPaid`, `ORNo`, `ORDate`, `Status`, `CreatedBy`, `ProcessedBy`, `ReleasedBy`, `ReadyForReleaseDate`) VALUES
-(1, 'REQ-2026-001', '1123-24', '2026-02-01', 150.00, 'Paid', 150.00, 'OR-10001', '2026-02-01', 'Cancelled', 4, NULL, NULL, NULL),
-(2, 'REQ-2026-002', '1127-24', '2026-02-01', 50.00, 'Paid', 50.00, 'OR-10002', '2026-02-01', 'Cancelled', 2, NULL, NULL, NULL),
+(1, 'REQ-2026-001', '1123-24', '2026-02-01', 150.00, 'Paid', 150.00, 'OR-10001', '2026-02-01', 'Ready for Release', 4, 4, NULL, '2026-10-10 17:39:35'),
+(2, 'REQ-2026-002', '1127-24', '2026-02-01', 50.00, 'Paid', 50.00, 'OR-10002', '2026-02-01', 'Ready for Release', 2, 2, NULL, '2026-10-10 17:39:35'),
 (3, 'REQ-2026-003', '1208-24', '2026-02-02', 100.00, 'Unpaid', 0.00, NULL, NULL, 'Cancelled', 4, NULL, NULL, NULL),
 (4, 'REQ-2026-004', '1314-24', '2026-02-02', 200.00, 'Paid', 200.00, 'OR-10003', '2026-02-02', 'Processing', 2, 2, NULL, NULL),
-(5, 'REQ-2026-005', '1327-24', '2026-02-03', 50.00, 'Paid', 50.00, 'OR-10004', '2026-02-03', 'Cancelled', 4, NULL, NULL, NULL),
+(5, 'REQ-2026-005', '1327-24', '2026-02-03', 50.00, 'Paid', 50.00, 'OR-10004', '2026-02-03', 'Ready for Release', 4, 4, NULL, '2026-10-10 17:39:35'),
 (6, 'REQ-2026-006', '1395-24', '2026-02-03', 100.00, 'Unpaid', 0.00, NULL, NULL, 'Cancelled', 2, NULL, NULL, NULL),
 (7, 'REQ-2026-007', '1396-24', '2026-02-04', 150.00, 'Paid', 150.00, 'OR-10005', '2026-02-04', 'Processing', 4, 2, NULL, NULL),
-(8, 'REQ-2026-008', '1522-24', '2026-02-04', 50.00, 'Paid', 50.00, 'OR-10006', '2026-02-04', 'Cancelled', 2, NULL, NULL, NULL),
+(8, 'REQ-2026-008', '1522-24', '2026-02-04', 50.00, 'Paid', 50.00, 'OR-10006', '2026-02-04', 'Ready for Release', 2, 2, NULL, '2026-10-10 17:39:35'),
 (9, 'REQ-2026-009', '1808-23', '2026-02-05', 250.00, 'Paid', 250.00, 'OR-10007', '2026-02-05', 'Released', 4, 2, 2, NULL),
 (10, 'REQ-2026-010', '2055-24', '2026-02-05', 100.00, 'Unpaid', 0.00, NULL, NULL, 'Cancelled', 2, NULL, NULL, NULL),
-(11, 'REQ-2026-011', '2096-24', '2026-02-06', 150.00, 'Paid', 150.00, 'OR-10008', '2026-02-06', 'Cancelled', 4, NULL, NULL, NULL),
+(11, 'REQ-2026-011', '2096-24', '2026-02-06', 150.00, 'Paid', 150.00, 'OR-10008', '2026-02-06', 'Ready for Release', 4, 4, NULL, '2026-10-10 17:39:35'),
 (12, 'REQ-2026-012', '2194-24', '2026-02-06', 50.00, 'Unpaid', 0.00, NULL, NULL, 'Cancelled', 2, NULL, NULL, NULL),
 (13, 'REQ-2026-013', '2208-24', '2026-02-07', 100.00, 'Paid', 100.00, 'OR-10009', '2026-02-07', 'Released', 4, 4, 2, NULL),
-(14, 'REQ-2026-014', '2786-24', '2026-02-07', 200.00, 'Paid', 200.00, 'OR-10010', '2026-02-07', 'Cancelled', 2, NULL, NULL, NULL),
+(14, 'REQ-2026-014', '2786-24', '2026-02-07', 200.00, 'Paid', 200.00, 'OR-10010', '2026-02-07', 'Ready for Release', 2, 1, NULL, '2026-10-10 17:38:11'),
 (15, 'REQ-2026-015', '2789-24', '2026-02-08', 50.00, 'Unpaid', 0.00, NULL, NULL, 'Cancelled', 4, NULL, NULL, NULL),
 (16, 'REQ-2026-016', '1395-24', '2026-09-22', 50.00, 'Unpaid', 0.00, NULL, NULL, 'Cancelled', 4, NULL, NULL, NULL),
 (17, 'REQ-2024-001', '1123-24', '2024-03-15', 150.00, 'Paid', 150.00, NULL, NULL, 'Released', 4, 2, 3, NULL),
@@ -169,23 +238,31 @@ INSERT INTO `tblrequest` (`RequestID`, `RequestNo`, `StudentID`, `RequestDate`, 
 (21, 'REQ-2024-005', '1327-24', '2024-11-12', 150.00, 'Paid', 150.00, NULL, NULL, 'Released', 2, 2, 3, NULL),
 (22, 'REQ-2025-001', '1395-24', '2025-01-14', 100.00, 'Paid', 100.00, NULL, NULL, 'Released', 4, 2, 3, NULL),
 (23, 'REQ-2025-002', '1396-24', '2025-03-22', 150.00, 'Paid', 150.00, NULL, NULL, 'Released', 2, 2, 2, NULL),
-(24, 'REQ-2025-003', '1522-24', '2025-06-18', 50.00, 'Paid', 50.00, 'OR-10021', '2025-06-18', 'Cancelled', 4, 2, NULL, NULL),
+(24, 'REQ-2025-003', '1522-24', '2025-06-18', 50.00, 'Paid', 50.00, 'OR-10021', '2025-06-18', 'Processing', 4, 3, NULL, NULL),
 (25, 'REQ-2025-004', '1808-23', '2025-09-02', 200.00, 'Paid', 200.00, NULL, NULL, 'Cancelled', 2, NULL, NULL, NULL),
-(26, 'REQ-2025-005', '2055-24', '2025-11-10', 100.00, 'Paid', 100.00, 'OR-56587', '2026-10-10', 'Cancelled', 4, NULL, NULL, NULL),
+(26, 'REQ-2025-005', '2055-24', '2025-11-10', 100.00, 'Paid', 100.00, 'OR-56587', '2026-10-10', 'Processing', 4, 1, NULL, NULL),
 (27, 'REQ-2026-017', '1123-24', '2026-08-05', 150.00, 'Paid', 150.00, 'OR-10011', '2026-08-05', 'Released', 4, 2, 3, NULL),
 (28, 'REQ-2026-018', '1127-24', '2026-08-12', 50.00, 'Paid', 50.00, 'OR-10012', '2026-08-12', 'Released', 2, 3, 4, NULL),
-(29, 'REQ-2026-019', '1208-24', '2026-08-18', 200.00, 'Paid', 200.00, 'OR-10013', '2026-08-18', 'Cancelled', 3, 4, 2, NULL),
+(29, 'REQ-2026-019', '1208-24', '2026-08-18', 200.00, 'Paid', 200.00, 'OR-10013', '2026-08-18', 'Processing', 3, 1, NULL, NULL),
 (30, 'REQ-2026-020', '1314-24', '2026-08-22', 100.00, 'Paid', 100.00, 'OR-10014', '2026-08-22', 'Processing', 4, 2, 3, NULL),
-(31, 'REQ-2026-021', '1327-24', '2026-08-28', 150.00, 'Paid', 150.00, 'OR-10015', '2026-08-28', 'Cancelled', 2, 4, 3, NULL),
+(31, 'REQ-2026-021', '1327-24', '2026-08-28', 150.00, 'Paid', 150.00, 'OR-10015', '2026-08-28', 'Processing', 2, 1, NULL, NULL),
 (32, 'REQ-2026-022', '1395-24', '2026-09-02', 100.00, 'Paid', 100.00, 'OR-10016', '2026-09-02', 'Processing', 3, 2, 4, NULL),
 (33, 'REQ-2026-023', '1396-24', '2026-09-07', 150.00, 'Paid', 150.00, 'OR-10017', '2026-09-07', 'Ready for Release', 4, 3, 2, '2026-09-14 09:00:00'),
 (34, 'REQ-2026-024', '1522-24', '2026-09-12', 50.00, 'Paid', 50.00, 'OR-10018', '2026-09-12', 'Processing', 2, 4, 3, NULL),
-(35, 'REQ-2026-025', '1808-23', '2026-09-16', 200.00, 'Paid', 200.00, 'OR-10019', '2026-09-16', 'Ready for Release', 3, 2, 4, '2026-09-23 09:00:00'),
+(35, 'REQ-2026-025', '1808-23', '2026-09-16', 200.00, 'Paid', 200.00, 'OR-10019', '2026-09-16', 'Processing', 3, 1, NULL, NULL),
 (36, 'REQ-2026-026', '2055-24', '2026-09-20', 100.00, 'Paid', 100.00, 'OR-10020', '2026-09-20', 'Processing', 4, 3, 2, NULL),
 (37, 'REQ-2026-027', '2786-24', '2026-09-26', 50.00, 'Paid', 50.00, 'OR-12345', '2026-09-26', 'Processing', 1, 1, NULL, NULL),
 (38, 'REQ-2026-028', '2786-24', '2026-09-26', 100.00, 'Paid', 100.00, 'OR-09876', '2026-09-26', 'Processing', 1, 1, NULL, NULL),
 (39, 'REQ-2026-029', '2208-24', '2026-10-09', 300.00, 'Unpaid', 0.00, NULL, NULL, 'Pending', 1, NULL, NULL, NULL),
-(40, 'REQ-2026-030', '1396-24', '2026-10-09', 50.00, 'Paid', 50.00, 'OR-68345', '2026-10-10', 'Processing', 1, 2, NULL, NULL);
+(40, 'REQ-2026-030', '1396-24', '2026-10-09', 50.00, 'Paid', 50.00, 'OR-68345', '2026-10-10', 'Processing', 1, 2, NULL, NULL),
+(41, 'REQ-2026-031', '1657-26', '2026-10-10', 200.00, 'Unpaid', 0.00, NULL, NULL, 'Pending', 4, NULL, NULL, NULL),
+(42, 'REQ-2026-032', '1825-23', '2026-10-10', 150.00, 'Paid', 150.00, 'OR-43543', '2026-10-10', 'Released', 4, 4, 2, NULL),
+(43, 'REQ-2026-033', '1396-24', '2026-10-10', 100.00, 'Unpaid', 0.00, NULL, NULL, 'Pending', 4, NULL, NULL, NULL),
+(44, 'REQ-2026-034', '1289-23', '2026-10-10', 50.00, 'Unpaid', 0.00, NULL, NULL, 'Pending', 1, NULL, NULL, NULL),
+(45, 'REQ-2026-035', '1289-23', '2026-10-10', 300.00, 'Paid', 300.00, 'OR-54354', '2026-10-10', 'Processing', 1, 1, NULL, NULL),
+(46, 'REQ-2026-036', '1289-23', '2026-10-10', 150.00, 'Paid', 150.00, 'OR-43435', '2026-10-10', 'Processing', 2, 2, NULL, NULL),
+(47, 'REQ-2026-037', '1434-22', '2026-10-10', 50.00, 'Unpaid', 0.00, NULL, NULL, 'Cancelled', 2, NULL, NULL, NULL),
+(48, 'REQ-2026-038', '1434-22', '2026-10-10', 150.00, 'Paid', 150.00, 'OR-43241', '2026-10-10', 'Released', 2, 2, 2, NULL);
 
 -- --------------------------------------------------------
 
@@ -246,7 +323,18 @@ INSERT INTO `tblrequestdetails` (`RequestDetailID`, `RequestID`, `DocumentID`, `
 (42, 37, 2, 1, 50.00, 50.00),
 (43, 38, 3, 1, 100.00, 100.00),
 (44, 39, 8, 1, 300.00, 300.00),
-(45, 40, 6, 1, 50.00, 50.00);
+(45, 40, 6, 1, 50.00, 50.00),
+(46, 41, 3, 1, 100.00, 100.00),
+(47, 41, 5, 1, 100.00, 100.00),
+(48, 42, 1, 1, 150.00, 150.00),
+(49, 43, 5, 1, 100.00, 100.00),
+(50, 44, 6, 1, 50.00, 50.00),
+(51, 45, 8, 1, 300.00, 300.00),
+(52, 46, 2, 1, 50.00, 50.00),
+(53, 46, 5, 1, 100.00, 100.00),
+(54, 47, 7, 1, 50.00, 50.00),
+(55, 48, 6, 1, 50.00, 50.00),
+(56, 48, 9, 1, 100.00, 100.00);
 
 -- --------------------------------------------------------
 
@@ -407,7 +495,7 @@ ALTER TABLE `tblusers`
 -- AUTO_INCREMENT for table `tblactivitylogs`
 --
 ALTER TABLE `tblactivitylogs`
-  MODIFY `LogID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `LogID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=115;
 
 --
 -- AUTO_INCREMENT for table `tbldocuments`
@@ -419,13 +507,13 @@ ALTER TABLE `tbldocuments`
 -- AUTO_INCREMENT for table `tblrequest`
 --
 ALTER TABLE `tblrequest`
-  MODIFY `RequestID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `RequestID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `tblrequestdetails`
 --
 ALTER TABLE `tblrequestdetails`
-  MODIFY `RequestDetailID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `RequestDetailID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT for table `tblschoolyear`
