@@ -29,6 +29,15 @@ Partial Class frmStudentManagement
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtSearch = New System.Windows.Forms.TextBox()
         Me.dgvStudents = New System.Windows.Forms.DataGridView()
+        Me.StudentID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.LRN = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.LastName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FirstName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.MiddleName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Course = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.YearLevel = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Section = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ContactNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.btnAdd = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.txtStudentID = New System.Windows.Forms.TextBox()
@@ -66,15 +75,6 @@ Partial Class frmStudentManagement
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.btnClear = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.StudentID = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.LRN = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.LastName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.FirstName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.MiddleName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Course = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.YearLevel = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Section = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ContactNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.dgvStudents, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel5.SuspendLayout()
         Me.Panel7.SuspendLayout()
@@ -129,17 +129,84 @@ Partial Class frmStudentManagement
         Me.dgvStudents.Size = New System.Drawing.Size(1123, 471)
         Me.dgvStudents.TabIndex = 29
         '
+        'StudentID
+        '
+        Me.StudentID.HeaderText = "StudentID"
+        Me.StudentID.MinimumWidth = 6
+        Me.StudentID.Name = "StudentID"
+        Me.StudentID.ReadOnly = True
+        '
+        'LRN
+        '
+        Me.LRN.HeaderText = "LRN"
+        Me.LRN.MinimumWidth = 6
+        Me.LRN.Name = "LRN"
+        Me.LRN.ReadOnly = True
+        '
+        'LastName
+        '
+        Me.LastName.HeaderText = "Last Name"
+        Me.LastName.MinimumWidth = 6
+        Me.LastName.Name = "LastName"
+        Me.LastName.ReadOnly = True
+        '
+        'FirstName
+        '
+        Me.FirstName.HeaderText = "First Name"
+        Me.FirstName.MinimumWidth = 6
+        Me.FirstName.Name = "FirstName"
+        Me.FirstName.ReadOnly = True
+        '
+        'MiddleName
+        '
+        Me.MiddleName.HeaderText = "Middle Name"
+        Me.MiddleName.MinimumWidth = 6
+        Me.MiddleName.Name = "MiddleName"
+        Me.MiddleName.ReadOnly = True
+        '
+        'Course
+        '
+        Me.Course.HeaderText = "Course"
+        Me.Course.MinimumWidth = 6
+        Me.Course.Name = "Course"
+        Me.Course.ReadOnly = True
+        '
+        'YearLevel
+        '
+        Me.YearLevel.HeaderText = "Year Level"
+        Me.YearLevel.MinimumWidth = 6
+        Me.YearLevel.Name = "YearLevel"
+        Me.YearLevel.ReadOnly = True
+        '
+        'Section
+        '
+        Me.Section.HeaderText = "Section"
+        Me.Section.MinimumWidth = 6
+        Me.Section.Name = "Section"
+        Me.Section.ReadOnly = True
+        '
+        'ContactNumber
+        '
+        Me.ContactNumber.HeaderText = "Contact Number"
+        Me.ContactNumber.MinimumWidth = 6
+        Me.ContactNumber.Name = "ContactNumber"
+        Me.ContactNumber.ReadOnly = True
+        '
         'btnAdd
         '
         Me.btnAdd.BackColor = System.Drawing.Color.Navy
+        Me.btnAdd.FlatAppearance.BorderSize = 0
         Me.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAdd.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnAdd.ForeColor = System.Drawing.Color.White
-        Me.btnAdd.Location = New System.Drawing.Point(733, 277)
+        Me.btnAdd.Image = CType(resources.GetObject("btnAdd.Image"), System.Drawing.Image)
+        Me.btnAdd.Location = New System.Drawing.Point(872, 276)
         Me.btnAdd.Name = "btnAdd"
-        Me.btnAdd.Size = New System.Drawing.Size(143, 30)
+        Me.btnAdd.Size = New System.Drawing.Size(140, 30)
         Me.btnAdd.TabIndex = 30
-        Me.btnAdd.Text = "Add"
+        Me.btnAdd.Text = "     Add"
+        Me.btnAdd.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnAdd.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnAdd.UseVisualStyleBackColor = False
         '
         'Label2
@@ -388,11 +455,14 @@ Partial Class frmStudentManagement
         Me.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnEdit.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnEdit.ForeColor = System.Drawing.Color.White
-        Me.btnEdit.Location = New System.Drawing.Point(882, 277)
+        Me.btnEdit.Image = CType(resources.GetObject("btnEdit.Image"), System.Drawing.Image)
+        Me.btnEdit.Location = New System.Drawing.Point(746, 277)
         Me.btnEdit.Name = "btnEdit"
-        Me.btnEdit.Size = New System.Drawing.Size(136, 30)
+        Me.btnEdit.Size = New System.Drawing.Size(120, 30)
         Me.btnEdit.TabIndex = 51
-        Me.btnEdit.Text = "Edit"
+        Me.btnEdit.Text = "     Edit"
+        Me.btnEdit.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnEdit.UseVisualStyleBackColor = False
         '
         'btnDelete
@@ -402,11 +472,14 @@ Partial Class frmStudentManagement
         Me.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnDelete.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDelete.ForeColor = System.Drawing.Color.White
-        Me.btnDelete.Location = New System.Drawing.Point(1024, 277)
+        Me.btnDelete.Image = CType(resources.GetObject("btnDelete.Image"), System.Drawing.Image)
+        Me.btnDelete.Location = New System.Drawing.Point(1018, 276)
         Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(127, 30)
+        Me.btnDelete.Size = New System.Drawing.Size(133, 30)
         Me.btnDelete.TabIndex = 52
-        Me.btnDelete.Text = "Delete"
+        Me.btnDelete.Text = "     Delete"
+        Me.btnDelete.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnDelete.UseVisualStyleBackColor = False
         '
         'Panel6
@@ -519,14 +592,18 @@ Partial Class frmStudentManagement
         'btnClear
         '
         Me.btnClear.BackColor = System.Drawing.Color.Gray
+        Me.btnClear.FlatAppearance.BorderSize = 0
         Me.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnClear.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnClear.ForeColor = System.Drawing.Color.White
-        Me.btnClear.Location = New System.Drawing.Point(617, 277)
+        Me.btnClear.Image = CType(resources.GetObject("btnClear.Image"), System.Drawing.Image)
+        Me.btnClear.Location = New System.Drawing.Point(620, 277)
         Me.btnClear.Name = "btnClear"
-        Me.btnClear.Size = New System.Drawing.Size(110, 30)
+        Me.btnClear.Size = New System.Drawing.Size(120, 30)
         Me.btnClear.TabIndex = 86
-        Me.btnClear.Text = "Clear"
+        Me.btnClear.Text = "     Clear"
+        Me.btnClear.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnClear.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnClear.UseVisualStyleBackColor = False
         '
         'Panel1
@@ -542,69 +619,6 @@ Partial Class frmStudentManagement
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(1174, 27)
         Me.Panel1.TabIndex = 87
-        '
-        'StudentID
-        '
-        Me.StudentID.HeaderText = "StudentID"
-        Me.StudentID.MinimumWidth = 6
-        Me.StudentID.Name = "StudentID"
-        Me.StudentID.ReadOnly = True
-        '
-        'LRN
-        '
-        Me.LRN.HeaderText = "LRN"
-        Me.LRN.MinimumWidth = 6
-        Me.LRN.Name = "LRN"
-        Me.LRN.ReadOnly = True
-        '
-        'LastName
-        '
-        Me.LastName.HeaderText = "Last Name"
-        Me.LastName.MinimumWidth = 6
-        Me.LastName.Name = "LastName"
-        Me.LastName.ReadOnly = True
-        '
-        'FirstName
-        '
-        Me.FirstName.HeaderText = "First Name"
-        Me.FirstName.MinimumWidth = 6
-        Me.FirstName.Name = "FirstName"
-        Me.FirstName.ReadOnly = True
-        '
-        'MiddleName
-        '
-        Me.MiddleName.HeaderText = "Middle Name"
-        Me.MiddleName.MinimumWidth = 6
-        Me.MiddleName.Name = "MiddleName"
-        Me.MiddleName.ReadOnly = True
-        '
-        'Course
-        '
-        Me.Course.HeaderText = "Course"
-        Me.Course.MinimumWidth = 6
-        Me.Course.Name = "Course"
-        Me.Course.ReadOnly = True
-        '
-        'YearLevel
-        '
-        Me.YearLevel.HeaderText = "Year Level"
-        Me.YearLevel.MinimumWidth = 6
-        Me.YearLevel.Name = "YearLevel"
-        Me.YearLevel.ReadOnly = True
-        '
-        'Section
-        '
-        Me.Section.HeaderText = "Section"
-        Me.Section.MinimumWidth = 6
-        Me.Section.Name = "Section"
-        Me.Section.ReadOnly = True
-        '
-        'ContactNumber
-        '
-        Me.ContactNumber.HeaderText = "Contact Number"
-        Me.ContactNumber.MinimumWidth = 6
-        Me.ContactNumber.Name = "ContactNumber"
-        Me.ContactNumber.ReadOnly = True
         '
         'frmStudentManagement
         '

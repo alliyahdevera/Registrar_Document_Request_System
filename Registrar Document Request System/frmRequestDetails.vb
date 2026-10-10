@@ -23,10 +23,11 @@ Public Class frmRequestDetails
         txtReleasedBy.ReadOnly = True
         txtRequestDate.ReadOnly = True
         txtRequestDate.TabStop = False
-        txtORNo.MaxLength = 3 + OR_DIGITS     ' "OR-" + digits
-        txtAmountPaid.ReadOnly = True        ' automatic = Total Amount
+        txtORNo.MaxLength = 3 + OR_DIGITS
+        txtAmountPaid.ReadOnly = True
         txtAmountPaid.TabStop = False
-        cboPaymentStatus.Enabled = False     ' automatic (Paid when OR is complete)
+        txtPaymentStatus.ReadOnly = True
+        txtPaymentStatus.TabStop = False
 
         If Not String.IsNullOrEmpty(SelectedRequestNo) Then
             LoadRequestDetailsInfo(SelectedRequestNo)
@@ -80,8 +81,8 @@ Public Class frmRequestDetails
                     dtpORDate.Value = DateTime.Now
                 End If
                 txtAmountPaid.Text = If(IsDBNull(dr("AmountPaid")), "0.00", Convert.ToDecimal(dr("AmountPaid")).ToString("N2"))
-                cboPaymentStatus.Text = If(IsDBNull(dr("PaymentStatus")) OrElse String.IsNullOrWhiteSpace(dr("PaymentStatus").ToString()), "Unpaid", dr("PaymentStatus").ToString())
-                dbPaymentVerified = (cboPaymentStatus.Text = "Paid" AndAlso txtORNo.Text.Trim() <> "")
+                txtPaymentStatus.Text = If(IsDBNull(dr("PaymentStatus")) OrElse String.IsNullOrWhiteSpace(dr("PaymentStatus").ToString()), "Unpaid", dr("PaymentStatus").ToString())
+                dbPaymentVerified = (txtPaymentStatus.Text = "Paid" AndAlso txtORNo.Text.Trim() <> "")
 
                 If Not IsDBNull(dr("ReleasedByName")) AndAlso Not String.IsNullOrWhiteSpace(dr("ReleasedByName").ToString()) Then
                     txtReleasedBy.Text = dr("ReleasedByName").ToString()
@@ -248,7 +249,7 @@ Public Class frmRequestDetails
 
         Dim selectedStatus As String = cboStatus.Text.Trim()
 
-        If selectedStatus = "Cancelled" AndAlso cboPaymentStatus.Text.Trim() = "Paid" Then
+        If selectedStatus = "Cancelled" AndAlso txtPaymentStatus.Text.Trim() = "Paid" Then
             MsgBox("This request has already been paid and cannot be cancelled." & vbCrLf &
            "Please continue processing it through to 'Released', or reopen it back to 'Processing' instead.",
            vbExclamation, "Cannot Cancel Paid Request")
@@ -327,12 +328,10 @@ Public Class frmRequestDetails
         End Try
     End Sub
 
-    ' only digits can be typed; "OR-" is added by the system
     Private Sub txtORNo_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtORNo.KeyPress
         If Not Char.IsControl(e.KeyChar) AndAlso Not Char.IsDigit(e.KeyChar) Then e.Handled = True
     End Sub
 
-    ' clicking the empty box shows the "OR-" prefix
     Private Sub txtORNo_Enter(sender As Object, e As EventArgs) Handles txtORNo.Enter
         If txtORNo.Text.Trim() = "" Then
             txtORNo.Text = "OR-"
@@ -340,14 +339,14 @@ Public Class frmRequestDetails
         End If
     End Sub
 
-    ' leaving it with just the prefix clears it again
+
     Private Sub txtORNo_Leave(sender As Object, e As EventArgs) Handles txtORNo.Leave
         If txtORNo.Text.Trim() = "OR-" Then txtORNo.Text = ""
     End Sub
 
     Private Sub txtORNo_TextChanged(sender As Object, e As EventArgs) Handles txtORNo.TextChanged
-        If _loading OrElse _fixing Then Exit Sub    ' skip while loading old records
-        ' keep the text always in the form OR-digits (also fixes pasted text)
+        If _loading OrElse _fixing Then Exit Sub
+
         Dim s As String = txtORNo.Text.ToUpper()
         If s <> "" Then
             Dim body As String = If(s.StartsWith("OR-"), s.Substring(3), s)
@@ -361,13 +360,13 @@ Public Class frmRequestDetails
                 _fixing = False
             End If
         End If
-        ' complete OR number -> Amount Paid = Total Amount, Payment Status = Paid
+
         If IsValidOR(txtORNo.Text) Then
             txtAmountPaid.Text = txtTotalAmount.Text
-            cboPaymentStatus.Text = "Paid"
+            txtPaymentStatus.Text = "Paid"
         Else
             txtAmountPaid.Text = "0.00"
-            cboPaymentStatus.Text = "Unpaid"
+            txtPaymentStatus.Text = "Unpaid"
         End If
     End Sub
 

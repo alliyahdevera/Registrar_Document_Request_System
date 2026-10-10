@@ -1318,6 +1318,17 @@
   <metadata name="ReleasedBy.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <data name="btnExportExcel.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAAAZdEVYdFNvZnR3YXJlAHd3dy5pbmtzY2FwZS5vcmeb7jwa
+        AAAA9ElEQVQ4T5XTsS4FQRSH8YlIiIhKq1J4AoVejeJKlEKn8SKqW0kUJDriASSCeAZ0wgtQEgl+HGZj
+        jWX3fskmO3v2/+XM2dmUUkpYwxVefHOQa5sYjvtGcriJSvCKY4yV2U9wXSYzdUFwgfEyHy/U265TCoIT
+        jJSCvzjK9afieb+r4A6jmMNy7VrqKgjOsVoIepjoKmiiN0gHwW3MI4aK3ZzZxw6G2gRnv6b+JZjHI7ba
+        BOuYxXNZyDy0CfrRARaLQW7kDk7/O0hB1EKykoMLeQuHuMFULOIn6sobpjGDyWog8Z0HYa8caiW5bNnO
+        PbZ/HKIP3gGEshDTnbGO7gAAAABJRU5ErkJggg==
+</value>
+  </data>
   <metadata name="Timer1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>

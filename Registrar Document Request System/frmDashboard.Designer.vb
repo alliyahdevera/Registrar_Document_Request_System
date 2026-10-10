@@ -129,7 +129,7 @@ Partial Class frmDashboard
         Me.lbldatetime.BackColor = System.Drawing.Color.Transparent
         Me.lbldatetime.Font = New System.Drawing.Font("Segoe UI Semibold", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbldatetime.ForeColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
-        Me.lbldatetime.Location = New System.Drawing.Point(576, 3)
+        Me.lbldatetime.Location = New System.Drawing.Point(571, 2)
         Me.lbldatetime.Name = "lbldatetime"
         Me.lbldatetime.Size = New System.Drawing.Size(16, 21)
         Me.lbldatetime.TabIndex = 77

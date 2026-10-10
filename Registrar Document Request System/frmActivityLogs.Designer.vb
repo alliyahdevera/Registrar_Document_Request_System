@@ -22,8 +22,8 @@ Partial Class frmActivityLogs
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmActivityLogs))
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.btngenerate = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.dtpto = New System.Windows.Forms.DateTimePicker()
@@ -33,13 +33,13 @@ Partial Class frmActivityLogs
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.dgvActivityHistory = New System.Windows.Forms.DataGridView()
-        Me.Panel6 = New System.Windows.Forms.Panel()
-        Me.Label7 = New System.Windows.Forms.Label()
         Me.Username = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Fullname = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Role = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ActionType = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Details = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Panel6 = New System.Windows.Forms.Panel()
+        Me.Label7 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.lbldatetime = New System.Windows.Forms.Label()
         Me.Label19 = New System.Windows.Forms.Label()
@@ -65,11 +65,14 @@ Partial Class frmActivityLogs
         Me.btngenerate.FlatAppearance.BorderSize = 0
         Me.btngenerate.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btngenerate.ForeColor = System.Drawing.Color.White
-        Me.btngenerate.Location = New System.Drawing.Point(401, 91)
+        Me.btngenerate.Image = CType(resources.GetObject("btngenerate.Image"), System.Drawing.Image)
+        Me.btngenerate.Location = New System.Drawing.Point(393, 92)
         Me.btngenerate.Name = "btngenerate"
-        Me.btngenerate.Size = New System.Drawing.Size(101, 28)
+        Me.btngenerate.Size = New System.Drawing.Size(118, 28)
         Me.btngenerate.TabIndex = 170
-        Me.btngenerate.Text = "Load Data"
+        Me.btngenerate.Text = "   Load Data"
+        Me.btngenerate.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btngenerate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btngenerate.UseVisualStyleBackColor = False
         '
         'Label2
@@ -163,26 +166,6 @@ Partial Class frmActivityLogs
         Me.dgvActivityHistory.Size = New System.Drawing.Size(1120, 606)
         Me.dgvActivityHistory.TabIndex = 2
         '
-        'Panel6
-        '
-        Me.Panel6.BackColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
-        Me.Panel6.Controls.Add(Me.Label7)
-        Me.Panel6.Location = New System.Drawing.Point(0, 0)
-        Me.Panel6.Name = "Panel6"
-        Me.Panel6.Size = New System.Drawing.Size(1169, 35)
-        Me.Panel6.TabIndex = 0
-        '
-        'Label7
-        '
-        Me.Label7.AutoSize = True
-        Me.Label7.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.ForeColor = System.Drawing.Color.White
-        Me.Label7.Location = New System.Drawing.Point(7, 7)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(108, 21)
-        Me.Label7.TabIndex = 25
-        Me.Label7.Text = "Activity Logs"
-        '
         'Username
         '
         Me.Username.HeaderText = "Username"
@@ -212,6 +195,26 @@ Partial Class frmActivityLogs
         Me.Details.HeaderText = "Details"
         Me.Details.Name = "Details"
         Me.Details.ReadOnly = True
+        '
+        'Panel6
+        '
+        Me.Panel6.BackColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
+        Me.Panel6.Controls.Add(Me.Label7)
+        Me.Panel6.Location = New System.Drawing.Point(0, 0)
+        Me.Panel6.Name = "Panel6"
+        Me.Panel6.Size = New System.Drawing.Size(1169, 35)
+        Me.Panel6.TabIndex = 0
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.ForeColor = System.Drawing.Color.White
+        Me.Label7.Location = New System.Drawing.Point(7, 7)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(108, 21)
+        Me.Label7.TabIndex = 25
+        Me.Label7.Text = "Activity Logs"
         '
         'Panel1
         '

@@ -22,6 +22,7 @@ Partial Class frmSettings
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmSettings))
         Me.btnmanagesy = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.lbldatetime = New System.Windows.Forms.Label()
@@ -39,11 +40,14 @@ Partial Class frmSettings
         Me.btnmanagesy.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnmanagesy.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnmanagesy.ForeColor = System.Drawing.Color.White
+        Me.btnmanagesy.Image = CType(resources.GetObject("btnmanagesy.Image"), System.Drawing.Image)
         Me.btnmanagesy.Location = New System.Drawing.Point(12, 12)
         Me.btnmanagesy.Name = "btnmanagesy"
-        Me.btnmanagesy.Size = New System.Drawing.Size(162, 37)
+        Me.btnmanagesy.Size = New System.Drawing.Size(208, 45)
         Me.btnmanagesy.TabIndex = 72
-        Me.btnmanagesy.Text = "Manage School Year"
+        Me.btnmanagesy.Text = "     Manage School Year"
+        Me.btnmanagesy.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnmanagesy.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnmanagesy.UseVisualStyleBackColor = False
         '
         'Panel1

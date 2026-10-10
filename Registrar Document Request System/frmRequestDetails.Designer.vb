@@ -22,6 +22,7 @@ Partial Class frmRequestDetails
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmRequestDetails))
         Me.Panel11 = New System.Windows.Forms.Panel()
         Me.btnBacktoRequestList = New System.Windows.Forms.Button()
         Me.Label14 = New System.Windows.Forms.Label()
@@ -61,7 +62,6 @@ Partial Class frmRequestDetails
         Me.dtpORDate = New System.Windows.Forms.DateTimePicker()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.txtORNo = New System.Windows.Forms.TextBox()
-        Me.cboPaymentStatus = New System.Windows.Forms.ComboBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label21 = New System.Windows.Forms.Label()
         Me.cboStatus = New System.Windows.Forms.ComboBox()
@@ -72,6 +72,7 @@ Partial Class frmRequestDetails
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.Label9 = New System.Windows.Forms.Label()
+        Me.txtPaymentStatus = New System.Windows.Forms.TextBox()
         Me.Panel11.SuspendLayout()
         Me.Panel8.SuspendLayout()
         Me.Panel15.SuspendLayout()
@@ -98,11 +99,15 @@ Partial Class frmRequestDetails
         '
         Me.btnBacktoRequestList.BackColor = System.Drawing.Color.White
         Me.btnBacktoRequestList.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnBacktoRequestList.Location = New System.Drawing.Point(979, 12)
+        Me.btnBacktoRequestList.Font = New System.Drawing.Font("Segoe UI Semibold", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnBacktoRequestList.Image = CType(resources.GetObject("btnBacktoRequestList.Image"), System.Drawing.Image)
+        Me.btnBacktoRequestList.Location = New System.Drawing.Point(971, 12)
         Me.btnBacktoRequestList.Name = "btnBacktoRequestList"
-        Me.btnBacktoRequestList.Size = New System.Drawing.Size(130, 27)
+        Me.btnBacktoRequestList.Size = New System.Drawing.Size(138, 27)
         Me.btnBacktoRequestList.TabIndex = 52
         Me.btnBacktoRequestList.Text = "Back to Request List"
+        Me.btnBacktoRequestList.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnBacktoRequestList.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnBacktoRequestList.UseVisualStyleBackColor = False
         '
         'Label14
@@ -374,6 +379,7 @@ Partial Class frmRequestDetails
         '
         Me.Panel1.BackColor = System.Drawing.Color.White
         Me.Panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel1.Controls.Add(Me.txtPaymentStatus)
         Me.Panel1.Controls.Add(Me.Label10)
         Me.Panel1.Controls.Add(Me.txtReleasedBy)
         Me.Panel1.Controls.Add(Me.btnSavePayment)
@@ -383,7 +389,6 @@ Partial Class frmRequestDetails
         Me.Panel1.Controls.Add(Me.dtpORDate)
         Me.Panel1.Controls.Add(Me.Label16)
         Me.Panel1.Controls.Add(Me.txtORNo)
-        Me.Panel1.Controls.Add(Me.cboPaymentStatus)
         Me.Panel1.Controls.Add(Me.Label6)
         Me.Panel1.Controls.Add(Me.Label21)
         Me.Panel1.Location = New System.Drawing.Point(23, 590)
@@ -493,16 +498,6 @@ Partial Class frmRequestDetails
         Me.txtORNo.Size = New System.Drawing.Size(209, 25)
         Me.txtORNo.TabIndex = 54
         '
-        'cboPaymentStatus
-        '
-        Me.cboPaymentStatus.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cboPaymentStatus.FormattingEnabled = True
-        Me.cboPaymentStatus.Items.AddRange(New Object() {"Unpaid", "Paid"})
-        Me.cboPaymentStatus.Location = New System.Drawing.Point(452, 97)
-        Me.cboPaymentStatus.Name = "cboPaymentStatus"
-        Me.cboPaymentStatus.Size = New System.Drawing.Size(163, 25)
-        Me.cboPaymentStatus.TabIndex = 53
-        '
         'Label6
         '
         Me.Label6.AutoSize = True
@@ -611,6 +606,16 @@ Partial Class frmRequestDetails
         Me.Label9.TabIndex = 51
         Me.Label9.Text = "Request Status"
         '
+        'txtPaymentStatus
+        '
+        Me.txtPaymentStatus.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtPaymentStatus.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtPaymentStatus.Location = New System.Drawing.Point(452, 96)
+        Me.txtPaymentStatus.Name = "txtPaymentStatus"
+        Me.txtPaymentStatus.ReadOnly = True
+        Me.txtPaymentStatus.Size = New System.Drawing.Size(163, 25)
+        Me.txtPaymentStatus.TabIndex = 83
+        '
         'frmRequestDetails
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -681,7 +686,6 @@ Partial Class frmRequestDetails
     Friend WithEvents dtpORDate As DateTimePicker
     Friend WithEvents Label16 As Label
     Friend WithEvents txtORNo As TextBox
-    Friend WithEvents cboPaymentStatus As ComboBox
     Friend WithEvents Label6 As Label
     Friend WithEvents Label21 As Label
     Friend WithEvents cboStatus As ComboBox
@@ -697,4 +701,5 @@ Partial Class frmRequestDetails
     Friend WithEvents Label8 As Label
     Friend WithEvents Label10 As Label
     Friend WithEvents txtReleasedBy As TextBox
+    Friend WithEvents txtPaymentStatus As TextBox
 End Class

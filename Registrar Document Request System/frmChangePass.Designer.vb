@@ -87,11 +87,14 @@ Partial Class frmChangePass
         Me.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnLogin.Font = New System.Drawing.Font("Segoe UI Semibold", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnLogin.ForeColor = System.Drawing.Color.White
-        Me.btnLogin.Location = New System.Drawing.Point(191, 291)
+        Me.btnLogin.Image = CType(resources.GetObject("btnLogin.Image"), System.Drawing.Image)
+        Me.btnLogin.Location = New System.Drawing.Point(172, 291)
         Me.btnLogin.Name = "btnLogin"
-        Me.btnLogin.Size = New System.Drawing.Size(90, 26)
+        Me.btnLogin.Size = New System.Drawing.Size(109, 26)
         Me.btnLogin.TabIndex = 48
-        Me.btnLogin.Text = "Update"
+        Me.btnLogin.Text = "  Update"
+        Me.btnLogin.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnLogin.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnLogin.UseVisualStyleBackColor = False
         '
         'PWPanel

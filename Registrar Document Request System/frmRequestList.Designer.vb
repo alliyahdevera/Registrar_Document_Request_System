@@ -23,8 +23,8 @@ Partial Class frmRequestList
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmRequestList))
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.btnViewDetails = New System.Windows.Forms.Button()
         Me.Panel7 = New System.Windows.Forms.Panel()
         Me.Panel16 = New System.Windows.Forms.Panel()
@@ -72,11 +72,14 @@ Partial Class frmRequestList
         Me.btnViewDetails.BackColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
         Me.btnViewDetails.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnViewDetails.ForeColor = System.Drawing.Color.White
+        Me.btnViewDetails.Image = CType(resources.GetObject("btnViewDetails.Image"), System.Drawing.Image)
         Me.btnViewDetails.Location = New System.Drawing.Point(988, 84)
         Me.btnViewDetails.Name = "btnViewDetails"
         Me.btnViewDetails.Size = New System.Drawing.Size(155, 35)
         Me.btnViewDetails.TabIndex = 75
-        Me.btnViewDetails.Text = "View Details"
+        Me.btnViewDetails.Text = "     View Details"
+        Me.btnViewDetails.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnViewDetails.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnViewDetails.UseVisualStyleBackColor = False
         '
         'Panel7

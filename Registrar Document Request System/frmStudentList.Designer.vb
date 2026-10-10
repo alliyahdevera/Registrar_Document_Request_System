@@ -22,7 +22,7 @@ Partial Class frmStudentList
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmStudentList))
         Me.dgvStudents = New System.Windows.Forms.DataGridView()
         Me.StudentID = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -49,17 +49,19 @@ Partial Class frmStudentList
         '
         'dgvStudents
         '
+        Me.dgvStudents.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.dgvStudents.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.dgvStudents.BackgroundColor = System.Drawing.Color.White
         Me.dgvStudents.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvStudents.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.StudentID, Me.LRN, Me.LastName, Me.FirstName, Me.MiddleName, Me.Course, Me.YearLevel, Me.Section, Me.ContactNumber})
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvStudents.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvStudents.DefaultCellStyle = DataGridViewCellStyle1
         Me.dgvStudents.Location = New System.Drawing.Point(19, 122)
         Me.dgvStudents.Name = "dgvStudents"
         Me.dgvStudents.ReadOnly = True
@@ -74,7 +76,6 @@ Partial Class frmStudentList
         Me.StudentID.MinimumWidth = 6
         Me.StudentID.Name = "StudentID"
         Me.StudentID.ReadOnly = True
-        Me.StudentID.Width = 125
         '
         'LRN
         '
@@ -82,7 +83,6 @@ Partial Class frmStudentList
         Me.LRN.MinimumWidth = 6
         Me.LRN.Name = "LRN"
         Me.LRN.ReadOnly = True
-        Me.LRN.Width = 125
         '
         'LastName
         '
@@ -90,7 +90,6 @@ Partial Class frmStudentList
         Me.LastName.MinimumWidth = 6
         Me.LastName.Name = "LastName"
         Me.LastName.ReadOnly = True
-        Me.LastName.Width = 140
         '
         'FirstName
         '
@@ -98,7 +97,6 @@ Partial Class frmStudentList
         Me.FirstName.MinimumWidth = 6
         Me.FirstName.Name = "FirstName"
         Me.FirstName.ReadOnly = True
-        Me.FirstName.Width = 140
         '
         'MiddleName
         '
@@ -106,7 +104,6 @@ Partial Class frmStudentList
         Me.MiddleName.MinimumWidth = 6
         Me.MiddleName.Name = "MiddleName"
         Me.MiddleName.ReadOnly = True
-        Me.MiddleName.Width = 140
         '
         'Course
         '
@@ -114,7 +111,6 @@ Partial Class frmStudentList
         Me.Course.MinimumWidth = 6
         Me.Course.Name = "Course"
         Me.Course.ReadOnly = True
-        Me.Course.Width = 140
         '
         'YearLevel
         '
@@ -122,7 +118,6 @@ Partial Class frmStudentList
         Me.YearLevel.MinimumWidth = 6
         Me.YearLevel.Name = "YearLevel"
         Me.YearLevel.ReadOnly = True
-        Me.YearLevel.Width = 125
         '
         'Section
         '
@@ -130,7 +125,6 @@ Partial Class frmStudentList
         Me.Section.MinimumWidth = 6
         Me.Section.Name = "Section"
         Me.Section.ReadOnly = True
-        Me.Section.Width = 120
         '
         'ContactNumber
         '
@@ -138,7 +132,6 @@ Partial Class frmStudentList
         Me.ContactNumber.MinimumWidth = 6
         Me.ContactNumber.Name = "ContactNumber"
         Me.ContactNumber.ReadOnly = True
-        Me.ContactNumber.Width = 125
         '
         'Label1
         '

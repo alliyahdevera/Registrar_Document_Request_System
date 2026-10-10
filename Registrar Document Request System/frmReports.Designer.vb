@@ -24,7 +24,7 @@ Partial Class frmReports
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmReports))
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.Panel10 = New System.Windows.Forms.Panel()
         Me.txtSearch = New System.Windows.Forms.TextBox()
@@ -187,9 +187,10 @@ Partial Class frmReports
         Me.btnGenerateReport.ForeColor = System.Drawing.Color.White
         Me.btnGenerateReport.Location = New System.Drawing.Point(812, 86)
         Me.btnGenerateReport.Name = "btnGenerateReport"
-        Me.btnGenerateReport.Size = New System.Drawing.Size(115, 25)
+        Me.btnGenerateReport.Size = New System.Drawing.Size(116, 25)
         Me.btnGenerateReport.TabIndex = 79
         Me.btnGenerateReport.Text = "Generate Report"
+        Me.btnGenerateReport.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnGenerateReport.UseVisualStyleBackColor = False
         '
         'Panel7
@@ -230,14 +231,14 @@ Partial Class frmReports
         Me.dgvReqDoc.BackgroundColor = System.Drawing.Color.White
         Me.dgvReqDoc.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvReqDoc.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.RequestNo, Me._date, Me.StudentID, Me.FirstName, Me.LastName, Me.Documents, Me.TotalAmount, Me.Status, Me.AmountPaid, Me.PaymentStatus, Me.CreateReq, Me.ProcessedReq, Me.ReleasedBy})
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvReqDoc.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvReqDoc.DefaultCellStyle = DataGridViewCellStyle4
         Me.dgvReqDoc.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.dgvReqDoc.Location = New System.Drawing.Point(0, 33)
         Me.dgvReqDoc.Name = "dgvReqDoc"
@@ -430,11 +431,14 @@ Partial Class frmReports
         Me.btnExportExcel.FlatAppearance.BorderSize = 0
         Me.btnExportExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnExportExcel.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.btnExportExcel.Location = New System.Drawing.Point(1019, 768)
+        Me.btnExportExcel.Image = CType(resources.GetObject("btnExportExcel.Image"), System.Drawing.Image)
+        Me.btnExportExcel.Location = New System.Drawing.Point(1003, 768)
         Me.btnExportExcel.Name = "btnExportExcel"
-        Me.btnExportExcel.Size = New System.Drawing.Size(128, 27)
+        Me.btnExportExcel.Size = New System.Drawing.Size(144, 27)
         Me.btnExportExcel.TabIndex = 89
-        Me.btnExportExcel.Text = "Export to Excel"
+        Me.btnExportExcel.Text = "     Export to Excel"
+        Me.btnExportExcel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnExportExcel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnExportExcel.UseVisualStyleBackColor = False
         '
         'Timer1
@@ -444,7 +448,7 @@ Partial Class frmReports
         '
         Me.lbltotalamount.AutoSize = True
         Me.lbltotalamount.Font = New System.Drawing.Font("Segoe UI Semibold", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbltotalamount.Location = New System.Drawing.Point(882, 768)
+        Me.lbltotalamount.Location = New System.Drawing.Point(845, 768)
         Me.lbltotalamount.Name = "lbltotalamount"
         Me.lbltotalamount.Size = New System.Drawing.Size(15, 20)
         Me.lbltotalamount.TabIndex = 94
@@ -454,7 +458,7 @@ Partial Class frmReports
         '
         Me.Label9.AutoSize = True
         Me.Label9.Font = New System.Drawing.Font("Segoe UI Semibold", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(774, 768)
+        Me.Label9.Location = New System.Drawing.Point(737, 768)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(105, 20)
         Me.Label9.TabIndex = 93
