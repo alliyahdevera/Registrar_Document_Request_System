@@ -403,7 +403,7 @@ Public Class frmNewRequest
             LogActivity("New Request", slipReqNo & " - " & slipStudentID & " - Total " & slipTotalAmt)
             MsgBox("Document request saved successfully!" & vbCrLf & "Request No: " & slipReqNo, vbInformation, "Success")
             ClearForm()
-            ShowSlipPreview()                   ' print preview of the student's slip
+            ShowSlipPreview()
             frmMainMenu.OpenRequestList()
         End If
     End Sub
