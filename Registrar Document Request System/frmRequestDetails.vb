@@ -9,6 +9,12 @@ Public Class frmRequestDetails
     Private _loading As Boolean = False
     Private dbPaymentVerified As Boolean = False
 
+    Private Const OR_DIGITS As Integer = 5          ' OR-10001 -> 5 digits (change to 6 if needed)
+    Private _fixing As Boolean = False
+    Private Function IsValidOR(s As String) As Boolean
+        Return System.Text.RegularExpressions.Regex.IsMatch(s.Trim(), "^OR-\d{" & OR_DIGITS & "}$")
+    End Function
+
     Private Sub frmRequestDetails_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         dgvReqDoc.SelectionMode = DataGridViewSelectionMode.FullRowSelect
         dgvReqDoc.MultiSelect = False
@@ -17,7 +23,7 @@ Public Class frmRequestDetails
         txtReleasedBy.ReadOnly = True
         txtRequestDate.ReadOnly = True
         txtRequestDate.TabStop = False
-        txtORNo.MaxLength = 6
+        txtORNo.MaxLength = 3 + OR_DIGITS     ' "OR-" + digits
         txtAmountPaid.ReadOnly = True        ' automatic = Total Amount
         txtAmountPaid.TabStop = False
         cboPaymentStatus.Enabled = False     ' automatic (Paid when OR is complete)
@@ -26,6 +32,7 @@ Public Class frmRequestDetails
             LoadRequestDetailsInfo(SelectedRequestNo)
         End If
     End Sub
+
     Public Sub LoadRequestDetailsInfo(ByVal reqNo As String)
         SelectedRequestNo = reqNo
         LoadRequestHeaderAndStudent()
@@ -39,13 +46,13 @@ Public Class frmRequestDetails
             Call connection()
 
             sql = "SELECT r.RequestID, r.RequestNo, r.RequestDate, r.TotalAmount, r.Status, r.PaymentStatus, " &
-              "r.ORNo, r.ORDate, r.AmountPaid, r.ReleasedBy, " &
-              "s.StudentID, CONCAT(s.FirstName, ' ', IFNULL(s.MiddleName, ''), ' ', s.LastName) AS StudentName, " &
-              "s.Course, s.YearLevel, u.FullName AS ReleasedByName " &
-              "FROM tblrequest r " &
-              "INNER JOIN tblstudents s ON r.StudentID = s.StudentID " &
-              "LEFT JOIN tblusers u ON r.ReleasedBy = u.UserID " &
-              "WHERE r.RequestNo = @reqno"
+                  "r.ORNo, r.ORDate, r.AmountPaid, r.ReleasedBy, " &
+                  "s.StudentID, CONCAT(s.FirstName, ' ', IFNULL(s.MiddleName, ''), ' ', s.LastName) AS StudentName, " &
+                  "s.Course, s.YearLevel, u.FullName AS ReleasedByName " &
+                  "FROM tblrequest r " &
+                  "INNER JOIN tblstudents s ON r.StudentID = s.StudentID " &
+                  "LEFT JOIN tblusers u ON r.ReleasedBy = u.UserID " &
+                  "WHERE r.RequestNo = @reqno"
 
             cmd = New MySqlCommand(sql, cn)
             cmd.Parameters.AddWithValue("@reqno", SelectedRequestNo)
@@ -148,9 +155,11 @@ Public Class frmRequestDetails
             MsgBox("Error loading requested documents: " & ex.Message, vbCritical, "Error")
         End Try
     End Sub
+
     Private Function IsPaymentVerified() As Boolean
         Return dbPaymentVerified
     End Function
+
     Private Sub ApplyStatusLock()
         If Not IsPaymentVerified() Then
             If cboStatus.Text <> "Cancelled" Then
@@ -161,6 +170,7 @@ Public Class frmRequestDetails
         cboStatus.Enabled = True
         btnUpdateStatus.Enabled = True
     End Sub
+
     Private Function IsValidStatusTransition(fromStatus As String, toStatus As String) As Boolean
         If fromStatus = toStatus Then Return True ' no-op, nothing to validate
 
@@ -186,9 +196,10 @@ Public Class frmRequestDetails
             Return
         End If
 
-        Dim orNo As String = txtORNo.Text.Trim()
-        If Not System.Text.RegularExpressions.Regex.IsMatch(orNo, "^\d{6}$") Then
-            MsgBox("OR Number must be exactly 6 digits (example: 123456).", vbExclamation, "Validation Error")
+        Dim orNo As String = txtORNo.Text.Trim().ToUpper()
+        If Not IsValidOR(orNo) Then
+            MsgBox("OR Number must be in the format OR-" & New String("0"c, OR_DIGITS).Replace("0", "1") &
+                   " ('OR-' followed by " & OR_DIGITS & " digits).", vbExclamation, "Validation Error")
             txtORNo.Focus()
             Return
         End If
@@ -216,14 +227,14 @@ Public Class frmRequestDetails
             cn.Close()
 
             LogActivity("Save Payment", txtRequestNo.Text & " - OR " & orNo & " - " & totalAmt.ToString("N2"))
-            MsgBox("Payment saved. The request stays '" & currentDbStatus & "'." & vbCrLf &
-                   "Use Update Status to move it to Processing.", vbInformation, "Success")
+            MsgBox("Payment details saved successfully!", vbInformation, "Success")
             LoadRequestHeaderAndStudent()
         Catch ex As Exception
             If cn.State = ConnectionState.Open Then cn.Close()
             MsgBox("Error saving payment details: " & ex.Message, vbCritical, "Error")
         End Try
     End Sub
+
     Private Sub btnUpdateStatus_Click(sender As Object, e As EventArgs) Handles btnUpdateStatus.Click
         If currentRequestID = 0 Then
             MsgBox("No active request loaded to update status.", vbExclamation, "Error")
@@ -315,13 +326,43 @@ Public Class frmRequestDetails
             MsgBox("Error updating status: " & ex.Message, vbCritical, "Error")
         End Try
     End Sub
+
+    ' only digits can be typed; "OR-" is added by the system
     Private Sub txtORNo_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtORNo.KeyPress
         If Not Char.IsControl(e.KeyChar) AndAlso Not Char.IsDigit(e.KeyChar) Then e.Handled = True
     End Sub
 
+    ' clicking the empty box shows the "OR-" prefix
+    Private Sub txtORNo_Enter(sender As Object, e As EventArgs) Handles txtORNo.Enter
+        If txtORNo.Text.Trim() = "" Then
+            txtORNo.Text = "OR-"
+            txtORNo.SelectionStart = txtORNo.Text.Length
+        End If
+    End Sub
+
+    ' leaving it with just the prefix clears it again
+    Private Sub txtORNo_Leave(sender As Object, e As EventArgs) Handles txtORNo.Leave
+        If txtORNo.Text.Trim() = "OR-" Then txtORNo.Text = ""
+    End Sub
+
     Private Sub txtORNo_TextChanged(sender As Object, e As EventArgs) Handles txtORNo.TextChanged
-        If _loading Then Exit Sub       ' don't fire while loading old records (e.g. "OR-10001")
-        If System.Text.RegularExpressions.Regex.IsMatch(txtORNo.Text.Trim(), "^\d{6}$") Then
+        If _loading OrElse _fixing Then Exit Sub    ' skip while loading old records
+        ' keep the text always in the form OR-digits (also fixes pasted text)
+        Dim s As String = txtORNo.Text.ToUpper()
+        If s <> "" Then
+            Dim body As String = If(s.StartsWith("OR-"), s.Substring(3), s)
+            Dim digits As String = System.Text.RegularExpressions.Regex.Replace(body, "\D", "")
+            If digits.Length > OR_DIGITS Then digits = digits.Substring(0, OR_DIGITS)
+            Dim fixedText As String = "OR-" & digits
+            If fixedText <> txtORNo.Text Then
+                _fixing = True
+                txtORNo.Text = fixedText
+                txtORNo.SelectionStart = fixedText.Length
+                _fixing = False
+            End If
+        End If
+        ' complete OR number -> Amount Paid = Total Amount, Payment Status = Paid
+        If IsValidOR(txtORNo.Text) Then
             txtAmountPaid.Text = txtTotalAmount.Text
             cboPaymentStatus.Text = "Paid"
         Else

@@ -1,7 +1,14 @@
-﻿Imports MySql.Data.MySqlClient
+﻿Imports System.Drawing.Printing
+Imports MySql.Data.MySqlClient
 
 Public Class frmNewRequest
     Private currentDocFee As Decimal = 0
+    Private _oldQty As Integer = 1
+
+    ' ---- data kept for the printed slip (ClearForm wipes the screen) ----
+    Private slipItems As New List(Of String())
+    Private slipReqNo, slipDate, slipStudentID, slipStudentName, slipCourse, slipYear As String
+    Private slipTotalQty, slipTotalAmt, slipPay, slipStatus, slipBy As String
 
     Private Sub frmNewRequest_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         RefreshUserSession()
@@ -17,9 +24,13 @@ Public Class frmNewRequest
         txtreqdate.Text = Date.Today.ToString("yyyy-MM-dd")
         txtCreatedBy.Text = CurrentUser.FullName
 
-        ' Set default status choices
-        cboPaymentStatus.Text = "Unpaid"
-        cboStatus.Text = "Pending"
+        txtPaymentStatus.Text = "Unpaid"
+        txtStatus.Text = "Pending"
+        txtPaymentStatus.ReadOnly = True
+        txtStatus.ReadOnly = True
+        cboPaymentStatus.Enabled = False     ' old combos: disabled, ignored by the system
+        cboStatus.Enabled = False
+        SetupGridEditing()
 
         ClearDocumentEntryFields()
         RecalculateTotal()
@@ -42,7 +53,6 @@ Public Class frmNewRequest
     Private Sub UpdateFooterDateTime()
         lbldatetime.Text = DateTime.Now.ToString("dddd, MMMM d, yyyy h:mm:ss tt")
     End Sub
-
 
     Private Sub LoadDocumentsCombo()
         Call connection()
@@ -76,6 +86,36 @@ Public Class frmNewRequest
 
         txtRequestNo.Text = "REQ-" & year & "-" & nextNumber.ToString("000")
         txtRequestNo.ReadOnly = True
+    End Sub
+
+    Private Sub SetupGridEditing()
+        dgvReqDoc.ReadOnly = False
+        dgvReqDoc.AllowUserToAddRows = False
+        dgvReqDoc.EditMode = DataGridViewEditMode.EditOnEnter
+        For Each col As DataGridViewColumn In dgvReqDoc.Columns
+            col.ReadOnly = (col.Name <> "Quantity")   ' only Quantity is editable
+        Next
+    End Sub
+
+    Private Sub dgvReqDoc_CellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles dgvReqDoc.CellBeginEdit
+        If dgvReqDoc.Columns(e.ColumnIndex).Name = "Quantity" Then
+            If Not Integer.TryParse(Convert.ToString(dgvReqDoc.Rows(e.RowIndex).Cells("Quantity").Value), _oldQty) Then _oldQty = 1
+        End If
+    End Sub
+
+    Private Sub dgvReqDoc_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles dgvReqDoc.CellEndEdit
+        If e.RowIndex < 0 OrElse dgvReqDoc.Columns(e.ColumnIndex).Name <> "Quantity" Then Exit Sub
+        Dim row As DataGridViewRow = dgvReqDoc.Rows(e.RowIndex)
+        Dim qty As Integer
+        If Not Integer.TryParse(Convert.ToString(row.Cells("Quantity").Value).Trim(), qty) OrElse qty < 1 OrElse qty > 99 Then
+            MsgBox("Quantity must be a whole number from 1 to 99.", vbExclamation, "New Document Request")
+            qty = _oldQty                       ' restore the previous value
+        End If
+        Dim fee As Decimal = 0
+        Decimal.TryParse(Convert.ToString(row.Cells("Fee").Value), fee)
+        row.Cells("Quantity").Value = qty
+        row.Cells("Subtotal").Value = (fee * qty).ToString("N2")   ' automatic subtotal
+        RecalculateTotal()                                          ' totals update too
     End Sub
 
     Private Sub btnsearch_Click(sender As Object, e As EventArgs) Handles btnsearch.Click
@@ -166,9 +206,9 @@ Public Class frmNewRequest
         Try
             Call connection()
             sql = "SELECT COUNT(*) FROM tblrequestdetails rd " &
-              "INNER JOIN tblrequest r ON rd.RequestID = r.RequestID " &
-              "WHERE r.StudentID = @sid AND rd.DocumentID = @docid " &
-              "AND r.Status NOT IN ('Released', 'Cancelled')"
+                  "INNER JOIN tblrequest r ON rd.RequestID = r.RequestID " &
+                  "WHERE r.StudentID = @sid AND rd.DocumentID = @docid " &
+                  "AND r.Status NOT IN ('Released', 'Cancelled')"
             cmd = New MySqlCommand(sql, cn)
             cmd.Parameters.AddWithValue("@sid", studentId)
             cmd.Parameters.AddWithValue("@docid", docId)
@@ -287,6 +327,7 @@ Public Class frmNewRequest
         txtTotalAmount.Text = totalAmount.ToString("N2")
         txtTotalQuantity.Text = totalQty.ToString()
     End Sub
+
     Private Function IsValidRequest() As Boolean
         If String.IsNullOrWhiteSpace(txtStudentID.Text) Then
             MsgBox("Please search and select a student.", vbExclamation, "New Document Request")
@@ -299,12 +340,6 @@ Public Class frmNewRequest
         ElseIf dgvReqDoc.Rows.Count = 0 OrElse
            (dgvReqDoc.Rows.Count = 1 AndAlso dgvReqDoc.Rows(0).IsNewRow) Then
             MsgBox("Please add at least one document to the request.", vbExclamation, "New Document Request")
-            Return False
-        ElseIf String.IsNullOrWhiteSpace(cboPaymentStatus.Text) Then
-            MsgBox("Please select a Payment Status.", vbExclamation, "New Document Request")
-            Return False
-        ElseIf String.IsNullOrWhiteSpace(cboStatus.Text) Then
-            MsgBox("Please select a Request Status.", vbExclamation, "New Document Request")
             Return False
         End If
 
@@ -326,31 +361,26 @@ Public Class frmNewRequest
 
     Private Sub btnSaveRequest_Click(sender As Object, e As EventArgs) Handles btnsavereq.Click
         If Not IsValidRequest() Then Exit Sub
-
         If MsgBox("Save this document request?", vbYesNo + vbQuestion, "Confirm Save") <> MsgBoxResult.Yes Then
             Exit Sub
         End If
-
+        Dim savedOk As Boolean = False
         Call connection()
-
         Try
+            ' Payment status and status are always Unpaid / Pending for a new request
             sql = "INSERT INTO tblrequest (RequestNo, StudentID, RequestDate, TotalAmount, PaymentStatus, Status, CreatedBy) " &
-                  "VALUES (@reqno, @studid, @reqdate, @total, @paystat, @status, @createdby)"
+                  "VALUES (@reqno, @studid, @reqdate, @total, 'Unpaid', 'Pending', @createdby)"
             cmd = New MySqlCommand(sql, cn)
             cmd.Parameters.AddWithValue("@reqno", txtRequestNo.Text.Trim())
             cmd.Parameters.AddWithValue("@studid", txtStudentID.Text.Trim())
             cmd.Parameters.AddWithValue("@reqdate", Date.Today)
             cmd.Parameters.AddWithValue("@total", CDec(txtTotalAmount.Text))
-            cmd.Parameters.AddWithValue("@paystat", cboPaymentStatus.Text)
-            cmd.Parameters.AddWithValue("@status", cboStatus.Text)
             cmd.Parameters.AddWithValue("@createdby", CurrentUser.UserID)
             cmd.ExecuteNonQuery()
-
             Dim newRequestId As Long = cmd.LastInsertedId
-
+            slipItems.Clear()
             For Each row As DataGridViewRow In dgvReqDoc.Rows
                 If row.IsNewRow Then Continue For
-
                 sql = "INSERT INTO tblrequestdetails (RequestID, DocumentID, Quantity, Amount, SubTotal) " &
                       "VALUES (@reqid, @docid, @qty, @amount, @subtotal)"
                 cmd = New MySqlCommand(sql, cn)
@@ -360,18 +390,117 @@ Public Class frmNewRequest
                 cmd.Parameters.AddWithValue("@amount", CDec(row.Cells("Fee").Value))
                 cmd.Parameters.AddWithValue("@subtotal", CDec(row.Cells("Subtotal").Value))
                 cmd.ExecuteNonQuery()
+                slipItems.Add({row.Cells("DocumentName").Value.ToString(), row.Cells("Quantity").Value.ToString(),
+                               row.Cells("Fee").Value.ToString(), row.Cells("Subtotal").Value.ToString()})
             Next
-
-            MsgBox("Document request saved successfully!" & vbCrLf & "Request No: " & txtRequestNo.Text, vbInformation, "Success")
-            ClearForm()
-
-            frmMainMenu.OpenRequestList()
-
+            ' snapshot for the slip BEFORE the form is cleared
+            slipReqNo = txtRequestNo.Text
+            slipDate = txtreqdate.Text
+            slipStudentID = txtStudentID.Text.Trim()
+            slipStudentName = (txtFirstName.Text & " " & txtMiddleName.Text & " " & txtLastName.Text).Replace("  ", " ")
+            slipCourse = txtCourse.Text
+            slipYear = txtYearLevel.Text
+            slipTotalQty = txtTotalQuantity.Text
+            slipTotalAmt = txtTotalAmount.Text
+            slipPay = "Unpaid"
+            slipStatus = "Pending"
+            slipBy = txtCreatedBy.Text
+            savedOk = True
         Catch ex As Exception
             MsgBox("Failed to save request: " & ex.Message, vbCritical, "Error")
         Finally
             cn.Close()
         End Try
+        If savedOk Then
+            LogActivity("New Request", slipReqNo & " - " & slipStudentID & " - Total " & slipTotalAmt)
+            MsgBox("Document request saved successfully!" & vbCrLf & "Request No: " & slipReqNo, vbInformation, "Success")
+            ClearForm()
+            ShowSlipPreview()                   ' print preview of the student's slip
+            frmMainMenu.OpenRequestList()
+        End If
+    End Sub
+
+    Private Sub ShowSlipPreview()
+        Dim pd As New PrintDocument()
+        AddHandler pd.PrintPage, AddressOf SlipPrintPage
+        Using dlg As New PrintPreviewDialog()
+            dlg.Document = pd
+            dlg.UseAntiAlias = True
+            dlg.Width = 900
+            dlg.Height = 700
+            dlg.StartPosition = FormStartPosition.CenterScreen
+            dlg.ShowDialog(frmMainMenu)
+        End Using
+    End Sub
+
+    Private Sub SlipPrintPage(sender As Object, e As PrintPageEventArgs)
+        Dim g As Graphics = e.Graphics
+        Dim xL As Single = e.MarginBounds.Left
+        Dim xR As Single = e.MarginBounds.Right
+        Dim w As Single = e.MarginBounds.Width
+        Dim y As Single = e.MarginBounds.Top
+        Dim ctr As New StringFormat() With {.Alignment = StringAlignment.Center}
+        Dim rgt As New StringFormat() With {.Alignment = StringAlignment.Far}
+        Using fTitle As New Font("Segoe UI", 15, FontStyle.Bold),
+              fHead As New Font("Segoe UI", 10, FontStyle.Bold),
+              fBody As New Font("Segoe UI", 10),
+              fSmall As New Font("Segoe UI", 8, FontStyle.Italic),
+              pn As New Pen(Color.Black, 1)
+            Dim lineH As Single = fBody.GetHeight(g) + 5
+            g.DrawString("REGISTRAR'S OFFICE", fTitle, Brushes.Black, New RectangleF(xL, y, w, 30), ctr)
+            y += 30
+            g.DrawString("Document Request Slip", fHead, Brushes.Black, New RectangleF(xL, y, w, 22), ctr)
+            y += 28
+            g.DrawLine(pn, xL, y, xR, y)
+            y += 10
+            Dim kv = Sub(k As String, v As String)
+                         g.DrawString(k, fHead, Brushes.Black, xL, y)
+                         g.DrawString(v, fBody, Brushes.Black, xL + 130, y)
+                         y += lineH
+                     End Sub
+            kv("Request No.:", slipReqNo)
+            kv("Date:", slipDate)
+            kv("Student ID:", slipStudentID)
+            kv("Name:", slipStudentName)
+            kv("Course:", slipCourse)
+            kv("Year Level:", slipYear)
+            y += 6
+            g.DrawLine(pn, xL, y, xR, y)
+            y += 6
+            Dim cQty As Single = xL + w * 0.55F
+            Dim cFee As Single = xL + w * 0.64F
+            Dim cSub As Single = xL + w * 0.82F
+            g.DrawString("Document", fHead, Brushes.Black, xL, y)
+            g.DrawString("Qty", fHead, Brushes.Black, cQty, y)
+            g.DrawString("Fee", fHead, Brushes.Black, New RectangleF(cFee, y, w * 0.16F, lineH), rgt)
+            g.DrawString("Subtotal", fHead, Brushes.Black, New RectangleF(cSub, y, xR - cSub, lineH), rgt)
+            y += lineH
+            g.DrawLine(pn, xL, y, xR, y)
+            y += 4
+            For Each it As String() In slipItems
+                g.DrawString(it(0), fBody, Brushes.Black, New RectangleF(xL, y, w * 0.53F, lineH))
+                g.DrawString(it(1), fBody, Brushes.Black, cQty, y)
+                g.DrawString(it(2), fBody, Brushes.Black, New RectangleF(cFee, y, w * 0.16F, lineH), rgt)
+                g.DrawString(it(3), fBody, Brushes.Black, New RectangleF(cSub, y, xR - cSub, lineH), rgt)
+                y += lineH
+            Next
+            g.DrawLine(pn, xL, y + 2, xR, y + 2)
+            y += 8
+            g.DrawString("Total Quantity: " & slipTotalQty, fHead, Brushes.Black, xL, y)
+            g.DrawString("TOTAL: PHP " & slipTotalAmt, fHead, Brushes.Black, New RectangleF(xL, y, w, lineH), rgt)
+            y += lineH + 6
+            kv("Payment Status:", slipPay)
+            kv("Request Status:", slipStatus)
+            kv("Processed by:", slipBy)
+            y += 10
+            g.DrawString("Please pay at the cashier, then present your Official Receipt (OR) number" & vbCrLf &
+                         "to the Registrar's Office. Unpaid requests are automatically cancelled after 7 days.",
+                         fSmall, Brushes.Black, New RectangleF(xL, y, w, lineH * 2.5F))
+            y += lineH * 3
+            g.DrawLine(pn, xR - 200, y + 20, xR, y + 20)
+            g.DrawString("Registrar Staff Signature", fSmall, Brushes.Black, New RectangleF(xR - 200, y + 22, 200, 18), ctr)
+        End Using
+        e.HasMorePages = False
     End Sub
 
     Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnclear.Click
@@ -386,8 +515,8 @@ Public Class frmNewRequest
         dgvReqDoc.Rows.Clear()
         ClearDocumentEntryFields()
 
-        cboPaymentStatus.Text = "Unpaid"
-        cboStatus.Text = "Pending"
+        txtPaymentStatus.Text = "Unpaid"
+        txtStatus.Text = "Pending"
 
         txtreqdate.Text = Date.Today.ToString("yyyy-MM-dd")
         RecalculateTotal()
