@@ -4,13 +4,11 @@ Imports System.Text
 
 Public Class frmReports
 
-    ' --- TASK 17: GRID PAGER INITIALIZATION ---
     Private pager As GridPager
 
     Private _loadingFilter As Boolean = False
 
     Private Sub frmReports_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ' --- TASK 17: Hook pager to dgvReqDoc ---
         pager = New GridPager(dgvReqDoc)
 
         RefreshUserSession()
@@ -19,7 +17,7 @@ Public Class frmReports
         Timer1.Start()
         UpdateFooterDateTime()
 
-        Label1.Text = "Reports  -  " & SchoolYear.DisplayName
+        lblr.Text = "Reports"
         SetDefaultDateRange()
 
         _loadingFilter = True
@@ -166,7 +164,6 @@ Public Class frmReports
     End Sub
 
     Private Sub txtSearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearch.TextChanged
-        ' --- TASK 17: Reset pager to Page 1 on search ---
         pager.FirstPage()
         LoadReports()
     End Sub
@@ -191,14 +188,12 @@ Public Class frmReports
     Private Sub cbofilter_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cbofilter.SelectedIndexChanged
         If _loadingFilter Then Exit Sub
         If Not DatesAreValid() Then Exit Sub
-        ' --- TASK 17: Reset pager to Page 1 on filter change ---
         pager.FirstPage()
         LoadReports()
     End Sub
 
     Private Sub btnGenerateReport_Click(sender As Object, e As EventArgs) Handles btnGenerateReport.Click
         If Not DatesAreValid() Then Exit Sub
-        ' --- TASK 17: Reset pager to Page 1 on manual report generation ---
         pager.FirstPage()
         LoadReports()
     End Sub

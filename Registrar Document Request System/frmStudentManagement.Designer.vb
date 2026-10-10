@@ -24,19 +24,11 @@ Partial Class frmStudentManagement
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmStudentManagement))
         Me.Label1 = New System.Windows.Forms.Label()
         Me.txtSearch = New System.Windows.Forms.TextBox()
         Me.dgvStudents = New System.Windows.Forms.DataGridView()
-        Me.StudentID = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.LRN = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.LastName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.FirstName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.MiddleName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Course = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.YearLevel = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Section = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ContactNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.btnAdd = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.txtStudentID = New System.Windows.Forms.TextBox()
@@ -74,6 +66,15 @@ Partial Class frmStudentManagement
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.btnClear = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.StudentID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.LRN = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.LastName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FirstName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.MiddleName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Course = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.YearLevel = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Section = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ContactNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.dgvStudents, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel5.SuspendLayout()
         Me.Panel7.SuspendLayout()
@@ -105,19 +106,21 @@ Partial Class frmStudentManagement
         '
         'dgvStudents
         '
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvStudents.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle1
         Me.dgvStudents.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgvStudents.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.dgvStudents.BackgroundColor = System.Drawing.Color.White
         Me.dgvStudents.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvStudents.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.StudentID, Me.LRN, Me.LastName, Me.FirstName, Me.MiddleName, Me.Course, Me.YearLevel, Me.Section, Me.ContactNumber})
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvStudents.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.dgvStudents.DefaultCellStyle = DataGridViewCellStyle2
         Me.dgvStudents.Location = New System.Drawing.Point(28, 320)
         Me.dgvStudents.Name = "dgvStudents"
         Me.dgvStudents.ReadOnly = True
@@ -125,69 +128,6 @@ Partial Class frmStudentManagement
         Me.dgvStudents.RowHeadersWidth = 51
         Me.dgvStudents.Size = New System.Drawing.Size(1123, 471)
         Me.dgvStudents.TabIndex = 29
-        '
-        'StudentID
-        '
-        Me.StudentID.HeaderText = "StudentID"
-        Me.StudentID.MinimumWidth = 6
-        Me.StudentID.Name = "StudentID"
-        Me.StudentID.ReadOnly = True
-        '
-        'LRN
-        '
-        Me.LRN.HeaderText = "LRN"
-        Me.LRN.MinimumWidth = 6
-        Me.LRN.Name = "LRN"
-        Me.LRN.ReadOnly = True
-        '
-        'LastName
-        '
-        Me.LastName.HeaderText = "Last Name"
-        Me.LastName.MinimumWidth = 6
-        Me.LastName.Name = "LastName"
-        Me.LastName.ReadOnly = True
-        '
-        'FirstName
-        '
-        Me.FirstName.HeaderText = "First Name"
-        Me.FirstName.MinimumWidth = 6
-        Me.FirstName.Name = "FirstName"
-        Me.FirstName.ReadOnly = True
-        '
-        'MiddleName
-        '
-        Me.MiddleName.HeaderText = "Middle Name"
-        Me.MiddleName.MinimumWidth = 6
-        Me.MiddleName.Name = "MiddleName"
-        Me.MiddleName.ReadOnly = True
-        '
-        'Course
-        '
-        Me.Course.HeaderText = "Course"
-        Me.Course.MinimumWidth = 6
-        Me.Course.Name = "Course"
-        Me.Course.ReadOnly = True
-        '
-        'YearLevel
-        '
-        Me.YearLevel.HeaderText = "Year Level"
-        Me.YearLevel.MinimumWidth = 6
-        Me.YearLevel.Name = "YearLevel"
-        Me.YearLevel.ReadOnly = True
-        '
-        'Section
-        '
-        Me.Section.HeaderText = "Section"
-        Me.Section.MinimumWidth = 6
-        Me.Section.Name = "Section"
-        Me.Section.ReadOnly = True
-        '
-        'ContactNumber
-        '
-        Me.ContactNumber.HeaderText = "Contact Number"
-        Me.ContactNumber.MinimumWidth = 6
-        Me.ContactNumber.Name = "ContactNumber"
-        Me.ContactNumber.ReadOnly = True
         '
         'btnAdd
         '
@@ -603,6 +543,69 @@ Partial Class frmStudentManagement
         Me.Panel1.Size = New System.Drawing.Size(1174, 27)
         Me.Panel1.TabIndex = 87
         '
+        'StudentID
+        '
+        Me.StudentID.HeaderText = "StudentID"
+        Me.StudentID.MinimumWidth = 6
+        Me.StudentID.Name = "StudentID"
+        Me.StudentID.ReadOnly = True
+        '
+        'LRN
+        '
+        Me.LRN.HeaderText = "LRN"
+        Me.LRN.MinimumWidth = 6
+        Me.LRN.Name = "LRN"
+        Me.LRN.ReadOnly = True
+        '
+        'LastName
+        '
+        Me.LastName.HeaderText = "Last Name"
+        Me.LastName.MinimumWidth = 6
+        Me.LastName.Name = "LastName"
+        Me.LastName.ReadOnly = True
+        '
+        'FirstName
+        '
+        Me.FirstName.HeaderText = "First Name"
+        Me.FirstName.MinimumWidth = 6
+        Me.FirstName.Name = "FirstName"
+        Me.FirstName.ReadOnly = True
+        '
+        'MiddleName
+        '
+        Me.MiddleName.HeaderText = "Middle Name"
+        Me.MiddleName.MinimumWidth = 6
+        Me.MiddleName.Name = "MiddleName"
+        Me.MiddleName.ReadOnly = True
+        '
+        'Course
+        '
+        Me.Course.HeaderText = "Course"
+        Me.Course.MinimumWidth = 6
+        Me.Course.Name = "Course"
+        Me.Course.ReadOnly = True
+        '
+        'YearLevel
+        '
+        Me.YearLevel.HeaderText = "Year Level"
+        Me.YearLevel.MinimumWidth = 6
+        Me.YearLevel.Name = "YearLevel"
+        Me.YearLevel.ReadOnly = True
+        '
+        'Section
+        '
+        Me.Section.HeaderText = "Section"
+        Me.Section.MinimumWidth = 6
+        Me.Section.Name = "Section"
+        Me.Section.ReadOnly = True
+        '
+        'ContactNumber
+        '
+        Me.ContactNumber.HeaderText = "Contact Number"
+        Me.ContactNumber.MinimumWidth = 6
+        Me.ContactNumber.Name = "ContactNumber"
+        Me.ContactNumber.ReadOnly = True
+        '
         'frmStudentManagement
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -643,15 +646,6 @@ Partial Class frmStudentManagement
     Friend WithEvents txtSearch As TextBox
     Friend WithEvents dgvStudents As DataGridView
     Friend WithEvents btnAdd As Button
-    Friend WithEvents StudentID As DataGridViewTextBoxColumn
-    Friend WithEvents LRN As DataGridViewTextBoxColumn
-    Friend WithEvents LastName As DataGridViewTextBoxColumn
-    Friend WithEvents FirstName As DataGridViewTextBoxColumn
-    Friend WithEvents MiddleName As DataGridViewTextBoxColumn
-    Friend WithEvents Course As DataGridViewTextBoxColumn
-    Friend WithEvents YearLevel As DataGridViewTextBoxColumn
-    Friend WithEvents Section As DataGridViewTextBoxColumn
-    Friend WithEvents ContactNumber As DataGridViewTextBoxColumn
     Friend WithEvents Label2 As Label
     Friend WithEvents txtStudentID As TextBox
     Friend WithEvents Label3 As Label
@@ -688,4 +682,13 @@ Partial Class frmStudentManagement
     Friend WithEvents Timer1 As Timer
     Friend WithEvents btnClear As Button
     Friend WithEvents Panel1 As Panel
+    Friend WithEvents StudentID As DataGridViewTextBoxColumn
+    Friend WithEvents LRN As DataGridViewTextBoxColumn
+    Friend WithEvents LastName As DataGridViewTextBoxColumn
+    Friend WithEvents FirstName As DataGridViewTextBoxColumn
+    Friend WithEvents MiddleName As DataGridViewTextBoxColumn
+    Friend WithEvents Course As DataGridViewTextBoxColumn
+    Friend WithEvents YearLevel As DataGridViewTextBoxColumn
+    Friend WithEvents Section As DataGridViewTextBoxColumn
+    Friend WithEvents ContactNumber As DataGridViewTextBoxColumn
 End Class

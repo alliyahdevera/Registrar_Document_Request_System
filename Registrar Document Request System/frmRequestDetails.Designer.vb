@@ -621,6 +621,7 @@ Partial Class frmRequestDetails
         Me.Controls.Add(Me.Panel7)
         Me.Controls.Add(Me.Panel8)
         Me.Controls.Add(Me.Panel11)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "frmRequestDetails"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "frmRequestDetails"

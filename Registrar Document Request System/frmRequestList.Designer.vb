@@ -50,7 +50,7 @@ Partial Class frmRequestList
         Me.txtSearch = New System.Windows.Forms.TextBox()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.lblrq = New System.Windows.Forms.Label()
         Me.lbldatetime = New System.Windows.Forms.Label()
         Me.Label19 = New System.Windows.Forms.Label()
         Me.lblposition = New System.Windows.Forms.Label()
@@ -112,6 +112,7 @@ Partial Class frmRequestList
         '
         'dgvReqDoc
         '
+        Me.dgvReqDoc.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.dgvReqDoc.BackgroundColor = System.Drawing.Color.White
         Me.dgvReqDoc.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvReqDoc.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.RequestNo, Me._date, Me.StudentID, Me.FirstName, Me.LastName, Me.Documents, Me.TotalAmount, Me.PaymentStatus, Me.AmountPaid, Me.ORNo, Me.ORDate, Me.Status, Me.CreateReq, Me.ProcessedReq, Me.ReleasedBy})
@@ -280,17 +281,17 @@ Partial Class frmRequestList
         Me.Label3.TabIndex = 33
         Me.Label3.Text = "Search by Student ID or Last Name"
         '
-        'Label1
+        'lblrq
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.BackColor = System.Drawing.Color.Transparent
-        Me.Label1.Font = New System.Drawing.Font("Segoe UI", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
-        Me.Label1.Location = New System.Drawing.Point(22, 20)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(151, 32)
-        Me.Label1.TabIndex = 68
-        Me.Label1.Text = "Request List"
+        Me.lblrq.AutoSize = True
+        Me.lblrq.BackColor = System.Drawing.Color.Transparent
+        Me.lblrq.Font = New System.Drawing.Font("Segoe UI", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblrq.ForeColor = System.Drawing.Color.FromArgb(CType(CType(1, Byte), Integer), CType(CType(21, Byte), Integer), CType(CType(78, Byte), Integer))
+        Me.lblrq.Location = New System.Drawing.Point(22, 20)
+        Me.lblrq.Name = "lblrq"
+        Me.lblrq.Size = New System.Drawing.Size(151, 32)
+        Me.lblrq.TabIndex = 68
+        Me.lblrq.Text = "Request List"
         '
         'lbldatetime
         '
@@ -391,7 +392,7 @@ Partial Class frmRequestList
         Me.Controls.Add(Me.Panel7)
         Me.Controls.Add(Me.Label15)
         Me.Controls.Add(Me.Panel10)
-        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.lblrq)
         Me.Controls.Add(Me.Label3)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "frmRequestList"
@@ -420,7 +421,7 @@ Partial Class frmRequestList
     Friend WithEvents txtSearch As TextBox
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents Label3 As Label
-    Friend WithEvents Label1 As Label
+    Friend WithEvents lblrq As Label
     Friend WithEvents lbldatetime As Label
     Friend WithEvents Label19 As Label
     Friend WithEvents lblposition As Label

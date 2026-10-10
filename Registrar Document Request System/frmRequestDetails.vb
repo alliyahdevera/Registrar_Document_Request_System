@@ -372,7 +372,7 @@ Public Class frmRequestDetails
     End Sub
 
     Private Sub btnBackToRequestList_Click(sender As Object, e As EventArgs) Handles btnBacktoRequestList.Click
-        frmMainMenu.OpenRequestList()
+        Me.Close()
     End Sub
 
 End Class

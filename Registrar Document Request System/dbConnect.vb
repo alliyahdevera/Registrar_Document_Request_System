@@ -25,20 +25,16 @@ Module DBConnection
 End Module
 
 Module ConfirmHelper
-    ' Returns True only if the user clicks Yes. "No" is the default button
-    ' so pressing Enter by accident will not save anything.
     Public Function ConfirmAction(message As String, title As String) As Boolean
         Return MsgBox(message, vbYesNo + vbQuestion + vbDefaultButton2, title) = MsgBoxResult.Yes
     End Function
 End Module
 
 Module RequestRules
-    ' Runs the automatic cancellation rules. Call it whenever a page that lists requests opens.
     Public Sub ApplyAutoRules()
         Try
             Call connection()
 
-            ' RULE 1: not paid + still Pending after 7 days -> Cancelled
             sql = "UPDATE tblrequest SET Status = 'Cancelled' " &
                   "WHERE (Status = 'Pending' OR Status IS NULL OR Status = '') " &
                   "AND (PaymentStatus IS NULL OR PaymentStatus <> 'Paid') " &
@@ -47,8 +43,6 @@ Module RequestRules
             cmd = New MySqlCommand(sql, cn)
             cmd.ExecuteNonQuery()
 
-            ' RULE 2: PAID requests are never auto-cancelled, even after 1 month.
-            ' Safety net only: an UNPAID request stuck at Ready for Release for 1 month is cancelled.
             sql = "UPDATE tblrequest SET Status = 'Cancelled', ReadyForReleaseDate = NULL " &
                   "WHERE Status = 'Ready for Release' " &
                   "AND ReadyForReleaseDate IS NOT NULL " &
@@ -66,7 +60,6 @@ Module RequestRules
 End Module
 
 Module SchoolYear
-    ' The school year currently chosen in Settings (shared by Dashboard, Request List, Reports)
     Public IsAllTime As Boolean = True
     Public SchoolYearID As Integer = 0
     Public SchoolYearName As String = "All Time"
@@ -93,8 +86,6 @@ Module SchoolYear
         EndDate = endD.Date
     End Sub
 
-    ' Returns " AND r.RequestDate >= '...' AND r.RequestDate < '...' " or "" for All Time.
-    ' Append it to any WHERE clause. The dates come from the database, not from typed text.
     Public Function AndRequestDate(Optional col As String = "r.RequestDate") As String
         If IsAllTime Then Return ""
         Dim ci As System.Globalization.CultureInfo = System.Globalization.CultureInfo.InvariantCulture
@@ -104,7 +95,6 @@ Module SchoolYear
 End Module
 
 Module ActivityLogger
-    ' Call from anywhere: LogActivity("Action Type", "details")
     Public Sub LogActivity(actionType As String, details As String)
         Try
             If details Is Nothing Then details = ""
@@ -123,7 +113,7 @@ Module ActivityLogger
                 End Using
             End Using
         Catch
-            ' logging must never crash the system
+
         End Try
     End Sub
 End Module

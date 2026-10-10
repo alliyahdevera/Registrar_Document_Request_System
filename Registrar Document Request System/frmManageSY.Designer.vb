@@ -238,6 +238,7 @@ Partial Class frmManageSY
         Me.Controls.Add(Me.DateTimePicker2)
         Me.Controls.Add(Me.DateTimePicker1)
         Me.Name = "frmManageSY"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "frmManageSY"
         CType(Me.dgvsy, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)

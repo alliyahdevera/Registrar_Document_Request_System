@@ -2,15 +2,14 @@
 
 Public Class frmRequestList
 
-    ' --- TASK 17: GRID PAGER INITIALIZATION ---
     Private pager As GridPager
 
     Private Sub frmRequestList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        ' --- TASK 17: Hook pager to dgvReqDoc ---
+
         pager = New GridPager(dgvReqDoc)
 
         RefreshUserSession()
-        Label1.Text = "Request List  -  " & SchoolYear.DisplayName
+        lblrq.Text = "Request List"
 
         Timer1.Interval = 1000
         Timer1.Start()
@@ -157,8 +156,32 @@ Public Class frmRequestList
         End Try
     End Sub
 
+    Private Function StatusColor(st As String) As Color
+        Select Case st
+            Case "Pending" : Return Color.FromArgb(243, 156, 18)
+            Case "Processing" : Return Color.FromArgb(52, 152, 219)
+            Case "Ready for Release" : Return Color.FromArgb(155, 89, 182)
+            Case "Released" : Return Color.FromArgb(39, 174, 96)
+            Case "Cancelled" : Return Color.FromArgb(231, 76, 60)
+            Case Else : Return Color.Empty
+        End Select
+    End Function
+
+    Private Sub dgvReqDoc_CellFormatting(sender As Object, e As DataGridViewCellFormattingEventArgs) Handles dgvReqDoc.CellFormatting
+        If e.RowIndex < 0 Then Exit Sub
+        If dgvReqDoc.Columns(e.ColumnIndex).Name <> "Status" Then Exit Sub
+
+        Dim st As String = If(e.Value Is Nothing, "", e.Value.ToString())
+        Dim c As Color = StatusColor(st)
+        If c <> Color.Empty Then
+            e.CellStyle.BackColor = c
+            e.CellStyle.ForeColor = Color.White
+            e.CellStyle.SelectionBackColor = c
+            e.CellStyle.SelectionForeColor = Color.White
+        End If
+    End Sub
     Private Sub txtSearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearch.TextChanged
-        ' --- TASK 17: Reset pager to Page 1 on search ---
+
         pager.FirstPage()
 
         Try
@@ -240,7 +263,12 @@ Public Class frmRequestList
         If dgvReqDoc.SelectedRows.Count > 0 Then
             Dim selectedReqNo As String = dgvReqDoc.SelectedRows(0).Cells(0).Value.ToString()
 
-            frmMainMenu.OpenRequestDetails(selectedReqNo)
+            Using frm As New frmRequestDetails()
+                frm.SelectedRequestNo = selectedReqNo
+                frm.ShowDialog(Me.FindForm())
+            End Using
+
+            LoadRequests()
         Else
             MsgBox("Please select a request row from the list first.", vbInformation, "No Selection")
         End If

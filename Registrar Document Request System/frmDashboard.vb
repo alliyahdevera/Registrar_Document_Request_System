@@ -64,11 +64,7 @@ Public Class frmDashboard
     End Sub
 
     Private Sub UpdateTitle()
-        If SchoolYear.IsAllTime Then
-            Label1.Text = "Dashboard"
-        Else
-            Label1.Text = "Dashboard  -  " & SchoolYear.SchoolYearName
-        End If
+        lbldashb.Text = "Dashboard"
     End Sub
 
 #End Region
@@ -76,7 +72,7 @@ Public Class frmDashboard
 #Region "Setup (charts, grids, combos)"
 
     Private Sub SetupCharts()
-        ' ---- TOP 5 REQUESTED DOCUMENTS ----
+
         With chtMostreqdoc
             .Legends(0).Enabled = True
             .Legends(0).Docking = Docking.Bottom
@@ -98,7 +94,6 @@ Public Class frmDashboard
             End With
         End With
 
-        ' ---- DOCUMENT REQUEST PER MONTH ----
         With chtdocreqpermonth
             .Legends(0).Enabled = True
             .Legends(0).Docking = Docking.Bottom
@@ -110,7 +105,6 @@ Public Class frmDashboard
             End With
         End With
 
-        ' ---- REQUEST STATUS DISTRIBUTION (Chart1 = pie) ----
         With Chart1
             .Legends(0).Enabled = True
             .Legends(0).Docking = Docking.Right
@@ -156,7 +150,6 @@ Public Class frmDashboard
         _loadingStaffFilter = False
     End Sub
 
-    ' ComboBox2 = filter of the Request Status Distribution pie
     Private Sub LoadStatusFilterCombo()
         _loadingStatusFilter = True
         ComboBox2.Items.Clear()
@@ -168,7 +161,6 @@ Public Class frmDashboard
         _loadingStatusFilter = False
     End Sub
 
-    ' ComboBox1 = school year filter (reads tblschoolyear)
     Private Sub LoadSchoolYearCombo()
         _loadingYear = True
         ComboBox1.Items.Clear()
@@ -195,7 +187,7 @@ Public Class frmDashboard
             If cn.State = ConnectionState.Open Then cn.Close()
         End Try
 
-        ' re-select the school year that is currently active
+
         Dim idx As Integer = 0
         If Not SchoolYear.IsAllTime Then
             Dim found As Boolean = False
@@ -252,7 +244,7 @@ Public Class frmDashboard
         End Using
     End Function
 
-    ' RECENT = only the requests of THIS WEEK (Monday to Sunday), not cancelled, newest first.
+
     Private Sub LoadRecentRequests()
         Dim query As String =
         "SELECT r.RequestNo, " &
@@ -430,7 +422,7 @@ Public Class frmDashboard
         chtdocreqpermonth.ChartAreas(0).AxisY.Interval = Math.Max(1, Math.Ceiling(maxVal / 5.0))
     End Sub
 
-    ' REQUEST STATUS DISTRIBUTION (pie): school year filter + ComboBox2 date filter
+
     Private Sub LoadStatusDistribution()
         Dim f As String = SchoolYear.AndRequestDate() & DateFilterByIndex(ComboBox2.SelectedIndex)
         Dim query As String =
@@ -470,7 +462,7 @@ Public Class frmDashboard
         End Select
     End Function
 
-    ' Shared date filter: 0 = All Time, 1 = This Day, 2 = This Week, 3 = This Month
+
     Private Function DateFilterByIndex(idx As Integer) As String
         Select Case idx
             Case 1
@@ -518,8 +510,7 @@ Public Class frmDashboard
 
 #Region "Combo / button events"
 
-    ' SCHOOL YEAR FILTER: updates the shared SchoolYear module, so Request List
-    ' and Reports follow the same year, then reloads the whole dashboard.
+
     Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
         If _loadingYear Then Exit Sub
         Dim item As YearItem = TryCast(ComboBox1.SelectedItem, YearItem)

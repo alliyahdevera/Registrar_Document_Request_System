@@ -4,8 +4,6 @@ Imports MySql.Data.MySqlClient
 Public Class frmNewRequest
     Private currentDocFee As Decimal = 0
     Private _oldQty As Integer = 1
-
-    ' ---- data kept for the printed slip (ClearForm wipes the screen) ----
     Private slipItems As New List(Of String())
     Private slipReqNo, slipDate, slipStudentID, slipStudentName, slipCourse, slipYear As String
     Private slipTotalQty, slipTotalAmt, slipPay, slipStatus, slipBy As String
@@ -19,24 +17,16 @@ Public Class frmNewRequest
 
         LoadDocumentsCombo()
 
-        txtreqdate.ReadOnly = True
         txtreqdate.TabStop = False
         txtreqdate.Text = Date.Today.ToString("yyyy-MM-dd")
         txtCreatedBy.Text = CurrentUser.FullName
-
         txtPaymentStatus.Text = "Unpaid"
         txtStatus.Text = "Pending"
-        txtPaymentStatus.ReadOnly = True
-        txtStatus.ReadOnly = True
-        cboPaymentStatus.Enabled = False     ' old combos: disabled, ignored by the system
-        cboStatus.Enabled = False
         SetupGridEditing()
 
         ClearDocumentEntryFields()
         RecalculateTotal()
 
-        ' Moved here from the old Activated event: embedded pages never get
-        ' Activated, and every visit creates a fresh page, so Load is enough.
         GenerateRequestNo()
     End Sub
 
@@ -109,20 +99,20 @@ Public Class frmNewRequest
         Dim qty As Integer
         If Not Integer.TryParse(Convert.ToString(row.Cells("Quantity").Value).Trim(), qty) OrElse qty < 1 OrElse qty > 99 Then
             MsgBox("Quantity must be a whole number from 1 to 99.", vbExclamation, "New Document Request")
-            qty = _oldQty                       ' restore the previous value
+            qty = _oldQty
         End If
         Dim fee As Decimal = 0
         Decimal.TryParse(Convert.ToString(row.Cells("Fee").Value), fee)
         row.Cells("Quantity").Value = qty
-        row.Cells("Subtotal").Value = (fee * qty).ToString("N2")   ' automatic subtotal
-        RecalculateTotal()                                          ' totals update too
+        row.Cells("Subtotal").Value = (fee * qty).ToString("N2")
+        RecalculateTotal()
     End Sub
 
     Private Sub btnsearch_Click(sender As Object, e As EventArgs) Handles btnsearch.Click
         Using frm As New frmStudentList()
             If frm.ShowDialog(frmMainMenu) = DialogResult.OK Then
                 txtStudentID.Text = frm.SelectedStudentID
-                SearchStudent()   ' reuses your existing code to fill name, course, year level
+                SearchStudent()
             End If
         End Using
     End Sub
@@ -367,7 +357,6 @@ Public Class frmNewRequest
         Dim savedOk As Boolean = False
         Call connection()
         Try
-            ' Payment status and status are always Unpaid / Pending for a new request
             sql = "INSERT INTO tblrequest (RequestNo, StudentID, RequestDate, TotalAmount, PaymentStatus, Status, CreatedBy) " &
                   "VALUES (@reqno, @studid, @reqdate, @total, 'Unpaid', 'Pending', @createdby)"
             cmd = New MySqlCommand(sql, cn)
@@ -393,7 +382,6 @@ Public Class frmNewRequest
                 slipItems.Add({row.Cells("DocumentName").Value.ToString(), row.Cells("Quantity").Value.ToString(),
                                row.Cells("Fee").Value.ToString(), row.Cells("Subtotal").Value.ToString()})
             Next
-            ' snapshot for the slip BEFORE the form is cleared
             slipReqNo = txtRequestNo.Text
             slipDate = txtreqdate.Text
             slipStudentID = txtStudentID.Text.Trim()
@@ -447,7 +435,7 @@ Public Class frmNewRequest
               fSmall As New Font("Segoe UI", 8, FontStyle.Italic),
               pn As New Pen(Color.Black, 1)
             Dim lineH As Single = fBody.GetHeight(g) + 5
-            g.DrawString("REGISTRAR'S OFFICE", fTitle, Brushes.Black, New RectangleF(xL, y, w, 30), ctr)
+            g.DrawString("Lyceum of Alabang", fTitle, Brushes.Black, New RectangleF(xL, y, w, 30), ctr)
             y += 30
             g.DrawString("Document Request Slip", fHead, Brushes.Black, New RectangleF(xL, y, w, 22), ctr)
             y += 28
