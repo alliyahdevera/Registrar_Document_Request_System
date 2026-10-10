@@ -1,9 +1,11 @@
 ﻿Imports MySql.Data.MySqlClient
+
 Module DBConnection
     Public cn As New MySqlConnection
     Public cmd As MySqlCommand
     Public dr As MySqlDataReader 'retrieve
     Public sql As String 'sql command
+
     Public Function connection() As Boolean
         Try
             If cn.State = ConnectionState.Open Then
@@ -21,6 +23,7 @@ Module DBConnection
         End Try
     End Function
 End Module
+
 Module ConfirmHelper
     ' Returns True only if the user clicks Yes. "No" is the default button
     ' so pressing Enter by accident will not save anything.
@@ -28,6 +31,7 @@ Module ConfirmHelper
         Return MsgBox(message, vbYesNo + vbQuestion + vbDefaultButton2, title) = MsgBoxResult.Yes
     End Function
 End Module
+
 Module RequestRules
     ' Runs the automatic cancellation rules. Call it whenever a page that lists requests opens.
     Public Sub ApplyAutoRules()
@@ -60,6 +64,7 @@ Module RequestRules
         End Try
     End Sub
 End Module
+
 Module SchoolYear
     ' The school year currently chosen in Settings (shared by Dashboard, Request List, Reports)
     Public IsAllTime As Boolean = True
@@ -96,4 +101,29 @@ Module SchoolYear
         Return " AND " & col & " >= '" & StartDate.ToString("yyyy-MM-dd", ci) & "'" &
                " AND " & col & " < '" & EndDate.AddDays(1).ToString("yyyy-MM-dd", ci) & "' "
     End Function
+End Module
+
+Module ActivityLogger
+    ' Call from anywhere: LogActivity("Action Type", "details")
+    Public Sub LogActivity(actionType As String, details As String)
+        Try
+            If details Is Nothing Then details = ""
+            If details.Length > 500 Then details = details.Substring(0, 500)
+            Using c As New MySqlConnection("server=localhost;userid=root;password=;database=registrar_db;")
+                c.Open()
+                Using k As New MySqlCommand("INSERT INTO tblactivitylogs (UserID, Username, FullName, Role, ActionType, Details) " &
+                                            "VALUES (@uid, @un, @fn, @role, @act, @det)", c)
+                    k.Parameters.AddWithValue("@uid", CurrentUser.UserID)
+                    k.Parameters.AddWithValue("@un", CurrentUser.Username)
+                    k.Parameters.AddWithValue("@fn", CurrentUser.FullName)
+                    k.Parameters.AddWithValue("@role", CurrentUser.Role)
+                    k.Parameters.AddWithValue("@act", actionType)
+                    k.Parameters.AddWithValue("@det", details)
+                    k.ExecuteNonQuery()
+                End Using
+            End Using
+        Catch
+            ' logging must never crash the system
+        End Try
+    End Sub
 End Module
